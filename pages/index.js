@@ -7,6 +7,6 @@ const Home = () => {
     <div>
       <EventList items={featuredEvents} />
     </div>
-  );
+  );    
 };
 export default Home;
