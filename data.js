@@ -1,3 +1,5 @@
+import firebase from "./helpers/firebase";
+
 export const DUMMY_EVENTS = [
   {
     id: "e1",
@@ -35,8 +37,16 @@ export function getFeaturedEvents() {
   return DUMMY_EVENTS.filter((event) => event.isFeatured);
 }
 
-export function getAllEvents() {
-  return DUMMY_EVENTS;
+export async function getAllEvents() {
+  const response = await fetch(
+    "https://next-events-309cd-default-rtdb.firebaseio.com/events.json"
+  );
+  const data = await response.json();
+  let events = [];
+  for (let key in data) {
+    events.push({ id: key, ...data[key] });
+  }
+  return events;
 }
 
 export function getFilteredEvents(dateFilter) {
@@ -50,6 +60,17 @@ export function getFilteredEvents(dateFilter) {
   });
 
   return filteredEvents;
+}
+
+export function getkeys() {
+  const query = firebase.database().ref("events").orderByKey();
+  let eventKeys = [];
+  query.once("value").then(function (snapshot) {
+    snapshot.forEach((childSnapshot) => {
+      eventKeys.push(childSnapshot.key);
+    });
+  });
+  return eventKeys;
 }
 
 export function getEventById(id) {

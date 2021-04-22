@@ -22,6 +22,7 @@ const AllEvents = ({ eventList }) => {
       for (let key in data) {
         events.push({
           id: key,
+          date: data[key].date,
           title: data[key].title,
           description: data[key].description,
           location: data[key].location,
