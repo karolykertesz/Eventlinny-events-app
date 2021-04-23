@@ -7,7 +7,8 @@ import { getkeys } from "../../data";
 
 const SingleEvent = ({ single }) => {
   if (!single) {
-    return <p>No event found</p>;
+    return <p className="center">Loading....</p>;
+    // Needs to optimize
   }
 
   return (
@@ -42,6 +43,7 @@ export async function getStaticProps(context) {
     props: {
       single: oj,
     },
+    revalidate: 30,
   };
 }
 export async function getStaticPaths() {

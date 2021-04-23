@@ -73,6 +73,19 @@ export function getkeys() {
   return eventKeys;
 }
 
-export function getEventById(id) {
-  return DUMMY_EVENTS.find((event) => event.id === id);
+export async function findDate(year, month) {
+  const arr = [];
+  const ref = firebase.database().ref("events");
+  await ref
+    .orderByChild("year")
+    .equalTo(year)
+    .once("value", function (snapshot) {
+      const v = snapshot.val();
+      arr.push(
+        Object.keys(v)
+          .map((item) => v[item])
+          .filter((v) => v.month === month)
+      );
+    });
+  return arr;
 }

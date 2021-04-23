@@ -5,9 +5,9 @@ const EventList = (props) => {
   return (
     <div>
       <ul className={classes.list}>
-        {items.map((item) => (
+        {items.map((item, indx) => (
           <EventItem
-            key={item.id}
+            key={indx}
             id={item.id}
             title={item.title}
             image={item.image}
