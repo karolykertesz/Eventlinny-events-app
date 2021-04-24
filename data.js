@@ -1,4 +1,5 @@
-import firebase from "./helpers/firebase";
+// import firebase from "./helpers/firebase";
+import { db } from "./helpers/firebase";
 
 export const DUMMY_EVENTS = [
   {
@@ -38,15 +39,24 @@ export function getFeaturedEvents() {
 }
 
 export async function getAllEvents() {
-  const response = await fetch(
-    "https://next-events-309cd-default-rtdb.firebaseio.com/events.json"
-  );
-  const data = await response.json();
-  let events = [];
-  for (let key in data) {
-    events.push({ id: key, ...data[key] });
+  const allEv = [];
+  try {
+    const col = await db
+      .collection("events")
+      .orderBy("year", "asc")
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((i) => {
+          allEv.push({
+            id: i.id,
+            ...i.data(),
+          });
+        });
+      });
+  } catch (err) {
+    console.log(err);
   }
-  return events;
+  return allEv;
 }
 
 export function getFilteredEvents(dateFilter) {
@@ -62,30 +72,25 @@ export function getFilteredEvents(dateFilter) {
   return filteredEvents;
 }
 
-export function getkeys() {
-  const query = firebase.database().ref("events").orderByKey();
-  let eventKeys = [];
-  query.once("value").then(function (snapshot) {
-    snapshot.forEach((childSnapshot) => {
-      eventKeys.push(childSnapshot.key);
-    });
-  });
-  return eventKeys;
-}
-
 export async function findDate(year, month) {
   const arr = [];
-  const ref = firebase.database().ref("events");
-  await ref
-    .orderByChild("year")
-    .equalTo(year)
-    .once("value", function (snapshot) {
-      const v = snapshot.val();
-      arr.push(
-        Object.keys(v)
-          .map((item) => v[item])
-          .filter((v) => v.month === month)
-      );
-    });
+  try {
+    const ref = await db
+      .collection("events")
+      .where("year", "==", year)
+      .where("month", "==", month)
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((i) => {
+          arr.push({
+            id: i.id,
+            ...i.data(),
+          });
+        });
+      });
+  } catch (err) {
+    throw new err();
+  }
+
   return arr;
 }

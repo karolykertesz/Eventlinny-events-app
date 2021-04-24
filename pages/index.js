@@ -1,12 +1,15 @@
 import { useState } from "react";
 import EventList from "../components/EventList";
-import useSWR from "swr";
-
+import { db } from "../helpers/firebase";
+import Head from "next/head";
 const Home = ({ eventss }) => {
   const [fetched, useFetched] = useState(eventss);
-
   return (
     <div>
+      <Head>
+        <title>Next Events</title>
+        <meta name="description" content="Great events by Next events" />
+      </Head>
       <EventList items={fetched} />
     </div>
   );
@@ -14,25 +17,23 @@ const Home = ({ eventss }) => {
 export default Home;
 
 export async function getStaticProps() {
-  const response = await fetch(
-    'https://next-events-309cd-default-rtdb.firebaseio.com/events.json?orderBy="isFeatured"&equalTo=true'
-  );
-
-  const data = await response.json();
   const events = [];
-
-  for (let key in data) {
-    events.push({
-      id: key,
-      title: data[key].title,
-      date: data[key].date,
-      description: data[key].description,
-      location: data[key].location,
-      image: data[key].image,
-      isFeatured: data[key].isFeatured,
-    });
+  try {
+    const ref = await db
+      .collection("events")
+      .where(" isFeatured", "==", true)
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((item) => {
+          events.push({
+            id: item.id,
+            ...item.data(),
+          });
+        });
+      });
+  } catch (err) {
+    console.log(err);
   }
-
   return {
     props: {
       eventss: events,

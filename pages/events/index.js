@@ -1,11 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import EventList from "../../components/EventList";
 import EventSearch from "../../components/event-search.jsx";
 import { useRouter } from "next/router";
-import { findDate } from "../../data";
+import { getAllEvents } from "../../data";
+import { db } from "../../helpers/firebase";
 
 const AllEvents = ({ eventss }) => {
   const [event, setEvent] = useState(eventss);
+  useEffect(() => {
+    if (eventss) {
+      getAllEvents().then((re) => {
+        setEvent(re);
+      });
+    }
+  }, []);
   const router = useRouter();
   const onSelected = (y, m) => {
     const path = `/events/${y}/${m}`;
@@ -18,7 +26,7 @@ const AllEvents = ({ eventss }) => {
   return (
     <div>
       <EventSearch onSelected={onSelected} />
-      <EventList items={event} />
+      {event && <EventList items={event} />}
     </div>
   );
 };
@@ -26,28 +34,28 @@ const AllEvents = ({ eventss }) => {
 export default AllEvents;
 
 export async function getStaticProps() {
-  const response = await fetch(
-    "https://next-events-309cd-default-rtdb.firebaseio.com/events.json"
-  );
-
-  const data = await response.json();
-  const events = [];
-
-  for (let key in data) {
-    events.push({
-      id: key,
-      title: data[key].title,
-      date: data[key].date,
-      description: data[key].description,
-      location: data[key].location,
-      image: data[key].image,
-      isFeatured: data[key].isFeatured,
-    });
+  const allEv = [];
+  try {
+    const col = await db
+      .collection("events")
+      .orderBy("year", "desc")
+      .limit(2)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((item) => {
+          allEv.push({
+            id: item.id,
+            ...item.data(),
+          });
+        });
+      });
+  } catch (err) {
+    console.log(err);
   }
 
   return {
     props: {
-      eventss: events,
+      eventss: allEv,
     },
     revalidate: 1800,
   };

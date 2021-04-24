@@ -1,12 +1,11 @@
 import { useRouter } from "next/router";
 import { Fragment } from "react";
-import { getFilteredEvents, findDate } from "../../data";
+import { findDate } from "../../data";
 import EventList from "../../components/EventList.jsx";
 import ResultTitle from "../../components/results-title";
 import Button from "../../components/UI/Button";
 import ErrorAlert from "../../components/UI/error-alert";
 const FilteredEvent = (props) => {
-  console.log(props.eventsFiltered);
   const router = useRouter();
 
   const data = router.query.slug;
@@ -72,8 +71,7 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  const ev = await findDate(yearY, montM);
-  const eventsFiltered = ev[0];
+  const eventsFiltered = await findDate(yearY, montM);
   return {
     props: {
       eventsFiltered,
