@@ -1,9 +1,10 @@
 import { Fragment } from "react";
-
+import Head from "next/head";
 import EventSummary from "../../components/event-detail/event-summary";
 import EventLog from "../../components/event-detail/event-logistics";
 import EventContent from "../../components/event-detail/event-content";
-import { getkeys } from "../../data";
+import { getKeys, findById } from "../../data";
+
 
 const SingleEvent = ({ single }) => {
   if (!single) {
@@ -13,6 +14,10 @@ const SingleEvent = ({ single }) => {
 
   return (
     <Fragment>
+      <Head>
+        <title>{single.title}</title>
+        <meta name="description" content="single next event" />
+      </Head>
       <EventSummary title={single.title} />
       <EventLog
         date={single.date}
@@ -29,25 +34,16 @@ const SingleEvent = ({ single }) => {
 
 export async function getStaticProps(context) {
   const id = context.params.id;
-  const data = await fetch(
-    `https://next-events-309cd-default-rtdb.firebaseio.com/events.json?orderBy="$key"&equalTo="${id}"`
-  );
-  const dt = await data.json();
-  let oj = {};
-  for (let key in dt) {
-    oj = {
-      ...dt[key],
-    };
-  }
+  let dd = await findById(id);
   return {
     props: {
-      single: oj,
+      single: dd,
     },
     revalidate: 30,
   };
 }
 export async function getStaticPaths() {
-  const events = await getkeys();
+  const events = await getKeys();
   const paths = events.map((item) => ({ params: { id: item.id } }));
   return {
     paths: paths,

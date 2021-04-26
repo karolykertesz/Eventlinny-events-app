@@ -3,6 +3,7 @@ import Button from "./UI/Button";
 import DateIcon from "./UI/icons/date-icon";
 import AddresIcon from "./UI/icons/address-icon";
 import ArrowIcon from "./UI/icons/arrow-right-icon";
+import Image from "next/image";
 
 const EventItem = (props) => {
   const { title, image, date, location, id } = props;
@@ -15,7 +16,13 @@ const EventItem = (props) => {
   const linkTo = `/events/${id}`;
   return (
     <li className={classes.item}>
-      <img src={"/" + image} alt={title} />
+      <Image
+        src={"/" + image}
+        alt={title}
+        width={260}
+        height={180}
+        quality={100}
+      />
       <div className={classes.content}>
         <div className={classes.summary}>
           <h2>{title}</h2>

@@ -5,6 +5,7 @@ import EventList from "../../components/EventList.jsx";
 import ResultTitle from "../../components/results-title";
 import Button from "../../components/UI/Button";
 import ErrorAlert from "../../components/UI/error-alert";
+import Head from "next/head";
 const FilteredEvent = (props) => {
   const router = useRouter();
 
@@ -43,8 +44,17 @@ const FilteredEvent = (props) => {
   const date = new Date(yearY, montM - 1);
   return (
     <div>
-      <ResultTitle date={date} />
-      <EventList items={props.eventsFiltered} />
+      <>
+        <Head>
+          <title>selected next event</title>
+          <meta
+            name="description"
+            content={`selected event for ${yearY}/${montM}`}
+          />
+        </Head>
+        <ResultTitle date={date} />
+        <EventList items={props.eventsFiltered} />
+      </>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import EventSearch from "../../components/event-search.jsx";
 import { useRouter } from "next/router";
 import { getAllEvents } from "../../data";
 import { db } from "../../helpers/firebase";
+import Head from "next/head";
 
 const AllEvents = ({ eventss }) => {
   const [event, setEvent] = useState(eventss);
@@ -24,10 +25,17 @@ const AllEvents = ({ eventss }) => {
   }
 
   return (
-    <div>
+    <>
+      <Head>
+        <title>All next events</title>
+        <meta
+          name="description"
+          content="all next events including non featured events"
+        />
+      </Head>
       <EventSearch onSelected={onSelected} />
       {event && <EventList items={event} />}
-    </div>
+    </>
   );
 };
 

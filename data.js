@@ -94,3 +94,35 @@ export async function findDate(year, month) {
 
   return arr;
 }
+
+export const getKeys = async () => {
+  const keys = [];
+  try {
+    const k = await db.collection("events").onSnapshot((snapshot) => {
+      const ids = snapshot.docs.forEach((i) => {
+        keys.push(i.id);
+      });
+    });
+  } catch (err) {
+    console.log(err);
+  }
+  return keys;
+};
+
+export const findById = async (id) => {
+  let ren = {};
+  try {
+    let t = await db
+      .collection("events")
+      .doc(id)
+      .get()
+      .then((i) => {
+        ren = {
+          ...i.data(),
+        };
+      });
+  } catch (err) {
+    console.log(err);
+  }
+  return ren;
+};

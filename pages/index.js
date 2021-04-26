@@ -4,6 +4,7 @@ import { db } from "../helpers/firebase";
 import Head from "next/head";
 const Home = ({ eventss }) => {
   const [fetched, useFetched] = useState(eventss);
+
   return (
     <div>
       <Head>
