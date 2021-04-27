@@ -1,0 +1,87 @@
+import { useState } from 'react';
+import Image from 'next/image';
+import styled from 'styled-components';
+import classes from './UI/ui-modules/startitem.module.css';
+
+const StartItem = ({ items, addUserInt }) => {
+  const [selected, setSelected] = useState(false);
+  return (
+    <div>
+      <PageTitle>Add Your Event</PageTitle>
+      <Divlayer>
+        <span
+          className={selected ? classes.divlayer : classes.divImage}
+          onClick={() => setSelected(!selected)}
+        >
+          <Image
+            src={'/' + items.image}
+            alt={items.title}
+            width={300}
+            height={200}
+            quality={100}
+          />
+        </span>
+        <span>
+          <Pi onClick={() => addUserInt(items.id)}>
+            <Paragraph>{items.title}</Paragraph>
+            <SVG onClick={() => setSelected(!selected)}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </SVG>
+          </Pi>
+        </span>
+      </Divlayer>
+    </div>
+  );
+};
+
+const Divlayer = styled.div`
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+`;
+const Pi = styled.div`
+  text-align: center;
+  text-transform: capitalize;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+const Paragraph = styled.p`
+  font-size: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+`;
+const SVG = styled.span`
+  width: 30px;
+  height: 30px;
+  color: #b35900;
+  margin-left: 50px;
+`;
+
+const PageTitle = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 10px;
+  text-transform: uppercase;
+`;
+
+export default StartItem;
