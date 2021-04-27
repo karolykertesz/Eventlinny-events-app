@@ -4,32 +4,71 @@ import StartItem from '../components/startitem';
 import { useState, createContext } from 'react';
 import { useRouter } from 'next/router';
 import classes from '../components/UI/button.module.css';
+import { getAllAStartUp } from '../data';
+import styled from 'styled-components';
+import Head from 'next/head';
 
-import { DUMMY_EVENTS } from '../data';
-
-const UserIntrest = createContext();
-const StartUp = () => {
+const StartUp = ({ allStart }) => {
   const [userInt, setUserInt] = useState([]);
   const router = useRouter();
   const addUserInt = (id) => {
-    setUserInt([...userInt, id]);
+    const item = userInt.find((i) => i === id);
+    if (!item) {
+      return setUserInt([...userInt, id]);
+    }
+    const data = userInt.filter((i) => i !== id);
+    setUserInt(data);
   };
-  const data = DUMMY_EVENTS;
-  console.log(userInt);
+
   return (
     <Fragment>
-      <UserIntrest.Provider value={userInt}>
-        <Uilayer>
-          {data.map((i) => (
-            <span key={i.id}>
-              <StartItem items={i} addUserInt={addUserInt} />
-            </span>
-          ))}
-        </Uilayer>
-        {userInt.length > 0 && <button className={classes.btn}>Go</button>}
-      </UserIntrest.Provider>
+      <Head>
+        <title>All next events</title>
+        <meta name="description" content="all online cooking events" />
+      </Head>
+      <PageTitle>Add Your favorite Cooking Events</PageTitle>
+      <Uilayer>
+        {allStart.map((i) => (
+          <span key={i.id}>
+            <StartItem items={i} addUserInt={addUserInt} />
+          </span>
+        ))}
+      </Uilayer>
+      {userInt.length > 0 && (
+        <ButtonComp>
+          <button className={classes.btn}>Save My Events</button>
+        </ButtonComp>
+      )}
     </Fragment>
   );
 };
 
 export default StartUp;
+
+export async function getStaticProps() {
+  const data = await getAllAStartUp();
+  return {
+    props: {
+      allStart: data,
+    },
+    revalidate: 1800,
+  };
+}
+const PageTitle = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 10px;
+  text-transform: uppercase;
+`;
+
+const ButtonComp = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+`;
