@@ -15,7 +15,7 @@ const ValidPage = () => {
           setVError(mess.error);
         } else {
           setVError(mess.message);
-          router.push('/startup');
+          // router.push('/startup');
         }
       } catch (err) {
         console.log(err);
