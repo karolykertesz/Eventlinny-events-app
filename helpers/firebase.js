@@ -1,5 +1,6 @@
 import firebase from 'firebase';
 
+
 if (!firebase.apps.length) {
   firebase.initializeApp({
     apiKey: process.env.FIREBASE_API_KEY,
@@ -13,3 +14,4 @@ if (!firebase.apps.length) {
 }
 
 export const db = firebase.firestore();
+

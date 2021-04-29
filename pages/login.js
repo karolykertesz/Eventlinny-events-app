@@ -2,29 +2,18 @@ import { Fragment, useRef, useState } from 'react';
 import styled from 'styled-components';
 import classes from '../components/UI/ui-modules/login.module.css';
 import { useRouter } from 'next/router';
-import React from 'react';
-import {
-  useAuthUser,
-  withAuthUser,
-  withAuthUserTokenSSR,
-} from 'next-firebase-auth';
+
 const Login = () => {
-  const AuthUser = useAuthUser();
-  console.log(AuthUser);
   const router = useRouter();
   const [error, setError] = useState('');
-  const firstNameRef = useRef();
-  const lastNameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const formSubmit = async (e) => {
     e.preventDefault();
     try {
-      const mess = await fetch('/api/users/signup', {
+      const mess = await fetch('/api/users/login', {
         method: 'POST',
         body: JSON.stringify({
-          firstname: firstNameRef.current.value,
-          lastname: lastNameRef.current.value,
           email: emailRef.current.value,
           password: passwordRef.current.value,
         }),
@@ -34,15 +23,9 @@ const Login = () => {
           Accept: 'application/json',
         },
       });
-      if (mess.status === 403) {
-        setError('something went wrong');
-        return;
-      }
-      if (mess.status === 400) {
-        setError('Sorry this email is takken!');
-        return;
-      }
-      setError('Plese Check Your mailbox validation Email was sent');
+      const errorMessage = await mess.json();
+      //   setError(errorMessage.error);
+      console.log(errorMessage.error);
     } catch (err) {
       console.log(err, 'the error');
     }
@@ -53,14 +36,6 @@ const Login = () => {
         <div className={classes.form}>
           <form onSubmit={formSubmit}>
             <div className={classes.control}>
-              <label htmlFor="firstname">First Name</label>
-              <input type="text" id="firstname" ref={firstNameRef} />
-            </div>
-            <div className={classes.control}>
-              <label htmlFor="lastname">Last Name</label>
-              <input type="text" id="lastname" ref={lastNameRef} />
-            </div>
-            <div className={classes.control}>
               <label htmlFor="email">Email</label>
               <input type="email" id="email" ref={emailRef} />
             </div>
@@ -69,7 +44,7 @@ const Login = () => {
               <input type="password" id="password" ref={passwordRef} />
             </div>
             <ForMButton>
-              <Pi>Sign Up</Pi>
+              <Pi>Login</Pi>
             </ForMButton>
           </form>
           <Error>{error && error}</Error>

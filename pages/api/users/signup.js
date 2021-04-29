@@ -55,6 +55,7 @@ export default async function handler(req, res) {
         email,
         password: hashpass,
         vid: uuidv4(),
+        isValidated: false,
       })
       .then((docId) => {
         res
@@ -65,5 +66,4 @@ export default async function handler(req, res) {
     console.log(err);
     res.status(401).json({ message: err });
   }
-  
 }

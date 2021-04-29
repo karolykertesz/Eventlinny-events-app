@@ -1,9 +1,9 @@
 import { init } from 'next-firebase-auth';
 const initAuth = () => {
   init({
-    authPageURL: '/auth',
-    appPageURL: '/',
-    loginAPIEndpoint: '/api/users/[vid]', // required
+    authPageURL: '/login',
+    appPageURL: 'http://localhost',
+    loginAPIEndpoint: '/api/users/login', // required
     logoutAPIEndpoint: '/api/users/logout', // required
     firebaseAuthEmulatorHost: process.env.FIREBASE_AUTH_EMULATOR_HOST,
     // Required in most cases.
