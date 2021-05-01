@@ -32,4 +32,7 @@ yarn-error.log*
 .env
 
 # vercel
+
 .vercel
+/service
+/service/next-events-309cd-05ba5a4bdaef.json
