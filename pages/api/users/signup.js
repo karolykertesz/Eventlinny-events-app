@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 import { db } from '../../../helpers/firebase';
 const { v4: uuidv4 } = require('uuid');
+import admin from 'firebase-admin';
 
 const validate = require('validate.js');
 import { constraints } from '../../../helpers/validators/signup';

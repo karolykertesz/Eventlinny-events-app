@@ -11,7 +11,7 @@ const Login = () => {
   const formSubmit = async (e) => {
     e.preventDefault();
     try {
-      const mess = await fetch('/api/users/login', {
+      const mess = await fetch('/api/users/loger', {
         method: 'POST',
         body: JSON.stringify({
           email: emailRef.current.value,
@@ -23,9 +23,9 @@ const Login = () => {
           Accept: 'application/json',
         },
       });
-      const errorMessage = await mess.json();
-      //   setError(errorMessage.error);
-      console.log(errorMessage.error);
+      const data = await mess.json();
+      console.log(data);
+      setError(data.message);
     } catch (err) {
       console.log(err, 'the error');
     }

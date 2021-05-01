@@ -49,12 +49,9 @@ export default async function handler(req, res) {
     return res.status(401).json({ error: 'You need to validate your email' });
   }
   const uid = userInfo[0].docId;
-  await admin
-    .auth().generateEmailVerificationLink
- 
-    .catch((error) => {
-      console.log('Error fetching user data:', error);
-    });
+  // await admin.auth().generateEmailVerificationLink.catch((error) => {
+  //   console.log('Error fetching user data:', error);
+  // });
   try {
     await admin
       .auth()
@@ -70,7 +67,8 @@ export default async function handler(req, res) {
       });
   } catch (err) {
     console.log(err);
+
     return res.status(500).json({ error: 'Unexpected error.' });
   }
-  console.log(userInfo[0]);
+  console.log(admin.credential);
 }

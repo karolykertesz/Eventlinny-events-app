@@ -3,14 +3,8 @@ import styled from 'styled-components';
 import classes from '../components/UI/ui-modules/login.module.css';
 import { useRouter } from 'next/router';
 import React from 'react';
-import {
-  useAuthUser,
-  withAuthUser,
-  withAuthUserTokenSSR,
-} from 'next-firebase-auth';
+
 const Login = () => {
-  const AuthUser = useAuthUser();
-  console.log(AuthUser);
   const router = useRouter();
   const [error, setError] = useState('');
   const firstNameRef = useRef();
@@ -20,7 +14,7 @@ const Login = () => {
   const formSubmit = async (e) => {
     e.preventDefault();
     try {
-      const mess = await fetch('/api/users/signup', {
+      const mess = await fetch('/api/users/signer', {
         method: 'POST',
         body: JSON.stringify({
           firstname: firstNameRef.current.value,
@@ -34,15 +28,8 @@ const Login = () => {
           Accept: 'application/json',
         },
       });
-      if (mess.status === 403) {
-        setError('something went wrong');
-        return;
-      }
-      if (mess.status === 400) {
-        setError('Sorry this email is takken!');
-        return;
-      }
-      setError('Plese Check Your mailbox validation Email was sent');
+      const data = await mess.json();
+      setError(data.message);
     } catch (err) {
       console.log(err, 'the error');
     }
@@ -117,7 +104,7 @@ const Error = styled.div`
   justify-content: center;
   align-items: center;
   color: red;
-  text-transform: capitalize;
+  text-transform: uppercase;
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.2rem;
