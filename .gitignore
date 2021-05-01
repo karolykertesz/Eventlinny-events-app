@@ -35,4 +35,5 @@ yarn-error.log*
 
 .vercel
 /service
-/service/next-events-309cd-05ba5a4bdaef.json
+service
+next-events-309cd-05ba5a4bdaef.json
