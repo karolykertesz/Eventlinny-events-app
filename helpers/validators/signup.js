@@ -9,13 +9,6 @@ export const constraints = {
     },
     length: { minimum: 2 },
   },
-  lastname: {
-    presence: true,
-    format: {
-      pattern: /^[a-zA-Zs\s]*$/,
-      message: 'Sorry, invalid Characters',
-    },
-  },
   email: {
     presence: true,
     email: true,

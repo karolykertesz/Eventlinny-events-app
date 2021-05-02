@@ -3,22 +3,24 @@ import styled from 'styled-components';
 import classes from '../components/UI/ui-modules/login.module.css';
 import { useRouter } from 'next/router';
 import React from 'react';
+import SimpleReactValidator from 'simple-react-validator';
 
 const Login = () => {
   const router = useRouter();
   const [error, setError] = useState('');
   const firstNameRef = useRef();
-  const lastNameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
+
+
   const formSubmit = async (e) => {
     e.preventDefault();
+   
     try {
       const mess = await fetch('/api/users/signer', {
         method: 'POST',
         body: JSON.stringify({
           firstname: firstNameRef.current.value,
-          lastname: lastNameRef.current.value,
           email: emailRef.current.value,
           password: passwordRef.current.value,
         }),
@@ -34,6 +36,7 @@ const Login = () => {
       console.log(err, 'the error');
     }
   };
+
   return (
     <Fragment>
       <Layer>
@@ -41,19 +44,33 @@ const Login = () => {
           <form onSubmit={formSubmit}>
             <div className={classes.control}>
               <label htmlFor="firstname">First Name</label>
-              <input type="text" id="firstname" ref={firstNameRef} />
-            </div>
-            <div className={classes.control}>
-              <label htmlFor="lastname">Last Name</label>
-              <input type="text" id="lastname" ref={lastNameRef} />
+              <input
+                type="text"
+                id="firstname"
+                name="firstname"
+                ref={firstNameRef}
+              />
+
             </div>
             <div className={classes.control}>
               <label htmlFor="email">Email</label>
-              <input type="email" id="email" ref={emailRef} />
+              <input
+                type="email"
+                id="email"
+                ref={emailRef}
+                name="email"
+              
+              />
+
             </div>
             <div className={classes.control}>
               <label htmlFor="password">Passsword</label>
-              <input type="password" id="password" ref={passwordRef} />
+              <input
+                type="password"
+                id="password"
+                ref={passwordRef}
+                name="password"
+              />
             </div>
             <ForMButton>
               <Pi>Sign Up</Pi>
@@ -78,7 +95,6 @@ const Layer = styled.div`
 
 const ForMButton = styled.button`
   cursor: pointer;
-
   background-color: papayawhip;
   border: 1px solid papayawhip;
   border-radius: 6px;

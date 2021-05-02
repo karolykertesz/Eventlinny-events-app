@@ -2,6 +2,8 @@ import { db, auth } from '../../../helpers/firebase';
 import firebase from 'firebase';
 const validate = require('validate.js');
 import { constraints } from '../../../helpers/validators/login';
+const jwt = require('jsonwebtoken');
+import cookie from 'cookie';
 export default async function handler(req, res) {
   auth.setPersistence(firebase.auth.Auth.Persistence.NONE);
   const { email, password } = req.body;
@@ -15,7 +17,21 @@ export default async function handler(req, res) {
       let user = userCred.user;
       if (user && user.emailVerified) {
         return user.getIdToken().then((idToken) => {
-        //   const csrfToken = getCookie('csrfToken');
+          const secret = process.env.SECRET;
+          const token = jwt.sign({ ui: user.uid }, secret, {
+            expiresIn: '1h',
+          });
+
+          res.setHeader(
+            'Set-Cookie',
+            cookie.serialize('auth', jwt, {
+              httpOnly: true,
+              secure: process.env.NODE_ENV !== 'development',
+              sameSite: 'strict',
+              maxAge: 3600,
+              path: '/',
+            })
+          );
           return res.status(200).json({
             message: 'Thank You',
             currentUser: {
@@ -23,7 +39,6 @@ export default async function handler(req, res) {
               uid: user.uid,
             },
             idToken,
-            // csrfToken,
           });
         });
       }
