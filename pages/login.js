@@ -21,7 +21,6 @@ const Login = () => {
 
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer `,
           Accept: 'application/json',
         },
       });

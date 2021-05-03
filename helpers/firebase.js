@@ -33,6 +33,7 @@ if (admin.apps.length === 0) {
 // export const auth = admin.auth();
 export const auth = firebase.auth();
 export const db = admin.firestore();
+export const adminAuth = admin.auth();
 // export const adminUser = admin.auth();
 
 // export const ad = admin;
