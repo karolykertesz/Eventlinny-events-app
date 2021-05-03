@@ -13,6 +13,7 @@ const Login = () => {
     try {
       const mess = await fetch('/api/users/loger', {
         method: 'POST',
+        credentials: 'same-origin',
         body: JSON.stringify({
           email: emailRef.current.value,
           password: passwordRef.current.value,
@@ -20,11 +21,12 @@ const Login = () => {
 
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer `,
           Accept: 'application/json',
         },
       });
       const data = await mess.json();
-      console.log(data);
+      console.log(data.token);
       setError(data.message);
     } catch (err) {
       console.log(err, 'the error');
