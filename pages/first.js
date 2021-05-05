@@ -16,6 +16,8 @@ First.getInitialProps = async (context) => {
   //     // 'Content-Type': 'application/json',
   //   },
   const { res, req } = context;
+
+  console.log(ses);
   const cookie = req.headers.cookie;
   const url = 'http://localhost:3000/api/users/validate';
   const response = await fetch(url, {
@@ -25,12 +27,12 @@ First.getInitialProps = async (context) => {
     },
   }).catch((err) => console.log(err));
   const d = await response.json();
-  console.log(d);
+  console.log(d.message);
   // const j = await response.json();
   // const t = j.message;
   // console.log(t);
   return {
-    message: 'boom',
+    message: d.message,
   };
 };
 

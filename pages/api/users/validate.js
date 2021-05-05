@@ -1,17 +1,16 @@
-import { db, adminAuth } from '../../../helpers/firebase';
 import firebase from 'firebase';
 const jwt = require('jsonwebtoken');
-
+import cookie from 'cookie';
 export const authChecker = (fn) => async (req, res) => {
   const secret = process.env.SECRET;
   const token = req.cookies.auth;
+  console.log(token);
   if (token == null) return res.status(403).json({ message: 'No valid token' });
 
   try {
     await jwt.verify(token, secret, async function (err, decoded) {
       if (!err && decoded) {
-        const t = decoded.uid;
-        return await fn(req, res, t);
+        return await fn(req, res);
       }
     });
   } catch (err) {
@@ -19,17 +18,32 @@ export const authChecker = (fn) => async (req, res) => {
   }
 };
 
-export default authChecker(async function getName(req, res, t) {
-  console.log(t);
-  const user = firebase.auth().currentUser.toJSON();
-  firebase.auth().onAuthStateChanged((fbUser) => {
-    if (fbUser) {
-      console.log(fbUser.toJSON());
-    }
+export default authChecker(async function getName(req, res) {
+  const user = firebase.auth().currentUser;
+  if (!user) return res.status(403).json({ massege: 'no User Signed in' });
+  const uid = user.toJSON().uid;
+
+  const userToken = { userId: uid };
+  const token = jwt.sign({ userToken }, process.env.SESSION_SECRET, {
+    expiresIn: '1h',
   });
-  // console.log(user);
-  res.json({ m: 'jj' });
+  try {
+    const coo = await res.setHeader(
+      'Set-Cookie',
+      cookie.serialize('fire', 'ggg', {
+        httpOnly: true,
+        secure: process.env.NODE_ENV !== 'development',
+        sameSite: 'strict',
+        path: '/',
+      })
+    );
+    res.status(200).json({ message: 'Everithing is great' });
+  } catch (err) {
+    res.status(400).json({ message: "token wasn't created" });
+  }
 });
+
+// console.log(user);
 
 //   const coc = req.cookies.auth;
 //   const dd = await jwt.verify(token, secret, (err, decoded) => {

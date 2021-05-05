@@ -1,19 +1,34 @@
-import { Fragment, useRef, useState } from 'react';
+import { Fragment, useRef, useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import classes from '../components/UI/ui-modules/login.module.css';
+import validate from 'validate.js';
+import { constraints } from '../helpers/validators/login';
 import { useRouter } from 'next/router';
 
 const Login = () => {
   const router = useRouter();
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [tok, setTok] = useState();
   const emailRef = useRef();
   const passwordRef = useRef();
   const formSubmit = async (e) => {
     e.preventDefault();
+    setError(undefined);
+    const value = await validate(
+      {
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+      },
+      constraints
+    );
+    if (value !== undefined) {
+      setError('Invalid credentials');
+      return;
+    }
     try {
       const mess = await fetch('/api/users/loger', {
         method: 'POST',
-        credentials: 'same-origin',
         body: JSON.stringify({
           email: emailRef.current.value,
           password: passwordRef.current.value,
@@ -25,12 +40,45 @@ const Login = () => {
         },
       });
       const data = await mess.json();
-      console.log(data.token);
-      setError(data.message);
+      if (mess.status !== 200) {
+        setError(data.message);
+        return;
+      } else {
+        setTok(data.tokken);
+        setError(null);
+      }
     } catch (err) {
       console.log(err, 'the error');
     }
   };
+  const sendValid = useCallback(
+    async (tok) => {
+      if (!tok) return;
+      try {
+        const data = await fetch('/api/users/cookies', {
+          method: 'POST',
+          body: JSON.stringify({ userToken: tok }),
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+        });
+        const value = await data.json();
+        if (data.status !== 200) {
+          setError(value.tokken);
+          return;
+        } else {
+          router.push('/first');
+        }
+      } catch (err) {
+        console.log(err, 'the error');
+      }
+    },
+    [tok]
+  );
+  useEffect(() => {
+    sendValid(tok);
+  }, [tok]);
   return (
     <Fragment>
       <Layer>
@@ -93,7 +141,7 @@ const Error = styled.div`
   justify-content: center;
   align-items: center;
   color: red;
-  text-transform: capitalize;
+  text-transform: uppercase;
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.2rem;
