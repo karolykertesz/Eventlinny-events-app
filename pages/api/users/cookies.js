@@ -1,20 +1,18 @@
 import cookie from 'cookie';
+import firebase from 'firebase';
 export default async function handler(req, res) {
-  const userToken = req.body.userToken;
-  if (!userToken) {
-    return res.status(401).json({ tokken: 'UNAUTHORIZED REQUEST!' });
-  }
 
   const expiresIn = 60 * 60;
   try {
-    res.setHeader(
+    await res.setHeader(
       'Set-Cookie',
-      cookie.serialize('fire', userToken, {
+      cookie.serialize('fire', too, {
         httpOnly: true,
         secure: process.env.NODE_ENV !== 'development',
         sameSite: 'strict',
         path: '/',
         maxAge: expiresIn,
+        
       })
     );
   } catch (err) {

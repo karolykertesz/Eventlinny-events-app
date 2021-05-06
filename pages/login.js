@@ -12,6 +12,7 @@ const Login = () => {
   const [tok, setTok] = useState();
   const emailRef = useRef();
   const passwordRef = useRef();
+  const tokenRef = useRef();
   const formSubmit = async (e) => {
     e.preventDefault();
     setError(undefined);
@@ -37,48 +38,54 @@ const Login = () => {
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
+          // 'CSRF-Token': tokenRef.current.value,
         },
       });
-      const data = await mess.json();
-      if (mess.status !== 200) {
-        setError(data.message);
-        return;
-      } else {
-        setTok(data.tokken);
-        setError(null);
-      }
+
+      // const data = await mess.json();5
+      // const d = mess.json();
+      console.log(mess);
+
+      // if (mess.status !== 200) {
+      //   setError(data.message);
+      //   return;
+      // } else {
+      //   setTok(data.tokken);
+      //   setError(null);
+      // }
     } catch (err) {
       console.log(err, 'the error');
     }
   };
-  const sendValid = useCallback(
-    async (tok) => {
-      if (!tok) return;
-      try {
-        const data = await fetch('/api/users/cookies', {
-          method: 'POST',
-          body: JSON.stringify({ userToken: tok }),
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-        });
-        const value = await data.json();
-        if (data.status !== 200) {
-          setError(value.tokken);
-          return;
-        } else {
-          router.push('/first');
-        }
-      } catch (err) {
-        console.log(err, 'the error');
-      }
-    },
-    [tok]
-  );
-  useEffect(() => {
-    sendValid(tok);
-  }, [tok]);
+  // const sendValid = useCallback(
+  //   async (tok) => {
+  //     if (!tok) return;
+  //     try {
+  //       const data = await fetch('/api/users/cookies', {
+  //         method: 'POST',
+  //         body: JSON.stringify({ userToken: tok }),
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //           Accept: 'application/json',
+  //         },
+  //       });
+  //       const value = await data.json();
+  //       if (data.status !== 200) {
+  //         setError(value.tokken);
+  //         return;
+  //       } else {
+  //         router.push('/first');
+  //       }
+  //     } catch (err) {
+  //       console.log(err, 'the error');
+  //     }
+  //   },
+  //   [tok]
+  // );
+  // useEffect(() => {
+  //   sendValid(tok);
+  // }, [tok]);
+  console.log('hhh');
   return (
     <Fragment>
       <Layer>
@@ -88,9 +95,16 @@ const Login = () => {
               <label htmlFor="email">Email</label>
               <input type="email" id="email" ref={emailRef} />
             </div>
+            <code>{process.env.SESSION_SECRET}</code>
             <div className={classes.control}>
               <label htmlFor="password">Passsword</label>
               <input type="password" id="password" ref={passwordRef} />
+              <input
+                ref={tokenRef}
+                type="hidden"
+                name="_csrf"
+                value={process.env.SESSION_SECRET}
+              />
             </div>
             <ForMButton>
               <Pi>Login</Pi>

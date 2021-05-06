@@ -10,29 +10,25 @@ const First = ({ message }) => {
 
 export default First;
 First.getInitialProps = async (context) => {
-  // const to = await fetch('http://localhost:3000/api/users/validate', {
-  //   headers: {
-  //     cookie: context.req.headers.cookie,
-  //     // 'Content-Type': 'application/json',
-  //   },
-  const { res, req } = context;
+  const { req } = context;
 
-  console.log(ses);
-  const cookie = req.headers.cookie;
+  const cookie = await req.headers.cookie;
   const url = 'http://localhost:3000/api/users/validate';
   const response = await fetch(url, {
     headers: {
       cookie: cookie,
-      // 'Content-Type': 'application/json',
+      'Content-Type': 'application/json',
     },
+    credentials: 'same-origin',
   }).catch((err) => console.log(err));
-  const d = await response.json();
-  console.log(d.message);
+  // const d = await response.json();
+  const r = await response.json();
+  console.log(r);
   // const j = await response.json();
   // const t = j.message;
   // console.log(t);
   return {
-    message: d.message,
+    message: 'hh',
   };
 };
 
