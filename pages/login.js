@@ -1,91 +1,75 @@
-import { Fragment, useRef, useState, useCallback, useEffect } from 'react';
-import styled from 'styled-components';
-import classes from '../components/UI/ui-modules/login.module.css';
-import validate from 'validate.js';
-import { constraints } from '../helpers/validators/login';
-import { useRouter } from 'next/router';
+import { Fragment, useRef, useState, useCallback, useEffect } from "react";
+import styled from "styled-components";
+import classes from "../components/UI/ui-modules/login.module.css";
+import validate from "validate.js";
+import { constraints } from "../helpers/validators/login";
+import sender from "../helpers/sender";
+import { useRouter } from "next/router";
 
 const Login = () => {
   const router = useRouter();
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [tok, setTok] = useState();
   const emailRef = useRef();
   const passwordRef = useRef();
   const tokenRef = useRef();
-  const formSubmit = async (e) => {
-    e.preventDefault();
-    setError(undefined);
-    const value = await validate(
-      {
-        email: emailRef.current.value,
-        password: passwordRef.current.value,
-      },
-      constraints
-    );
-    if (value !== undefined) {
-      setError('Invalid credentials');
-      return;
-    }
-    try {
-      const mess = await fetch('/api/users/loger', {
-        method: 'POST',
-        body: JSON.stringify({
+  useEffect(() => {
+    const getToken = async () => {
+      const data = await fetch("/api/users/session");
+      const token = await data.json();
+      return setTok(token);
+    };
+    getToken();
+  }, []);
+  const formSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      setError(undefined);
+      const value = await validate(
+        {
           email: emailRef.current.value,
           password: passwordRef.current.value,
-        }),
-
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          // 'CSRF-Token': tokenRef.current.value,
         },
-      });
+        constraints
+      );
+      if (value !== undefined) {
+        setError("Invalid credentials");
+        return;
+      }
+      const email = emailRef.current.value;
+      const password = passwordRef.current.value;
+      try {
+        if (tok) {
+          const mess = await fetch("/api/users/session", {
+            method: "POST",
+            body: JSON.stringify({
+              token: tok ? tok.token : "",
+            }),
 
-      // const data = await mess.json();5
-      // const d = mess.json();
-      console.log(mess);
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+          });
+          const status = await mess.status;
+          if (status !== 200) {
+            const data = await mess.json();
+            setError(data.message);
+            return;
+          }
+          if (status === 200) {
+            return sender(email, password, router, setError);
+          }
+        }
+      } catch (err) {
+        console.log(err, "the error");
+      }
+      return setTok("");
+    },
+    [tok]
+  );
 
-      // if (mess.status !== 200) {
-      //   setError(data.message);
-      //   return;
-      // } else {
-      //   setTok(data.tokken);
-      //   setError(null);
-      // }
-    } catch (err) {
-      console.log(err, 'the error');
-    }
-  };
-  // const sendValid = useCallback(
-  //   async (tok) => {
-  //     if (!tok) return;
-  //     try {
-  //       const data = await fetch('/api/users/cookies', {
-  //         method: 'POST',
-  //         body: JSON.stringify({ userToken: tok }),
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //           Accept: 'application/json',
-  //         },
-  //       });
-  //       const value = await data.json();
-  //       if (data.status !== 200) {
-  //         setError(value.tokken);
-  //         return;
-  //       } else {
-  //         router.push('/first');
-  //       }
-  //     } catch (err) {
-  //       console.log(err, 'the error');
-  //     }
-  //   },
-  //   [tok]
-  // );
-  // useEffect(() => {
-  //   sendValid(tok);
-  // }, [tok]);
-  console.log('hhh');
   return (
     <Fragment>
       <Layer>
@@ -95,7 +79,6 @@ const Login = () => {
               <label htmlFor="email">Email</label>
               <input type="email" id="email" ref={emailRef} />
             </div>
-            <code>{process.env.SESSION_SECRET}</code>
             <div className={classes.control}>
               <label htmlFor="password">Passsword</label>
               <input type="password" id="password" ref={passwordRef} />
@@ -103,7 +86,7 @@ const Login = () => {
                 ref={tokenRef}
                 type="hidden"
                 name="_csrf"
-                value={process.env.SESSION_SECRET}
+                value={tok ? tok : ""}
               />
             </div>
             <ForMButton>

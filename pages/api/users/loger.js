@@ -1,67 +1,64 @@
-import { db, auth } from '../../../helpers/firebase';
-import admin from 'firebase-admin';
-import firebase from 'firebase';
-const validate = require('validate.js');
-import { constraints } from '../../../helpers/validators/login';
-const jwt = require('jsonwebtoken');
-import cookie from 'cookie';
-// const csrf = require('csurf');
+import { db, auth } from "../../../helpers/firebase";
+import admin from "firebase-admin";
+import firebase from "firebase";
+const validate = require("validate.js");
+import { constraints } from "../../../helpers/validators/login";
+const jwt = require("jsonwebtoken");
+import cookie from "cookie";
 
-// var cookieParser = require('cookie-parser');
-// export const config = {
-//   api: {
-//     cookieParser: true,
-//   },
-// };
-
-// export const config = {
-//   api: {
-//     cookieParser: true,
-//   },
-// };
-
-// export function middleware(req, res, fn) {
-//   return new Promise((resolve, reject) => {
-//     fn(req, res, (result) => {
-//       if (result instanceof Error) {
-//         return reject(result);
-//       }
-//       return resolve(result);
-//     });
-//   });
-// }
-
-export const handler = (fn) => async (req, res) => {
- 
-
-  return fn(req, res, token, secret);
-};
-
-export default handler(async function doToken(req, res, token, secret) {
-  const { email, password } = req.body;
-  console.log(secret);
-  const value = validate({ email, password }, constraints);
-  // await middleware(req, res, csrfProtection);
-
-  if (value !== undefined) {
-    return;
-    55;
+export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    return res.status(500).json({
+      message: "Wrong request",
+    });
   }
-  return res.status(200).json({ tokken: token });
-});
+  const email = req.body.email;
+  const password = req.body.password;
 
-// const handler = nc({
-//   onError(req, res) {
-//     res.status(501).json({ error: 'dd' });
-//   },
-//   next()
-// })
-//   // .use(csrfProtection)
-//   .use((req, res, next) => {
-//
-//     next();
-//     let tok = {};
-// firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
+  const value = await validate(
+    {
+      email,
+      password,
+    },
+    constraints
+  );
+  if (value !== undefined) {
+    return res.status(403).json({ message: "Something went wrong" });
+  }
+
+  let userId = "";
+  try {
+    await auth
+      .signInWithEmailAndPassword(email, password)
+      .then((userCred) => {
+        const user = userCred.user;
+        if (!user.emailVerified) {
+          return res.status(400).json({ message: "Need to get verified" });
+        }
+        userId += user.uid;
+      })
+      .catch((err) => console.log(err));
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    return res.status(402).json({ message: errorMessage });
+  }
+  const token = jwt.sign({ data: userId }, process.env.SECRET, {
+    expiresIn: "1h",
+  });
+  res.setHeader(
+    "Set-Cookie",
+    cookie.serialize("auth", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV !== "development",
+      sameSite: "strict",
+      path: "/",
+      maxAge: 3600,
+    })
+  );
+  res.status(200).json({ message: "All good" });
+}
+
 // firebase
 //   .auth()
 //   .signInWithEmailAndPassword(email, password)
@@ -102,14 +99,7 @@ export default handler(async function doToken(req, res, token, secret) {
 //       });
 //     })
 //     .catch((err) => console.log(err))}
-// auth
-//   .signInWithEmailAndPassword(email, password)
-//   .then((userCred) => {
-//     if (!userCred) {
-//       return res
-//         .status(404)
-//         .json({ message: 'Not a Valid user or password' });
-//     }
+//
 //     return userCred.getIdToken().then(idToken=> {})
 //     // let user = userCred.user;
 //     // if (user && user.emailVerified) {
@@ -119,16 +109,7 @@ export default handler(async function doToken(req, res, token, secret) {
 //     //   expiresIn: '1h',
 //     // });
 //     //
-//     // res.setHeader(
-//     //   'Set-Cookie',
-//     //   cookie.serialize('auth', token, {
-//     //     httpOnly: true,
-//     //     secure: process.env.NODE_ENV !== 'development',
-//     //     sameSite: 'strict',
-//     //     path: '/',
-//     //     maxAge: 3600,
-//     //   })
-//     // );
+//     /
 //     return fn(req, res, uid);
 //     // }
 //     return res.status(400).json({ message: 'Email Needs to be Verified!' });

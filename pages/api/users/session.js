@@ -1,10 +1,60 @@
-const Tokens = require('csrf');
-export default function handler (req,res){
-    const tokens = new Tokens();
-    const secret = await tokens.secretSync();
-    const token = await tokens.create(secret);
-    if (req.method === "GET"){
-
+const Tokens = require("csrf");
+import firebase from "firebase";
+const jwt = require("jsonwebtoken");
+import cookie from "cookie";
+import { vdToken } from "./validateSesion";
+const tokens = new Tokens();
+const secret = tokens.secretSync();
+const token = tokens.create(secret);
+export default async function handler(req, res) {
+  if (req.method === "GET" && !req.cookies.session) {
+    const tokenC = jwt.sign({ data: secret }, process.env.SESSION_SECRET, {
+      expiresIn: 100,
+    });
+    res.setHeader(
+      "Set-Cookie",
+      cookie.serialize("session", tokenC, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV !== "development",
+        sameSite: "strict",
+        path: "/",
+        maxAge: 100,
+      })
+    );
+    return res.status(200).json({ token: token });
+  }
+  if (req.method === "GET" && req.cookies.session) {
+    res.status(200);
+  }
+  if (req.method === "POST") {
+    if (!req.body.token || !req.cookies.session) {
+      return res.status(401).json({ message: "Invalid Login" });
     }
-
+    const session = req.cookies.session;
+    const token = req.body.token;
+    let secret = "";
+    try {
+      const r = await jwt.verify(
+        session,
+        process.env.SESSION_SECRET,
+        async function (err, decoded) {
+          if (!err && decoded) {
+            // secret = decoded.data;
+            secret += decoded.data;
+          }
+        }
+      );
+    } catch (err) {
+      console.log(err);
+      return res.status(405).json({ message: "Invalid token" });
+    }
+    try {
+      if (!tokens.verify(secret, token)) {
+        return res.status(400).json({ message: "Something went wrong" });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    return res.status(200).json({ message: "all Good" });
+  }
 }

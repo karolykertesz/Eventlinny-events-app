@@ -1,3 +1,9 @@
+module.exports = {
+  future: {
+    webpack5: true,
+  },
+};
+
 // module.exports = {
 //   async headers() {
 //     return [
@@ -13,4 +19,3 @@
 //     ];
 //   },
 // };
-
