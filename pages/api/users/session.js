@@ -1,8 +1,6 @@
 const Tokens = require("csrf");
-import firebase from "firebase";
 const jwt = require("jsonwebtoken");
 import cookie from "cookie";
-import { vdToken } from "./validateSesion";
 const tokens = new Tokens();
 const secret = tokens.secretSync();
 const token = tokens.create(secret);
@@ -39,14 +37,13 @@ export default async function handler(req, res) {
         process.env.SESSION_SECRET,
         async function (err, decoded) {
           if (!err && decoded) {
-            // secret = decoded.data;
             secret += decoded.data;
           }
         }
       );
     } catch (err) {
       console.log(err);
-      return res.status(405).json({ message: "Invalid token" });
+      return res.status(405).json({ message: "Please refresh the browser" });
     }
     try {
       if (!tokens.verify(secret, token)) {

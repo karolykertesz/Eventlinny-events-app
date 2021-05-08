@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import fetch from 'isomorphic-unfetch';
+import { useState, useEffect } from "react";
+import {} from "swr";
 // import token from '../handlers/token';
 
 const First = ({ message }) => {
@@ -10,25 +10,24 @@ const First = ({ message }) => {
 
 export default First;
 First.getInitialProps = async (context) => {
-  const { req } = context;
-
-  const cookie = await req.headers.cookie;
-  const url = 'http://localhost:3000/api/users/validate';
+  const cookie = context.req.headers.cookie;
+  const url = "http://localhost:3000/api/users/validate";
   const response = await fetch(url, {
     headers: {
       cookie: cookie,
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
-    credentials: 'same-origin',
+    credentials: "same-origin",
   }).catch((err) => console.log(err));
   // const d = await response.json();
   const r = await response.json();
-  console.log(r);
+  const message = r.message;
+
   // const j = await response.json();
   // const t = j.message;
   // console.log(t);
   return {
-    message: 'hh',
+    message: message,
   };
 };
 

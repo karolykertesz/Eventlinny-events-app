@@ -1,12 +1,12 @@
-import { useEffect, Fragment } from 'react';
-import Uilayer from '../components/UI/uiLayer ';
-import StartItem from '../components/startitem';
-import { useState, createContext } from 'react';
-import { useRouter } from 'next/router';
-import classes from '../components/UI/button.module.css';
-import { getAllAStartUp } from '../data';
-import styled from 'styled-components';
-import Head from 'next/head';
+import { Fragment } from "react";
+import Uilayer from "../components/UI/uiLayer ";
+import StartItem from "../components/startitem";
+import { useState } from "react";
+import { useRouter } from "next/router";
+import classes from "../components/UI/button.module.css";
+import { getAllAStartUp } from "../data";
+import styled from "styled-components";
+import Head from "next/head";
 
 const StartUp = ({ allStart }) => {
   const [userInt, setUserInt] = useState([]);

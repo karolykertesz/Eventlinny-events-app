@@ -1,6 +1,10 @@
 import Link from "next/link";
+import { useContext } from "react";
 import classes from "./main-header.module.css";
+import { UserContext } from "./Layout";
 const Header = () => {
+  const user = useContext(UserContext);
+
   return (
     <header className={classes.header}>
       <div className={classes.logo}>

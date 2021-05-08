@@ -14,8 +14,7 @@ export default async function sender(email, password, router, fn) {
     const status = await mess.status;
     const data = await mess.json();
     if (status === 200) {
-      //   router.push("/first");
-      console.log(data);
+      router.push("/startup");
     } else {
       console.log(data);
     }

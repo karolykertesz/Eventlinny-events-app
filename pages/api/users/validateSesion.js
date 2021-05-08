@@ -28,5 +28,4 @@ export const vdToken = (fn) => async (req, res, tokens) => {
   // } catch (err) {
   //   console.log(err);
   // }
-  console.log(secret, "the secret");
 };
