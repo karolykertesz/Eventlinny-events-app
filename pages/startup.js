@@ -26,19 +26,21 @@ const StartUp = ({ allStart }) => {
         <title>All next events</title>
         <meta name="description" content="all online cooking events" />
       </Head>
-      <PageTitle>Add Your favorite Cooking Events</PageTitle>
-      <Uilayer>
-        {allStart.map((i) => (
-          <span key={i.id}>
-            <StartItem items={i} addUserInt={addUserInt} />
-          </span>
-        ))}
-      </Uilayer>
-      {userInt.length > 0 && (
-        <ButtonComp>
-          <button className={classes.btn}>Save My Events</button>
-        </ButtonComp>
-      )}
+      <CoverDiv>
+        <PageTitle>Add Your favorite Cooking Events</PageTitle>
+        <Uilayer>
+          {allStart.map((i) => (
+            <span key={i.id}>
+              <StartItem items={i} addUserInt={addUserInt} />
+            </span>
+          ))}
+        </Uilayer>
+        {userInt.length > 0 && (
+          <ButtonComp>
+            <button className={classes.btn}>Save My Events</button>
+          </ButtonComp>
+        )}
+      </CoverDiv>
     </Fragment>
   );
 };
@@ -64,7 +66,14 @@ const PageTitle = styled.span`
   padding: 10px;
   text-transform: uppercase;
 `;
-
+const CoverDiv = styled.div`
+  @media (max-width: 600px) {
+    margin-top: 140px;
+    padding: 100px;
+    /* z-index: 100 !important; */
+    position: relative;
+  }
+`;
 const ButtonComp = styled.div`
   width: 100%;
   display: flex;

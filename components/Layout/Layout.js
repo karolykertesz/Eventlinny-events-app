@@ -35,7 +35,7 @@ const Layout = (props) => {
         <meta name="description" content="Next event App" />
       </Head>
       <UserContext.Provider value={user && user}>
-        <Header />
+        <Header user={user} />
         <main>{props.children}</main>
       </UserContext.Provider>
     </Fragment>

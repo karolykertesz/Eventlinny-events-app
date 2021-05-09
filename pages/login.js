@@ -18,6 +18,10 @@ const Login = () => {
     const getToken = async () => {
       const data = await fetch("/api/users/session");
       const token = await data.json();
+      const status = await data.status;
+      if (status === 201) {
+        router.push("/startup");
+      }
       return setTok(token);
     };
     getToken();

@@ -204,3 +204,74 @@ Issues? Report them at https://github.com/firebase/firebase-tools/issues and att
 [debug] [2021-05-08T20:54:36.382Z] Ignoring signal SIGHUP due to short delay of 10ms
 [debug] [2021-05-08T20:54:36.387Z] 22:54:36.386 [Thread-0] INFO com.firebase.server.forge.App$ - Graceful shutdown complete.
  {"metadata":{"emulator":{"name":"database"},"message":"22:54:36.386 [Thread-0] INFO com.firebase.server.forge.App$ - Graceful shutdown complete.\n"}}
+[debug] [2021-05-08T21:40:05.782Z] ----------------------------------------------------------------------
+[debug] [2021-05-08T21:40:05.785Z] Command:       /usr/local/bin/node /usr/local/bin/firebase emulators:start
+[debug] [2021-05-08T21:40:05.786Z] CLI Version:   9.10.2
+[debug] [2021-05-08T21:40:05.786Z] Platform:      darwin
+[debug] [2021-05-08T21:40:05.786Z] Node Version:  v14.16.1
+[debug] [2021-05-08T21:40:05.788Z] Time:          Sat May 08 2021 23:40:05 GMT+0200 (Central European Summer Time)
+[debug] [2021-05-08T21:40:05.789Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-05-08T21:40:05.802Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-05-08T21:40:05.803Z] > authorizing via signed-in user (karoly.kertesz11@gmail.com)
+[info] i  emulators: Starting emulators: auth, functions, firestore, database {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, functions, firestore, database"}}
+[debug] [2021-05-08T21:40:05.938Z] [hub] writing locator at /var/folders/52/xtq43_yd3xz4qt0s5sxvnncc0000gn/T/hub-next-events-309cd.json
+[warn] ⚠  functions: The functions emulator is configured but there is no functions source directory. Have you run firebase init functions? {"metadata":{"emulator":{"name":"functions"},"message":"The functions emulator is configured but there is no functions source directory. Have you run \u001b[1mfirebase init functions\u001b[22m?"}}
+[warn] ⚠  firestore: Did not find a Cloud Firestore rules file specified in a firebase.json config file. {"metadata":{"emulator":{"name":"firestore"},"message":"Did not find a Cloud Firestore rules file specified in a firebase.json config file."}}
+[warn] ⚠  firestore: The emulator will default to allowing all reads and writes. Learn more about this option: https://firebase.google.com/docs/emulator-suite/install_and_configure#security_rules_configuration. {"metadata":{"emulator":{"name":"firestore"},"message":"The emulator will default to allowing all reads and writes. Learn more about this option: https://firebase.google.com/docs/emulator-suite/install_and_configure#security_rules_configuration."}}
+[debug] [2021-05-08T21:40:06.120Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: projectId"}}
+[debug] [2021-05-08T21:40:06.120Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2021-05-08T21:40:06.121Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","/Users/kerteszkaroly/.cache/firebase/emulators/cloud-firestore-emulator-v1.11.15.jar","--host","localhost","--port",8080],"optionalArgs":["port","webchannel_port","host","rules","functions_emulator","seed_from_export"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"/Users/kerteszkaroly/.cache/firebase/emulators/cloud-firestore-emulator-v1.11.15.jar\",\"--host\",\"localhost\",\"--port\",8080],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"functions_emulator\",\"seed_from_export\"],\"joinArgs\":false}"}}
+[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
+[debug] [2021-05-08T21:40:15.515Z] May 08, 2021 11:40:15 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start
+INFO: Started WebSocket server on ws://localhost:49290
+ {"metadata":{"emulator":{"name":"firestore"},"message":"May 08, 2021 11:40:15 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start\nINFO: Started WebSocket server on ws://localhost:49290\n"}}
+[debug] [2021-05-08T21:40:15.599Z] API endpoint: http://localhost:8080
+ {"metadata":{"emulator":{"name":"firestore"},"message":"API endpoint: http://localhost:8080\n"}}
+[debug] [2021-05-08T21:40:15.599Z] If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
+
+   export FIRESTORE_EMULATOR_HOST=localhost:8080
+
+Dev App Server is now running.
+
+ {"metadata":{"emulator":{"name":"firestore"},"message":"If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:\n\n   export FIRESTORE_EMULATOR_HOST=localhost:8080\n\nDev App Server is now running.\n\n"}}
+[debug] [2021-05-08T21:40:15.791Z] > refreshing access token with scopes: []
+[debug] [2021-05-08T21:40:15.793Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-05-08T21:40:15.898Z] <<< HTTP RESPONSE 200 {"date":"Sat, 08 May 2021 21:40:15 GMT","pragma":"no-cache","cache-control":"no-cache, no-store, max-age=0, must-revalidate","expires":"Mon, 01 Jan 1990 00:00:00 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-05-08T21:40:15.916Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/next-events-309cd [none]
+[debug] [2021-05-08T21:40:16.224Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/next-events-309cd 200
+[debug] [2021-05-08T21:40:16.224Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/next-events-309cd {"projectId":"next-events-309cd","projectNumber":"633929560716","displayName":"next-events","name":"projects/next-events-309cd","resources":{"hostingSite":"next-events-309cd","realtimeDatabaseInstance":"next-events-309cd-default-rtdb","storageBucket":"next-events-309cd.appspot.com","locationId":"us-central"},"state":"ACTIVE"}
+[debug] [2021-05-08T21:40:16.225Z] database rules config:  []
+[warn] ⚠  database: Did not find a Realtime Database rules file specified in a firebase.json config file. The emulator will default to allowing all reads and writes. Learn more about this option: https://firebase.google.com/docs/emulator-suite/install_and_configure#security_rules_configuration. {"metadata":{"emulator":{"name":"database"},"message":"Did not find a Realtime Database rules file specified in a firebase.json config file. The emulator will default to allowing all reads and writes. Learn more about this option: https://firebase.google.com/docs/emulator-suite/install_and_configure#security_rules_configuration."}}
+[debug] [2021-05-08T21:40:16.234Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: projectId"}}
+[debug] [2021-05-08T21:40:16.235Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2021-05-08T21:40:16.235Z] Ignoring unsupported arg: rules {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: rules"}}
+[debug] [2021-05-08T21:40:16.235Z] Starting Database Emulator with command {"binary":"java","args":["-Duser.language=en","-jar","/Users/kerteszkaroly/.cache/firebase/emulators/firebase-database-emulator-v4.7.2.jar","--host","localhost","--port",9000],"optionalArgs":["port","host","functions_emulator_port","functions_emulator_host"],"joinArgs":false} {"metadata":{"emulator":{"name":"database"},"message":"Starting Database Emulator with command {\"binary\":\"java\",\"args\":[\"-Duser.language=en\",\"-jar\",\"/Users/kerteszkaroly/.cache/firebase/emulators/firebase-database-emulator-v4.7.2.jar\",\"--host\",\"localhost\",\"--port\",9000],\"optionalArgs\":[\"port\",\"host\",\"functions_emulator_port\",\"functions_emulator_host\"],\"joinArgs\":false}"}}
+[info] i  database: Database Emulator logging to database-debug.log {"metadata":{"emulator":{"name":"database"},"message":"Database Emulator logging to \u001b[1mdatabase-debug.log\u001b[22m"}}
+[debug] [2021-05-08T21:40:23.830Z] 23:40:23.826 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
+ {"metadata":{"emulator":{"name":"database"},"message":"23:40:23.826 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started\n"}}
+[debug] [2021-05-08T21:40:24.605Z] 23:40:24.604 [main] INFO com.firebase.server.forge.App$ - Listening at localhost:9000
+ {"metadata":{"emulator":{"name":"database"},"message":"23:40:24.604 [main] INFO com.firebase.server.forge.App$ - Listening at localhost:9000\n"}}
+[warn] ⚠  emulators: The Emulator UI requires a project ID to start. Configure your default project with 'firebase use' or pass the --project flag. {"metadata":{"emulator":{"name":"hub"},"message":"The Emulator UI requires a project ID to start. Configure your default project with 'firebase use' or pass the --project flag."}}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────────┬──────────────────────────────────┐
+│ Emulator       │ Host:Port                        │
+├────────────────┼──────────────────────────────────┤
+│ Authentication │ localhost:9099                   │
+├────────────────┼──────────────────────────────────┤
+│ Functions      │ Failed to initialize (see above) │
+├────────────────┼──────────────────────────────────┤
+│ Firestore      │ localhost:8080                   │
+├────────────────┼──────────────────────────────────┤
+│ Database       │ localhost:9000                   │
+└────────────────┴──────────────────────────────────┘
+  Emulator Hub running at localhost:4400
+  Other reserved ports: None
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 

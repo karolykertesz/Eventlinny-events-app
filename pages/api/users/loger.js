@@ -1,6 +1,5 @@
 import { db, auth } from "../../../helpers/firebase";
-import admin from "firebase-admin";
-import firebase from "firebase";
+
 const validate = require("validate.js");
 import { constraints } from "../../../helpers/validators/login";
 const jwt = require("jsonwebtoken");

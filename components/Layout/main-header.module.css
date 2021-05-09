@@ -1,41 +1,119 @@
 .header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 1rem 10%;
+  height: 5rem;
+  background-color: #c49e7d;
+}
+.navCheck {
+  display: none;
+}
+.nav {
+  height: 50px;
+  width: 100%;
+  background-color: #c49e7d;
+  position: relative;
+}
+
+.nav > .navHeader {
+  display: inline;
+}
+
+.nav > .navHeader > .navTitle {
+  display: inline-block;
+  font-size: 24px;
+  color: papayawhip;
+  padding: 10px 10px 10px 10px;
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.nav > .navBtn {
+  display: none;
+}
+
+.nav > .navLinks {
+  display: inline;
+  float: right;
+  font-size: 18px;
+}
+
+.nav > .navLinks > a {
+  display: inline-block;
+  padding: 13px 10px 13px 10px;
+  text-decoration: none;
+  color: papayawhip;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.link {
+  display: inline-block;
+  padding: 13px 10px 13px 10px;
+  text-decoration: none;
+  color: papayawhip;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.link:hover {
+  background-color: rgba(218, 209, 209, 0.3);
+  cursor: pointer;
+}
+.nav > .navLinks > a:hover {
+  background-color: rgba(218, 209, 209, 0.3);
+}
+
+@media (max-width: 600px) {
+  .nav > .navBtn {
+    display: inline-block;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+  }
+  .link {
+    color: #c49e7d;
+    cursor: pointer;
+  }
+  .nav > .navLinks > a {
+    color: #c49e7d;
+  }
+  .nav > .navBtn > label {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    padding: 13px;
+  }
+  .nav > .navBtn > label:hover,
+  .nav .navCheck:checked ~ .navBtn > label {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  .nav > .navBtn > label > span {
+    display: block;
+    width: 25px;
+    height: 10px;
+    border-top: 2px solid #eee;
+  }
+  .nav > .navLinks {
+    position: absolute;
+    display: block;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 1rem 10%;
-    height: 5rem;
-    background-color: #202020;
+
+    height: 0px;
+    transition: all 0.3s ease-in;
+    overflow-y: hidden;
+    top: 50px;
+    background-color: papayawhip;
   }
-  
-  .logo {
-    font-size: 1.5rem;
-    color: white;
-    font-family: 'Fira', sans-serif;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: papayawhip;
+  .nav > .navLinks > a {
+    display: block;
+    width: 100%;
   }
-  
-  .logo a {
-    text-decoration: none;
-    color: papayawhip;
+  .nav > .navCheck:not(:checked) ~ .navLinks {
+    height: 0px;
   }
-  
-  .navigation a {
-    text-decoration: none;
-    color:papayawhip;
-    font-size: 1rem;
+  .nav > .navCheck:checked ~ .navLinks {
+    height: calc(100vh - 50px);
+    overflow-y: auto;
   }
-  
-  @media (min-width: 768px) {
-    .logo {
-      font-size: 2.5rem;
-    }
-  
-    .navigation a {
-      font-size: 1.5rem;
-    }
-  }
+}
