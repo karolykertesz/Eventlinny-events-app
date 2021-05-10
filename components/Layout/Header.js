@@ -1,15 +1,37 @@
 import Link from "next/link";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import classes from "./main-header.module.css";
 import { UserContext } from "./Layout";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 
 const Header = ({ user }) => {
+  const [userS, setUserS] = useState();
+  const closeButton = () => {
+    setClose(!close);
+  };
   const router = useRouter();
-  // const user = useContext(UserContext);
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const mess = await fetch("/api/users/valuser");
+        const status = await mess.status;
+        if (status === 200) {
+          setUserS(true);
+        } else {
+          router.push("/login");
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    return getUser();
+  }, [userS]);
   const userSignOut = async () => {
-    const mess = await fetch("/users/logout");
+    const mess = await fetch("api/users/logout");
+    const status = await mess.status;
+    setUserS(undefined);
+    status === 200 && router.push("/login");
   };
   return (
     <div className={classes.nav}>
@@ -17,15 +39,18 @@ const Header = ({ user }) => {
       <div className={classes.navHeader}>
         <div className={classes.navTitle}>Eventlinny</div>
       </div>
+
       <div className={classes.navBtn}>
-        <label htmlFor="nav-check">
+        <label htmlFor="nav-check" onClick={() => setClose(!close)}>
+          <span></span>
+          <span></span>
           <span></span>
           <span></span>
           <span></span>
         </label>
       </div>
 
-      {user ? (
+      {userS ? (
         <div className={classes.navLinks}>
           <Link href="/startup">Event pick</Link>
           <Link href="/events">All Events</Link>

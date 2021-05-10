@@ -66,12 +66,10 @@ const PageTitle = styled.span`
   padding: 10px;
   text-transform: uppercase;
 `;
-const CoverDiv = styled.div`
+export const CoverDiv = styled.div`
   @media (max-width: 600px) {
-    margin-top: 140px;
+    margin-top: 100px;
     padding: 100px;
-    /* z-index: 100 !important; */
-    position: relative;
   }
 `;
 const ButtonComp = styled.div`

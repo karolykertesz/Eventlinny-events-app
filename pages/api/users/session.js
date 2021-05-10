@@ -24,9 +24,12 @@ export default async function handler(req, res) {
   if (req.method === "GET" && req.cookies.auth) {
     return res.status(201).json({ message: "already" });
   }
+  // if (req.method === "GET" && !req.cookies.auth && req.cookies.session) {
+  //   res.status(200).json({ message: "k" });
+  // }
   if (req.method === "POST") {
     if (!req.body.token || !req.cookies.session) {
-      return res.status(401).json({ message: "Invalid Login" });
+      return res.status(401).json({ message: "Please refresh the page" });
     }
     const session = req.cookies.session;
     const token = req.body.token;

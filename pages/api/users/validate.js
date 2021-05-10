@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 import firebase from "firebase";
-const authChecker = (fn) => async (req, res) => {
+export const authChecker = (fn) => async (req, res) => {
   const secret = process.env.SECRET;
   const token = req.cookies.auth;
 

@@ -10,6 +10,7 @@ const Login = () => {
   const router = useRouter();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [valid, setValid] = useState(false);
   const [tok, setTok] = useState();
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -22,7 +23,7 @@ const Login = () => {
       if (status === 201) {
         router.push("/startup");
       }
-      return setTok(token);
+      setTok(token);
     };
     getToken();
   }, []);
@@ -44,11 +45,11 @@ const Login = () => {
       const email = emailRef.current.value;
       const password = passwordRef.current.value;
       try {
-        if (tok) {
+        if (tok !== undefined) {
           const mess = await fetch("/api/users/session", {
             method: "POST",
             body: JSON.stringify({
-              token: tok ? tok.token : "",
+              token: tok && tok.token,
             }),
 
             headers: {
@@ -57,14 +58,15 @@ const Login = () => {
             },
           });
           const status = await mess.status;
+
           if (status !== 200) {
             const data = await mess.json();
+            setValid(false);
             setError(data.message);
             return;
           }
-          if (status === 200) {
-            return sender(email, password, router, setError);
-          }
+          sender(email, password, router, setError);
+          // return;
         }
       } catch (err) {
         console.log(err, "the error");
