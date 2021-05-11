@@ -1,19 +1,17 @@
 import { db, auth } from "../../../helpers/firebase";
-
 const validate = require("validate.js");
 import { constraints } from "../../../helpers/validators/login";
 const jwt = require("jsonwebtoken");
 import cookie from "cookie";
 
-export default async function handler(req, res) {
+async function loger(req, res, email, password) {
+  console.log(email);
+  console.log(password);
   if (req.method !== "POST") {
     return res.status(500).json({
       message: "Wrong request",
     });
   }
-  const email = req.body.email;
-  const password = req.body.password;
-
   const value = await validate(
     {
       email,
@@ -54,3 +52,5 @@ export default async function handler(req, res) {
   );
   res.status(200).json({ message: "All good" });
 }
+
+export default loger;

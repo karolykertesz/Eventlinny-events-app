@@ -1,24 +1,25 @@
-import { Fragment, useRef, useState } from 'react';
-import styled from 'styled-components';
-import classes from '../components/UI/ui-modules/login.module.css';
-import { useRouter } from 'next/router';
-import React from 'react';
-import SimpleReactValidator from 'simple-react-validator';
-
+import { Fragment, useRef, useState } from "react";
+import styled from "styled-components";
+import classes from "../components/UI/ui-modules/login.module.css";
+import { useRouter } from "next/router";
+import React from "react";
+import SimpleReactValidator from "simple-react-validator";
+import { GoogleButton } from "./login";
+import { IconContext } from "react-icons";
+import { ImGoogle3 } from "react-icons/im";
 const Login = () => {
   const router = useRouter();
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const firstNameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
 
-
   const formSubmit = async (e) => {
     e.preventDefault();
-   
+
     try {
-      const mess = await fetch('/api/users/signer', {
-        method: 'POST',
+      const mess = await fetch("/api/users/signer", {
+        method: "POST",
         body: JSON.stringify({
           firstname: firstNameRef.current.value,
           email: emailRef.current.value,
@@ -26,14 +27,14 @@ const Login = () => {
         }),
 
         headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
+          "Content-Type": "application/json",
+          Accept: "application/json",
         },
       });
       const data = await mess.json();
       setError(data.message);
     } catch (err) {
-      console.log(err, 'the error');
+      console.log(err, "the error");
     }
   };
 
@@ -50,18 +51,10 @@ const Login = () => {
                 name="firstname"
                 ref={firstNameRef}
               />
-
             </div>
             <div className={classes.control}>
               <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                ref={emailRef}
-                name="email"
-              
-              />
-
+              <input type="email" id="email" ref={emailRef} name="email" />
             </div>
             <div className={classes.control}>
               <label htmlFor="password">Passsword</label>
@@ -76,6 +69,11 @@ const Login = () => {
               <Pi>Sign Up</Pi>
             </ForMButton>
           </form>
+          <GoogleButton>
+            <IconContext.Provider value={{ color: "white", size: "1.6em" }}>
+              <ImGoogle3 />
+            </IconContext.Provider>
+          </GoogleButton>
           <Error>{error && error}</Error>
         </div>
       </Layer>

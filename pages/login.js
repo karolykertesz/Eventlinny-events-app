@@ -5,6 +5,8 @@ import validate from "validate.js";
 import { constraints } from "../helpers/validators/login";
 import sender from "../helpers/sender";
 import { useRouter } from "next/router";
+import { ImGoogle3 } from "react-icons/im";
+import { IconContext } from "react-icons";
 
 const Login = () => {
   const router = useRouter();
@@ -15,17 +17,16 @@ const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const tokenRef = useRef();
+  const googleSign = async () => {
+    const data = await fetch("/api/users/googleSignIn");
+  };
   useEffect(() => {
     const getToken = async () => {
       const data = await fetch("/api/users/session");
       const token = await data.json();
-      const status = await data.status;
-      if (status === 201) {
-        router.push("/startup");
-      }
-      setTok(token);
+      await setTok(token.token);
     };
-    getToken();
+    return getToken();
   }, []);
   const formSubmit = useCallback(
     async (e) => {
@@ -44,33 +45,19 @@ const Login = () => {
       }
       const email = emailRef.current.value;
       const password = passwordRef.current.value;
-      try {
-        if (tok !== undefined) {
-          const mess = await fetch("/api/users/session", {
-            method: "POST",
-            body: JSON.stringify({
-              token: tok && tok.token,
-            }),
 
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-          });
-          const status = await mess.status;
-
-          if (status !== 200) {
-            const data = await mess.json();
-            setValid(false);
-            setError(data.message);
-            return;
-          }
-          sender(email, password, router, setError);
-          // return;
-        }
-      } catch (err) {
-        console.log(err, "the error");
+      if (tok !== undefined || tok !== null) {
+        const val = await sender(tok, email, password, router)
+          .then((resp) => {
+            if (resp.message) {
+              setError(resp.message);
+            }
+          })
+          .catch((err) => console.log(err));
       }
+
+      // return;
+
       return setTok("");
     },
     [tok]
@@ -99,6 +86,11 @@ const Login = () => {
               <Pi>Login</Pi>
             </ForMButton>
           </form>
+          <GoogleButton onClick={() => googleSign()}>
+            <IconContext.Provider value={{ color: "white", size: "1.7em" }}>
+              <ImGoogle3 />
+            </IconContext.Provider>
+          </GoogleButton>
           <Error>{error && error}</Error>
         </div>
       </Layer>
@@ -116,9 +108,8 @@ const Layer = styled.div`
   margin: 3rem auto;
 `;
 
-const ForMButton = styled.button`
+export const ForMButton = styled.button`
   cursor: pointer;
-
   background-color: papayawhip;
   border: 1px solid papayawhip;
   border-radius: 6px;
@@ -128,6 +119,20 @@ const ForMButton = styled.button`
   margin-top: 10px;
   padding: 0;
   margin: 0.2rem auto;
+`;
+
+export const GoogleButton = styled.button`
+  cursor: pointer;
+  background-color: red;
+  border: 1px solid red;
+  border-radius: 6px;
+  color: white;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  margin-top: 10px;
+
+  margin: 0.2rem auto;
+  padding: 12px;
 `;
 
 const Pi = styled.p`

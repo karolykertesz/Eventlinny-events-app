@@ -1,8 +1,9 @@
-export default async function sender(email, password, router, fn) {
+export default async function sender(tok, email, password, router) {
   try {
-    const mess = await fetch("/api/users/loger", {
+    const mess = await fetch("/api/users/session", {
       method: "POST",
       body: JSON.stringify({
+        token: tok,
         email,
         password,
       }),
@@ -12,12 +13,14 @@ export default async function sender(email, password, router, fn) {
       },
     });
     const status = await mess.status;
-    const data = await mess.json();
-    if (status === 200) {
-      router.push("/startup");
+    if (status !== 200) {
+      const mes = mess.json();
+      return mes;
     } else {
-      console.log(data);
+      router.push("/startup");
+      return;
     }
+    // }
   } catch (err) {
     console.log(err);
   }

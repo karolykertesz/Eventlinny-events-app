@@ -14,7 +14,7 @@ const Header = ({ user }) => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const mess = await fetch("/api/users/valuser");
+        const mess = await fetch("/api/users/validate");
         const status = await mess.status;
         if (status === 200) {
           setUserS(true);
@@ -26,7 +26,7 @@ const Header = ({ user }) => {
       }
     };
     return getUser();
-  }, [userS]);
+  }, []);
   const userSignOut = async () => {
     const mess = await fetch("api/users/logout");
     const status = await mess.status;
