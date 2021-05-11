@@ -15,5 +15,9 @@
     "database": {
       "port": 9000
     }
+  },
+  "firestore": {
+    "rules": " ",
+    "indexes": "firestore.indexes.json"
   }
 }
