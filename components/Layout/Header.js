@@ -1,36 +1,35 @@
 import Link from "next/link";
+import firebase from "firebase";
 import { useContext, useEffect, useState } from "react";
 import classes from "./main-header.module.css";
-import { UserContext } from "./Layout";
 import styled from "styled-components";
 import { useRouter } from "next/router";
-
-const Header = ({ user }) => {
+import FirebaseClient from "../../helpers/firebase";
+import { useAuth } from "../Layout/UserContext";
+FirebaseClient();
+const Header = () => {
   const [userS, setUserS] = useState();
-  const closeButton = () => {
-    setClose(!close);
-  };
+  const { user } = useAuth();
   const router = useRouter();
+
   useEffect(() => {
     const getUser = async () => {
-      try {
-        const mess = await fetch("/api/users/validate");
-        const status = await mess.status;
+      return firebase.auth().onAuthStateChanged(async (user) => {
+        const session = await fetch("/api/users/validateSesion");
+        const status = await session.status;
         if (status === 200) {
-          setUserS(true);
+          return setUserS(true);
         } else {
-          router.push("/login");
+          return setUserS(undefined);
         }
-      } catch (err) {
-        console.log(err);
-      }
+      });
     };
     return getUser();
   }, []);
   const userSignOut = async () => {
+    await setUserS(undefined);
     const mess = await fetch("api/users/logout");
     const status = await mess.status;
-    setUserS(undefined);
     status === 200 && router.push("/login");
   };
   return (
@@ -41,7 +40,7 @@ const Header = ({ user }) => {
       </div>
 
       <div className={classes.navBtn}>
-        <label htmlFor="nav-check" onClick={() => setClose(!close)}>
+        <label htmlFor="nav-check">
           <span></span>
           <span></span>
           <span></span>

@@ -1,4 +1,4 @@
-import { db, auth } from "../../../helpers/firebase";
+import firebase from "firebase";
 const validate = require("validate.js");
 import { constraints } from "../../../helpers/validators/login";
 const jwt = require("jsonwebtoken");
@@ -25,13 +25,16 @@ async function loger(req, res, email, password) {
 
   let userId = "";
   try {
-    await auth.signInWithEmailAndPassword(email, password).then((userCred) => {
-      const user = userCred.user;
-      if (!user.emailVerified) {
-        return res.status(400).json({ message: "Need to get verified" });
-      }
-      userId += user.uid;
-    });
+    await firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((userCred) => {
+        const user = userCred.user;
+        if (!user.emailVerified) {
+          return res.status(400).json({ message: "Need to get verified" });
+        }
+        userId += user.uid;
+      });
   } catch (error) {
     const errorCode = error.code;
     const errorMessage = error.message;

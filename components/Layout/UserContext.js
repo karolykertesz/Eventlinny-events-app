@@ -2,7 +2,7 @@ import { useContext, createContext, useState, useEffect } from "react";
 import FirebaseClient from "../../helpers/firebase";
 import firebase from "firebase/app";
 import "firebase/auth";
-const AuthContext = createContext({});
+const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   FirebaseClient();

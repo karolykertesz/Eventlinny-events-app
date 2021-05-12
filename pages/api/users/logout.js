@@ -1,9 +1,13 @@
 import firebase from "firebase";
 import cookie from "cookie";
-
 const handler = (fn) => async (req, res) => {
-  const userOut = await firebase.auth().signOut();
-  return fn(req, res);
+  return firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      return fn(req, res);
+    })
+    .catch((err) => console.log(err));
 };
 
 export default handler(async function logout(req, res) {

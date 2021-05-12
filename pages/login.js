@@ -5,9 +5,10 @@ import validate from "validate.js";
 import { constraints } from "../helpers/validators/login";
 import sender from "../helpers/sender";
 import { useRouter } from "next/router";
-import { ImGoogle3 } from "react-icons/im";
+import { ImGoogle3, ImFacebook2 } from "react-icons/im";
 import { IconContext } from "react-icons";
 import googleSign from "../helpers/googlesignin";
+import facebookSignIn from "../helpers/fb";
 
 const Login = () => {
   const router = useRouter();
@@ -89,6 +90,14 @@ const Login = () => {
               <ImGoogle3 />
             </IconContext.Provider>
           </GoogleButton>
+          <GoogleButton
+            onClick={() => facebookSignIn()}
+            style={{ backgroundColor: "blue", border: "1px solid blue" }}
+          >
+            <IconContext.Provider value={{ color: "white", size: "1.7em" }}>
+              <ImFacebook2 />
+            </IconContext.Provider>
+          </GoogleButton>
           <Error>{error && error}</Error>
         </div>
       </Layer>
@@ -130,7 +139,7 @@ export const GoogleButton = styled.button`
   margin-top: 10px;
 
   margin: 0.2rem auto;
-  padding: 12px;
+  padding: 8px;
 `;
 
 const Pi = styled.p`
