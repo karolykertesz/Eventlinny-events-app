@@ -1,30 +1,22 @@
-import firebase from "firebase";
-const handler = async () => {
-  const userId = "";
-  try {
-    provider.addScope("profile");
-    provider.addScope("email");
-    await firebase.auth().useDeviceLanguage();
-    await provider.setCustomParameters({
-      login_hint: "user@example.com",
-    });
+const jwt = require("jsonwebtoken");
+const cookie = require("cookie");
 
-    const sign = await firebase
-      .auth()
-      .signInWithPopup(providerr)
-      .then((result) => {
-        console.log(result);
-        const credential = result.credential;
-        const tok = credential.accessToken;
-        userId += tok;
-      });
-  } catch (err) {
-    console.log(err);
-    // return;
-  }
-  console.log(userId);
-  // return userId;
-};
-export default async function goo(handler) {
-  return handler;
+export default async function handler(req, res) {
+  const userId = req.body.id;
+  const secret = process.env.SECRET;
+  const token = jwt.sign({ data: userId }, secret, {
+    expiresIn: "1h",
+  });
+  res.setHeader(
+    "Set-Cookie",
+    cookie.serialize("auth", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV !== "development",
+      sameSite: "strict",
+      path: "/",
+      maxAge: 3600,
+    })
+  );
+  res.status(200).json({ message: "All set" });
+  return;
 }

@@ -7,13 +7,8 @@ import sender from "../helpers/sender";
 import { useRouter } from "next/router";
 import { ImGoogle3 } from "react-icons/im";
 import { IconContext } from "react-icons";
-// import FirebaseClient from "../helpers/firebase";
-// import { firebase } from "../helpers/firebase";
-// import firebase from "firebase/app";
-// console.log(firebase.apps, "the app");
+import googleSign from "../helpers/googlesignin";
 
-// import * as fires from "../helpers/firebase";
-// import "firebase/auth";
 const Login = () => {
   const router = useRouter();
   const [error, setError] = useState("");
@@ -23,34 +18,6 @@ const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const tokenRef = useRef();
-  const googleSign = async () => {
-    // const provider = new firebase.auth.GoogleAuthProvider();
-    // provider.addScope("profile");
-    // provider.addScope("email");
-    // firebase
-    //   .auth()
-    //   .signInWithPopup(new firebase.auth.apps.GoogleAuthProvider())
-    //   .then(function (result) {
-    //     // This gives you a Google Access Token.
-    //     var token = result.credential.accessToken;
-    //     // The signed-in user info.
-    //     var user = result.user;
-    //   });
-    // const mess = await fetch("/api/users/googleSignin");
-    // console.log(userId);
-    // if (userId !== null || userId !== undefined) {
-    //   const mess = await fetch("/api/users/googlefetch", {
-    //     method: "POST",
-    //     body: {
-    //       userId: JSON.stringify(userId),
-    //     },
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Accept: "application/json",
-    //     },
-    //   });
-    // }
-  };
   useEffect(() => {
     const getToken = async () => {
       const data = await fetch("/api/users/session");

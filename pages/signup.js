@@ -7,6 +7,7 @@ import SimpleReactValidator from "simple-react-validator";
 import { GoogleButton } from "./login";
 import { IconContext } from "react-icons";
 import { ImGoogle3 } from "react-icons/im";
+import googleSign from "../helpers/googlesignin";
 const Login = () => {
   const router = useRouter();
   const [error, setError] = useState("");
@@ -69,7 +70,7 @@ const Login = () => {
               <Pi>Sign Up</Pi>
             </ForMButton>
           </form>
-          <GoogleButton>
+          <GoogleButton onClick={() => googleSign()}>
             <IconContext.Provider value={{ color: "white", size: "1.6em" }}>
               <ImGoogle3 />
             </IconContext.Provider>
