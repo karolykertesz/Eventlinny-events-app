@@ -1,5 +1,4 @@
 import firebase from "firebase";
-import react from "react";
 
 export default function FirebaseClient() {
   if (!firebase.apps.length) {

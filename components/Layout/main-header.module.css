@@ -69,6 +69,13 @@
   height: auto;
   background-color: peru;
 }
+.icon {
+  color: papayawhip;
+  margin: auto 0;
+}
+.icon:hover {
+  background-color: rgba(218, 209, 209, 0.3);
+}
 @media (max-width: 600px) {
   .control {
     max-height: 200px !important;
@@ -82,6 +89,16 @@
   .link {
     color: #c49e7d;
     cursor: pointer;
+    position: absolute;
+    left: 0;
+  }
+  .icon {
+    color: #c49e7d;
+    width: 30px;
+    height: 70px;
+  }
+  .icon:hover {
+    background-color: papayawhip;
   }
   .nav > .navLinks > a {
     color: #c49e7d;

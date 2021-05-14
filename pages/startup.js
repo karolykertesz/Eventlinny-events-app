@@ -7,6 +7,8 @@ import classes from "../components/UI/button.module.css";
 import { getAllAStartUp } from "../data";
 import styled from "styled-components";
 import Head from "next/head";
+import tokenCheck from "../handlers/token";
+import DropDown from "../components/dropdown";
 
 const StartUp = ({ allStart }) => {
   const [userInt, setUserInt] = useState([]);
@@ -27,6 +29,7 @@ const StartUp = ({ allStart }) => {
         <meta name="description" content="all online cooking events" />
       </Head>
       <CoverDiv>
+        {/* <DropDown /> */}
         <PageTitle>Add Your favorite Cooking Events</PageTitle>
         <Uilayer>
           {allStart.map((i) => (
@@ -56,6 +59,7 @@ export async function getStaticProps() {
     revalidate: 1800,
   };
 }
+
 const PageTitle = styled.span`
   display: flex;
   justify-content: center;

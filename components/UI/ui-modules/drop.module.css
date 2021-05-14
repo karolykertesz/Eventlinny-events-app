@@ -1,0 +1,45 @@
+.top {
+  position: absolute;
+  right: 0;
+  top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(228, 219, 197);
+  animation: rotation 1s 1 ease;
+  z-index: 100;
+}
+
+.top ul li {
+  padding: 20px;
+  border-bottom: 1px solid black;
+  text-align: center;
+}
+.top ul li:hover {
+  background-color: rgb(225, 162, 80);
+}
+.top ul li:active {
+  background-color: rgb(176, 139, 91);
+}
+@media screen and (max-width: 600px) {
+  .top {
+    /* margin-bottom: 10px; */
+    top: 16px;
+  }
+  .top ul li {
+    padding: -10px;
+    font-size: 12px;
+  }
+}
+@keyframes rotation {
+  from {
+    transform: translate(-1000px);
+  }
+  to {
+    transform: translate(10px);
+  }
+}
+
+.hide {
+  display: none;
+}

@@ -3,8 +3,12 @@ import EventList from "../../components/EventList";
 import EventSearch from "../../components/event-search.jsx";
 import { useRouter } from "next/router";
 import { getAllEvents } from "../../data";
-import { db } from "../../helpers/firebase";
+import firebase from "firebase";
 import Head from "next/head";
+import FirebaseClient from "../../helpers/firebase";
+FirebaseClient();
+
+const db = firebase.firestore();
 
 const AllEvents = ({ eventss }) => {
   const [event, setEvent] = useState(eventss);
