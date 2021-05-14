@@ -15,12 +15,12 @@ export default async function sender(tok, email, password, router) {
       },
     });
     const status = await mess.status;
+    const mes = await mess.json();
+    console.log(mes);
     if (status !== 200) {
-      const mes = mess.json();
       return mes;
     } else {
-      router.push("/startup");
-      return;
+      return (window.location.href = `${mes.message}`);
     }
     // }
   } catch (err) {

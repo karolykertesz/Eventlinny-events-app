@@ -1,6 +1,7 @@
 import FirebaseClient from "../helpers/firebase";
 import firebase from "firebase/app";
 import "firebase/auth";
+import validate from "../pages/api/users/validate";
 
 const googleSign = (fn) => async () => {
   FirebaseClient();
@@ -14,12 +15,12 @@ const googleSign = (fn) => async () => {
       const id = result.credential.accessToken;
       return fn(id);
     })
-    .then(() => {
-      window.location.href = "/startup";
-    })
     .catch((err) => console.log(err));
 };
-export default googleSign(async function (id) {
+export default googleSign(async function (id, userId) {
+  const valUrl = await validate(userId);
+  const url = !valUrl ? "/startup" : "/events/first";
+  console.log(url);
   const mess = await fetch("/api/users/googleSignIn", {
     method: "POST",
     body: {
@@ -32,6 +33,5 @@ export default googleSign(async function (id) {
       },
     },
   });
-  const data = await mess.json();
-  console.log(data);
+  window.location.href = `${url}`;
 });

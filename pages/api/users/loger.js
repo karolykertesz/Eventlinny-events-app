@@ -3,10 +3,9 @@ const validate = require("validate.js");
 import { constraints } from "../../../helpers/validators/login";
 const jwt = require("jsonwebtoken");
 import cookie from "cookie";
+import validateUrl from "./validate";
 
 async function loger(req, res, email, password) {
-  console.log(email);
-  console.log(password);
   if (req.method !== "POST") {
     return res.status(500).json({
       message: "Wrong request",
@@ -40,9 +39,12 @@ async function loger(req, res, email, password) {
     const errorMessage = error.message;
     return res.status(402).json({ message: errorMessage });
   }
-  const token = jwt.sign({ data: userId }, process.env.SECRET, {
+  const token = await jwt.sign({ data: userId }, process.env.SECRET, {
     expiresIn: "1h",
   });
+  const urlvalue = await validateUrl(userId);
+  const url = !urlvalue ? "/startup" : "/events/first";
+
   res.setHeader(
     "Set-Cookie",
     cookie.serialize("auth", token, {
@@ -53,7 +55,8 @@ async function loger(req, res, email, password) {
       maxAge: 3600,
     })
   );
-  res.status(200).json({ message: "All good" });
+  res.status(200).json({ message: url });
+  return;
 }
 
 export default loger;

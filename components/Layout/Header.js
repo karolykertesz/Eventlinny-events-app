@@ -5,7 +5,6 @@ import classes from "./main-header.module.css";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import FirebaseClient from "../../helpers/firebase";
-import { useAuth } from "../Layout/UserContext";
 import { IconContext } from "react-icons";
 import { BsFillPersonFill } from "react-icons/bs";
 import DropDown from "../../components/dropdown";
@@ -24,7 +23,6 @@ const Header = () => {
         if (status === 200 && user) {
           setUserS(user);
         } else {
-          router.push("/login");
           return setUserS(undefined);
         }
       });
