@@ -4,6 +4,8 @@ FirebaseClient();
 const vGoogle = async (req, res) => {
   let url;
   const uid = req.body.uid;
+  console.log(uid, "the uid uiiui");
+
   const docref = firebase.firestore().collection("cookies").doc(uid);
   await docref
     .get()

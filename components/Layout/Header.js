@@ -8,12 +8,14 @@ import FirebaseClient from "../../helpers/firebase";
 import { IconContext } from "react-icons";
 import { BsFillPersonFill } from "react-icons/bs";
 import DropDown from "../../components/dropdown";
+import Dimension from "../../helpers/dimension";
 
 FirebaseClient();
 const Header = () => {
   const [userS, setUserS] = useState();
   const router = useRouter();
   const [show, setShow] = useState(false);
+  const { width } = Dimension();
 
   useEffect(() => {
     const getUser = async () => {
@@ -60,6 +62,7 @@ const Header = () => {
           <Link href="/startup">Event pick</Link>
           <Link href="/events">All Events</Link>
           <Link href="/events">All Events</Link>
+          {/* <Link href="/events">{width}</Link> */}
 
           <IconWrap onClick={() => setShow(!show)}>
             <IconContext.Provider
