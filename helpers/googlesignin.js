@@ -19,17 +19,16 @@ const googleSign = (fn) => async () => {
 export default googleSign(async function (id, uid) {
   const urlLink = await fetch("api/users/googleValid", {
     method: "POST",
-    body: {
+    body: JSON.stringify({
       uid: uid,
-    },
+    }),
     headers: {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
+      "Content-Type": "application/json",
+      Accept: "application/json",
     },
   });
   const url = await urlLink.json();
+
   const mess = await fetch("/api/users/googleSignIn", {
     method: "POST",
     body: {
