@@ -7,12 +7,12 @@ import classes from "../components/UI/button.module.css";
 import { getAllAStartUp } from "../data";
 import styled from "styled-components";
 import Head from "next/head";
-import tokenCheck from "../handlers/token";
-import DropDown from "../components/dropdown";
+import { send } from "../helpers/helpers";
 
 const StartUp = ({ allStart }) => {
   const [userInt, setUserInt] = useState([]);
   const router = useRouter();
+  const [location, setLocation] = useState([]);
   const addUserInt = (id) => {
     const item = userInt.find((i) => i === id);
     if (!item) {
@@ -22,6 +22,19 @@ const StartUp = ({ allStart }) => {
     setUserInt(data);
   };
 
+  const getLock = async () => {
+    const getLocation = async (position) => {
+      const { latitude, longitude } = await position.coords;
+      const loca = [];
+      loca.push(latitude, longitude);
+      if (location.length === 0) {
+        await setLocation(loca);
+      }
+    };
+    await navigator.geolocation.getCurrentPosition(getLocation, console.log);
+    return send(location, userInt.join(","));
+  };
+
   return (
     <Fragment>
       <Head>
@@ -29,7 +42,6 @@ const StartUp = ({ allStart }) => {
         <meta name="description" content="all online cooking events" />
       </Head>
       <CoverDiv>
-        {/* <DropDown /> */}
         <PageTitle>Add Your favorite Cooking Events</PageTitle>
         <Uilayer>
           {allStart.map((i) => (
@@ -40,7 +52,9 @@ const StartUp = ({ allStart }) => {
         </Uilayer>
         {userInt.length > 0 && (
           <ButtonComp>
-            <button className={classes.btn}>Save My Events</button>
+            <button className={classes.btn} onClick={() => getLock()}>
+              Save My Events
+            </button>
           </ButtonComp>
         )}
       </CoverDiv>

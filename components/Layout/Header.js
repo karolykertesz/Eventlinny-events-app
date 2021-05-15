@@ -33,7 +33,10 @@ const Header = () => {
     await setUserS(undefined);
     const mess = await fetch("api/users/logout");
     const status = await mess.status;
-    status === 200 && router.push("/login");
+    if (status === 200) {
+      window.location.href = "/login";
+      return;
+    }
   };
   return (
     <div className={classes.nav}>

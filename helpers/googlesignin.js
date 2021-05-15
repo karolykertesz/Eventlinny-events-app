@@ -1,8 +1,6 @@
-import FirebaseClient from "../helpers/firebase";
 import firebase from "firebase/app";
+import FirebaseClient from "../helpers/firebase";
 import "firebase/auth";
-import validate from "../pages/api/users/validate";
-
 const googleSign = (fn) => async () => {
   FirebaseClient();
   const provider = new firebase.auth.GoogleAuthProvider();
@@ -13,14 +11,25 @@ const googleSign = (fn) => async () => {
     .signInWithPopup(provider)
     .then(function (result) {
       const id = result.credential.accessToken;
-      return fn(id);
+      const uid = result.user.uid;
+      return fn(id, uid);
     })
     .catch((err) => console.log(err));
 };
-export default googleSign(async function (id, userId) {
-  const valUrl = await validate(userId);
-  const url = !valUrl ? "/startup" : "/events/first";
-  console.log(url);
+export default googleSign(async function (id, uid) {
+  const urlLink = await fetch("api/users/googleValid", {
+    method: "POST",
+    body: {
+      uid: uid,
+    },
+    headers: {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    },
+  });
+  const url = await urlLink.json();
   const mess = await fetch("/api/users/googleSignIn", {
     method: "POST",
     body: {
@@ -33,5 +42,5 @@ export default googleSign(async function (id, userId) {
       },
     },
   });
-  window.location.href = `${url}`;
+  window.location.href = `${url.url}`;
 });
