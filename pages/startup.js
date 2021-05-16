@@ -34,7 +34,6 @@ const StartUp = ({ allStart }) => {
     await navigator.geolocation.getCurrentPosition(getLocation, console.log);
     return send(location, userInt.join(","));
   };
-
   return (
     <Fragment>
       <Head>

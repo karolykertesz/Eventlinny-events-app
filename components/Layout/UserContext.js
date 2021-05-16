@@ -10,7 +10,15 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     return firebase.auth().onAuthStateChanged(async function (user) {
       if (user) {
-        setUser(user);
+        const uid = user.uid;
+        const name = user.displayName;
+        const email = user.email;
+
+        setUser({
+          uid,
+          email,
+          name,
+        });
       } else {
         const userOut = await fetch("/api/users/logout");
         setUser(undefined);

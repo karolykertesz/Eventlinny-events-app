@@ -1,17 +1,23 @@
 import firebase from "firebase";
 import cookie from "cookie";
 const handler = (fn) => async (req, res) => {
-  return firebase
+  await firebase
     .auth()
     .signOut()
-    .then(() => {
-      return fn(req, res);
-    })
-    .catch((err) => console.log(err));
+    .then(
+      function () {
+        console.log("loged out");
+      },
+      function (error) {
+        console.log("not signed out");
+      }
+    )
+    .catch((err) => console.error("Sign Out Error", err));
+  return fn(req, res);
 };
 
 export default handler(async function logout(req, res) {
-  res.setHeader(
+  await res.setHeader(
     "Set-Cookie",
     cookie.serialize("auth", "", {
       httpOnly: true,

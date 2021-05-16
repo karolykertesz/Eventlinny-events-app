@@ -113,7 +113,6 @@ export async function findDate(year, month) {
   } catch (err) {
     throw new err();
   }
-
   return arr;
 }
 

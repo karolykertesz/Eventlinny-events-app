@@ -1,28 +1,17 @@
 import react, { useEffect, useState, useCallback } from "react";
 import firebase from "firebase";
 import FirebaseClient from "../../helpers/firebase";
-
+import { useAuth } from "../../components/Layout/UserContext";
 const First = () => {
   const [userId, setUserId] = useState("");
   const [data, setData] = useState();
   FirebaseClient();
-
-  useEffect(() => {
-    const user = firebase.auth().currentUser;
-    if (user) {
-      const uid = user.uid;
-      setUserId(uid);
-    }
-    call(userId);
-  }, []);
-  console.log(data);
-  console.log(userId);
   const call = useCallback(
-    async (userId) => {
+    async (uid) => {
       const mess = await fetch("/api/users/helpers/firstPage", {
         method: "POST",
         body: JSON.stringify({
-          uid: userId,
+          uid: uid,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -30,10 +19,19 @@ const First = () => {
         },
       });
       const d = await mess.json();
-      return () => setData(d);
+      setData(d);
     },
-    [setUserId]
+    [setData]
   );
+
+  useEffect(() => {
+    const { user } = useAuth();
+    if (user) {
+      const uid = user.uid;
+      call(uid);
+    }
+  }, [call]);
+  console.log(data);
   return (
     <div>
       <button onClick={() => call()}>Click</button>

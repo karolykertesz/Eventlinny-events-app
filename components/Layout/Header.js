@@ -39,7 +39,6 @@ const Header = () => {
     const status = await mess.status;
     if (status === 200) {
       window.location.href = "/login";
-      return;
     }
   };
   return (
