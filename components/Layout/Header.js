@@ -17,6 +17,8 @@ const Header = () => {
   const [show, setShow] = useState(false);
   const { width } = Dimension();
 
+  // const mobile = width > 600 ? classes.navBtn : classes.noneD;
+  // const links = width > 600 ? classes.navLinks : classes.close;
   useEffect(() => {
     const getUser = async () => {
       return firebase.auth().onAuthStateChanged(async (user) => {
@@ -62,7 +64,6 @@ const Header = () => {
           <Link href="/startup">Event pick</Link>
           <Link href="/events">All Events</Link>
           <Link href="/events">All Events</Link>
-          {/* <Link href="/events">{width}</Link> */}
 
           <IconWrap onClick={() => setShow(!show)}>
             <IconContext.Provider
