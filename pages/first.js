@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {} from "swr";
+
 // import token from '../handlers/token';
 
 const First = ({ message }) => {

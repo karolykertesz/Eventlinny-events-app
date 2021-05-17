@@ -1,3 +1,4 @@
+import firebase from "firebase";
 import { Fragment } from "react";
 import Uilayer from "../components/UI/uiLayer ";
 import StartItem from "../components/startitem";
@@ -8,6 +9,7 @@ import { getAllAStartUp } from "../data";
 import styled from "styled-components";
 import Head from "next/head";
 import { send } from "../helpers/helpers";
+import { useAuth } from "../components/Layout/UserContext";
 
 const StartUp = ({ allStart }) => {
   const [userInt, setUserInt] = useState([]);
@@ -31,8 +33,13 @@ const StartUp = ({ allStart }) => {
         await setLocation(loca);
       }
     };
-    await navigator.geolocation.getCurrentPosition(getLocation, console.log);
-    return send(location, userInt.join(","));
+    if (location) {
+      await navigator.geolocation.getCurrentPosition(getLocation, console.log);
+    } else {
+      return;
+    }
+
+    send(location, userInt.join(","));
   };
   return (
     <Fragment>

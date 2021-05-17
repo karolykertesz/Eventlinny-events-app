@@ -1,43 +1,21 @@
 import react, { useEffect, useState, useCallback } from "react";
 import firebase from "firebase";
 import FirebaseClient from "../../helpers/firebase";
-import { useAuth } from "../../components/Layout/UserContext";
 const First = () => {
-  const [userId, setUserId] = useState("");
   const [data, setData] = useState();
+
   FirebaseClient();
-  const call = useCallback(
-    async (uid) => {
-      const mess = await fetch("/api/users/helpers/firstPage", {
-        method: "POST",
-        body: JSON.stringify({
-          uid: uid,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      });
-      const d = await mess.json();
-      setData(d);
-    },
-    [setData]
-  );
+  const call = useCallback(async () => {
+    const mess = await fetch("/api/users/helpers/firstPage");
+    const d = await mess.json();
+    setData(d);
+  }, [setData]);
 
   useEffect(() => {
-    const { user } = useAuth();
-    if (user) {
-      const uid = user.uid;
-      call(uid);
-    }
+    call();
   }, [call]);
   console.log(data);
-  return (
-    <div>
-      <button onClick={() => call()}>Click</button>
-      {/* <div>{uid && uid}</div> */}
-    </div>
-  );
+  return <div>{data ? <div>data</div> : <div>Loadding...</div>}</div>;
 };
 export default First;
 // export async function getStaticProps() {

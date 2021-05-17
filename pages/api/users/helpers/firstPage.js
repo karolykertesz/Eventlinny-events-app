@@ -1,9 +1,24 @@
 import firebase from "firebase";
 import FirebaseClient from "../../../../helpers/firebase";
-
+const jwt = require("jsonwebtoken");
 const firstPage = (fn) => async (req, res) => {
   FirebaseClient();
-  const { uid } = req.body;
+  const auth = req.cookies.auth;
+  let uid;
+  try {
+    const r = await jwt.verify(
+      auth,
+      process.env.SECRET,
+      async function (err, decoded) {
+        if (!err && decoded) {
+          uid = decoded.data;
+        }
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    return;
+  }
   const docRef = await firebase.firestore().collection("cookies").doc(uid);
   let userPref;
   await docRef
