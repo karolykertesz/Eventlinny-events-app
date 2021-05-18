@@ -24,29 +24,43 @@ const Header = () => {
 
   useEffect(() => {
     const getUser = async () => {
-      const session = await fetch("/api/users/validateSesion");
-      const status = await session.status;
-      if (status === 200) {
-        setUserS(true);
-        return;
-      } else {
-        setUserS(undefined);
-        return;
+      try {
+        const session = await fetch("/api/users/validateSesion");
+        const status = await session.status;
+        if (status === 200) {
+          setUserS(true);
+          return;
+        } else {
+          setUserS(undefined);
+          return;
+        }
+      } catch (err) {
+        console.log(err);
       }
     };
-    getUser();
+
+    return getUser();
   }, []);
 
   const sout = async () => {
+    try {
+      const out = await fetch("api/users/logout");
+      const ou = await out.json();
+    } catch (err) {
+      console.log(err);
+    }
     await setUserS(undefined);
-    const out = await fetch("api/users/logout");
-    return firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        window.location.href = "/login";
-      })
-      .catch((err) => console.log(err));
+    try {
+      await firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          window.location.href = "/login";
+        })
+        .catch((err) => console.log(err));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -65,7 +79,7 @@ const Header = () => {
           <span></span>
         </label>
       </div>
-      {userS !== "undifined" ? (
+      {userS ? (
         <div className={classes.navLinks}>
           <Link href="/startup">Event pick</Link>
           <Link href="/events">All Events</Link>
@@ -88,13 +102,10 @@ const Header = () => {
           </span>
           <DropDown cls={show} uid={1} />
         </div>
-      ) : width > 599 && userS === undefined ? (
-        <div className={classes.navLinks}>
-          <Link href="/login">Log in</Link>
-          <Link href="/signup">Sign up</Link>
-        </div>
       ) : (
-        <MobileLogout />
+        <>
+          <MobileLogout />
+        </>
       )}
     </div>
   );

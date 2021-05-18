@@ -23,6 +23,7 @@ const First = () => {
   useEffect(() => {
     call();
   }, [call]);
+  console.log(data);
   return !data ? <div>Loading...</div> : <Layer>data</Layer>;
 };
 export default First;
