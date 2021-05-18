@@ -10,6 +10,7 @@ const destroy = async (req, res) => {
       expires: new Date(0),
     })
   );
+
   res.status(200).json({ m: "did" });
   return;
 };

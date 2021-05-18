@@ -1,7 +1,7 @@
 import { Fragment, useRef, useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import classes from "../components/UI/ui-modules/login.module.css";
-import validate from "validate.js";
+import validate, { async } from "validate.js";
 import { constraints } from "../helpers/validators/login";
 import sender from "../helpers/sender";
 import { useRouter } from "next/router";
@@ -31,7 +31,13 @@ const Login = () => {
     const seeUser = async () => {
       await fetch("/api/users/helpers/destroyUser");
     };
-    seeUser();
+    return seeUser();
+  }, []);
+  useEffect(() => {
+    const desT = async () => {
+      await fetch("/api/users/logout");
+    };
+    return desT();
   }, []);
   const formSubmit = useCallback(
     async (e) => {

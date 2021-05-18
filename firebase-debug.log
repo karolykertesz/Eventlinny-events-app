@@ -94,3 +94,36 @@ Dev App Server is now running.
 Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
  
 [debug] [2021-05-17T21:35:20.798Z] [worker-~diagnostic~-69bc24c5-8e4c-40e7-96f9-e0436cb851e4]: IDLE {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-69bc24c5-8e4c-40e7-96f9-e0436cb851e4]: IDLE"}}
+[debug] [2021-05-18T01:00:59.888Z] Received signal SIGHUP 1
+[info]  
+[info] i  emulators: Received SIGHUP for the first time. Starting a clean shutdown. 
+[info] i  emulators: Please wait for a clean shutdown or send the SIGHUP signal again to stop right now. 
+[debug] [2021-05-18T01:00:59.893Z] Error: write EIO
+    at afterWriteDispatched (internal/stream_base_commons.js:156:25)
+    at writeGeneric (internal/stream_base_commons.js:147:3)
+    at WriteStream.Socket._writeGeneric (net.js:785:11)
+    at WriteStream.Socket._write (net.js:797:8)
+    at writeOrBuffer (internal/streams/writable.js:358:12)
+    at WriteStream.Writable.write (internal/streams/writable.js:303:10)
+    at Console.log (/usr/local/lib/node_modules/firebase-tools/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/usr/local/lib/node_modules/firebase-tools/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/usr/local/lib/node_modules/firebase-tools/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:428:64)
+    at writeOrBuffer (/usr/local/lib/node_modules/firebase-tools/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:417:5)
+    at Console.Writable.write (/usr/local/lib/node_modules/firebase-tools/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:334:11)
+    at DerivedLogger.ondata (/usr/local/lib/node_modules/firebase-tools/node_modules/readable-stream/lib/_stream_readable.js:681:20)
+    at DerivedLogger.emit (events.js:388:22)
+    at DerivedLogger.emit (domain.js:470:12)
+    at addChunk (/usr/local/lib/node_modules/firebase-tools/node_modules/readable-stream/lib/_stream_readable.js:298:12)
+    at readableAddChunk (/usr/local/lib/node_modules/firebase-tools/node_modules/readable-stream/lib/_stream_readable.js:280:11)
+[error] 
+[error] Error: An unexpected error has occurred.
+[info] i  emulators: Shutting down emulators. {"metadata":{"emulator":{"name":"hub"},"message":"Shutting down emulators."}}
+[info] i  functions: Stopping Functions Emulator {"metadata":{"emulator":{"name":"functions"},"message":"Stopping Functions Emulator"}}
+[info] i  database: Stopping Database Emulator {"metadata":{"emulator":{"name":"database"},"message":"Stopping Database Emulator"}}
+[debug] [2021-05-18T01:00:59.898Z] Ignoring signal SIGHUP due to short delay of 10ms
+[debug] [2021-05-18T01:00:59.902Z] [worker-~diagnostic~-69bc24c5-8e4c-40e7-96f9-e0436cb851e4]: exited {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-69bc24c5-8e4c-40e7-96f9-e0436cb851e4]: exited"}}
+[debug] [2021-05-18T01:00:59.903Z] [worker-~diagnostic~-69bc24c5-8e4c-40e7-96f9-e0436cb851e4]: FINISHED {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-69bc24c5-8e4c-40e7-96f9-e0436cb851e4]: FINISHED"}}
+[debug] [2021-05-18T01:00:59.904Z] 03:00:59.899 [Thread-0] INFO com.firebase.server.forge.App$ - Attempting graceful shutdown.
+ {"metadata":{"emulator":{"name":"database"},"message":"03:00:59.899 [Thread-0] INFO com.firebase.server.forge.App$ - Attempting graceful shutdown.\n"}}
+[debug] [2021-05-18T01:00:59.907Z] 03:00:59.906 [Thread-0] INFO com.firebase.server.forge.App$ - Graceful shutdown complete.
+ {"metadata":{"emulator":{"name":"database"},"message":"03:00:59.906 [Thread-0] INFO com.firebase.server.forge.App$ - Graceful shutdown complete.\n"}}

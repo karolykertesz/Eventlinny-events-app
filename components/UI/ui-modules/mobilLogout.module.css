@@ -1,0 +1,39 @@
+.cover {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: row;
+  margin-bottom: 15px;
+}
+.btn {
+  width: 0;
+  height: 0;
+}
+.cover li a {
+  list-style-type: none;
+  text-decoration: none;
+  color: papayawhip;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.cover li {
+  padding: 10px;
+  background-color: #c49e7d;
+  width: 150px;
+  text-align: center;
+  height: 40px;
+  border: 1px solid papayawhip;
+  border-radius: 3px;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 15px;
+  color: papayawhip;
+
+  text-transform: uppercase;
+}
+.cover li:hover {
+  background-color: rgb(189, 161, 130);
+}
+
+.cover li:active {
+  background-color: peru;
+}

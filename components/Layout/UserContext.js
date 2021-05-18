@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
           name,
         });
       } else {
-        const userOut = await fetch("/api/users/logout");
+        // const userOut = await fetch("/api/users/logout");
         setUser(undefined);
         return;
       }

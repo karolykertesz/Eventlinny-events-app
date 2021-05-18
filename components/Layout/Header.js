@@ -6,10 +6,11 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import FirebaseClient from "../../helpers/firebase";
 import { IconContext } from "react-icons";
-import { BsFillPersonFill } from "react-icons/bs";
+import { BsDisplay, BsFillPersonFill } from "react-icons/bs";
 import DropDown from "../../components/dropdown";
 import Dimension from "../../helpers/dimension";
-import getUser from "../../pages/api/users/helpers/currentuser";
+import MobileLogout from "../UI/mobillogout";
+// import getUser from "../../pages/api/users/helpers/currentuser";
 
 FirebaseClient();
 const Header = () => {
@@ -20,29 +21,34 @@ const Header = () => {
 
   // const mobile = width > 600 ? classes.navBtn : classes.noneD;
   // const links = width > 600 ? classes.navLinks : classes.close;
+
   useEffect(() => {
     const getUser = async () => {
-      return firebase.auth().onAuthStateChanged(async (user) => {
-        const session = await fetch("/api/users/validateSesion");
-        const status = await session.status;
-        if (status === 200 && user) {
-          setUserS(user);
-        } else {
-          return setUserS(undefined);
-        }
-      });
+      const session = await fetch("/api/users/validateSesion");
+      const status = await session.status;
+      if (status === 200) {
+        setUserS(true);
+        return;
+      } else {
+        setUserS(undefined);
+        return;
+      }
     };
     getUser();
-  }, [getUser]);
+  }, []);
 
-  const userSignOut = async () => {
+  const sout = async () => {
     await setUserS(undefined);
-    const mess = await fetch("api/users/logout");
-    const status = await mess.status;
-    if (status === 200) {
-      window.location.href = "/login";
-    }
+    const out = await fetch("api/users/logout");
+    return firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        window.location.href = "/login";
+      })
+      .catch((err) => console.log(err));
   };
+
   return (
     <div className={classes.nav}>
       <input type="checkbox" id="nav-check" className={classes.navCheck} />
@@ -59,8 +65,7 @@ const Header = () => {
           <span></span>
         </label>
       </div>
-
-      {userS !== undefined ? (
+      {userS !== "undifined" ? (
         <div className={classes.navLinks}>
           <Link href="/startup">Event pick</Link>
           <Link href="/events">All Events</Link>
@@ -77,17 +82,19 @@ const Header = () => {
             </IconContext.Provider>
           </IconWrap>
           <span>
-            <span className={classes.link} onClick={() => userSignOut()}>
+            <span className={classes.link} onClick={() => sout()}>
               Sign Out
             </span>
           </span>
           <DropDown cls={show} uid={1} />
         </div>
-      ) : (
+      ) : width > 599 && userS === undefined ? (
         <div className={classes.navLinks}>
           <Link href="/login">Log in</Link>
           <Link href="/signup">Sign up</Link>
         </div>
+      ) : (
+        <MobileLogout />
       )}
     </div>
   );
