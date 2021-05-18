@@ -1,7 +1,7 @@
-import { db, auth } from '../../../helpers/firebase';
-const validate = require('validate.js');
-
-import { constraints } from '../../../helpers/validators/signup';
+import firebase from "firebase";
+const validate = require("validate.js");
+const auth = firebase.auth();
+import { constraints } from "../../../helpers/validators/signup";
 export default async function handler(req, res) {
   const { firstname, lastname, email, password } = req.body;
   const value = await validate(
@@ -27,6 +27,6 @@ export default async function handler(req, res) {
   }
   return res.status(200).json({
     message:
-      'Email Verification has been sent,plese check your spam folder,too!',
+      "Email Verification has been sent,plese check your spam folder,too!",
   });
 }

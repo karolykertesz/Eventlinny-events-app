@@ -27,6 +27,12 @@ const Login = () => {
     };
     return getToken();
   }, []);
+  useEffect(() => {
+    const seeUser = async () => {
+      await fetch("/api/users/helpers/destroyUser");
+    };
+    seeUser();
+  }, []);
   const formSubmit = useCallback(
     async (e) => {
       e.preventDefault();

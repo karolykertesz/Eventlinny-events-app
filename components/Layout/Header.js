@@ -9,6 +9,7 @@ import { IconContext } from "react-icons";
 import { BsFillPersonFill } from "react-icons/bs";
 import DropDown from "../../components/dropdown";
 import Dimension from "../../helpers/dimension";
+import getUser from "../../pages/api/users/helpers/currentuser";
 
 FirebaseClient();
 const Header = () => {
@@ -31,8 +32,9 @@ const Header = () => {
         }
       });
     };
-    return getUser();
-  }, []);
+    getUser();
+  }, [getUser]);
+
   const userSignOut = async () => {
     await setUserS(undefined);
     const mess = await fetch("api/users/logout");
@@ -74,11 +76,11 @@ const Header = () => {
               <BsFillPersonFill />
             </IconContext.Provider>
           </IconWrap>
-          <Link href="/login">
+          <span>
             <span className={classes.link} onClick={() => userSignOut()}>
               Sign Out
             </span>
-          </Link>
+          </span>
           <DropDown cls={show} uid={1} />
         </div>
       ) : (

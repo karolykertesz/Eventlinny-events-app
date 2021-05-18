@@ -1,11 +1,11 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Uilayer = (props) => {
   return <Layer>{props.children}</Layer>;
 };
 
 export default Uilayer;
-const Layer = styled.div`
+export const Layer = styled.div`
   background: papayawhip;
   height: 100%;
   width: 100%;

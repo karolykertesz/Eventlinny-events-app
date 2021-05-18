@@ -5,13 +5,15 @@ const vdToken = async (req, res) => {
   if (!auth) {
     return res.status(400).json({ message: false });
   }
+  let uid;
   try {
     const r = await jwt.verify(
       auth,
       process.env.SECRET,
       async function (err, decoded) {
         if (!err && decoded) {
-          return true;
+          const userId = await decoded.data;
+          uid = userId;
         }
       }
     );

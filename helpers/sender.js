@@ -16,10 +16,21 @@ export default async function sender(tok, email, password, router) {
     });
     const status = await mess.status;
     const mes = await mess.json();
-    console.log(mes);
+
     if (status !== 200) {
       return mes;
     } else {
+      const user = await mes.userObj;
+      await fetch("/api/users/helpers/currentuser", {
+        method: "POST",
+        body: JSON.stringify({
+          user: user,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      });
       return (window.location.href = `${mes.message}`);
     }
     // }

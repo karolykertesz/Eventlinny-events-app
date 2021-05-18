@@ -1,5 +1,4 @@
-import firebase from "firebase";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import Uilayer from "../components/UI/uiLayer ";
 import StartItem from "../components/startitem";
 import { useState } from "react";
@@ -9,9 +8,15 @@ import { getAllAStartUp } from "../data";
 import styled from "styled-components";
 import Head from "next/head";
 import { send } from "../helpers/helpers";
-import { useAuth } from "../components/Layout/UserContext";
+import gettoken from "../helpers/gettoken";
 
 const StartUp = ({ allStart }) => {
+  useEffect(() => {
+    gettoken();
+  }, []);
+  useEffect(() => {
+    getLock();
+  });
   const [userInt, setUserInt] = useState([]);
   const router = useRouter();
   const [location, setLocation] = useState([]);
@@ -38,8 +43,6 @@ const StartUp = ({ allStart }) => {
     } else {
       return;
     }
-
-    send(location, userInt.join(","));
   };
   return (
     <Fragment>
@@ -58,7 +61,10 @@ const StartUp = ({ allStart }) => {
         </Uilayer>
         {userInt.length > 0 && (
           <ButtonComp>
-            <button className={classes.btn} onClick={() => getLock()}>
+            <button
+              className={classes.btn}
+              onClick={() => send(location, userInt.join(","))}
+            >
               Save My Events
             </button>
           </ButtonComp>
@@ -70,7 +76,7 @@ const StartUp = ({ allStart }) => {
 
 export default StartUp;
 
-export async function getStaticProps() {
+export async function getStaticProps(context) {
   const data = await getAllAStartUp();
   return {
     props: {

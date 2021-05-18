@@ -23,6 +23,7 @@ async function loger(req, res, email, password) {
   }
 
   let userId = "";
+  let userObj = {};
   try {
     await firebase
       .auth()
@@ -33,6 +34,12 @@ async function loger(req, res, email, password) {
           return res.status(400).json({ message: "Need to get verified" });
         }
         userId += user.uid;
+        userObj = {
+          ...userObj,
+          name: user.displayName,
+          email: user.email,
+          uid: user.uid,
+        };
       });
   } catch (error) {
     const errorCode = error.code;
@@ -42,10 +49,11 @@ async function loger(req, res, email, password) {
   const token = await jwt.sign({ data: userId }, process.env.SECRET, {
     expiresIn: "1h",
   });
-  const urlvalue = await validateUrl(userId);
-  const url = !urlvalue ? "/startup" : "/events/first";
 
-  res.setHeader(
+  const urlvalue = await validateUrl(userId);
+  const url = !urlvalue ? "/events/first" : "/startup";
+
+  await res.setHeader(
     "Set-Cookie",
     cookie.serialize("auth", token, {
       httpOnly: true,
@@ -55,7 +63,8 @@ async function loger(req, res, email, password) {
       maxAge: 3600,
     })
   );
-  res.status(200).json({ message: url });
+
+  res.status(200).json({ message: url, userObj: userObj });
   return;
 }
 

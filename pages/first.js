@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 const First = ({ message }) => {
   // const [message, setMessage] = useState();
 
-  return <div>{message && message}</div>;
+  return <Layer></Layer>;
 };
 
 export default First;

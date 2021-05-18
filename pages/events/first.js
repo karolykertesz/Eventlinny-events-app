@@ -1,8 +1,11 @@
 import react, { useEffect, useState, useCallback } from "react";
 import firebase from "firebase";
 import FirebaseClient from "../../helpers/firebase";
+import gettoken from "../../helpers/gettoken";
+import { Layer } from "../../components/UI/uiLayer ";
 const First = () => {
   const [data, setData] = useState();
+  const [user, setuser] = useState();
 
   FirebaseClient();
   const call = useCallback(async () => {
@@ -10,28 +13,16 @@ const First = () => {
     const d = await mess.json();
     setData(d);
   }, [setData]);
-
+  useEffect(() => {
+    const getTo = async () => {
+      const user = await gettoken();
+      setuser(user);
+    };
+    getTo();
+  }, []);
   useEffect(() => {
     call();
   }, [call]);
-  console.log(data);
-  return <div>{data ? <div>data</div> : <div>Loadding...</div>}</div>;
+  return !data ? <div>Loading...</div> : <Layer>data</Layer>;
 };
 export default First;
-// export async function getStaticProps() {
-//   FirebaseClient();
-//   const authPromise = () => {
-//     return new Promise((resolve, reject) => {
-//       const user = firebase.auth().currentUser;
-//       console.log(user.email);
-//     });
-//   };
-
-//   setTimeout(authPromise, 2000);
-//   return {
-//     props: {
-//       uid: "n",
-//     },
-//     revalidate: 1800,
-//   };
-// }
