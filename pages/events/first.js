@@ -1,13 +1,16 @@
 import react, { useEffect, useState, useCallback } from "react";
-import firebase from "firebase";
 import FirebaseClient from "../../helpers/firebase";
 import gettoken from "../../helpers/gettoken";
 import { Layer } from "../../components/UI/uiLayer ";
+import FirstPageItem from "../../components/UI/firstpageItem";
+import { NameDiv, Pi } from "../../components/UI/firstpageItem";
+import Loader from "../../components/UI/loader";
 const First = () => {
+  FirebaseClient();
   const [data, setData] = useState();
   const [user, setuser] = useState();
+  const t = data;
 
-  FirebaseClient();
   const call = useCallback(async () => {
     const mess = await fetch("/api/users/helpers/firstPage");
     const d = await mess.json();
@@ -23,7 +26,26 @@ const First = () => {
   useEffect(() => {
     call();
   }, [call]);
-  console.log(data);
-  return !data ? <div>Loading...</div> : <Layer>data</Layer>;
+  return !data || !user ? (
+    <Loader />
+  ) : (
+    <div>
+      {user && (
+        <NameDiv>
+          <Pi>
+            Dear {user.userIn.name} Your selection of cooking events below
+          </Pi>
+        </NameDiv>
+      )}
+      <Layer>
+        {t.m &&
+          t.m.map((item, indx) => (
+            <span key={indx}>
+              <FirstPageItem image={item.image} cusineName={item.description} />
+            </span>
+          ))}
+      </Layer>
+    </div>
+  );
 };
 export default First;

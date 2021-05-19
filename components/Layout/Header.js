@@ -1,23 +1,21 @@
 import Link from "next/link";
 import firebase from "firebase";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Fragment } from "react";
 import classes from "./main-header.module.css";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import FirebaseClient from "../../helpers/firebase";
 import { IconContext } from "react-icons";
-import { BsDisplay, BsFillPersonFill } from "react-icons/bs";
+import { BsFillPersonFill, BsViewStacked } from "react-icons/bs";
 import DropDown from "../../components/dropdown";
-import Dimension from "../../helpers/dimension";
 import MobileLogout from "../UI/mobillogout";
-// import getUser from "../../pages/api/users/helpers/currentuser";
+import windowLocation from "../../helpers/location";
 
 FirebaseClient();
 const Header = () => {
   const [userS, setUserS] = useState();
   const router = useRouter();
   const [show, setShow] = useState(false);
-  const { width } = Dimension();
 
   // const mobile = width > 600 ? classes.navBtn : classes.noneD;
   // const links = width > 600 ? classes.navLinks : classes.close;
@@ -103,9 +101,9 @@ const Header = () => {
           <DropDown cls={show} uid={1} />
         </div>
       ) : (
-        <>
+        <Fragment>
           <MobileLogout />
-        </>
+        </Fragment>
       )}
     </div>
   );

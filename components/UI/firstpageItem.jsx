@@ -1,12 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import classes from "./ui-modules/firstpageItem.module.css";
-import image from "next/image";
+import Image from "next/image";
 
 const firstPageItem = ({ userName, cusineName, image }) => {
   return (
     <div className={classes.coverdiv}>
-      <NameDiv>Dear {userName} Your event selection</NameDiv>
       <Image
         src={"/" + image}
         alt={cusineName}
@@ -14,17 +13,27 @@ const firstPageItem = ({ userName, cusineName, image }) => {
         height={200}
         quality={100}
       />
+      <span className={classes.descpspan}>
+        <Pi className={classes.description}>{cusineName}</Pi>
+      </span>
     </div>
   );
 };
 
 export default firstPageItem;
 
-const NameDiv = styled.div`
+export const NameDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 2px;
+  margin: 10px;
+`;
+
+export const Pi = styled.p`
+  text-align: center;
   text-transform: uppercase;
   font-family: Arial, Helvetica, sans-serif;
+  color: #c49e7d;
+  font-size: 18px;
 `;

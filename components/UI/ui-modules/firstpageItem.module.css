@@ -2,6 +2,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 5px;
+  margin: 15px;
   width: 100%;
+  flex-direction: column;
+}
+.description {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.descpspan {
+  margin-top: 20px;
 }
