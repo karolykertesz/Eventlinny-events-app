@@ -1,16 +1,17 @@
 import react, { useEffect, useState, useCallback } from "react";
-import FirebaseClient from "../../helpers/firebase";
 import gettoken from "../../helpers/gettoken";
 import { Layer } from "../../components/UI/uiLayer ";
 import FirstPageItem from "../../components/UI/firstpageItem";
 import { NameDiv, Pi } from "../../components/UI/firstpageItem";
 import Loader from "../../components/UI/loader";
+import classes from "../../components/UI/ui-modules/first.module.css";
+
 const First = () => {
-  FirebaseClient();
   const [data, setData] = useState();
   const [user, setuser] = useState();
-  const t = data;
+  const [userLocation, setuserlocation] = useState();
 
+  const t = data;
   const call = useCallback(async () => {
     const mess = await fetch("/api/users/helpers/firstPage");
     const d = await mess.json();
@@ -26,6 +27,25 @@ const First = () => {
   useEffect(() => {
     call();
   }, [call]);
+  const getLocation = useCallback(async () => {
+    const uid = user ? user.userIn.uid : null;
+    const mess = await fetch("/api/users/helpers/userlocation", {
+      method: "POST",
+      body: JSON.stringify({
+        uid: uid,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    const message = await mess.json();
+    setuserlocation(message.m);
+  }, [setuserlocation]);
+
+  useEffect(() => {
+    getLocation();
+  }, [getLocation]);
   return !data || !user ? (
     <Loader />
   ) : (
@@ -41,10 +61,20 @@ const First = () => {
         {t.m &&
           t.m.map((item, indx) => (
             <span key={indx}>
-              <FirstPageItem image={item.image} cusineName={item.description} />
+              <FirstPageItem
+                image={item.image}
+                cusineName={item.description}
+                location={userLocation}
+              />
             </span>
           ))}
       </Layer>
+      <div className={classes.location}>
+        <h5>
+          Events close to {userLocation && userLocation.country}/
+          {userLocation && userLocation.city}
+        </h5>
+      </div>
     </div>
   );
 };

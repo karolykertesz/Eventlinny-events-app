@@ -3,7 +3,6 @@ import styled from "styled-components";
 import classes from "../components/UI/ui-modules/login.module.css";
 import { useRouter } from "next/router";
 import React from "react";
-import SimpleReactValidator from "simple-react-validator";
 import { GoogleButton } from "./login";
 import { IconContext } from "react-icons";
 import { ImGoogle3 } from "react-icons/im";

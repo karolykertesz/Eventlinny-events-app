@@ -14,3 +14,9 @@
 .descpspan {
   margin-top: 20px;
 }
+
+.location {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

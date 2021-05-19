@@ -9,7 +9,6 @@ import { IconContext } from "react-icons";
 import { BsFillPersonFill, BsViewStacked } from "react-icons/bs";
 import DropDown from "../../components/dropdown";
 import MobileLogout from "../UI/mobillogout";
-import windowLocation from "../../helpers/location";
 
 FirebaseClient();
 const Header = () => {

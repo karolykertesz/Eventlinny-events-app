@@ -2,17 +2,37 @@ import react from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import classes from "../components/UI/ui-modules/drop.module.css";
-const DropDown = ({ cls, uid }) => {
+import { useEffect, useState } from "react";
+import gettoken from "../helpers/gettoken";
+
+const DropDown = ({ cls }) => {
+  const [user, setUser] = useState();
+  const uid = user !== undefined ? user.userIn.uid : undefined;
+
+  useEffect(() => {
+    const getTo = async () => {
+      const user = await gettoken();
+      setUser(user);
+    };
+    getTo();
+    return;
+  }, []);
   return (
     <CoverDiv>
       <div className={cls ? classes.top : classes.hide}>
         <ul>
           <li>
-            <Link href="/login">Login</Link>
+            <Link href="usepage/[uid]">your profile</Link>
           </li>
-          <li>Notifications</li>
-          <li>Your Events</li>
-          <li>Sign Out</li>
+          <li>
+            <Link href="/login">Notification</Link>
+          </li>
+          <li>
+            <Link href="/create/[cret]">create an event</Link>
+          </li>
+          <li>
+            <Link href="/logout">sign Out</Link>
+          </li>
         </ul>
       </div>
     </CoverDiv>

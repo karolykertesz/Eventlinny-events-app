@@ -3,7 +3,7 @@ import styled from "styled-components";
 import classes from "./ui-modules/firstpageItem.module.css";
 import Image from "next/image";
 
-const firstPageItem = ({ userName, cusineName, image }) => {
+const firstPageItem = ({ userName, cusineName, image, location }) => {
   return (
     <div className={classes.coverdiv}>
       <Image

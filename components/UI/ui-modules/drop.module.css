@@ -15,6 +15,11 @@
   border-bottom: 1px solid black;
   text-align: center;
 }
+.top ul li a {
+  text-decoration: none;
+  color: rgb(176, 139, 91);
+  text-transform: uppercase;
+}
 .top ul li:hover {
   background-color: rgb(225, 162, 80);
 }
