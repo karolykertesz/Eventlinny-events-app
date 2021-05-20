@@ -22,7 +22,7 @@ const DropDown = ({ cls }) => {
       <div className={cls ? classes.top : classes.hide}>
         <ul>
           <li>
-            <Link href="usepage/[uid]">your profile</Link>
+            <Link href={`/userpage/${uid}`}>your profile</Link>
           </li>
           <li>
             <Link href="/login">Notification</Link>

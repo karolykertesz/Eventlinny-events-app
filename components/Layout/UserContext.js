@@ -8,20 +8,12 @@ export const AuthProvider = ({ children }) => {
   FirebaseClient();
   const [user, setUser] = useState();
   useEffect(() => {
-    return firebase.auth().onAuthStateChanged(async function (user) {
-      if (user) {
-        const uid = user.uid;
-        const name = user.displayName;
-        const email = user.email;
-
-        setUser({
-          uid,
-          email,
-          name,
-        });
+    return firebase.auth().onIdTokenChanged(async function (user) {
+      if (!user) {
+        setUser(null);
+        return;
       } else {
-        // const userOut = await fetch("/api/users/logout");
-        setUser(undefined);
+        setUser(user);
         return;
       }
     });

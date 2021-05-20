@@ -1,11 +1,9 @@
 const jwt = require("jsonwebtoken");
-import cookie from "cookie";
 const Tokens = require("csrf");
 const tokens = new Tokens();
 const secret = tokens.secretSync();
 const token = tokens.create(secret);
 import loger from "./loger";
-import sander from "./createsession";
 import { checkOut, createCookie } from "./createsession";
 const handler = async (req, res) => {
   if (req.method === "GET") {
@@ -13,13 +11,14 @@ const handler = async (req, res) => {
   }
 
   if (req.method === "POST") {
-    if (!req.body.token || !req.cookies.session) {
+    if (!req.body.token || !req.cookies.session || !req.body.user) {
       return res.status(401).json({ message: "Please refresh the page" });
     }
     const session = req.cookies.session;
     const tokenI = req.body.token;
-    const email = req.body.email;
-    const password = req.body.password;
+    const user = req.body.user;
+    // const password = req.body.password;
+
     let sec = "";
     try {
       const r = await jwt.verify(
@@ -42,7 +41,7 @@ const handler = async (req, res) => {
           res.status(405).json({ message: "Something went wrong" });
           return;
         } else {
-          return loger(req, res, email, password);
+          return loger(req, res, user);
         }
       }
     } catch (err) {

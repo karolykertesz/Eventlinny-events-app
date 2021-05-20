@@ -18,6 +18,9 @@ export default async function helper(req, res) {
         city: data.city,
         country: data.country,
       };
+    } else {
+      res.status(400).json({ m: "no doc" });
+      return;
     }
   } catch (err) {
     console.log(err);

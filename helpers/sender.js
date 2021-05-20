@@ -1,13 +1,12 @@
 const jwt = require("jsonwebtoken");
 
-export default async function sender(tok, email, password, router) {
+export default async function sender(tok, user) {
   try {
     const mess = await fetch("/api/users/session", {
       method: "POST",
       body: JSON.stringify({
         token: tok,
-        email,
-        password,
+        user: user,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -16,7 +15,8 @@ export default async function sender(tok, email, password, router) {
     });
     const status = await mess.status;
     const mes = await mess.json();
-
+    // console.log(status);
+    // console.log(mes);
     if (status !== 200) {
       return mes;
     } else {

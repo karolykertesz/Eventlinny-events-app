@@ -5,7 +5,7 @@ import FirstPageItem from "../../components/UI/firstpageItem";
 import { NameDiv, Pi } from "../../components/UI/firstpageItem";
 import Loader from "../../components/UI/loader";
 import classes from "../../components/UI/ui-modules/first.module.css";
-
+import { useAuth } from "../../components/Layout/UserContext";
 const First = () => {
   const [data, setData] = useState();
   const [user, setuser] = useState();
@@ -27,25 +27,33 @@ const First = () => {
   useEffect(() => {
     call();
   }, [call]);
-  const getLocation = useCallback(async () => {
-    const uid = user ? user.userIn.uid : null;
-    const mess = await fetch("/api/users/helpers/userlocation", {
-      method: "POST",
-      body: JSON.stringify({
-        uid: uid,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    });
-    const message = await mess.json();
-    setuserlocation(message.m);
-  }, [setuserlocation]);
+  const getLocation = async (uid) => {
+    if (uid !== null || uid !== undefined) {
+      try {
+        const mess = await fetch("/api/users/helpers/userlocation", {
+          method: "POST",
+          body: JSON.stringify({
+            uid: uid,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        });
+        const message = await mess.json();
+        return setuserlocation(message.m);
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      return;
+    }
+  };
 
   useEffect(() => {
-    getLocation();
-  }, [getLocation]);
+    const uid = user ? user.userIn.uid : null;
+    getLocation(uid);
+  }, [user]);
   return !data || !user ? (
     <Loader />
   ) : (
@@ -69,12 +77,13 @@ const First = () => {
             </span>
           ))}
       </Layer>
-      <div className={classes.location}>
-        <h5>
-          Events close to {userLocation && userLocation.country}/
-          {userLocation && userLocation.city}
-        </h5>
-      </div>
+      {userLocation && (
+        <div className={classes.location}>
+          <h5>
+            Events close to {userLocation.country}/{userLocation.city}
+          </h5>
+        </div>
+      )}
     </div>
   );
 };

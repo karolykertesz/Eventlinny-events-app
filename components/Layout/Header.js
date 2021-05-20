@@ -16,9 +16,6 @@ const Header = () => {
   const router = useRouter();
   const [show, setShow] = useState(false);
 
-  // const mobile = width > 600 ? classes.navBtn : classes.noneD;
-  // const links = width > 600 ? classes.navLinks : classes.close;
-
   useEffect(() => {
     const getUser = async () => {
       try {
@@ -36,7 +33,7 @@ const Header = () => {
       }
     };
 
-    return getUser();
+    getUser();
   }, []);
 
   const sout = async () => {
@@ -46,11 +43,13 @@ const Header = () => {
     } catch (err) {
       console.log(err);
     }
-    await setUserS(undefined);
     try {
       await firebase
         .auth()
         .signOut()
+        .then(() => {
+          setUserS(null);
+        })
         .then(() => {
           window.location.href = "/login";
         })

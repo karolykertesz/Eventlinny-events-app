@@ -2,7 +2,13 @@ const jwt = require("jsonwebtoken");
 const cookie = require("cookie");
 
 export default async function handler(req, res) {
-  const userId = req.body.id;
+  const userId = req.body.uid;
+  if (!userId) {
+    console.log("Error");
+    res.status(400).json({ m: "no uid" });
+    return;
+  }
+  console.log(userId, "the user id");
   const secret = process.env.SECRET;
   const token = jwt.sign({ data: userId }, secret, {
     expiresIn: "1h",

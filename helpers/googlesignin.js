@@ -9,14 +9,13 @@ const googleSign = (fn) => async () => {
   firebase
     .auth()
     .signInWithPopup(provider)
-    .then(function (result) {
-      const id = result.credential.accessToken;
-      const uid = result.user.uid;
-      return fn(id, uid);
+    .then(async function (result) {
+      const uid = await result.user.uid;
+      return fn(uid);
     })
     .catch((err) => console.log(err));
 };
-export default googleSign(async function (id, uid) {
+export default googleSign(async function (uid) {
   const urlLink = await fetch("api/users/googleValid", {
     method: "POST",
     body: JSON.stringify({
@@ -29,17 +28,25 @@ export default googleSign(async function (id, uid) {
   });
   const url = await urlLink.json();
 
-  const mess = await fetch("/api/users/googleSignIn", {
-    method: "POST",
-    body: {
-      id: id,
-    },
-    headers: {
+  try {
+    const mess = await fetch("/api/users/googleSignIn", {
+      method: "POST",
+      body: JSON.stringify({
+        uid: uid,
+      }),
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-    },
-  });
+    });
+    const status = await mess.status;
+    if (status !== 200) {
+      console.log(await mess.json());
+      return;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+
   window.location.href = `${url.url}`;
 });

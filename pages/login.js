@@ -9,13 +9,13 @@ import { ImGoogle3, ImFacebook2 } from "react-icons/im";
 import { IconContext } from "react-icons";
 import googleSign from "../helpers/googlesignin";
 import facebookSignIn from "../helpers/fb";
+import Head from "next/head";
+import firebase from "firebase";
 
 const Login = () => {
-  const router = useRouter();
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [valid, setValid] = useState(false);
   const [tok, setTok] = useState();
+  const [useData, setUseDate] = useState(true);
   const emailRef = useRef();
   const passwordRef = useRef();
   const tokenRef = useRef();
@@ -30,15 +30,18 @@ const Login = () => {
   useEffect(() => {
     const seeUser = async () => {
       await fetch("/api/users/helpers/destroyUser");
+      setUseDate(false);
     };
     return seeUser();
   }, []);
   useEffect(() => {
-    const desT = async () => {
-      await fetch("/api/users/logout");
-    };
-    return desT();
-  }, []);
+    if (!useData) {
+      const desT = async () => {
+        await fetch("/api/users/logout");
+      };
+      desT();
+    }
+  }, [setUseDate]);
   const formSubmit = useCallback(
     async (e) => {
       e.preventDefault();
@@ -58,18 +61,24 @@ const Login = () => {
       const password = passwordRef.current.value;
 
       if (tok !== undefined || tok !== null) {
-        const val = await sender(tok, email, password, router)
-          .then((resp) => {
-            if (resp.message) {
-              setError(resp.message);
-            }
+        return firebase
+          .auth()
+          .signInWithEmailAndPassword(email, password)
+          .then(async (userCred) => {
+            let user = {};
+            const userObj = await userCred.user;
+            user = await {
+              uid: userObj.uid,
+              email: userObj.email,
+              name: userObj.displayName,
+            };
+            await sender(tok, user);
           })
           .catch((err) => console.log(err));
       }
 
-      // return;
-
-      return setTok("");
+      setTok("");
+      setUseDate(true);
     },
     [tok]
   );
@@ -86,12 +95,6 @@ const Login = () => {
             <div className={classes.control}>
               <label htmlFor="password">Passsword</label>
               <input type="password" id="password" ref={passwordRef} />
-              <input
-                ref={tokenRef}
-                type="hidden"
-                name="_csrf"
-                value={tok ? tok : ""}
-              />
             </div>
             <ForMButton>
               <Pi>Login</Pi>
