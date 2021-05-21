@@ -9,7 +9,12 @@
   animation: rotation 1s 1 ease;
   z-index: 100;
 }
-
+.name {
+  background-color: peru !important;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 .top ul li {
   padding: 20px;
   border-bottom: 1px solid black;

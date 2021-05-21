@@ -3,25 +3,31 @@ import FirebaseClient from "../../../../helpers/firebase";
 const jwt = require("jsonwebtoken");
 const firstPage = (fn) => async (req, res) => {
   FirebaseClient();
+  const userSentId = req.body.uid ? req.body.uid : null;
   const auth = req.cookies.auth;
-  let uid;
-  console.log(uid, "top");
-  try {
-    const r = await jwt.verify(
-      auth,
-      process.env.SECRET,
-      async function (err, decoded) {
-        if (!err && decoded) {
-          uid = await decoded.data;
+  let uidIn;
+
+  if (!userSentId) {
+    try {
+      const r = await jwt.verify(
+        auth,
+        process.env.SECRET,
+        async function (err, decoded) {
+          if (!err && decoded) {
+            console.log(decoded, "data");
+            uidIn = await decoded.data;
+          }
         }
-      }
-    );
-  } catch (err) {
-    console.log(err);
-    // return;
+      );
+    } catch (err) {
+      console.log(err);
+      // return;
+    }
+  } else {
+    uidIn = userSentId;
   }
 
-  const docRef = await firebase.firestore().collection("cookies").doc(uid);
+  const docRef = await firebase.firestore().collection("cookies").doc(uidIn);
 
   let userPref;
   try {
@@ -31,7 +37,7 @@ const firstPage = (fn) => async (req, res) => {
         if (snapshot) {
           const eventss = await snapshot.data().pref_events;
           userPref = eventss;
-          return fn(req, res, userPref, uid);
+          return fn(req, res, userPref, uidIn);
         } else {
           return;
         }
@@ -42,8 +48,6 @@ const firstPage = (fn) => async (req, res) => {
   }
 };
 export default firstPage(async function getData(req, res, userPref, uid) {
-  console.log(uid, "the uid in");
-  console.log(userPref, "the user");
   const gt = () => {
     const docref = firebase.firestore().collection("startup");
     const promises = userPref.map((item) => docref.doc(item).get());

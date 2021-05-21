@@ -8,12 +8,12 @@ export const AuthProvider = ({ children }) => {
   FirebaseClient();
   const [user, setUser] = useState();
   useEffect(() => {
-    return firebase.auth().onIdTokenChanged(async function (user) {
-      if (!user) {
-        setUser(null);
+    return firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        setUser({ uid: user.uid, name: user.displayName, email: user.email });
         return;
       } else {
-        setUser(user);
+        setUser(undefined);
         return;
       }
     });

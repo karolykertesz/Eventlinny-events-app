@@ -1,37 +1,26 @@
 const jwt = require("jsonwebtoken");
 
-export default async function sender(tok, user) {
+export default async function sender(tok, uid) {
   try {
     const mess = await fetch("/api/users/session", {
       method: "POST",
       body: JSON.stringify({
         token: tok,
-        user: user,
+        uid: uid,
       }),
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
     });
+    console.log(tok);
     const status = await mess.status;
     const mes = await mess.json();
-    // console.log(status);
-    // console.log(mes);
     if (status !== 200) {
+      console.log(mes);
       return mes;
     } else {
-      const user = await mes.userObj;
-      await fetch("/api/users/helpers/currentuser", {
-        method: "POST",
-        body: JSON.stringify({
-          user: user,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      });
-      return (window.location.href = `${mes.message}`);
+      window.location.href = `${mes.message}`;
     }
     // }
   } catch (err) {

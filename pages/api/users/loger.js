@@ -2,14 +2,14 @@ const jwt = require("jsonwebtoken");
 import cookie from "cookie";
 import validateUrl from "./validate";
 
-async function loger(req, res, user) {
+async function loger(req, res, uid) {
   if (req.method !== "POST") {
     return res.status(500).json({
       message: "Wrong request",
     });
   }
-  let userId = user.uid;
-  let userObj = user;
+  let userId = uid;
+  console.log(userId, "in token");
 
   const token = await jwt.sign({ data: userId }, process.env.SECRET, {
     expiresIn: "1h",
@@ -29,7 +29,7 @@ async function loger(req, res, user) {
     })
   );
 
-  res.status(200).json({ message: url, userObj: userObj });
+  res.status(200).json({ message: url });
   return;
 }
 

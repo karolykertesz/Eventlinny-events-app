@@ -11,12 +11,13 @@ const handler = async (req, res) => {
   }
 
   if (req.method === "POST") {
-    if (!req.body.token || !req.cookies.session || !req.body.user) {
+    if (!req.body.token || !req.cookies.session) {
       return res.status(401).json({ message: "Please refresh the page" });
     }
     const session = req.cookies.session;
     const tokenI = req.body.token;
-    const user = req.body.user;
+    const uid = req.body.uid;
+
     // const password = req.body.password;
 
     let sec = "";
@@ -41,7 +42,7 @@ const handler = async (req, res) => {
           res.status(405).json({ message: "Something went wrong" });
           return;
         } else {
-          return loger(req, res, user);
+          return loger(req, res, uid);
         }
       }
     } catch (err) {

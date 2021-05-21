@@ -41,7 +41,6 @@ export default googleSign(async function (uid) {
     });
     const status = await mess.status;
     if (status !== 200) {
-      console.log(await mess.json());
       return;
     }
   } catch (err) {

@@ -1,10 +1,10 @@
 import { Fragment, useRef, useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import classes from "../components/UI/ui-modules/login.module.css";
-import validate, { async } from "validate.js";
+import validate from "validate.js";
 import { constraints } from "../helpers/validators/login";
 import sender from "../helpers/sender";
-import { useRouter } from "next/router";
+
 import { ImGoogle3, ImFacebook2 } from "react-icons/im";
 import { IconContext } from "react-icons";
 import googleSign from "../helpers/googlesignin";
@@ -19,29 +19,25 @@ const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const tokenRef = useRef();
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (!user) {
+        fetch("/api/users/logout");
+      }
+    });
+  });
+
   useEffect(() => {
     const getToken = async () => {
       const data = await fetch("/api/users/session");
       const token = await data.json();
       await setTok(token.token);
     };
+
     return getToken();
   }, []);
-  useEffect(() => {
-    const seeUser = async () => {
-      await fetch("/api/users/helpers/destroyUser");
-      setUseDate(false);
-    };
-    return seeUser();
-  }, []);
-  useEffect(() => {
-    if (!useData) {
-      const desT = async () => {
-        await fetch("/api/users/logout");
-      };
-      desT();
-    }
-  }, [setUseDate]);
+
   const formSubmit = useCallback(
     async (e) => {
       e.preventDefault();
@@ -64,21 +60,15 @@ const Login = () => {
         return firebase
           .auth()
           .signInWithEmailAndPassword(email, password)
-          .then(async (userCred) => {
-            let user = {};
-            const userObj = await userCred.user;
-            user = await {
-              uid: userObj.uid,
-              email: userObj.email,
-              name: userObj.displayName,
-            };
-            await sender(tok, user);
+          .then(async function (userCred) {
+            const uid = await userCred.user.uid;
+            await sender(tok, uid);
+          })
+          .then(() => {
+            setTok("");
           })
           .catch((err) => console.log(err));
       }
-
-      setTok("");
-      setUseDate(true);
     },
     [tok]
   );

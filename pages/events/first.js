@@ -7,6 +7,7 @@ import Loader from "../../components/UI/loader";
 import classes from "../../components/UI/ui-modules/first.module.css";
 import { useAuth } from "../../components/Layout/UserContext";
 const First = () => {
+  const userInfo = useAuth().user;
   const [data, setData] = useState();
   const [user, setuser] = useState();
   const [userLocation, setuserlocation] = useState();
@@ -18,12 +19,8 @@ const First = () => {
     setData(d);
   }, [setData]);
   useEffect(() => {
-    const getTo = async () => {
-      const user = await gettoken();
-      setuser(user);
-    };
-    getTo();
-  }, []);
+    setuser(userInfo);
+  }, [userInfo]);
   useEffect(() => {
     call();
   }, [call]);
@@ -51,7 +48,7 @@ const First = () => {
   };
 
   useEffect(() => {
-    const uid = user ? user.userIn.uid : null;
+    const uid = userInfo ? userInfo.uid : null;
     getLocation(uid);
   }, [user]);
   return !data || !user ? (
@@ -60,9 +57,7 @@ const First = () => {
     <div>
       {user && (
         <NameDiv>
-          <Pi>
-            Dear {user.userIn.name} Your selection of cooking events below
-          </Pi>
+          <Pi>Dear {userInfo.name} Your selection of cooking events below</Pi>
         </NameDiv>
       )}
       <Layer>

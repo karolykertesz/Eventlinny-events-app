@@ -1,7 +1,7 @@
 import cookie from "cookie";
 const destroysession = async (req, res) => {
-  const usertoken = req.cookies.user;
-  if (usertoken) {
+  const session = req.cookies.session;
+  if (session) {
     await res.setHeader(
       "Set-Cookie",
       cookie.serialize("session", "", {

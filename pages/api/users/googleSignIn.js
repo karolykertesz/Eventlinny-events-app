@@ -8,7 +8,6 @@ export default async function handler(req, res) {
     res.status(400).json({ m: "no uid" });
     return;
   }
-  console.log(userId, "the user id");
   const secret = process.env.SECRET;
   const token = jwt.sign({ data: userId }, secret, {
     expiresIn: "1h",

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import firebase from "firebase";
-import { useEffect, useState, Fragment } from "react";
+import { useEffect, useState, Fragment, useCallback } from "react";
 import classes from "./main-header.module.css";
 import styled from "styled-components";
 import { useRouter } from "next/router";
@@ -17,32 +17,18 @@ const Header = () => {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    const getUser = async () => {
-      try {
-        const session = await fetch("/api/users/validateSesion");
-        const status = await session.status;
-        if (status === 200) {
-          setUserS(true);
-          return;
-        } else {
+    return firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        setUserS(true);
+      } else {
+        return new Promise((resolve, reject) => {
           setUserS(undefined);
-          return;
-        }
-      } catch (err) {
-        console.log(err);
+        }).catch((err) => console.log(err));
       }
-    };
-
-    getUser();
+    });
   }, []);
 
   const sout = async () => {
-    try {
-      const out = await fetch("api/users/logout");
-      const ou = await out.json();
-    } catch (err) {
-      console.log(err);
-    }
     try {
       await firebase
         .auth()
@@ -51,7 +37,7 @@ const Header = () => {
           setUserS(null);
         })
         .then(() => {
-          window.location.href = "/login";
+          return (window.location.href = "/login");
         })
         .catch((err) => console.log(err));
     } catch (err) {
