@@ -57,7 +57,10 @@ const First = () => {
     <div>
       {user && (
         <NameDiv>
-          <Pi>Dear {userInfo.name} Your selection of cooking events below</Pi>
+          <Pi>
+            Dear {userInfo && userInfo.name} Your selection of cooking events
+            below
+          </Pi>
         </NameDiv>
       )}
       <Layer>

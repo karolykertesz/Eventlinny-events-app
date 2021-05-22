@@ -8,7 +8,7 @@ import { useAuth } from "../components/Layout/UserContext";
 const DropDown = ({ cls }) => {
   const [user, setUser] = useState();
   const userObj = useAuth().user;
-  const uid = userObj.uid;
+  const uid = userObj ? userObj.uid : "2";
   useEffect(() => {
     setUser(userObj);
   }, [userObj]);
@@ -17,9 +17,11 @@ const DropDown = ({ cls }) => {
     <CoverDiv>
       <div className={cls ? classes.top : classes.hide}>
         <ul>
-          <li className={classes.name}>{userObj.name}</li>
+          <li className={classes.name}>{userObj && userObj.name}</li>
           <li>
-            <Link href={`/userpage/${userObj.uid}`}>your profile</Link>
+            <Link href={`/userpage/${userObj && userObj.uid}`}>
+              your profile
+            </Link>
           </li>
           <li>
             <Link href="/login">Notification</Link>

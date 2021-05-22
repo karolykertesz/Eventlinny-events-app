@@ -8,6 +8,7 @@ async function loger(req, res, uid) {
       message: "Wrong request",
     });
   }
+
   let userId = uid;
   console.log(userId, "in token");
 

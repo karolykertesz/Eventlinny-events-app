@@ -6,28 +6,23 @@ const firstPage = (fn) => async (req, res) => {
   const userSentId = req.body.uid ? req.body.uid : null;
   const auth = req.cookies.auth;
   let uidIn;
-
-  if (!userSentId) {
-    try {
-      const r = await jwt.verify(
-        auth,
-        process.env.SECRET,
-        async function (err, decoded) {
-          if (!err && decoded) {
-            console.log(decoded, "data");
-            uidIn = await decoded.data;
-          }
+  try {
+    const r = await jwt.verify(
+      auth,
+      process.env.SECRET,
+      async function (err, decoded) {
+        if (!err && decoded) {
+          uidIn = await decoded.data;
         }
-      );
-    } catch (err) {
-      console.log(err);
-      // return;
-    }
-  } else {
-    uidIn = userSentId;
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    // return;
   }
-
-  const docRef = await firebase.firestore().collection("cookies").doc(uidIn);
+  const value = userSentId !== null ? userSentId : uidIn;
+  console.log(value);
+  const docRef = await firebase.firestore().collection("cookies").doc(value);
 
   let userPref;
   try {
@@ -37,7 +32,7 @@ const firstPage = (fn) => async (req, res) => {
         if (snapshot) {
           const eventss = await snapshot.data().pref_events;
           userPref = eventss;
-          return fn(req, res, userPref, uidIn);
+          return fn(req, res, userPref, value);
         } else {
           return;
         }

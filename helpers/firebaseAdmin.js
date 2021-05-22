@@ -22,12 +22,20 @@ export default function getToken(token) {
     .verifyIdToken(token)
     .catch((err) => console.log(err));
 }
-export const AuthM = () => {
+export const AuthM = async (uid) => {
+  const user = {};
   if (!admin.apps.length) {
     admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
       databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DB_URL,
     });
   }
-  return admin.auth().getUser();
+  await admin
+    .auth()
+    .getUser(uid)
+    .then(async (useRec) => {
+      const authObj = await useReck;
+      user = { ...useRec };
+    });
+  return user;
 };

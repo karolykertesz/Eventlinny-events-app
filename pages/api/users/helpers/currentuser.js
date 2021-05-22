@@ -1,34 +1,28 @@
-// const jwt = require("jsonwebtoken");
-// import cookie from "cookie";
+const admin = require("firebase-admin");
+import { AuthM } from "../../../../helpers/firebaseAdmin";
 
-// export default async function getUser(req, res) {
-//   const userIn = req.body.user;
-//   if (!userIn) {
-//     res.status(403).json({ message: "invalid User credentials" });
-//     return;
-//   }
-//   const user = await jwt.sign(
-//     {
-//       data: {
-//         userIn,
-//       },
-//     },
-//     process.env.USER_SECRET,
-//     {
-//       expiresIn: "1h",
-//     }
-//   );
-//   await res.setHeader(
-//     "Set-Cookie",
-//     cookie.serialize("user", user, {
-//       httpOnly: true,
-//       secure: process.env.NODE_ENV !== "development",
-//       sameSite: "strict",
-//       path: "/",
-//       maxAge: 3600,
-//     })
-//   );
+export default async function cuurrentuser(req, res) {
+  //   fireAdmin();
+  const uid = req.body.uid;
+  const user = await AuthM(uid).then((ii) => {
+    console.log(ii);
+  });
 
-//   res.status(200).json({ message: "good" });
-//   return;
-// }
+  //   let userObj = {};
+  //   try {
+  //     await admin
+  //       .auth()
+  //       .getUser(uid)
+  //       .then(async (userRec) => {
+  //         const us = await userRec;
+  //         userObj = { ...us };
+  //       })
+  //       .catch((err) => {
+  //         throw new Error(err);
+  //       });
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  res.status(200).json({ m: user });
+  return;
+}
