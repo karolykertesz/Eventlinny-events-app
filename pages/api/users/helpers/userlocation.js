@@ -14,9 +14,9 @@ export default async function helper(req, res) {
     const doc = await docref.get();
     if (doc.exists) {
       const data = await doc.data();
+      console.log(data);
       userLoc = {
-        city: data.city,
-        country: data.country,
+        location: data.location,
       };
     } else {
       res.status(400).json({ m: "no doc" });

@@ -9,6 +9,7 @@ import { IconContext } from "react-icons";
 import { BsFillPersonFill, BsViewStacked } from "react-icons/bs";
 import DropDown from "../../components/dropdown";
 import MobileLogout from "../UI/mobillogout";
+import { useAuth } from "../Layout/UserContext";
 
 FirebaseClient();
 const Header = () => {
@@ -17,16 +18,25 @@ const Header = () => {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    return firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        setUserS(true);
-      } else {
-        return new Promise((resolve, reject) => {
-          setUserS(undefined);
-        }).catch((err) => console.log(err));
+    firebase.auth().onAuthStateChanged((user) => {
+      if (!user) {
+        setUserS(undefined);
       }
+      setUserS(user);
     });
+    return;
   }, []);
+  useEffect(() => {
+    validate();
+  }, []);
+
+  const validate = async () => {
+    const mess = await fetch("/api/users/validateSesion");
+    const status = await mess.status;
+    if (status === 400) {
+      setUserS(null);
+    }
+  };
 
   const sout = async () => {
     try {

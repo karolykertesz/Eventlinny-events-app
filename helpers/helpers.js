@@ -20,6 +20,7 @@ export const send = async (location, userInt) => {
     },
   });
   const status = await mess.status;
+  console.log(status, "the status");
   if (status === 200) {
     return (window.location.href = "/events/first");
   }

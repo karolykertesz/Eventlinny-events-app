@@ -1,6 +1,5 @@
 import firebase from "firebase";
 import FirebaseClient from "../../../helpers/firebase";
-import { cuser } from "../users/helpers/currentuser";
 const jwt = require("jsonwebtoken");
 
 FirebaseClient();
@@ -30,7 +29,7 @@ const createPref = async (req, res) => {
     `https://api.opencagedata.com/geocode/v1/json?q=${locArray[0]}+${locArray[1]}&key=bb67b50c778f473485683ec677055afe`
   );
   const message = await data.json();
-  const { country, town } = message.results[0].components;
+  const locationString = await message.results[0].formatted;
 
   const newProm = async () => {
     const dockRef = await firebase.firestore().collection("cookies").doc(uid);
@@ -39,20 +38,21 @@ const createPref = async (req, res) => {
         .get()
         .then((docSnapshot) => {
           if (docSnapshot.exists) {
-            console.log("g");
+            res.status(200).json({ m: "Ok" });
+            console.log("run");
           } else {
             dockRef.set({
-              city: town,
-              country: country,
+              location: locationString,
               pref_events: intArray,
             });
+            res.status(200).json({ m: "Ok" });
           }
         })
         .catch((err) => console.log(err));
     });
   };
   const pr = await newProm();
-  res.status(200).json({ m: "Ok" });
+  return;
 };
 
 export default createPref;

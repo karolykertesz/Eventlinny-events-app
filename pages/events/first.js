@@ -77,9 +77,7 @@ const First = () => {
       </Layer>
       {userLocation && (
         <div className={classes.location}>
-          <h5>
-            Events close to {userLocation.country}/{userLocation.city}
-          </h5>
+          <h5>Events close to {userLocation.location}</h5>
         </div>
       )}
     </div>

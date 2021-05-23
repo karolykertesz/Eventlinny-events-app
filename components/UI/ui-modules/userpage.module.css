@@ -15,3 +15,53 @@
   justify-content: center;
   align-items: center;
 }
+.item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.userInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.userInfo li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.userInfo li p {
+  margin: 20px;
+  font-size: 20px;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  text-transform: capitalize;
+}
+.userInfo li a {
+  text-decoration: none;
+  color: burlywood;
+}
+.icon {
+  height: 20px;
+  width: 20px;
+  color: burlywood;
+  margin-left: 10px;
+  margin-top: 20px;
+  margin-bottom: -5px;
+}
+.list {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: row;
+}
+.listitem {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: row;
+  font-family: Arial;
+  text-transform: uppercase;
+}

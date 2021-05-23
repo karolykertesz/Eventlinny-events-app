@@ -1,4 +1,3 @@
-import "bootstrap/dist/css/bootstrap.css";
 import "../styles/globals.css";
 import { AuthProvider } from "../components/Layout/UserContext";
 import Layout from "../components/Layout/Layout";

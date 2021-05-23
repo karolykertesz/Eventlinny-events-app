@@ -17,8 +17,8 @@ async function loger(req, res, uid) {
   });
 
   const urlvalue = await validateUrl(userId);
-  const url = !urlvalue ? "/events/first" : "/startup";
-
+  const url = !urlvalue ? "/startup" : "/events/first";
+  console.log(url, "the url");
   await res.setHeader(
     "Set-Cookie",
     cookie.serialize("auth", token, {

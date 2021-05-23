@@ -21,7 +21,7 @@ const firstPage = (fn) => async (req, res) => {
     // return;
   }
   const value = userSentId !== null ? userSentId : uidIn;
-  console.log(value);
+
   const docRef = await firebase.firestore().collection("cookies").doc(value);
 
   let userPref;

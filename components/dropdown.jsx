@@ -10,7 +10,8 @@ const DropDown = ({ cls }) => {
   const userObj = useAuth().user;
   const uid = userObj ? userObj.uid : "2";
   useEffect(() => {
-    setUser(userObj);
+    const unsubscribe = setUser(userObj);
+    return unsubscribe;
   }, [userObj]);
 
   return (

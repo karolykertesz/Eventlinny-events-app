@@ -12,9 +12,6 @@ import gettoken from "../helpers/gettoken";
 
 const StartUp = ({ allStart }) => {
   useEffect(() => {
-    gettoken();
-  }, []);
-  useEffect(() => {
     getLock();
   });
   const [userInt, setUserInt] = useState([]);

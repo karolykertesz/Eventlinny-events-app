@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 export default async function sender(tok, uid) {
+  console.log(uid, "in sender");
   try {
     const mess = await fetch("/api/users/session", {
       method: "POST",
