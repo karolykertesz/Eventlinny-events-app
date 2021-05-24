@@ -67,7 +67,7 @@ const Login = () => {
           .then(() => {
             setTok("");
           })
-          .catch((err) => console.log(err));
+          .catch((err) => setError(err.message));
       }
     },
     [tok]

@@ -1,18 +1,20 @@
-import cookie from "cookie";
-const destroy = async (req, res) => {
-  await res.setHeader(
-    "Set-Cookie",
-    cookie.serialize("user", "", {
-      httpOnly: true,
-      secure: process.env.NODE_ENV !== "development",
-      sameSite: "strict",
-      path: "/",
-      expires: new Date(0),
-    })
-  );
-
-  res.status(200).json({ m: "did" });
-  return;
-};
-
-export default destroy;
+// const axios = require("axios").default;
+// const getlocationData = (req, res) => {
+//   axios
+//     .get("https://api.countrystatecity.in/v1/countries/IN/cities", {
+//       headers: {
+//         "X-CSCAPI-KEY":
+//           "cUhDN01BSXF1eGVQbklLVHl1SmRGUk9BUXp4SklmamQydmxINWVZMg==",
+//       },
+//     })
+//     .then(function (response) {
+//       console.log(response.data);
+//     })
+//     .then((re) => {
+//       console.log(re);
+//     })
+//     .catch(function (error) {
+//       console.error(error);
+//     });
+// };
+// getlocationData();

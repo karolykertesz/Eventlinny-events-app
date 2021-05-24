@@ -17,6 +17,7 @@ export default async function helper(req, res) {
       console.log(data);
       userLoc = {
         location: data.location,
+        countryCode: data.country_code,
       };
     } else {
       res.status(400).json({ m: "no doc" });

@@ -1,6 +1,8 @@
 import firebase from "firebase";
+
 import FirebaseClient from "../helpers/firebase";
 FirebaseClient();
+import { getArray } from "./newhelpers";
 
 export const send = async (location, userInt) => {
   if (!location || !userInt) {
@@ -24,4 +26,23 @@ export const send = async (location, userInt) => {
   if (status === 200) {
     return (window.location.href = "/events/first");
   }
+};
+
+export const getUserdata = async (uid) => {
+  const t = async (uid) => {
+    const arr = await getArray(uid);
+    if (arr) {
+      const docref = firebase.firestore().collection("startup");
+      const promises = arr.map((item) => docref.doc(item).get());
+      return Promise.all(promises).then((docks) => {
+        let dockArray = [];
+        docks.forEach((i) => {
+          dockArray.push({ id: i.id, ...i.data() });
+        });
+        return dockArray;
+      });
+    }
+  };
+  const arrayBack = await t(uid);
+  return arrayBack;
 };

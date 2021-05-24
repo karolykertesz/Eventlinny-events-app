@@ -34,7 +34,7 @@ const firstPage = (fn) => async (req, res) => {
           userPref = eventss;
           return fn(req, res, userPref, value);
         } else {
-          return;
+          res.status(300).json({ m: "no data" });
         }
       })
       .catch((err) => console.log(err));
@@ -49,7 +49,7 @@ export default firstPage(async function getData(req, res, userPref, uid) {
     return Promise.all(promises).then((docks) => {
       const docArr = [];
       docks.forEach((doc) => {
-        docArr.push(doc.data());
+        docArr.push({ id: doc.id, ...doc.data() });
       });
       return docArr;
     });

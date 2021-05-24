@@ -28,15 +28,18 @@ const Header = () => {
   }, []);
   useEffect(() => {
     validate();
-  }, []);
+  }, [setUserS]);
 
-  const validate = async () => {
+  const validate = useCallback(async () => {
     const mess = await fetch("/api/users/validateSesion");
     const status = await mess.status;
+    console.log(status);
     if (status === 400) {
       setUserS(null);
+    } else {
+      setUserS(true);
     }
-  };
+  }, [setUserS]);
 
   const sout = async () => {
     try {

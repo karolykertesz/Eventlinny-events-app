@@ -30,7 +30,7 @@ const createPref = async (req, res) => {
   );
   const message = await data.json();
   const locationString = await message.results[0].formatted;
-
+  const countryCode = await message.results[0].components.country_code;
   const newProm = async () => {
     const dockRef = await firebase.firestore().collection("cookies").doc(uid);
     return new Promise((resolve, reject) => {
@@ -43,6 +43,7 @@ const createPref = async (req, res) => {
           } else {
             dockRef.set({
               location: locationString,
+              country_code: countryCode,
               pref_events: intArray,
             });
             res.status(200).json({ m: "Ok" });

@@ -10,14 +10,13 @@ async function loger(req, res, uid) {
   }
 
   let userId = uid;
-  console.log(userId, "in token");
 
   const token = await jwt.sign({ data: userId }, process.env.SECRET, {
     expiresIn: "1h",
   });
 
   const urlvalue = await validateUrl(userId);
-  const url = !urlvalue ? "/startup" : "/events/first";
+  const url = urlvalue ? "/events/first" : "/startup";
   console.log(url, "the url");
   await res.setHeader(
     "Set-Cookie",

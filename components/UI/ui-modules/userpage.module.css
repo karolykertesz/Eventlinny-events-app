@@ -23,14 +23,17 @@
 .userInfo {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
 }
 .userInfo li {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+}
+.userInfo li p {
+  align-self: center;
 }
 .userInfo li p {
   margin: 20px;
@@ -39,23 +42,29 @@
   font-family: Arial, Helvetica, sans-serif;
   text-transform: capitalize;
 }
+
+.userInfo li span {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  margin-right: 10px;
+}
 .userInfo li a {
   text-decoration: none;
   color: burlywood;
 }
 .icon {
-  height: 20px;
+  height: 24px;
   width: 20px;
-  color: burlywood;
+  color: rgb(236, 89, 20);
   margin-left: 10px;
   margin-top: 20px;
   margin-bottom: -5px;
+  opacity: 1 !important;
+  font-weight: 700;
 }
 .list {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 .listitem {
   display: flex;
@@ -63,5 +72,14 @@
   align-items: flex-end;
   flex-direction: row;
   font-family: Arial;
-  text-transform: uppercase;
+  text-transform: capitalize;
+  color: rgb(6, 43, 18);
+  /* background-color: rgb(214, 197, 174); */
+  opacity: 0.6;
+}
+.singleP {
+  text-align: center;
+  text-transform: capitalize;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 500;
 }

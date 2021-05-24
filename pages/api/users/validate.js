@@ -1,5 +1,6 @@
 import firebase from "firebase";
 const validateUrl = async (uid) => {
+  let url;
   try {
     await firebase
       .firestore()
@@ -8,13 +9,14 @@ const validateUrl = async (uid) => {
       .get()
       .then((doc) => {
         if (doc.exists) {
-          return true;
+          url = true;
         } else {
-          return false;
+          url = false;
         }
       });
   } catch (err) {
     console.log(err);
   }
+  return url;
 };
 export default validateUrl;

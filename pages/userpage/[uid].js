@@ -6,7 +6,7 @@ import { CoverDiv } from "../startup";
 import Userpage from "../../handlers/userpage";
 import { useRouter } from "next/router";
 import Loader from "../../components/UI/loader";
-
+import { getUserdata } from "../../helpers/helpers";
 const UserProfile = ({ userLocation, userinfo }) => {
   const router = useRouter();
   const [user, setuser] = useState();
@@ -25,6 +25,7 @@ const UserProfile = ({ userLocation, userinfo }) => {
     const unsubscribe = setuser(userContext);
     return unsubscribe;
   }, [userContext]);
+
   return (
     <CoverDiv>
       <Userpage
@@ -74,7 +75,7 @@ export async function getServerSideProps(context) {
     return {
       notFound: true,
       redirect: {
-        destination: "/login",
+        destination: "http://localhost:30003/login",
         permanent: false,
       },
     };
