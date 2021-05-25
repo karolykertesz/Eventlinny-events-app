@@ -1,33 +1,90 @@
-import react, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
+import firebase from "firebase";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { startup, startCities } from "../../../helpers/axios/getlocaion";
+import LocationCity from "../../../components/locationCity";
+import LocationState from "../../../components/locationState";
+import classes from "../../../components/UI/ui-modules/location.module.css";
+import styled from "styled-components";
+import { ButtonComp } from "../../startup";
+
+import { startup } from "../../../helpers/axios/getlocaion";
+import { route } from "next/dist/next-server/server/router";
 const LocationChange = () => {
   const [country, setCountry] = useState();
   const [city, setCity] = useState();
   const [countrycode, setCountrycode] = useState();
+  const [selectedCity, setSelectedCity] = useState();
+  const [selectedState, setselectedstate] = useState();
+  const [goback, setgoback] = useState(false);
+  const [error, seterror] = useState(null);
+
   const router = useRouter();
   const query = router.query;
-  console.log(query);
-  //   const startountry = startup();
+  const selectedCountry =
+    country && country.filter((item) => item.iso2 === countrycode);
 
-  useEffect(() => {
-    return startup(city, setCountry);
-  }, []);
-  useEffect(() => {
-    return startCities(city, query.def, setCity);
-  }, []);
-
-  const onCountrychange = (e) => {
-    setCountrycode(e.target.value);
+  const updatedvalues =
+    selectedState && selectedCity && selectedCountry
+      ? selectedCountry[0].name + " ," + selectedCity + " ," + selectedState
+      : "";
+  const unsubscribe = async () => {
+    const validate = await fetch("/api/users/validateSesion");
+    if (validate.status > 350) {
+      return router.push("/login");
+    }
   };
-  const callCity = useCallback(() => {}, [setCountrycode]);
+  const cancelAll = () => {
+    setselectedstate(undefined);
+    setgoback(true);
+  };
+
+  const updatelocation = () => {
+    if (
+      (selectedCountry && selectedCity && selectedState, query.uid, countrycode)
+    ) {
+      const docRef = firebase.firestore().collection("cookies").doc(query.uid);
+      return docRef
+        .update({
+          location: updatedvalues,
+          country_code: countrycode,
+        })
+        .then(() => {
+          router.push("/events/first");
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+  const uppdateOrnot = () => {
+    setselectedstate(undefined);
+    setSelectedCity(undefined);
+    setgoback(false);
+  };
+  useEffect(() => {
+    return unsubscribe;
+  }, []);
+  useEffect(() => {
+    return new Promise((resolve, reject) => {
+      resolve(startup(city, setCountry));
+    })
+      .then(() => {
+        if (!countrycode) {
+          return setCountrycode(query.def);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   const defaultCountry =
     country && country.filter((item) => item.iso2 === query.def);
 
   return (
-    <div>
-      <select onChange={() => onCountrychange()}>
+    <div className={classes.cover}>
+      <Pi>Select Your country</Pi>
+      <select
+        onChange={(e) => setCountrycode(e.target.value)}
+        className={classes.mainselection}
+      >
         <option value={country && defaultCountry[0].iso2}>
           {country && defaultCountry[0].name}
         </option>
@@ -38,16 +95,73 @@ const LocationChange = () => {
             </option>
           ))}
       </select>
-      <select>
-        {city &&
-          city.map((item) => (
-            <option key={item.id} value={item.name}>
-              {item.name}
-            </option>
-          ))}
-      </select>
+      <LocationCity
+        countrycode={countrycode}
+        setSelectedCity={setSelectedCity}
+      />
+      {selectedCity && (
+        <LocationState
+          countrycode={countrycode}
+          setselectedstate={setselectedstate}
+        />
+      )}
+      {selectedState && (
+        <Buttondiv>
+          <ButtonCover>
+            <button className={classes.btn} onClick={() => updatelocation()}>
+              update
+            </button>
+          </ButtonCover>
+          <ButtonCover>
+            <button
+              className={classes.btn + " " + classes.cancel}
+              onClick={() => cancelAll()}
+            >
+              cancel
+            </button>
+          </ButtonCover>
+        </Buttondiv>
+      )}
+      {goback && (
+        <Buttondiv>
+          <ButtonCover>
+            <button className={classes.btn} onClick={() => uppdateOrnot()}>
+              Continue
+            </button>
+          </ButtonCover>
+          <ButtonCover>
+            <button
+              className={classes.btn + " " + classes.cancel}
+              onClick={() => router.push("/events/first")}
+            >
+              Cancel All
+            </button>
+          </ButtonCover>
+        </Buttondiv>
+      )}
     </div>
   );
 };
 
 export default LocationChange;
+
+export const Pi = styled.p`
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: burlywood;
+`;
+
+export const Buttondiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 350px;
+`;
+
+export const ButtonCover = styled.span`
+  width: 100%;
+`;

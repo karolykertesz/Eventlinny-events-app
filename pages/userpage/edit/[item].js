@@ -1,16 +1,12 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useRedirect } from "../../../helpers/validatehelp";
-import { getlocationData } from "../../../helpers/getHelpersLocation";
 import axios from "axios";
 
 const Item = () => {
   const router = useRouter();
   const redirect = useRedirect();
-  // const getdone = async () => {
-  //   const mess = await fetch("/api/users/destroyUser");
-  //   console.log(mess);
-  // };
+
   useEffect(() => {
     return redirect;
   }, []);

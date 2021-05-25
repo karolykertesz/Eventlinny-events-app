@@ -99,7 +99,7 @@ export const CoverDiv = styled.div`
     padding: 100px;
   }
 `;
-const ButtonComp = styled.div`
+export const ButtonComp = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;

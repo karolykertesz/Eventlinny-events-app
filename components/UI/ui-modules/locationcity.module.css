@@ -1,0 +1,40 @@
+.cover {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center;
+  max-width: 800;
+  flex-direction: column;
+}
+
+.mainselection select {
+  border: 0;
+  background: transparent;
+  font-size: 40px;
+  font-weight: 900;
+  padding: 16px 18px;
+  width: 378px;
+  *width: 350px;
+  *background: #e7ac15;
+  -webkit-appearance: none;
+}
+.mainselection select option {
+  font-size: 40px !important;
+  font-weight: 900;
+  padding: 16px 18px !important;
+}
+.mainselection {
+  margin-top: 30px;
+  overflow: hidden;
+  width: 350px;
+  min-width: 300px;
+  padding: 8px;
+  font-size: 20px;
+  color: #eee;
+  border: 0;
+
+  -moz-border-radius: 9px 9px 9px 9px;
+  -webkit-border-radius: 9px 9px 9px 9px;
+  border-radius: 9px 9px 9px 9px;
+  box-shadow: 1px 1px 11px #b6a295;
+  background: burlywood no-repeat scroll 319px center;
+}

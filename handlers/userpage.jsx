@@ -56,7 +56,9 @@ const Userpage = ({ user, userInfo, location }) => {
                 <p>Your Location: </p>
                 <span>{userLocation}</span>
                 <span>
-                  <Link href={`/userpage/edit/location?def=${countryCode}`}>
+                  <Link
+                    href={`/userpage/edit/location?def=${countryCode}&uid=${user.uid}`}
+                  >
                     Change ...
                   </Link>
                 </span>
