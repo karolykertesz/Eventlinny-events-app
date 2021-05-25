@@ -1,0 +1,46 @@
+.cover {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.btn {
+  text-decoration: none;
+  cursor: pointer;
+  font: inherit;
+  background-color: burlywood;
+  border: 1px solid papayawhip;
+  border-radius: 6px;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  text-align: center;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+  width: 250px;
+}
+
+.btn:hover,
+.btn:active {
+  background-color: #a3af02;
+  border-color: #a3af02;
+}
+.calendar {
+  background-color: burlywood;
+  color: white;
+}
+.border {
+  width: 244px;
+  border-radius: 3px;
+  height: 40px;
+  font-size: 15px;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+}
+.border:focus {
+  outline: none;
+}

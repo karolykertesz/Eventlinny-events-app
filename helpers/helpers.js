@@ -46,3 +46,22 @@ export const getUserdata = async (uid) => {
   const arrayBack = await t(uid);
   return arrayBack;
 };
+
+export const getAdditionals = async (uid) => {
+  let data = {};
+  try {
+    const docref = await firebase
+      .firestore()
+      .collection("user_aditional")
+      .doc(uid);
+    await docref.get().then(async (doc) => {
+      if (doc.exists) {
+        const dataRef = await doc;
+        data = { ...dataRef.data() };
+      }
+    });
+  } catch (err) {
+    console.log(err);
+  }
+  return data;
+};

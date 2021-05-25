@@ -4,15 +4,19 @@ import Link from "next/link";
 import classes from "../components/UI/ui-modules/userpage.module.css";
 import { VscChromeClose } from "react-icons/vsc";
 import { IconContext } from "react-icons";
-import { getUserdata } from "../helpers/helpers";
+import { getAdditionals } from "../helpers/helpers";
 const Userpage = ({ user, userInfo, location }) => {
   const [userPrefs, setUserPrefs] = useState();
-  const userAdditional = "";
+  const [userAdditional, setAdditional] = useState("");
   const filtereduser = user && user;
   const userInfoNames = userInfo && userInfo.map((item) => item.name);
   const userLocation = location && location.location;
   const countryCode = location && location.countryCode.toUpperCase();
-
+  const userAds = getAdditionals(filtereduser && filtereduser.uid)
+    .then((data) => {
+      setAdditional(data);
+    })
+    .then(() => console.log("done"));
   const deleteElement = async (element) => {
     const docref = firebase
       .firestore()
@@ -42,14 +46,14 @@ const Userpage = ({ user, userInfo, location }) => {
                 <p>Name:</p>
                 <span> {filtereduser && filtereduser.name}</span>
                 <p>
-                  <Link href="/userpage/edit/name?col=auth">Change ...</Link>
+                  <Link href="/userpage/edit/name">Change ...</Link>
                 </p>
               </li>
               <li>
                 <p>email:</p>
                 <span>{filtereduser.email}</span>
                 <p>
-                  <Link href="/userpage/edit/email?col=auth">Change ...</Link>
+                  <Link href="/userpage/edit/email">Change ...</Link>
                 </p>
               </li>
               <li>
@@ -80,7 +84,7 @@ const Userpage = ({ user, userInfo, location }) => {
                 <p>Bio:</p>
                 <span>{userAdditional.bio ? userAdditional.bio : ""}</span>
                 <p>
-                  <Link href="/userpage/edit/bio?col=users">
+                  <Link href="/userpage/edit/bio">
                     {userAdditional.bio ? "change.." : "Add your bio.."}
                   </Link>
                 </p>

@@ -19,7 +19,7 @@ const UserProfile = ({ userLocation, userinfo }) => {
   const userContext = useAuth().user;
 
   useEffect(() => {
-    unsubscribe();
+    return () => unsubscribe();
   }, []);
   useEffect(() => {
     const unsubscribe = setuser(userContext);
