@@ -7,7 +7,7 @@ import Userpage from "../../handlers/userpage";
 import { useRouter } from "next/router";
 import Loader from "../../components/UI/loader";
 
-const UserProfile = ({ userLocation, userinfo }) => {
+const UserProfile = ({ userLocation, userinfo, userAdditional }) => {
   const router = useRouter();
   const [user, setuser] = useState();
   const unsubscribe = async () => {
@@ -32,6 +32,7 @@ const UserProfile = ({ userLocation, userinfo }) => {
         user={user && user}
         location={userLocation && userLocation}
         userInfo={userinfo && userinfo}
+        userAdditional={userAdditional && userAdditional}
       />
     </CoverDiv>
   );
@@ -70,6 +71,19 @@ export async function getServerSideProps(context) {
       },
     }
   );
+  const aditionals = await fetch(
+    "http://localhost:3000/api/users/helpers/getaditionals",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        uid: uid,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    }
+  );
 
   if (!loc || !userPref) {
     return {
@@ -82,11 +96,13 @@ export async function getServerSideProps(context) {
   }
   const location = await loc.json();
   const userInfo = await userPref.json();
+  const userAd = await aditionals.json();
 
   return {
     props: {
       userinfo: userInfo.m,
       userLocation: location.m,
+      userAdditional: userAd.m,
     },
   };
 }

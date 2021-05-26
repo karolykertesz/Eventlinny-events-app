@@ -4,17 +4,12 @@ import { useRedirect } from "../../../helpers/validatehelp";
 import SingleSelect from "../../../components/singleSelect";
 
 const Item = () => {
+  useRedirect();
   const router = useRouter();
-  const redirect = useRedirect();
-
-  useEffect(() => {
-    return redirect;
-  }, []);
-  const item = router.query.item;
-
+  const { uid, item } = router.query;
   return (
     <div>
-      <SingleSelect item={item} />
+      <SingleSelect item={item} uid={uid} />
     </div>
   );
 };

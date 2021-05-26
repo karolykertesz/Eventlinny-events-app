@@ -147,3 +147,12 @@ export const findById = async (id) => {
   }
   return ren;
 };
+
+export const language = [
+  "english",
+  "magyar",
+  "espanol",
+  "deutch",
+  "italiano",
+  "русский",
+];

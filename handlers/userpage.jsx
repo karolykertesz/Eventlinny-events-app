@@ -4,19 +4,26 @@ import Link from "next/link";
 import classes from "../components/UI/ui-modules/userpage.module.css";
 import { VscChromeClose } from "react-icons/vsc";
 import { IconContext } from "react-icons";
-import { getAdditionals } from "../helpers/helpers";
-const Userpage = ({ user, userInfo, location }) => {
+const Userpage = ({ user, userInfo, location, userAdditional }) => {
   const [userPrefs, setUserPrefs] = useState();
-  const [userAdditional, setAdditional] = useState("");
   const filtereduser = user && user;
   const userInfoNames = userInfo && userInfo.map((item) => item.name);
   const userLocation = location && location.location;
   const countryCode = location && location.countryCode.toUpperCase();
-  const userAds = getAdditionals(filtereduser && filtereduser.uid)
-    .then((data) => {
-      setAdditional(data);
-    })
-    .then(() => console.log("done"));
+
+  // useEffect(() => {
+  //   let mounted = true;
+  //   if (filtereduser && mounted) {
+  //     getAdditionals(filtereduser.uid)
+  //       .then((data) => {
+  //         setAdditional(data);
+  //       })
+  //       .catch((err) => console.log(err));
+  //   }
+  //   return function cleanup() {
+  //     mounted = false;
+  //   };
+  // }, []);
   const deleteElement = async (element) => {
     const docref = firebase
       .firestore()
@@ -69,11 +76,13 @@ const Userpage = ({ user, userInfo, location }) => {
               </li>
               <li>
                 <p>Birthday:</p>
-                <span>
-                  {userAdditional.birthday ? userAdditional.birthday : ""}
-                </span>
+                {
+                  <span>
+                    {userAdditional.birthday ? userAdditional.birthday : ""}
+                  </span>
+                }
                 <p>
-                  <Link href="/userpage/edit/birthday?col=users">
+                  <Link href={`/userpage/edit/birthday?uid=${user.uid}`} ui>
                     {userAdditional.birthday
                       ? "change.."
                       : "Add birthday date.."}
@@ -95,7 +104,7 @@ const Userpage = ({ user, userInfo, location }) => {
                   {userAdditional.language ? userAdditional.language : ""}
                 </span>
                 <p>
-                  <Link href="/userpage/edit/bio?col=users">
+                  <Link href={`/userpage/edit/language?uid=${user.uid}`}>
                     {userAdditional.language
                       ? "change.."
                       : "Add your prefered language.."}

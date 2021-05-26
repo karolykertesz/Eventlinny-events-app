@@ -54,11 +54,8 @@ export const getAdditionals = async (uid) => {
       .firestore()
       .collection("user_aditional")
       .doc(uid);
-    await docref.get().then(async (doc) => {
-      if (doc.exists) {
-        const dataRef = await doc;
-        data = { ...dataRef.data() };
-      }
+    await docref.onSnapshot((doc) => {
+      data = { ...doc.data() };
     });
   } catch (err) {
     console.log(err);
