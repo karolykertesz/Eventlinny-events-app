@@ -2,8 +2,9 @@ import react, { useReducer, useState, useEffect } from "react";
 import firebase from "firebase";
 import Link from "next/link";
 import classes from "../components/UI/ui-modules/userpage.module.css";
-import { VscChromeClose } from "react-icons/vsc";
+import { VscChromeClose, VscDiffAdded } from "react-icons/vsc";
 import { IconContext } from "react-icons";
+
 const Userpage = ({ user, userInfo, location, userAdditional }) => {
   const [userPrefs, setUserPrefs] = useState();
   const filtereduser = user && user;
@@ -112,7 +113,23 @@ const Userpage = ({ user, userInfo, location, userAdditional }) => {
                 </p>
               </li>
             </ul>
-            <p className={classes.singleP}>Your preferencess:</p>
+
+            <div className={classes.iconHolder}>
+              <p className={classes.singleP}>YOUR PREFERENCES:</p>
+              <Link href={`/userpage/edit/addNewPref/${user.uid}`}>
+                <span
+                  className={classes.pref}
+                  onClick={() => console.log("hh")}
+                >
+                  <IconContext.Provider
+                    value={{ className: classes.icon + " " + classes.secicon }}
+                  >
+                    <VscDiffAdded />
+                  </IconContext.Provider>
+                  <p>Add PREFERENCES</p>
+                </span>
+              </Link>
+            </div>
             <ul className={classes.list}>
               {userInfo &&
                 userInfo.map((item) => (
