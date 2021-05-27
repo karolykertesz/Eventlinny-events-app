@@ -8,10 +8,11 @@ import { useAuth } from "../components/Layout/UserContext";
 const DropDown = ({ cls }) => {
   const [user, setUser] = useState();
   const userObj = useAuth().user;
-  const uid = userObj ? userObj.uid : "2";
+  const uid = userObj && userObj.uid;
+
   useEffect(() => {
-    const unsubscribe = setUser(userObj);
-    return unsubscribe;
+    const unsubscribe = () => setUser(userObj);
+    return unsubscribe();
   }, [userObj]);
 
   return (
@@ -20,15 +21,15 @@ const DropDown = ({ cls }) => {
         <ul>
           <li className={classes.name}>{userObj && userObj.name}</li>
           <li>
-            <Link href={`/userpage/${userObj && userObj.uid}`}>
-              your profile
-            </Link>
+            <Link href={`/userpage/${uid}`}>your profile</Link>
           </li>
           <li>
             <Link href="/login">Notification</Link>
           </li>
           <li>
-            <Link href="/create/[cret]">create an event</Link>
+            <Link href={`/userpage/edit/createEvent/${uid}`}>
+              create an event
+            </Link>
           </li>
           <li>
             <Link href="/logout">sign Out</Link>

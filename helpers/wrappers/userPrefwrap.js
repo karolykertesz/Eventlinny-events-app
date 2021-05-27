@@ -29,22 +29,18 @@ export const getdifference = async (arr) => {
       });
     })
     .catch((err) => console.log(err));
-  //   const intersect = await arr.filter((item) => !keys.includes(item));
-  console.log(intersect, "intersecto");
-  console.log(arr, " the array");
-  if (!intersect) {
-    console.log("null");
-    return null;
-  }
-  const t = await intersect.map((item) => {
-    allkeys
-      .doc(item)
-      .get()
-      .then((yt) => ({ ...yt.data() }));
-  });
-  console.log(t, "the t");
+  const intersect = await keys.filter((item) => !arr[0].includes(item));
 
-  console.log(arr, "the array");
-
-  return t;
+  const promisefunc = () => {
+    const promises = intersect.map((item) => allkeys.doc(item).get());
+    return Promise.all(promises).then((docs) => {
+      let newArray = [];
+      docs.forEach((doc) => {
+        newArray.push({ id: doc.id, ...doc.data() });
+      });
+      return newArray;
+    });
+  };
+  const databack = promisefunc();
+  return databack;
 };

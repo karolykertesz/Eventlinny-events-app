@@ -1,5 +1,5 @@
-import React from "react";
-import StartItem from "../../../components/startitem";
+import React, { useState } from "react";
+
 import { allUserPref } from "../../../helpers/wrappers/userPrefwrap";
 
 const AddNewPref = () => {

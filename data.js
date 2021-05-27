@@ -156,3 +156,12 @@ export const language = [
   "italiano",
   "русский",
 ];
+
+export const categories = [
+  "indian,french",
+  "german",
+  "american",
+  "italian",
+  "vegan",
+  "vegetarian",
+];

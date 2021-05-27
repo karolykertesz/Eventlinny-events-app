@@ -8,7 +8,6 @@ import { getAllAStartUp } from "../data";
 import styled from "styled-components";
 import Head from "next/head";
 import { send } from "../helpers/helpers";
-import gettoken from "../helpers/gettoken";
 
 const StartUp = ({ allStart }) => {
   useEffect(() => {

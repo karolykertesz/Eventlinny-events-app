@@ -20,22 +20,22 @@ const Header = () => {
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (!user) {
-        setUserS(undefined);
+        setUserS(null);
       }
       setUserS(user);
     });
     return;
   }, []);
   useEffect(() => {
-    validate();
-  }, [setUserS]);
+    return () => validate();
+  }, []);
 
   const validate = useCallback(async () => {
     const mess = await fetch("/api/users/validateSesion");
     const status = await mess.status;
-    console.log(status);
     if (status === 400) {
       setUserS(null);
+      router.push("/login");
     } else {
       setUserS(true);
     }

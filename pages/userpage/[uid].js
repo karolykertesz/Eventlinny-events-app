@@ -10,7 +10,7 @@ import Loader from "../../components/UI/loader";
 const UserProfile = ({ userLocation, userinfo, userAdditional }) => {
   const router = useRouter();
   const [user, setuser] = useState();
-  const unsubscribe = async () => {
+  const unuser = async () => {
     const validate = await fetch("/api/users/validateSesion");
     if (validate.status > 350) {
       return router.push("/login");
@@ -19,7 +19,13 @@ const UserProfile = ({ userLocation, userinfo, userAdditional }) => {
   const userContext = useAuth().user;
 
   useEffect(() => {
-    return () => unsubscribe();
+    let mode = true;
+    if (mode) {
+      unuser();
+    }
+    return function () {
+      mode = false;
+    };
   }, []);
   useEffect(() => {
     const unsubscribe = setuser(userContext);

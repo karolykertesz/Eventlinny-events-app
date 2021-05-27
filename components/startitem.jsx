@@ -1,10 +1,11 @@
-import { useState } from 'react';
-import Image from 'next/image';
-import styled from 'styled-components';
-import classes from './UI/ui-modules/startitem.module.css';
+import { useState } from "react";
+import Image from "next/image";
+import styled from "styled-components";
+import classes from "./UI/ui-modules/startitem.module.css";
 
 const StartItem = ({ items, addUserInt }) => {
   const [selected, setSelected] = useState(false);
+  const item = items && items;
   return (
     <div>
       <Divlayer>
@@ -13,15 +14,15 @@ const StartItem = ({ items, addUserInt }) => {
           onClick={() => setSelected(!selected)}
         >
           <Image
-            src={'/' + items.image}
-            alt={items.title}
+            src={"/" + item.image}
+            alt={item.title}
             width={300}
             height={200}
             quality={100}
           />
         </span>
         <span>
-          <Pi onClick={() => addUserInt(items.id)}>
+          <Pi onClick={() => addUserInt(item.id)}>
             <Paragraph>{items.description}</Paragraph>
             <SVG onClick={() => setSelected(!selected)}>
               {!selected ? (
@@ -86,13 +87,11 @@ const Paragraph = styled.p`
   font-size: 1rem;
   font-family: Arial, Helvetica, sans-serif;
 `;
-const SVG = styled.span`
+export const SVG = styled.span`
   width: 30px;
   height: 30px;
   color: #b35900;
   margin-left: 15px;
 `;
-
-
 
 export default StartItem;
