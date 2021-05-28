@@ -75,7 +75,7 @@ const Divlayer = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-const Pi = styled.div`
+export const Pi = styled.div`
   text-align: center;
   text-transform: capitalize;
   display: flex;

@@ -27,7 +27,7 @@ const LocationCity = ({ countrycode, setSelectedCity }) => {
   }, [countrycode]);
   return (
     <div className={classes.cover}>
-      <Pi>Select Your City</Pi>
+      {/* <Pi>Select Your City</Pi> */}
       <select
         onChange={(e) => setSelectedCity(e.target.value)}
         className={classes.mainselection}

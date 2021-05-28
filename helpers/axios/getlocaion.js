@@ -1,6 +1,4 @@
 import axios from "axios";
-import { createFactory } from "react";
-
 export const startup = (country, fn) => {
   if (!country) {
     return axios
@@ -23,8 +21,6 @@ export const startup = (country, fn) => {
 };
 
 export const startCities = (queryObj, fn) => {
-  console.log(queryObj);
-
   return axios
     .get(`https://api.countrystatecity.in/v1/countries/${queryObj}/cities`, {
       headers: {
@@ -61,4 +57,21 @@ export const ifCity = async (queryObj, fn) => {
     .catch(function (error) {
       console.error(error);
     });
+};
+
+export const getcountries = async () => {
+  let data;
+  const mess = await axios
+    .get(`https://api.countrystatecity.in/v1/countries/`, {
+      headers: {
+        "X-CSCAPI-KEY":
+          "cUhDN01BSXF1eGVQbklLVHl1SmRGUk9BUXp4SklmamQydmxINWVZMg==",
+      },
+    })
+    .then((response) => (data = response))
+    .catch(function (error) {
+      console.error(error);
+    });
+
+  return data;
 };

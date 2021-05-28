@@ -82,7 +82,7 @@ const Login = () => {
 };
 export default Login;
 
-const Layer = styled.div`
+export const Layer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -91,7 +91,7 @@ const Layer = styled.div`
   margin: 3rem auto;
 `;
 
-const ForMButton = styled.button`
+export const ForMButton = styled.button`
   cursor: pointer;
   background-color: papayawhip;
   border: 1px solid papayawhip;
@@ -104,7 +104,7 @@ const ForMButton = styled.button`
   margin: 0.2rem auto;
 `;
 
-const Pi = styled.p`
+export const Pi = styled.p`
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
   text-transform: capitalize;
@@ -113,7 +113,7 @@ const Pi = styled.p`
   color: rgb(196, 158, 125);
 `;
 
-const Error = styled.div`
+export const Error = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
