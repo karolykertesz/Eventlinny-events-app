@@ -44,3 +44,18 @@
 .border:focus {
   outline: none;
 }
+
+.topDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.topDiv p {
+  text-align: center;
+  font-family: Arial;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 14px;
+  color: rgb(184, 142, 65);
+}
