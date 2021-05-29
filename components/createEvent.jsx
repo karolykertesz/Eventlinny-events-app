@@ -1,9 +1,10 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import firebase from "firebase";
 import classes from "./UI/ui-modules/createevent.module.css";
 import EventsTop from "./UI/eventstop";
 import { categories } from "../data";
 import Eventadder from "./UI/eventadder";
+import { Pi } from "../components/UI/styledComponents";
 
 const CreateEvent = ({ uid }) => {
   const [category, setCat] = useState();
@@ -17,6 +18,7 @@ const CreateEvent = ({ uid }) => {
   };
   return (
     <Fragment>
+      <Pi>Create a category</Pi>
       <div className={classes.coverdiv}>
         <div className={classes.grid}>
           {categories.map((item) => (
@@ -31,7 +33,13 @@ const CreateEvent = ({ uid }) => {
       </div>
       {category && (
         <div className={classes.coverdiv}>
-          <Eventadder category={category} />
+          <Eventadder
+            category={category}
+            uid={uid}
+            setcicked={setcicked}
+            clicked={clicked}
+            setCat={setCat}
+          />
         </div>
       )}
     </Fragment>

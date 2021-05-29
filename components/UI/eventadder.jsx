@@ -5,6 +5,8 @@ import react, {
   useEffect,
   useReducer,
 } from "react";
+import { useRouter } from "next/router";
+import firebase from "firebase";
 import { Layer, ForMButton, Error, Pi } from "../../pages/signup";
 import classes from "./ui-modules/login.module.css";
 import { getcountries } from "../../helpers/axios/getlocaion";
@@ -18,13 +20,22 @@ const eventsReducer = (state, action) => {
         [action.fildName]: action.payload,
       };
     }
-    case "cancel": {
-      return (state = initialState);
-    }
+    case "cancel":
+      return {
+        state: {
+          selectedcategory: "",
+          eventLocation: "",
+          selectedCountry: "",
+          startDay: null,
+          endDay: null,
+          selectedCity: "",
+        },
+      };
   }
 };
 
-const Eventadder = ({ category, setlocation }) => {
+const Eventadder = ({ category, uid, setcicked, clicked, setCat }) => {
+  const router = useRouter();
   const cityAdder = (value, name) => {
     return new Promise((resolve, reject) => {
       resolve(
@@ -39,31 +50,87 @@ const Eventadder = ({ category, setlocation }) => {
     });
   };
   const [citydone, setCityDone] = useState(false);
+  const [complete, setComplete] = useState(false);
   const initialState = {
     selectedcategory: category === "create" ? "" : category,
-    eventLocation: "",
+    eventLocation: null,
     selectedCountry: "",
-    startDay: "",
-    endDay: "",
-    startHour: "",
-    endHour: "",
+    startDay: null,
+    endDay: null,
     selectedCity: "",
   };
 
   const [state, dispatch] = useReducer(eventsReducer, initialState);
   const {
     selectedCountry,
+    selectedCity,
     selectedcategory,
     eventLocation,
-    startHour,
     startDay,
-    endHour,
     endDay,
   } = state;
+  console.log(state);
   const [allcountrie, setAllcounries] = useState();
-  // const [selectedCountry, setselectedCountry] = useState();
-  // const [selectedcity, setSelectedCity] = useState();
+  const formSubmit = (e, value) => {
+    e.preventDefault();
+    if (value === false) {
+      return new Promise((resolve, reject) => {
+        resolve(dispatch({ type: "cancel" }));
+      })
+        .then(() => {
+          setcicked(false);
+        })
+        .then(() => {
+          setCat(null);
+        });
+    }
 
+    if (
+      state.eventLocation !== null &&
+      state.startDay !== null &&
+      state.endDay !== null
+    ) {
+      if (eventLocation === "online") {
+        return firebase
+          .firestore()
+          .collection("user_add_events")
+          .doc()
+          .set({
+            added_by: uid,
+            attendies: firebase.firestore.FieldValue.arrayUnion(uid),
+            category: category,
+            location: "online",
+            starts: new Date(startDay),
+            ends: new Date(endDay),
+            premium: false,
+          })
+          .then(() => {
+            router.push("/events/first");
+          })
+          .catch((err) => console.log(err));
+      } else if (eventLocation !== "online") {
+        const loctString = selectedCountry + "," + selectedCity;
+        return firebase
+          .firestore()
+          .collection("user_add_events")
+          .doc()
+          .set({
+            added_by: uid,
+            attendies: firebase.firestore.FieldValue.arrayUnion(uid),
+            category: category,
+            location: loctString,
+            starts: new Date(startDay),
+            ends: new Date(endDay),
+            premium: false,
+          })
+          .then(() => {
+            router.push("/events/first");
+          })
+          .catch(() => console.log(err));
+      }
+    }
+  };
+  console.log(state);
   useEffect(() => {
     let mode = true;
     if (mode && state.eventLocation === "self") {
@@ -75,19 +142,18 @@ const Eventadder = ({ category, setlocation }) => {
     }
     return () => (mode = false);
   }, [state.eventLocation]);
-  // useEffect(() => {
-  //   let mode = true;
-  //   if (mode === true && state.eventLocation === "online") {
-  //     setCityDone(true);
-  //     return () => (mode = false);
-  //   } else if (mode === true && state.eventLocation === "self") {
-  //     setCityDone(false);
-  //   }
-  // }, [state.eventLocation]);
+  useEffect(() => {
+    let mode = true;
+    if (state.eventLocation === "online" && mode) {
+      setCityDone(true);
+      return () => (mode = false);
+    }
+  }, [state.eventLocation]);
+
   return (
     <Layer>
       <div className={classes.form}>
-        <form>
+        <form onSubmit={formSubmit}>
           {category === "create" ? (
             <div className={classes.control}>
               <label htmlFor="firstname">create your category</label>
@@ -159,12 +225,11 @@ const Eventadder = ({ category, setlocation }) => {
                 )}
               </div>
             )}
-            {citydone ||
-              (state.eventLocation === "online" && (
-                <div>
-                  <EventDatePicker />
-                </div>
-              ))}
+            {citydone === true && (
+              <div>
+                <EventDatePicker addDate={dispatch} formSubmit={formSubmit} />
+              </div>
+            )}
           </div>
         </form>
       </div>
