@@ -119,7 +119,7 @@ export async function findDate(year, month) {
 export const getKeys = async () => {
   const keys = [];
   try {
-    const k = await db.collection("events").onSnapshot((snapshot) => {
+    const k = await db.collection("user_add_events").onSnapshot((snapshot) => {
       const ids = snapshot.docs.forEach((i) => {
         keys.push(i.id);
       });
@@ -134,12 +134,19 @@ export const findById = async (id) => {
   let ren = {};
   try {
     let t = await db
-      .collection("events")
+      .collection("user_add_events")
       .doc(id)
       .get()
-      .then((i) => {
+      .then((item) => {
         ren = {
-          ...i.data(),
+          id: item.id,
+          start: item.data().starts.toMillis(),
+          end: item.data().ends.toMillis(),
+          category: item.data().category,
+          added_by: item.data().added_by,
+          location: item.data().location,
+          attendies: item.data().attendies,
+          premium: item.data().premium,
         };
       });
   } catch (err) {

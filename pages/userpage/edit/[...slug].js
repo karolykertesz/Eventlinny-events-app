@@ -4,10 +4,22 @@ import { useRouter } from "next/router";
 import { allUserPref } from "../../../helpers/wrappers/userPrefwrap";
 import StartItem from "../../../components/startitem";
 import CreateEvent from "../../../components/createEvent";
+
 const Slug = () => {
   const [data, seTdata] = useState();
   const router = useRouter();
   const query = router.query.slug;
+  useEffect(() => {
+    return new Promise(async (resolve, reject) => {
+      const mess = await fetch("/api/users/validateSesion");
+      resolve(mess);
+    }).then((response) => {
+      if (response.status === 400) {
+        console.log(response.message);
+        router.push("/login");
+      }
+    });
+  }, []);
   useEffect(() => {
     let isTrue = true;
     if (query && isTrue) {

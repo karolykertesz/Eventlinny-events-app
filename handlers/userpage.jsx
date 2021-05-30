@@ -1,4 +1,4 @@
-import react, { useReducer, useState, useEffect } from "react";
+import react, { useState } from "react";
 import firebase from "firebase";
 import Link from "next/link";
 import classes from "../components/UI/ui-modules/userpage.module.css";
@@ -12,19 +12,6 @@ const Userpage = ({ user, userInfo, location, userAdditional }) => {
   const userLocation = location && location.location;
   const countryCode = location && location.countryCode.toUpperCase();
 
-  // useEffect(() => {
-  //   let mounted = true;
-  //   if (filtereduser && mounted) {
-  //     getAdditionals(filtereduser.uid)
-  //       .then((data) => {
-  //         setAdditional(data);
-  //       })
-  //       .catch((err) => console.log(err));
-  //   }
-  //   return function cleanup() {
-  //     mounted = false;
-  //   };
-  // }, []);
   const deleteElement = async (element) => {
     const docref = firebase
       .firestore()
@@ -143,6 +130,11 @@ const Userpage = ({ user, userInfo, location, userAdditional }) => {
                   </li>
                 ))}
             </ul>
+            <div className={classes.everet}>
+              <Link href={`/adders/user/ownevents/${user.uid}`}>
+                Your Added Events Click to wiew
+              </Link>
+            </div>
           </div>
         </div>
       )}

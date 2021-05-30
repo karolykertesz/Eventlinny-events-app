@@ -6,31 +6,32 @@ import ArrowIcon from "./UI/icons/arrow-right-icon";
 import Image from "next/image";
 
 const EventItem = (props) => {
-  const { title, image, date, location, id } = props;
-  const visibleDate = new Date(date).toLocaleDateString("en-US", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-  const addressV = location.replace(", ", "\n");
+  const { start, end, category, location, id } = props;
+  const addressV = location;
   const linkTo = `/events/${id}`;
   return (
     <li className={classes.item}>
       <Image
-        src={"/" + image}
-        alt={title}
+        src={`/images/${category}.jpg`}
+        alt={category}
         width={260}
         height={180}
         quality={100}
       />
       <div className={classes.content}>
         <div className={classes.summary}>
-          <h2>{title}</h2>
+          <h2>{category}</h2>
         </div>
 
         <div className={classes.date}>
           <DateIcon />
-          <time>{visibleDate}</time>
+          <time> starts {new Date(start).toLocaleDateString()}</time>
+          <time> at {new Date(start).toLocaleTimeString()}</time>
+        </div>
+        <div className={classes.date}>
+          <DateIcon />
+          <time>Ends {new Date(end).toLocaleDateString()}</time>
+          <time>at {new Date(end).toLocaleTimeString()}</time>
         </div>
         <div className={classes.address}>
           <AddresIcon />

@@ -10,6 +10,7 @@ import { BsFillPersonFill, BsViewStacked } from "react-icons/bs";
 import DropDown from "../../components/dropdown";
 import MobileLogout from "../UI/mobillogout";
 import { useAuth } from "../Layout/UserContext";
+import { Pi } from "../UI/styledComponents";
 
 FirebaseClient();
 const Header = () => {
@@ -78,8 +79,7 @@ const Header = () => {
         <div className={classes.navLinks}>
           <Link href="/startup">Event pick</Link>
           <Link href="/events">All Events</Link>
-          <Link href="/events">All Events</Link>
-
+          <Link href="/events/find">Find an Event</Link>
           <IconWrap onClick={() => setShow(!show)}>
             <IconContext.Provider
               value={{
@@ -95,6 +95,7 @@ const Header = () => {
               Sign Out
             </span>
           </span>
+
           <DropDown cls={show} uid={1} />
         </div>
       ) : (

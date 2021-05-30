@@ -5,13 +5,14 @@ import classes from "../event-detail/event-logistics.module.css";
 import Image from "next/image";
 
 function EventLogistics(props) {
-  const { date, address, image, imageAlt } = props;
+  const { date, address, image, imageAlt, start, addedby } = props;
 
   const humanReadableDate = new Date(date).toLocaleDateString("en-US", {
     day: "numeric",
     month: "long",
     year: "numeric",
   });
+  const humanStartTime = new Date(start).toLocaleTimeString();
   const addressText = address.replace(", ", "\n");
 
   return (
@@ -29,9 +30,12 @@ function EventLogistics(props) {
       <ul className={classes.list}>
         <LogisticsItem icon={DateIcon}>
           <time>{humanReadableDate}</time>
+          <time style={{ marginLeft: "10px" }}>{humanStartTime}</time>
         </LogisticsItem>
+
         <LogisticsItem icon={AddressIcon}>
           <address>{addressText}</address>
+          <address> Added By: {addedby}</address>
         </LogisticsItem>
       </ul>
     </section>

@@ -20,6 +20,7 @@ const StartItem = ({ items, addUserInt }) => {
             height={200}
             quality={100}
           />
+          {/* "/" */}
         </span>
         <span>
           <Pi onClick={() => addUserInt(item.id)}>

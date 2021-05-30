@@ -5,6 +5,9 @@
   align-items: center;
   flex-direction: column;
 }
+.none {
+  display: none;
+}
 .btn {
   text-decoration: none;
   cursor: pointer;

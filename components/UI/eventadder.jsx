@@ -29,6 +29,7 @@ const eventsReducer = (state, action) => {
           startDay: null,
           endDay: null,
           selectedCity: "",
+          decription: null,
         },
       };
   }
@@ -58,6 +59,7 @@ const Eventadder = ({ category, uid, setcicked, clicked, setCat }) => {
     startDay: null,
     endDay: null,
     selectedCity: "",
+    decription: null,
   };
 
   const [state, dispatch] = useReducer(eventsReducer, initialState);
@@ -68,8 +70,9 @@ const Eventadder = ({ category, uid, setcicked, clicked, setCat }) => {
     eventLocation,
     startDay,
     endDay,
+    decription,
   } = state;
-  console.log(state);
+
   const [allcountrie, setAllcounries] = useState();
   const formSubmit = (e, value) => {
     e.preventDefault();
@@ -88,7 +91,8 @@ const Eventadder = ({ category, uid, setcicked, clicked, setCat }) => {
     if (
       state.eventLocation !== null &&
       state.startDay !== null &&
-      state.endDay !== null
+      state.endDay !== null &&
+      state.description !== null
     ) {
       if (eventLocation === "online") {
         return firebase
