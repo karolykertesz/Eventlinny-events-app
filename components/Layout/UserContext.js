@@ -8,9 +8,9 @@ export const AuthProvider = ({ children }) => {
   FirebaseClient();
   const [user, setUser] = useState();
   useEffect(() => {
-    return firebase.auth().onAuthStateChanged(function (user) {
-      if (user) {
-        setUser({ uid: user.uid, name: user.displayName, email: user.email });
+    return firebase.auth().onAuthStateChanged(function (use) {
+      if (use) {
+        setUser({ uid: use.uid, name: use.displayName, email: use.email });
         return;
       } else {
         setUser(undefined);

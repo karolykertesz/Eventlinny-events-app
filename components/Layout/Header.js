@@ -30,7 +30,7 @@ const Header = () => {
   useEffect(() => {
     return () => validate();
   }, []);
-
+  const navigate = () => {};
   const validate = useCallback(async () => {
     const mess = await fetch("/api/users/validateSesion");
     const status = await mess.status;
@@ -96,7 +96,7 @@ const Header = () => {
             </span>
           </span>
 
-          <DropDown cls={show} uid={1} />
+          <DropDown cls={show} uid={1} setShow={setShow} />
         </div>
       ) : (
         <Fragment>

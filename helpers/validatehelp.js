@@ -6,15 +6,14 @@ export const useRedirect = () => {
     try {
       const mess = await fetch("/api/users/validateSesion");
       const status = await mess.status;
-    } catch (err) {
-      throw new Error(err);
-    }
-
-    useEffect(() => {
       if (mess.status === 400) {
         router.push("/login");
       }
-    });
-    validate();
+    } catch (err) {
+      throw new Error(err);
+    }
   };
+  useEffect(() => {
+    validate();
+  }, []);
 };

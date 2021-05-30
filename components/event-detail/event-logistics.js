@@ -35,7 +35,7 @@ function EventLogistics(props) {
 
         <LogisticsItem icon={AddressIcon}>
           <address>{addressText}</address>
-          <address> Added By: {addedby}</address>
+          <p> Added By: {addedby}</p>
         </LogisticsItem>
       </ul>
     </section>

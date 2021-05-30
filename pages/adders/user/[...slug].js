@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import firebase from "firebase";
 import EventItem from "../../../components/EventItem";
 import { List } from "../../../components/UI/styledComponents";
+import { useRedirect } from "../../../helpers/validatehelp";
 const Userinfo = ({ message }) => {
+  useRedirect();
   const router = useRouter();
   const query = router.query;
   return (
@@ -39,6 +41,14 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   const eventtype = context.params.slug;
   const uid = eventtype[1];
+  if (!uid) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
   if (eventtype[0] === "ownevents") {
     const dataref = firebase.firestore().collection("user_add_events");
     const t = async () => {
@@ -63,7 +73,15 @@ export async function getStaticProps(context) {
         });
     };
     const value = await t();
-    console.log(value);
+    if (!value) {
+      return {
+        notFound: true,
+        redirect: {
+          destination: "/login",
+        },
+      };
+    }
+
     return {
       props: { message: value },
     };

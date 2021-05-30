@@ -6,15 +6,17 @@ import EventContent from "../../components/event-detail/event-content";
 import { getKeys, findById } from "../../data";
 import { PiBig } from "../../components/UI/styledComponents";
 import { useAuth } from "../../components/Layout/UserContext";
+import Loader from "../../components/UI/loader";
 
 const SingleEvent = ({ single }) => {
   if (!single) {
-    return <p className="center">Loading....</p>;
-    // Needs to optimize
+    return (
+      <span className="center">
+        <Loader />
+      </span>
+    );
   }
   const user = useAuth().user;
-  console.log(user);
-  console.log(single);
   return (
     <Fragment>
       <Head>
@@ -28,7 +30,7 @@ const SingleEvent = ({ single }) => {
         imageAlt={single.category}
         image={`images/${single.category}.jpg`}
         start={single.start}
-        addedby={user.name}
+        addedby={user && user.name}
       />
       <EventContent>
         <PiBig>{single.category}</PiBig>
@@ -40,7 +42,6 @@ const SingleEvent = ({ single }) => {
 export async function getStaticProps(context) {
   const id = context.params.id;
   let dd = await findById(id);
-  console.log(dd, "the dd");
   return {
     props: {
       single: dd,

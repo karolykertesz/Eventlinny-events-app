@@ -10,7 +10,7 @@ const EventItem = (props) => {
   const addressV = location;
   const linkTo = `/events/${id}`;
   return (
-    <li className={classes.item}>
+    <span className={classes.item}>
       <Image
         src={`/images/${category}.jpg`}
         alt={category}
@@ -46,7 +46,7 @@ const EventItem = (props) => {
           </Button>
         </div>
       </div>
-    </li>
+    </span>
   );
 };
 

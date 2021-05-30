@@ -130,6 +130,21 @@ export const getKeys = async () => {
   return keys;
 };
 
+export const user_events_data = async () => {
+  const docref = db.collection("user_add_events").get();
+  const dockArray = (await docref).docs.map((item) => ({
+    id: item.id,
+    start: item.data().starts.toMillis(),
+    end: item.data().ends.toMillis(),
+    category: item.data().category,
+    added_by: item.data().added_by,
+    location: item.data().location,
+    attendies: item.data().attendies,
+    premium: item.data().premium,
+  }));
+  return dockArray;
+};
+
 export const findById = async (id) => {
   let ren = {};
   try {
