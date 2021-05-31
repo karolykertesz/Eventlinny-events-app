@@ -22,5 +22,9 @@
   },
   "remoteconfig": {
     "template": "remoteconfig.template.json"
+  },
+  "functions": {
+    "predeploy": [],
+    "source": "functions"
   }
 }

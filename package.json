@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "functions:build": "npm run build --prefix ./functions"
   },
   "browser": {
     "child_process": false
@@ -16,7 +17,7 @@
     "csrf": "^3.1.0",
     "firebase": "^8.4.1",
     "firebase-admin": "^9.8.0",
-    "firebase-functions": "^3.14.0",
+    "firebase-functions": "^3.14.1",
     "isomorphic-unfetch": "^3.1.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
@@ -38,6 +39,8 @@
     "styled-components": "^5"
   },
   "devDependencies": {
-    "babel-plugin-styled-components": "^1.12.0"
+    "babel-plugin-styled-components": "^1.12.0",
+    "concurrently": "^6.2.0",
+    "nodemon": "^2.0.7"
   }
 }
