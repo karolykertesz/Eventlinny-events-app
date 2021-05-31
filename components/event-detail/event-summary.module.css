@@ -3,8 +3,8 @@
   height: 29vh;
   background-image: linear-gradient(
     to bottom left,
-    burlywood,
-    rgb(247, 190, 98)
+    rgb(237, 195, 140),
+    rgba(152, 111, 46, 0.8)
   );
 }
 

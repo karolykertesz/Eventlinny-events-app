@@ -9,23 +9,26 @@ import { IconContext } from "react-icons";
 import { BsFillPersonFill, BsViewStacked } from "react-icons/bs";
 import DropDown from "../../components/dropdown";
 import MobileLogout from "../UI/mobillogout";
-import { useAuth } from "../Layout/UserContext";
-import { Pi } from "../UI/styledComponents";
 
 FirebaseClient();
 const Header = () => {
   const [userS, setUserS] = useState();
   const router = useRouter();
   const [show, setShow] = useState(false);
-
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (!user) {
-        setUserS(null);
-      }
-      setUserS(user);
-    });
-    return;
+    const check = () => {
+      return firebase.auth().onAuthStateChanged((user) => {
+        if (!user) {
+          setUserS(null);
+        } else {
+          setUserS(user);
+        }
+      });
+    };
+    const unsubsribe = check();
+    return () => {
+      unsubsribe();
+    };
   }, []);
   useEffect(() => {
     return () => validate();
@@ -75,7 +78,7 @@ const Header = () => {
           <span></span>
         </label>
       </div>
-      {userS ? (
+      {userS !== null ? (
         <div className={classes.navLinks}>
           <Link href="/startup">Event pick</Link>
           <Link href="/events">All Events</Link>

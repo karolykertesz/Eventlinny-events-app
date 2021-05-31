@@ -20,11 +20,11 @@ const AllEvents = ({ eventss }) => {
   //     });
   //   }
   // }, []);
-  // const router = useRouter();
-  // const onSelected = (y, m) => {
-  //   const path = `/events/${y}/${m}`;
-  //   router.push(path);
-  // };
+  const router = useRouter();
+  const onSelected = (y, m) => {
+    const path = `/events/${y}/${m}`;
+    router.push(path);
+  };
   // if (!eventss) {
   //   return <p>Loading...</p>;
   // }
@@ -39,7 +39,7 @@ const AllEvents = ({ eventss }) => {
         />
       </Head>
       {/* <EventSearch onSelected={onSelected} /> */}
-      {/* {event && <EventList items={event} />} */}
+      {event && <EventList items={event} />}
     </>
   );
 };
@@ -48,6 +48,7 @@ export default AllEvents;
 
 export async function getStaticProps() {
   const allEv = await user_events_data();
+  console.log(allEv);
   if (!allEv) {
     return {
       notFound: true,

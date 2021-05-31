@@ -59,7 +59,7 @@ const Eventadder = ({ category, uid, setcicked, clicked, setCat }) => {
     startDay: null,
     endDay: null,
     selectedCity: "",
-    decription: null,
+    description: null,
   };
 
   const [state, dispatch] = useReducer(eventsReducer, initialState);
@@ -70,7 +70,7 @@ const Eventadder = ({ category, uid, setcicked, clicked, setCat }) => {
     eventLocation,
     startDay,
     endDay,
-    decription,
+    description,
   } = state;
 
   const [allcountrie, setAllcounries] = useState();
@@ -104,9 +104,10 @@ const Eventadder = ({ category, uid, setcicked, clicked, setCat }) => {
             attendies: firebase.firestore.FieldValue.arrayUnion(uid),
             category: category,
             location: "online",
-            starts: new Date(startDay),
-            ends: new Date(endDay),
+            starts: firebase.firestore.Timestamp.fromDate(new Date(startDay)),
+            ends: firebase.firestore.Timestamp.fromDate(new Date(endDay)),
             premium: false,
+            description: description,
           })
           .then(() => {
             router.push("/events/first");
@@ -126,15 +127,16 @@ const Eventadder = ({ category, uid, setcicked, clicked, setCat }) => {
             starts: new Date(startDay),
             ends: new Date(endDay),
             premium: false,
+            description: description,
           })
           .then(() => {
-            router.push("/events/first");
+            router.push("/events");
           })
           .catch(() => console.log(err));
       }
     }
   };
-  console.log(state);
+
   useEffect(() => {
     let mode = true;
     if (mode && state.eventLocation === "self") {

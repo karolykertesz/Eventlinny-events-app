@@ -1,15 +1,22 @@
 import Link from "next/link";
 import classes from "./button.module.css";
 const Button = (props) => {
+  const disab = props.isdisabled;
   if (props.link) {
     return (
-      <Link href={props.link}>
-        <a className={classes.btn}>{props.children}</a>
-      </Link>
+      <span className={!disab ? classes.dispNone : ""}>
+        <Link href={props.link}>
+          <a className={classes.btn}>{props.children}</a>
+        </Link>
+      </span>
     );
   }
   return (
-    <button onClick={props.onClick} className={classes.btn}>
+    <button
+      onClick={props.onClick}
+      className={classes.btn}
+      disabled={!disab ? "true" : "false"}
+    >
       {props.children}
     </button>
   );

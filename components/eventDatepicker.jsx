@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import DatePicker from "react-datepicker";
 require("react-datepicker/dist/react-datepicker.css");
 import format from "date-fns/format";
@@ -12,6 +12,8 @@ const EventDatePicker = ({ addDate, formSubmit }) => {
   const [second, setSecond] = useState(false);
   const [descri, setDes] = useState("");
   const [descComp, done] = useState(false);
+  const [endd, setU] = useState();
+  console.log(startDate);
   const cancelDescri = () => {
     return new Promise((resolve, reject) => {
       resolve(setDes(""));
@@ -19,9 +21,19 @@ const EventDatePicker = ({ addDate, formSubmit }) => {
       addDate({ type: "field", fildName: "description", payload: "" });
     });
   };
+
+  const setR = useCallback(() => {
+    setU(startDate);
+  }, [startDate]);
+  useEffect(() => {
+    const unsubscribe = setR();
+    return () => {
+      unsubscribe;
+    };
+  });
   const handleChange = (date) => {
     return new Promise((resolve, reject) => {
-      resolve(setStartDate(date.valueOf()));
+      resolve(setStartDate(date));
     })
       .then(() => {
         setFirst(true);
@@ -30,19 +42,19 @@ const EventDatePicker = ({ addDate, formSubmit }) => {
         addDate({
           type: "field",
           fildName: "startDay",
-          payload: startDate.valueOf(),
+          payload: date,
         });
       });
   };
   const handleEnd = (data) => {
     return new Promise((resolve, reject) => {
-      resolve(setEnd(data.valueOf()));
+      resolve(setEnd(data));
     })
       .then(() => {
         setSecond(true);
       })
       .then(() => {
-        addDate({ type: "field", fildName: "endDay", payload: end.valueOf() });
+        addDate({ type: "field", fildName: "endDay", payload: data });
       });
   };
   const addonchange = () => {
@@ -87,13 +99,13 @@ const EventDatePicker = ({ addDate, formSubmit }) => {
             showTimeInput
             calendarClassName={classes.calendar}
             className={classes.border}
-            minDate={startDate}
+            minDate={endd && endd}
           />
         </div>
       )}
       {second && (
         <div>
-          <div className={descComp && classes.none}>
+          <div className={descComp ? classes.none : ""}>
             <Pi>Add Your Description!</Pi>
             <label htmlFor="description"></label>
             <textarea
