@@ -25,6 +25,7 @@
     "next-auth": "^3.21.1",
     "next-connect": "^0.10.1",
     "next-firebase-auth": "^0.13.1-alpha.3",
+    "node": "^14.16.1",
     "nookies": "^2.5.2",
     "opencage-api-client": "^1.0.0",
     "react": "17.0.1",
