@@ -12,12 +12,14 @@ export default async function handler(req, res) {
     res.status(403).json({ message: value });
     return;
   }
-
+  const actionCodeSettings = {
+    url: `http://localhost:3000/users/vid/?email=${email}`,
+  };
   try {
     await auth
       .createUserWithEmailAndPassword(email, password)
       .then((userAcc) => {
-        userAcc.user.sendEmailVerification();
+        userAcc.user.sendEmailVerification(actionCodeSettings);
         userAcc.user.updateProfile({ displayName: firstname });
       });
   } catch (err) {

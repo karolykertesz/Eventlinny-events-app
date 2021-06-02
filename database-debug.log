@@ -1,7 +1,2 @@
-01:35:21.004 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
-01:35:21.226 [main] INFO com.firebase.server.forge.App$ - Listening at localhost:9000
-01:58:03.298 [Thread-0] INFO com.firebase.server.forge.App$ - Attempting graceful shutdown.
-01:58:03.315 [NamespaceSystem-akka.actor.default-dispatcher-8] INFO com.firebase.core.namespace.Terminator$Terminator - 1 actors left to terminate: next-events-309cd
-01:58:03.322 [NamespaceSystem-akka.actor.default-dispatcher-7] INFO com.firebase.core.namespace.NamespaceActor - Stopping namespace actor for next-events-309cd
-01:58:03.324 [NamespaceSystem-akka.actor.default-dispatcher-7] INFO com.firebase.core.namespace.NamespaceActor - Gauges removed for next-events-309cd
-01:58:03.334 [Thread-0] INFO com.firebase.server.forge.App$ - Graceful shutdown complete.
+01:54:25.905 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
+01:54:26.246 [main] INFO com.firebase.server.forge.App$ - Listening at localhost:9000
