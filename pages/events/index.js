@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import EventList from "../../components/EventList";
 import EventSearch from "../../components/event-search.jsx";
 import { useRouter } from "next/router";
@@ -11,23 +11,12 @@ const db = firebase.firestore();
 
 const AllEvents = ({ eventss }) => {
   const [event, setEvent] = useState(eventss);
-  console.log(eventss);
 
-  // useEffect(() => {
-  //   if (eventss) {
-  //     getAllEvents().then((re) => {
-  //       setEvent(re);
-  //     });
-  //   }
-  // }, []);
   const router = useRouter();
   const onSelected = (y, m) => {
     const path = `/events/${y}/${m}`;
     router.push(path);
   };
-  // if (!eventss) {
-  //   return <p>Loading...</p>;
-  // }
 
   return (
     <>

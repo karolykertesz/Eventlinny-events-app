@@ -30,7 +30,7 @@ const SingleEvent = ({ single }) => {
         imageAlt={single.category}
         image={`images/${single.category}.jpg`}
         start={single.start}
-        addedby={user && user.name}
+        addedby={single.added_by}
       />
       <EventContent>
         <PiBig>{single.category}</PiBig>

@@ -35,7 +35,14 @@ const eventsReducer = (state, action) => {
   }
 };
 
-const Eventadder = ({ category, uid, setcicked, clicked, setCat }) => {
+const Eventadder = ({
+  category,
+  uid,
+  setcicked,
+  clicked,
+  setCat,
+  userName,
+}) => {
   const router = useRouter();
   const cityAdder = (value, name) => {
     return new Promise((resolve, reject) => {

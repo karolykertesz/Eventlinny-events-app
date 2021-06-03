@@ -2,7 +2,6 @@ import firebase from "firebase";
 
 import FirebaseClient from "../helpers/firebase";
 FirebaseClient();
-import { getArray } from "./newhelpers";
 
 export const send = async (location, userInt) => {
   if (!location || !userInt) {
