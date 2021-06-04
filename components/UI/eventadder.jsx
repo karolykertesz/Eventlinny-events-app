@@ -12,6 +12,9 @@ import classes from "./ui-modules/login.module.css";
 import { getcountries } from "../../helpers/axios/getlocaion";
 import LocationCity from "../locationCity";
 import EventDatePicker from "../eventDatepicker";
+import { useAuth } from "../../components/Layout/UserContext";
+import { sendEmailWithEvent } from "../../helpers/sendEmailWithEvent";
+
 const eventsReducer = (state, action) => {
   switch (action.type) {
     case "field": {
@@ -59,6 +62,10 @@ const Eventadder = ({
   };
   const [citydone, setCityDone] = useState(false);
   const [complete, setComplete] = useState(false);
+  const user = useAuth().user;
+  const email = user.email;
+  const startDate = startDay && startDay;
+  const displayname = user.name;
   const initialState = {
     selectedcategory: category === "create" ? "" : category,
     eventLocation: null,
@@ -89,6 +96,16 @@ const Eventadder = ({
       })
         .then(() => {
           setcicked(false);
+        })
+        .then(() => {
+          return sendEmailWithEvent(
+            email,
+            displayname,
+            startDate,
+            selectedcategory
+          ).then(() => {
+            console.log("gg");
+          });
         })
         .then(() => {
           setCat(null);
@@ -162,7 +179,7 @@ const Eventadder = ({
       return () => (mode = false);
     }
   }, [state.eventLocation]);
-
+  console.log();
   return (
     <Layer>
       <div className={classes.form}>

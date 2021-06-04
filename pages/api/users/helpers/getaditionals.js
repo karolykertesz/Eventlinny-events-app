@@ -6,8 +6,12 @@ export default function helper(req, res) {
     return docref
       .get()
       .then((doc) => {
-        const userAditional = doc.data();
-        return res.status(200).json({ m: userAditional });
+        if (doc.exists) {
+          const userAditional = doc.data();
+          return res.status(200).json({ m: userAditional });
+        } else {
+          return res.status(200).json({ m: "no additonal data" });
+        }
       })
       .then(() => console.log("done"))
       .catch((err) => console.log(err));

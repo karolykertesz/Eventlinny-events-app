@@ -1,2 +1,2 @@
 export { helloWorld } from "./helloWorld";
-export { sendEmail } from "./users/sendEmail";
+export { sendEmail, sendCreate } from "./users/sendEmail";

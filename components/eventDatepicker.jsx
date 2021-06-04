@@ -13,7 +13,6 @@ const EventDatePicker = ({ addDate, formSubmit }) => {
   const [descri, setDes] = useState("");
   const [descComp, done] = useState(false);
   const [endd, setU] = useState();
-  console.log(startDate);
   const cancelDescri = () => {
     return new Promise((resolve, reject) => {
       resolve(setDes(""));

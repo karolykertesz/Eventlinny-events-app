@@ -1,6 +1,4 @@
-import react, { Fragment, useEffect, useState, useCallback } from "react";
-import UserProfileTop from "../../components/userProfileTop";
-import firebase from "firebase";
+import react, { useEffect, useState } from "react";
 import { useAuth } from "../../components/Layout/UserContext";
 import { CoverDiv } from "../startup";
 import Userpage from "../../handlers/userpage";
@@ -31,14 +29,16 @@ const UserProfile = ({ userLocation, userinfo, userAdditional }) => {
     const unsubscribe = setuser(userContext);
     return unsubscribe;
   }, [userContext]);
-
+  if (!userLocation || !userinfo) {
+    return <Loader />;
+  }
   return (
     <CoverDiv>
       <Userpage
         user={user && user}
         location={userLocation && userLocation}
         userInfo={userinfo && userinfo}
-        userAdditional={userAdditional && userAdditional}
+        userAdditional={userAdditional ? userAdditional : ""}
       />
     </CoverDiv>
   );
@@ -95,7 +95,7 @@ export async function getServerSideProps(context) {
     return {
       notFound: true,
       redirect: {
-        destination: "http://localhost:30003/login",
+        destination: "http://localhost:3000/login",
         permanent: false,
       },
     };
