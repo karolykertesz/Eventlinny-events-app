@@ -7,7 +7,7 @@ import react, {
 } from "react";
 import { useRouter } from "next/router";
 import firebase from "firebase";
-import { Layer, ForMButton, Error, Pi } from "../../pages/signup";
+import { Layer } from "../../pages/signup";
 import classes from "./ui-modules/login.module.css";
 import { getcountries } from "../../helpers/axios/getlocaion";
 import LocationCity from "../locationCity";
@@ -97,16 +97,7 @@ const Eventadder = ({
         .then(() => {
           setcicked(false);
         })
-        .then(() => {
-          return sendEmailWithEvent(
-            email,
-            displayname,
-            startDate,
-            selectedcategory
-          ).then(() => {
-            console.log("gg");
-          });
-        })
+
         .then(() => {
           setCat(null);
         });
@@ -134,6 +125,20 @@ const Eventadder = ({
             description: description,
           })
           .then(() => {
+            return new Promise((resolve, reject) => {
+              resolve(
+                sendEmailWithEvent(
+                  email,
+                  displayname,
+                  startDate,
+                  selectedcategory
+                )
+              );
+            }).then(() => {
+              console.log("gg");
+            });
+          })
+          .then(() => {
             router.push("/events/first");
           })
           .catch((err) => console.log(err));
@@ -152,6 +157,20 @@ const Eventadder = ({
             ends: new Date(endDay),
             premium: false,
             description: description,
+          })
+          .then(() => {
+            return new Promise((resolve, reject) => {
+              resolve(
+                sendEmailWithEvent(
+                  email,
+                  displayname,
+                  startDate,
+                  selectedcategory
+                )
+              );
+            }).then(() => {
+              console.log("gg");
+            });
           })
           .then(() => {
             router.push("/events");

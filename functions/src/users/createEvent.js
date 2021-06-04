@@ -17,15 +17,15 @@ export const createEvent = async (startDate, eventName, email, displayname) => {
     secure: false,
     port: 587,
     auth: {
-      user: "carlo3030@hotmail.hu",
+      user: "node-test-kertesz@outlook.com",
       pass: "Karika37",
     },
   });
   transporter.use("compile", hbs(handlebarOptions));
 
-  const tr = await transporter
+  return transporter
     .sendMail({
-      from: "carlo3030@hotmail.hu",
+      from: "node-test-kertesz@outlook.com",
       to: email,
       subject: "",
       template: "crEvent",

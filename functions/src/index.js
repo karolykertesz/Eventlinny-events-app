@@ -1,2 +1,3 @@
 export { helloWorld } from "./helloWorld";
-export { sendEmail, sendCreate } from "./users/sendEmail";
+export { sendEmail } from "./users/sendEmail";
+export { sendCreate } from "./users/seneEventCreate";
