@@ -3,7 +3,8 @@ export const sendEmailWithEvent = async (
   displayname,
   startToSend,
   selectedcategory,
-  docId
+  docId,
+  description
 ) => {
   const mess = await fetch(
     "http://localhost:5301/next-events-309cd/us-central1/sendCreate",
@@ -15,6 +16,7 @@ export const sendEmailWithEvent = async (
         startToSend,
         selectedcategory,
         docId,
+        description,
       }),
       headers: {
         "Content-Type": "application/json",

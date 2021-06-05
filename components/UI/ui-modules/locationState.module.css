@@ -5,15 +5,16 @@
   max-width: 800;
   flex-direction: column;
 }
-
+.divinputCover {
+  max-width: 350px !important;
+}
 .mainselection select {
   border: 0;
   background: transparent;
   font-size: 40px;
   font-weight: 900;
   padding: 16px 18px;
-  width: 378px;
-  *width: 350px;
+  width: 350px;
   *background: #e7ac15;
   -webkit-appearance: none;
 }

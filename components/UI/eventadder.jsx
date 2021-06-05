@@ -120,7 +120,7 @@ const Eventadder = ({
             starts: firebase.firestore.Timestamp.fromDate(new Date(startDay)),
             ends: firebase.firestore.Timestamp.fromDate(new Date(endDay)),
             premium: false,
-            description: description,
+            description: description.toLowerCase(),
           })
           .then(() => {
             return new Promise((resolve, reject) => {
@@ -130,7 +130,8 @@ const Eventadder = ({
                   displayname,
                   startToSend,
                   selectedcategory,
-                  docId
+                  docId,
+                  description.toLowerCase()
                 )
               );
             }).then(() => {
@@ -142,7 +143,7 @@ const Eventadder = ({
           })
           .catch((err) => console.log(err));
       } else if (eventLocation !== "online") {
-        const loctString = selectedCountry + "," + selectedCity;
+        const loctString = selectedCity;
         return firebase
           .firestore()
           .collection("user_add_events")
@@ -150,12 +151,13 @@ const Eventadder = ({
           .set({
             added_by: uid,
             attendies: firebase.firestore.FieldValue.arrayUnion(uid),
-            category: category,
-            location: loctString,
+            category: category.toLowerCase(),
+            location: loctString.toLowerCase(),
+            location_country: selectedCountry,
             starts: new Date(startDay),
             ends: new Date(endDay),
             premium: false,
-            description: description,
+            description: description.toLowerCase(),
           })
           .then(() => {
             return new Promise((resolve, reject) => {
@@ -164,8 +166,9 @@ const Eventadder = ({
                   email,
                   displayname,
                   startToSend,
-                  selectedcategory,
-                  docId
+                  selectedcategory.toLowerCase(),
+                  docId,
+                  description.toLowerCase()
                 )
               );
             }).then(() => {

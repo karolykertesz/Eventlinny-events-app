@@ -27,3 +27,37 @@ export const PiBig = styled.p`
 export const List = ({ children }) => {
   return <div className={classes.list}>{children}</div>;
 };
+
+export const Cover = styled.div`
+  display: flex;
+  box-sizing: border-box;
+  justify-content: center;
+  max-width: 600px;
+  align-items: center;
+  margin: 10px auto;
+  flex-direction: column;
+`;
+
+export const CoverRow = styled.div`
+  display: flex;
+  box-sizing: border-box;
+  justify-content: center;
+  max-width: 600px;
+  align-items: center;
+  margin: 10px auto;
+  flex-direction: row;
+`;
+export const CatContainer = (props) => {
+  return <CoverRow>{props.children}</CoverRow>;
+};
+
+export const Error = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #df2f2f;
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  text-align: center;
+`;

@@ -93,6 +93,9 @@ export const SVG = styled.span`
   height: 30px;
   color: #b35900;
   margin-left: 15px;
+  &:active {
+    color: burlywood;
+  }
 `;
 
 export default StartItem;
