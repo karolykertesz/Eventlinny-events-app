@@ -1,10 +1,5 @@
-import react, {
-  useRef,
-  useState,
-  useCallback,
-  useEffect,
-  useReducer,
-} from "react";
+import react, { useState, useEffect, useReducer } from "react";
+import { v4 as uuid_v4 } from "uuid";
 import { useRouter } from "next/router";
 import firebase from "firebase";
 import { Layer } from "../../pages/signup";
@@ -47,6 +42,7 @@ const Eventadder = ({
   userName,
 }) => {
   const router = useRouter();
+  const docId = uuid_v4();
   const cityAdder = (value, name) => {
     return new Promise((resolve, reject) => {
       resolve(
@@ -87,6 +83,8 @@ const Eventadder = ({
     description,
   } = state;
 
+  const startToSend = new Date(startDay).getTime();
+
   const [allcountrie, setAllcounries] = useState();
   const formSubmit = (e, value) => {
     e.preventDefault();
@@ -113,7 +111,7 @@ const Eventadder = ({
         return firebase
           .firestore()
           .collection("user_add_events")
-          .doc()
+          .doc(docId)
           .set({
             added_by: uid,
             attendies: firebase.firestore.FieldValue.arrayUnion(uid),
@@ -130,8 +128,9 @@ const Eventadder = ({
                 sendEmailWithEvent(
                   email,
                   displayname,
-                  startDate,
-                  selectedcategory
+                  startToSend,
+                  selectedcategory,
+                  docId
                 )
               );
             }).then(() => {
@@ -147,7 +146,7 @@ const Eventadder = ({
         return firebase
           .firestore()
           .collection("user_add_events")
-          .doc()
+          .doc(docId)
           .set({
             added_by: uid,
             attendies: firebase.firestore.FieldValue.arrayUnion(uid),
@@ -164,8 +163,9 @@ const Eventadder = ({
                 sendEmailWithEvent(
                   email,
                   displayname,
-                  startDate,
-                  selectedcategory
+                  startToSend,
+                  selectedcategory,
+                  docId
                 )
               );
             }).then(() => {

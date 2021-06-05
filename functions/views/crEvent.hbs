@@ -4,11 +4,120 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Eventlinny</title>
+    <style>
+      ul { margin-bottom: 10px; font-weight: normal; font-size: 14px;
+      line-height: 1.1; text-decoration: none; } ul li { list-style-type: none;
+      } p.lead { font-size: 19px; display: block; text-align: center;
+      font-weight: 600; } p.last { margin-bottom: 0px; } a { text-decoration:
+      none; color: white; } a:hover { color: rgb(224, 127, 127); } ul li {
+      margin-left: 5px; list-style-position: inside; } * { margin: 0; padding:
+      0; } * { font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial,
+      sans-serif; } img { max-width: 600px; border-radius: 10px; box-shadow:
+      none; } .gttable tr { max-width: 600px; position: absolute; } .collapse {
+      margin: 0; padding: 0; } body { -webkit-font-smoothing: antialiased;
+      -webkit-text-size-adjust: none; width: 100% !important; height: 100%; } a
+      { color: rgb(17, 16, 16); font-size: 18px; } table.head-wrap { width:
+      100%; } .header.container table td.logo { padding: 15px; }
+      .header.container table td.label { padding: 15px; padding-left: 0px; } /*
+      ------------------------------------- BODY
+      ------------------------------------- */ table.body-wrap { width: 100%; }
+      /* ------------------------------------- FOOTER
+      ------------------------------------- */ table.footer-wrap { margin-top:
+      400px; width: 100%; clear: both !important; background-color: #eee3cc;
+      position: absolute; bottom: 0; } .footer-wrap .container td.content p {
+      border-top: 1px solid rgb(215, 215, 215); padding-top: 15px; }
+      .footer-wrap .container td.content p { font-size: 10px; font-weight: bold;
+      } /* ------------------------------------- TYPOGRAPHY
+      ------------------------------------- */ h1, h2, h3, h4, h5, h6 {
+      font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica
+      Neue", Helvetica, Arial, "Lucida Grande", sans-serif; line-height: 1.1;
+      margin-bottom: 15px; color: #000; } h1 small, h2 small, h3 small, h4
+      small, h5 small, h6 small { font-size: 60%; color: #6f6f6f; line-height:
+      0; text-transform: none; } h1 { font-weight: 200; font-size: 44px; } h2 {
+      font-weight: 200; font-size: 37px; } h3 { font-weight: 500; font-size:
+      27px; } h4 { font-weight: 500; font-size: 23px; } h5 { font-weight: 900;
+      font-size: 17px; } h6 { font-weight: 900; font-size: 14px; text-transform:
+      uppercase; color: #444; } .collapse { margin: 0 !important; } p, ul {
+      margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height:
+      1.6; } p.lead { font-size: 17px; display: block; text-align: center; }
+      p.last { margin-bottom: 0px; } ul li { margin-left: 5px;
+      list-style-position: inside; } /* -------------------------------------
+      SIDEBAR ------------------------------------- */ ul.sidebar { background:
+      #ebebeb; display: block; list-style-type: none; } ul.sidebar li { display:
+      block; margin: 0; } ul.sidebar li a { text-decoration: none; color: #666;
+      padding: 10px 16px; /* font-weight:bold; */ margin-right: 10px; /*
+      text-align:center; */ cursor: pointer; border-bottom: 1px solid #777777;
+      border-top: 1px solid #ffffff; display: block; margin: 0; } ul.sidebar li
+      a.last { border-bottom-width: 0px; } ul.sidebar li a h1, ul.sidebar li a
+      h2, ul.sidebar li a h3, ul.sidebar li a h4, ul.sidebar li a h5, ul.sidebar
+      li a h6, ul.sidebar li a p { margin-bottom: 0 !important; } /*
+      --------------------------------------------------- RESPONSIVENESS Nuke it
+      from orbit. It's the only way to be sure.
+      ------------------------------------------------------ */ /* Set a
+      max-width, and make it display as block so it will automatically stretch
+      to that width, but will also shrink down on a phone or something */
+      .container { display: block !important; max-width: 600px !important;
+      margin: 0 auto !important; /* makes it centered */ clear: both !important;
+      } /* This should also be a block element, so that it will fill 100% of the
+      .container */ .content { padding: 15px; max-width: 600px; margin: 10px
+      auto; display: block; } /* Let's make sure tables in the content area are
+      100% wide */ .content table { width: 100%; } /* Odds and ends */ .column {
+      width: 300px; float: left; } .column tr td { padding: 15px; } .column-wrap
+      { padding: 0 !important; margin: 0 auto; max-width: 600px !important; }
+      .column table { width: 100%; } .social .column { width: 280px; min-width:
+      279px; float: left; } .clear { display: block; clear: both; } /* */
+    </style>
   </head>
-  <body>
-    {{from}}
-    {{start}}
-    {{name}}
-    {{event}}
+  <body bgcolor="#deb887">
+    <!-- {{start}} -->
+    <div>
+      <table class="head-wrap" bgcolor="#eee3cc">
+        <tr>
+          <td class="header container">
+            <div class="content">
+              <table bgcolor="#eee3cc">
+                <tr>
+                  <th>
+                    Thank You
+                    {{name}}
+                    from Eventlinny ,for creating your
+                    {{event}}
+                    event
+                  </th>
+                </tr>
+              </table>
+            </div>
+          </td>
+          <td></td>
+        </tr>
+      </table>
+      <table class="body-wrap"></table>
+    </div>
+    <table class="body-wrap">
+      <tr class="gttable">
+        <td class="container innerDiv">
+          <div class="content">
+            <table>
+              <img
+                src="https://cdn.pixabay.com/photo/2017/02/25/15/23/barbecue-2098020_960_720.jpg"
+              />
+            </table>
+            <ul>
+              <li>
+                <p class="lead">The category you created {{event}}</p>
+              </li>
+              <li>
+                <p class="lead">The start of your event {{start}}</p>
+              </li>
+              <li>
+                <a href={{url}}>
+                  <p class="lead">wiew Your Event</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </table>
   </body>
 </html>

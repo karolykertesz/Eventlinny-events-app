@@ -4,8 +4,9 @@ import { createEvent } from "./createEvent";
 
 export const sendCreate = functions.https.onRequest(async (req, res) => {
   cors(req, res, () => {
-    const { startDate, eventName, email, displayname } = req.body;
-    return createEvent(startDate, eventName, email, displayname)
+    const { email, displayname, startToSend, selectedcategory, docId } =
+      req.body;
+    return createEvent(email, displayname, startToSend, selectedcategory, docId)
       .then(() => {
         res.json({ m: "all set" });
       })

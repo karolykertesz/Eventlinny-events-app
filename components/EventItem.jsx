@@ -14,9 +14,6 @@ const EventItem = (props) => {
   const addressV = location;
 
   const linkTo = `/events/${id}`;
-  console.log(isValid);
-  console.log(new Date().getTime(), "new date");
-  console.log(start, "start");
   return (
     <span className={!isValid ? classes.falseItem : ""}>
       <span className={classes.item}>

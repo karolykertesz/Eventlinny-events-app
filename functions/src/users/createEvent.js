@@ -1,5 +1,6 @@
 const nodemailer = require("nodemailer");
 const hbs = require("nodemailer-express-handlebars");
+import categoryImages from "./data";
 
 const handlebarOptions = {
   viewEngine: {
@@ -11,7 +12,13 @@ const handlebarOptions = {
   viewPath: "./views/",
   extName: ".hbs",
 };
-export const createEvent = async (startDate, eventName, email, displayname) => {
+export const createEvent = async (
+  email,
+  displayname,
+  startToSend,
+  selectedcategory,
+  docId
+) => {
   const transporter = nodemailer.createTransport({
     host: "smtp-mail.outlook.com",
     secure: false,
@@ -22,19 +29,35 @@ export const createEvent = async (startDate, eventName, email, displayname) => {
     },
   });
   transporter.use("compile", hbs(handlebarOptions));
-
+  selectedcategory;
+  let source;
+  const oneItem = await categoryImages.find(
+    (item) => item.name === selectedcategory
+  );
+  if (oneItem) {
+    source = oneItem.src;
+  } else {
+    const secItem = await categoryImages.find((i) => i.name === "create");
+    source = secItem.src;
+  }
   return transporter
     .sendMail({
       from: "node-test-kertesz@outlook.com",
       to: email,
-      subject: "",
+      subject: "Eventlinny Event created",
       template: "crEvent",
       text: `Hi ${displayname} thank You for Adding Your Eventlinny event!!`,
       context: {
         from: "Eventlinny",
         name: displayname,
-        start: startDate,
-        event: eventName,
+        start: new Date(startToSend).toLocaleDateString("en-US", {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        }),
+        event: selectedcategory,
+        image: source,
+        url: `http://localhost:3000/views/${docId}`,
       },
     })
     .then(() => {

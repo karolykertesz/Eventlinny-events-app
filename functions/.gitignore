@@ -2,3 +2,5 @@ node_modules/
 build/
 .env
 .env.local
+users/createEvent.js
+users/seneEventCreate
