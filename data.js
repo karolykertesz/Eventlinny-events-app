@@ -141,6 +141,7 @@ export const user_events_data = async () => {
     location: item.data().location,
     attendies: item.data().attendies,
     premium: item.data().premium,
+    description: item.data().description,
   }));
   return dockArray;
 };
@@ -162,6 +163,7 @@ export const findById = async (id) => {
           location: item.data().location,
           attendies: item.data().attendies,
           premium: item.data().premium,
+          description: item.data().description,
         };
       });
   } catch (err) {

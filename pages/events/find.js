@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import firebase from "firebase";
 import Loader from "../../components/UI/loader";
+import EventList from "../../components/EventList";
+import {
+  onlyCat,
+  onlyLoc,
+  locAndCat,
+} from "../../helpers/wrappers/findfunctions";
 
 import {
   Pi,
@@ -22,38 +28,69 @@ const find = () => {
   const [isCat, setIscat] = useState(false);
   const [error, setError] = useState("");
   const [items, setItems] = useState();
+  const [loading, setLoading] = useState(false);
   const setitems = () => {
     setIscat(!isCat);
     setError("");
   };
   const returnCateroies = () => {
     setError("");
+    setItems(null);
+    setLoading(true);
     if (!category && !location) {
       setError("You Need to select eather a category or Location");
       return;
     }
     if (location && category) {
-      return firebase
-        .firestore()
-        .collection("user_add_events")
-        .where("location", "==", location.toLowerCase())
-        .where("category", "==", category.toLowerCase())
-        .get()
-        .then((doc) => {
-          if (doc.exists) {
-            let itemArray = [];
-            doc.forEach((i) => {
-              itemArray.push({ ...i.data() });
-            });
-            setItems(itemArray);
+      return locAndCat(location, category)
+        .then((i) => {
+          if (i.length === 0) {
+            setError("Plese refine Your search");
+            return;
           }
-        });
+          return setItems(i);
+        })
+        .then(() => setLoading(false));
+    }
+    if (!location && category) {
+      return onlyCat(category)
+        .then((i) => {
+          if (i.length === 0) {
+            setError("Plese refine Your search");
+            return;
+          }
+          return setItems(i);
+        })
+        .then(() => setLoading(false));
+    }
+    if (location && !category) {
+      return onlyLoc(location)
+        .then((i) => {
+          if (i.length === 0) {
+            setError("Plese refine Your search");
+            return;
+          }
+          return setItems(i);
+        })
+        .then(() => setLoading(false));
     }
   };
+  if (loading) {
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
+  }
   return (
     <div>
       <Cover>
         <PiBig>Find Event</PiBig>
+        {isCat && (
+          <Cdiv>
+            <SelectInput setCat={setCat} />
+          </Cdiv>
+        )}
         {!isCat && (
           <InputHolder>
             <Input
@@ -106,13 +143,10 @@ const find = () => {
             )}
           </SVG>
         </CatContainer>
-        {isCat && (
-          <Cdiv>
-            <SelectInput setCat={setCat} />
-          </Cdiv>
-        )}
+
         {error && <Error>{error}</Error>}
       </Cover>
+      <Cover>{items && <EventList items={items} />}</Cover>
     </div>
   );
 };

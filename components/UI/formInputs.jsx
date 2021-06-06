@@ -49,6 +49,7 @@ export const InputHolder = styled.div`
 `;
 export const Cdiv = styled.div`
   max-width: 300px;
+  margin: 30px 0;
   display: flex;
   justify-content: center;
   align-items: center;

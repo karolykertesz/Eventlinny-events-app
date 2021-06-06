@@ -33,11 +33,12 @@ export const createEvent = async (
   selectedcategory;
   let source;
   const oneItem = await categoryImages.find(
-    (item) => item.name === selectedcategory
+    (item) => item.name === selectedcategory.toString()
   );
   if (oneItem) {
     source = oneItem.src;
-  } else {
+  }
+  if (!oneItem) {
     const secItem = await categoryImages.find((i) => i.name === "create");
     source = secItem.src;
   }

@@ -10,6 +10,7 @@ const SelectInput = (props) => {
           className={classes.mainselection}
           onChange={(e) => props.setCat(e.target.value)}
         >
+          <option>Select your category</option>
           {categories.map((i) => (
             <option key={i} value={selectedCat}>
               {i}

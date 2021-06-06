@@ -9,6 +9,7 @@ import LocationCity from "../locationCity";
 import EventDatePicker from "../eventDatepicker";
 import { useAuth } from "../../components/Layout/UserContext";
 import { sendEmailWithEvent } from "../../helpers/sendEmailWithEvent";
+import Loader from "../UI/loader";
 
 const eventsReducer = (state, action) => {
   switch (action.type) {
@@ -58,6 +59,7 @@ const Eventadder = ({
   };
   const [citydone, setCityDone] = useState(false);
   const [complete, setComplete] = useState(false);
+  const [loading, setLoading] = useState(false);
   const user = useAuth().user;
   const email = user.email;
   const startDate = startDay && startDay;
@@ -108,6 +110,7 @@ const Eventadder = ({
       state.description !== null
     ) {
       if (eventLocation === "online") {
+        setLoading(true);
         return firebase
           .firestore()
           .collection("user_add_events")
@@ -135,7 +138,7 @@ const Eventadder = ({
                 )
               );
             }).then(() => {
-              console.log("gg");
+              setLoading(false);
             });
           })
           .then(() => {
@@ -144,6 +147,7 @@ const Eventadder = ({
           .catch((err) => console.log(err));
       } else if (eventLocation !== "online") {
         const loctString = selectedCity;
+        setLoading(true);
         return firebase
           .firestore()
           .collection("user_add_events")
@@ -172,7 +176,7 @@ const Eventadder = ({
                 )
               );
             }).then(() => {
-              console.log("gg");
+              setLoading(false);
             });
           })
           .then(() => {
@@ -201,7 +205,9 @@ const Eventadder = ({
       return () => (mode = false);
     }
   }, [state.eventLocation]);
-  console.log();
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <Layer>
       <div className={classes.form}>

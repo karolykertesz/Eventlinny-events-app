@@ -6,12 +6,11 @@ import classes from "../event-detail/event-logistics.module.css";
 import Image from "next/image";
 import { useAuth } from "../Layout/UserContext";
 import Loader from "../../components/UI/loader";
-import firebase from "firebase";
 
 function EventLogistics(props) {
   const { date, address, image, imageAlt, start, addedby } = props;
   const user = useAuth().user;
-  const [adminuser, setAdmin] = useState();
+
   const abst = new Date(date).getTime();
   const humanReadableDate = new Date(abst).toLocaleDateString("en-US", {
     day: "numeric",

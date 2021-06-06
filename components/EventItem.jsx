@@ -1,4 +1,4 @@
-import react, { useState, useCallback, useEffect } from "react";
+import react, { useState } from "react";
 import classes from "./event-item.module.css";
 import Button from "./UI/Button";
 import DateIcon from "./UI/icons/date-icon";
@@ -8,6 +8,7 @@ import Image from "next/image";
 
 const EventItem = (props) => {
   const { start, end, category, location, id } = props;
+
   const [isValid, setValid] = useState(() => {
     return start > new Date().getTime();
   });
