@@ -1,0 +1,30 @@
+.head {
+  background-color: peru;
+}
+
+.title {
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgb(226, 214, 198);
+  width: 100%;
+  text-transform: uppercase;
+}
+.top {
+  filter: sepia(20%);
+  -webkit-filter: sepia(20%);
+}
+
+.body {
+  background-color: papayawhip;
+}
+.body p {
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 600;
+  color: peru;
+}
+.footer {
+  background-color: papayawhip;
+}

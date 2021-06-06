@@ -31,7 +31,7 @@
 .list {
   flex: 3;
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   justify-content: center;
   align-items: center;
   flex-direction: column;

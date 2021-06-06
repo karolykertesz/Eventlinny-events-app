@@ -3,12 +3,13 @@ import classes from "./event-item.module.css";
 import Button from "./UI/Button";
 import DateIcon from "./UI/icons/date-icon";
 import AddresIcon from "./UI/icons/address-icon";
+import PersonIcon from "./UI/icons/person-icon";
 import ArrowIcon from "./UI/icons/arrow-right-icon";
 import Image from "next/image";
 
 const EventItem = (props) => {
-  const { start, end, category, location, id } = props;
-
+  const { start, end, category, location, id, attendies } = props;
+const ca
   const [isValid, setValid] = useState(() => {
     return start > new Date().getTime();
   });
@@ -43,6 +44,10 @@ const EventItem = (props) => {
           <div className={classes.address}>
             <AddresIcon />
             <address>{addressV}</address>
+          </div>
+          <div className={classes.address}>
+            <PersonIcon />
+            <address>{attendies.length}</address>
           </div>
           <div className={classes.actions}>
             <Button link={linkTo} isdisabled={isValid}>

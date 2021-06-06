@@ -8,7 +8,7 @@ body {
   margin: 0;
   font-family: "Open Sans", "Lato", sans-serif;
   color: #414141;
-  background-color: papayawhip;
+  background-color: papayawhip !important;
 }
 
 h1,

@@ -14,6 +14,7 @@ const EventList = (props) => {
             start={item.start}
             category={item.category}
             end={item.end}
+            attendies={item.attendies}
           />
         ))}
       </ul>
