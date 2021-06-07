@@ -43,12 +43,14 @@ const calendar = (id, email, isoStart, isoEnd, description, location) => {
         },
       };
       var request = gapi.client.calendar.events.insert({
-        calendarId: "primary",
+        calendarId: "s9frbt2kma63ljjmouapbp0jgk@group.calendar.google.com",
         resource: event,
       });
       return request.execute(function (event) {
         if (window !== undefined) {
-          window.open("/events/calendar/");
+          window.open(
+            "https://calendar.google.com/calendar/embed?src=s9frbt2kma63ljjmouapbp0jgk%40group.calendar.google.com&ctz=Europe%2FBudapest"
+          );
         }
       });
     });

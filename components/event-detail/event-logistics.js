@@ -10,7 +10,8 @@ import Image from "next/image";
 import { useAuth } from "../Layout/UserContext";
 import Loader from "../../components/UI/loader";
 import Reactmodal from "../UI/reactbootstrap/modal";
-import calendar from "../../helpers/calendar";
+// import calendar from "../../helpers/calendar";
+import sendcal from "../../helpers/sendcal";
 
 function EventLogistics(props) {
   const {
@@ -24,16 +25,12 @@ function EventLogistics(props) {
     location,
     imageAlt,
   } = props;
-  // 2015-05-28T17:00:00-07:00
-  // 2021-07-01T22:43:38.000Z
+
   const [signedUp, setSignedUp] = useState();
   const [showmodal, setShowModal] = useState(false);
   const userId = useAuth().user && useAuth().user.uid;
-  const email = useAuth().user && useAuth().email;
-  const isoStart = new Date(start).toISOString();
-  const isoEnd = new Date(end).toISOString();
-  console.log(isoStart, "starts");
-  console.log(isoEnd);
+  const email = useAuth().user && useAuth().user.email;
+  console.log(email);
   const abst = new Date().getTime();
   const userName = useAuth().user && useAuth().name;
 
@@ -75,7 +72,8 @@ function EventLogistics(props) {
       resolve(setShowModal(false));
     })
       .then(() => {
-        calendar(id, email, isoStart, isoEnd, description, location);
+        // calendar(id, email, isoStart, isoEnd, description, location);
+        sendcal(email, start, description, location);
       })
       .then(() => console.log("g"));
   };
