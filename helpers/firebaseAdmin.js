@@ -1,5 +1,5 @@
 const admin = require("firebase-admin");
-const serviceAccount = require("../../../../service/next-events-309cd-firebase-adminsdk-5vizw-f25b60cc6e.json");
+const serviceAccount = require("../service/next-events-309cd-firebase-adminsdk-5vizw-f25b60cc6e.json");
 
 if (!admin.apps.length) {
   admin.initializeApp({

@@ -19,6 +19,7 @@ const EventComp = ({ single }) => {
         addedby={single.added_by}
         attendies={attendies}
         id={single.id}
+        end={single.end}
       />
       <EventContent>
         <PiBig>event Description: {single.description}</PiBig>

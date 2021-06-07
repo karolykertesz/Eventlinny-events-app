@@ -10,14 +10,33 @@ import Image from "next/image";
 import { useAuth } from "../Layout/UserContext";
 import Loader from "../../components/UI/loader";
 import Reactmodal from "../UI/reactbootstrap/modal";
+import calendar from "../../helpers/calendar";
 
 function EventLogistics(props) {
-  const { date, address, image, imageAlt, start, addedby, attendies, id } =
-    props;
+  const {
+    address,
+    image,
+    start,
+    end,
+    attendies,
+    id,
+    description,
+    location,
+    imageAlt,
+  } = props;
+  // 2015-05-28T17:00:00-07:00
+  // 2021-07-01T22:43:38.000Z
   const [signedUp, setSignedUp] = useState();
   const [showmodal, setShowModal] = useState(false);
   const userId = useAuth().user && useAuth().user.uid;
-  const abst = new Date(date).getTime();
+  const email = useAuth().user && useAuth().email;
+  const isoStart = new Date(start).toISOString();
+  const isoEnd = new Date(end).toISOString();
+  console.log(isoStart, "starts");
+  console.log(isoEnd);
+  const abst = new Date().getTime();
+  const userName = useAuth().user && useAuth().name;
+
   const humanReadableDate = new Date(abst).toLocaleDateString("en-US", {
     day: "numeric",
     month: "long",
@@ -51,7 +70,15 @@ function EventLogistics(props) {
   if (!userId || !address) {
     return <Loader />;
   }
-  const senRem = () => {};
+  const senRem = () => {
+    return new Promise((resolve, reject) => {
+      resolve(setShowModal(false));
+    })
+      .then(() => {
+        calendar(id, email, isoStart, isoEnd, description, location);
+      })
+      .then(() => console.log("g"));
+  };
   return (
     <section className={classes.logistics}>
       <div className={classes.image}>
@@ -89,9 +116,9 @@ function EventLogistics(props) {
         <Reactmodal
           show={showmodal}
           onHide={() => setShowModal(false)}
-          callBack={() => {}}
+          add={() => senRem()}
         />
-        <button onClick={() => setShowModal(!showmodal)}>jjjjhhhhhjj</button>
+        <button onClick={() => setShowModal(!showmodal)}>jjjjhhjjhhhjj</button>
       </span>
     </section>
   );

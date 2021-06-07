@@ -9,7 +9,6 @@ import Image from "next/image";
 
 const EventItem = (props) => {
   const { start, end, category, location, id, attendies } = props;
-const ca
   const [isValid, setValid] = useState(() => {
     return start > new Date().getTime();
   });
@@ -51,7 +50,7 @@ const ca
           </div>
           <div className={classes.actions}>
             <Button link={linkTo} isdisabled={isValid}>
-              <span>Go to Event</span>
+              Go to Event
               <span className={classes.icon}>
                 <ArrowIcon />
               </span>

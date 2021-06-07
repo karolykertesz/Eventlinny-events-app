@@ -7,11 +7,11 @@ const Reactmodal = (props) => {
   return (
     <div>
       <Modal
-        {...props}
         size="sm"
         aria-labelledby="contained-modal-title-vcenter"
         centered={true}
         className={classes.top}
+        {...props}
       >
         <Modal.Header closeButton className={classes.head}>
           <Modal.Title
@@ -28,7 +28,7 @@ const Reactmodal = (props) => {
           <Button onClick={props.onHide} className="btn-danger">
             Close
           </Button>
-          <Button onClick={props.callBack} className="btn-success">
+          <Button onClick={props.add} className="btn-success">
             Ok
           </Button>
         </Modal.Footer>
