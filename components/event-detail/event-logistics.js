@@ -72,10 +72,11 @@ function EventLogistics(props) {
       resolve(setShowModal(false));
     })
       .then(() => {
-        // calendar(id, email, isoStart, isoEnd, description, location);
         sendcal(email, start, description, location);
       })
-      .then(() => console.log("g"));
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <section className={classes.logistics}>
@@ -116,7 +117,6 @@ function EventLogistics(props) {
           onHide={() => setShowModal(false)}
           add={() => senRem()}
         />
-        <button onClick={() => setShowModal(!showmodal)}>jjjjhhjjhhhjj</button>
       </span>
     </section>
   );

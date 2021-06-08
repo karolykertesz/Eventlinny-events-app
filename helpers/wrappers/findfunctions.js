@@ -19,6 +19,7 @@ export const locAndCat = (loc, cat) => {
           premium: item.data().premium,
           Image: item.data().Image,
           id: item.id,
+          attendies: item.data().attendies,
         });
       });
       return itemArray;
@@ -43,6 +44,7 @@ export const onlyLoc = (loc) => {
           premium: item.data().premium,
           Image: item.data().Image,
           id: item.id,
+          attendies: item.data().attendies,
         });
       });
       return itemArray;
@@ -67,6 +69,7 @@ export const onlyCat = (cat) => {
           premium: item.data().premium,
           Image: item.data().Image,
           id: item.id,
+          attendies: item.data().attendies,
         });
       });
       return itemArray;

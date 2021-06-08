@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import firebase from "firebase";
 import Loader from "../../components/UI/loader";
 import EventList from "../../components/EventList";
 import {

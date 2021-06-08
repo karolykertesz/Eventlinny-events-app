@@ -13,7 +13,7 @@ const EventItem = (props) => {
     return start > new Date().getTime();
   });
   const addressV = location;
-
+  const attEndiesLength = attendies.length > 0 ? attendies.length : 0;
   const linkTo = `/events/${id}`;
   return (
     <span className={!isValid ? classes.falseItem : ""}>
@@ -27,7 +27,15 @@ const EventItem = (props) => {
         />
         <div className={classes.content}>
           <div className={classes.summary}>
-            <h2>{category}</h2>
+            <h2
+              style={{
+                textTransform: "uppercase",
+                color: "burlywood",
+                fontFamily: "Ariel",
+              }}
+            >
+              {category}
+            </h2>
           </div>
 
           <div className={classes.date}>
@@ -46,7 +54,9 @@ const EventItem = (props) => {
           </div>
           <div className={classes.address}>
             <PersonIcon />
-            <address>{attendies.length}</address>
+            <address style={{ textAlign: "center", marginBottom: "1px" }}>
+              {attEndiesLength}
+            </address>
           </div>
           <div className={classes.actions}>
             <Button link={linkTo} isdisabled={isValid}>

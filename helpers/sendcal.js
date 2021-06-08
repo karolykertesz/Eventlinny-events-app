@@ -15,10 +15,10 @@ const sendcal = async (email, start, description, location) => {
   const status = await mess.status;
   const message = await mess.json();
   if (status === 200) {
-    // console.log(message);
+    console.log(message);
     return message;
   } else {
-    return "ERROR";
+    console.log(message);
   }
 };
 
