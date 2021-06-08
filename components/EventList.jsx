@@ -5,19 +5,23 @@ const EventList = (props) => {
   return (
     <div>
       <ul className={classes.list}>
-        {items.map((item, indx) => (
-          <EventItem
-            key={indx}
-            id={item.id}
-            image={`/images/${item.category}.jpg`}
-            location={item.location}
-            start={item.start}
-            category={item.category}
-            attendies={item.attendies}
-            description={item.description}
-            end={item.end}
-          />
-        ))}
+        {items
+          .sort((a, b) => {
+            return a.start - b.start;
+          })
+          .map((item, indx) => (
+            <EventItem
+              key={indx}
+              id={item.id}
+              image={`/images/${item.category}.jpg`}
+              location={item.location}
+              start={item.start}
+              category={item.category}
+              attendies={item.attendies}
+              description={item.description}
+              end={item.end}
+            />
+          ))}
       </ul>
     </div>
   );

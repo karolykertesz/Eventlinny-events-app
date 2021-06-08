@@ -116,6 +116,7 @@ function EventLogistics(props) {
           show={showmodal}
           onHide={() => setShowModal(false)}
           add={() => senRem()}
+          text={"Would you Like to have a remainder?"}
         />
       </span>
     </section>

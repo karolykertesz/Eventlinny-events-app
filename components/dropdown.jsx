@@ -4,7 +4,6 @@ import styled from "styled-components";
 import classes from "../components/UI/ui-modules/drop.module.css";
 import { useEffect, useState } from "react";
 import { useAuth } from "../components/Layout/UserContext";
-import windowLocation from "../helpers/location";
 
 const DropDown = ({ cls, setShow }) => {
   const [user, setUser] = useState();
@@ -33,7 +32,7 @@ const DropDown = ({ cls, setShow }) => {
             </Link>
           </li>
           <li onClick={() => setShow(false)}>
-            <Link href="/logout">sign Out</Link>
+            <Link href={`/events/calendar/${uid}`}>Your Events</Link>
           </li>
         </ul>
       </div>

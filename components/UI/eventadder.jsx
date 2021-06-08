@@ -182,7 +182,7 @@ const Eventadder = ({
           .then(() => {
             router.push("/events");
           })
-          .catch(() => console.log(err));
+          .catch((err) => console.log(err));
       }
     }
   };

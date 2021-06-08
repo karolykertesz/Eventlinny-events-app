@@ -146,6 +146,30 @@ export const user_events_data = async () => {
   return dockArray;
 };
 
+export const getUserEvents = async (id) => {
+  let docArray = [];
+  const docref = await db
+    .collection("user_add_events")
+    .where("added_by", "==", id)
+    .get()
+    .then((item) => {
+      item.forEach((it) => {
+        docArray.push({
+          id: it.id,
+          start: it.data().starts.toMillis(),
+          end: it.data().ends.toMillis(),
+          category: it.data().category,
+          added_by: it.data().added_by,
+          location: it.data().location,
+          attendies: it.data().attendies,
+          premium: it.data().premium,
+          description: it.data().description,
+        });
+      });
+    });
+  return docArray;
+};
+
 export const findById = async (id) => {
   let ren = {};
   try {

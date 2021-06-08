@@ -5,6 +5,7 @@ import DateIcon from "./UI/icons/date-icon";
 import AddresIcon from "./UI/icons/address-icon";
 import PersonIcon from "./UI/icons/person-icon";
 import ArrowIcon from "./UI/icons/arrow-right-icon";
+import NotApply from "./UI/icons/not-apply";
 import Image from "next/image";
 
 const EventItem = (props) => {
@@ -21,7 +22,7 @@ const EventItem = (props) => {
         <Image
           src={`/images/${category}.jpg`}
           alt={category}
-          width={260}
+          width={200}
           height={180}
           quality={100}
         />
@@ -58,6 +59,14 @@ const EventItem = (props) => {
               {attEndiesLength}
             </address>
           </div>
+          {!isValid && (
+            <div className={classes.address}>
+              <NotApply />
+              <address style={{ textAlign: "center", marginBottom: "1px" }}>
+                Finished Event
+              </address>
+            </div>
+          )}
           <div className={classes.actions}>
             <Button link={linkTo} isdisabled={isValid}>
               Go to Event

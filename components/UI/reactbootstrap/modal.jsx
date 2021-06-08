@@ -22,7 +22,7 @@ const Reactmodal = (props) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className={classes.body}>
-          <p>Would you Like to have a remainder?</p>
+          <p>{props.text}</p>
         </Modal.Body>
         <Modal.Footer className={classes.footer}>
           <Button onClick={props.onHide} className="btn-danger">
