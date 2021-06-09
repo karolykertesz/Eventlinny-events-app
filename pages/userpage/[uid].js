@@ -4,8 +4,9 @@ import { CoverDiv } from "../startup";
 import Userpage from "../../handlers/userpage";
 import { useRouter } from "next/router";
 import Loader from "../../components/UI/loader";
+import { getuserimage } from "../../data";
 
-const UserProfile = ({ userLocation, userinfo, userAdditional }) => {
+const UserProfile = ({ userLocation, userinfo, userAdditional, imgUrl }) => {
   const router = useRouter();
   const [user, setuser] = useState();
   const unuser = async () => {
@@ -39,6 +40,7 @@ const UserProfile = ({ userLocation, userinfo, userAdditional }) => {
         location={userLocation && userLocation}
         userInfo={userinfo && userinfo}
         userAdditional={userAdditional ? userAdditional : ""}
+        imgUrl={imgUrl}
       />
     </CoverDiv>
   );
@@ -103,12 +105,14 @@ export async function getServerSideProps(context) {
   const location = await loc.json();
   const userInfo = await userPref.json();
   const userAd = await aditionals.json();
+  const imgUrl = await getuserimage(uid);
 
   return {
     props: {
       userinfo: userInfo.m,
       userLocation: location.m,
       userAdditional: userAd.m,
+      imgUrl: imgUrl,
     },
   };
 }

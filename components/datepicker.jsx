@@ -33,6 +33,10 @@ const Datepicker = (props) => {
           docref.update({
             birthday: r,
           });
+        } else {
+          docref.set({
+            birthday: r,
+          });
         }
       })
       .then(() => {

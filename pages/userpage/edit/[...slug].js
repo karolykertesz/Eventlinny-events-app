@@ -15,7 +15,6 @@ const Slug = () => {
       resolve(mess);
     }).then((response) => {
       if (response.status === 400) {
-        console.log(response.message);
         router.push("/login");
       }
     });

@@ -7,5 +7,12 @@ export {
   Error,
   CoverRow,
 } from "./styledComponents";
-export { Input, SendButton, InputHolder, Cdiv } from "./formInputs";
+export {
+  Input,
+  SendButton,
+  InputHolder,
+  Cdiv,
+  IconCover,
+  FileInput,
+} from "./formInputs";
 export { SVG } from "../startitem";

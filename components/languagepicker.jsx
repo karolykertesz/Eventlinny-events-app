@@ -3,7 +3,9 @@ import react, { useState } from "react";
 import { language } from "../data";
 import classes from "./UI/ui-modules/locationState.module.css";
 import { Pi, Buttondiv } from "../pages/userpage/edit/location";
+import { useRouter } from "next/router";
 const Languagepicker = ({ uid }) => {
+  const router = useRouter();
   const [selected, setselected] = useState();
   const [message, setmassage] = useState();
   const [isSet, setisSet] = useState(false);
@@ -49,7 +51,10 @@ const Languagepicker = ({ uid }) => {
         <div className={classes.cover}>
           <Pi>{message && message}</Pi>
           <Buttondiv>
-            <button className={classes.btn + " " + classes.update}>
+            <button
+              className={classes.btn + " " + classes.update}
+              onClick={() => router.push("/events")}
+            >
               GO BACK
             </button>
           </Buttondiv>

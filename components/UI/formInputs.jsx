@@ -1,6 +1,17 @@
 import styled from "styled-components";
 import React from "react";
 
+export const IconCover = styled.div.attrs((props) => ({}))`
+  display: block;
+  height: ${(props) => props.height};
+  width: ${(props) => props.width};
+  color: burlywood;
+  margin-left: ${(props) => props.marginRight};
+  &:active {
+    color: ${(props) => props.color};
+  }
+`;
+
 export const Input = styled.input.attrs((props) => ({
   type: "text",
   size: props.small ? 10 : 18,
@@ -19,7 +30,11 @@ export const Input = styled.input.attrs((props) => ({
     outline: none;
   }
 `;
-
+export const FileInput = styled(Input).attrs((props) => ({
+  type: "file",
+}))`
+  color: burlywood;
+`;
 const Button = styled.button`
   text-decoration: none;
   cursor: pointer;

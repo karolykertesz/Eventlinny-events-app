@@ -1,17 +1,25 @@
-import react, { useState } from "react";
+import react, { useState, useEffect } from "react";
 import firebase from "firebase";
 import Link from "next/link";
+import Image from "next/image";
 import classes from "../components/UI/ui-modules/userpage.module.css";
 import { VscChromeClose, VscDiffAdded } from "react-icons/vsc";
 import { IconContext } from "react-icons";
+import {
+  Pi,
+  IconCover,
+  CoverRow,
+  FileInput,
+} from "../components/UI/styledindex";
+import UserIcon from "../components/UI/icons/user-icon";
 
-const Userpage = ({ user, userInfo, location, userAdditional }) => {
+const Userpage = ({ user, userInfo, location, userAdditional, imgUrl }) => {
   const [userPrefs, setUserPrefs] = useState();
   const filtereduser = user && user;
   const userInfoNames = userInfo && userInfo.map((item) => item.name);
   const userLocation = location && location.location;
   const countryCode = location && location.countryCode.toUpperCase();
-
+  console.log(imgUrl, "gjj");
   const deleteElement = async (element) => {
     const docref = firebase
       .firestore()
@@ -28,6 +36,22 @@ const Userpage = ({ user, userInfo, location, userAdditional }) => {
         throw new Error(err);
       });
   };
+  const fileChange = async (e) => {
+    const file = e.target.files[0];
+    const storageRef = firebase.storage().ref();
+    const fileRef = storageRef.child(file.name);
+    await fileRef.put(file);
+    const fileUrl = await fileRef.getDownloadURL();
+    return firebase
+      .firestore()
+      .collection("user_aditional")
+      .doc(user && user.uid)
+      .update({
+        image_url: fileUrl,
+      })
+      .then(() => alert("Upploded"))
+      .catch((err) => console.log(err));
+  };
 
   return (
     <>
@@ -37,6 +61,25 @@ const Userpage = ({ user, userInfo, location, userAdditional }) => {
         <div className={classes.top}>
           <div className={classes.inner}>
             <ul className={classes.userInfo}>
+              <li>
+                {!imgUrl ? (
+                  <CoverRow>
+                    <IconCover height="100px" width="100px">
+                      <UserIcon />
+                    </IconCover>
+                    <CoverRow>
+                      <Pi style={{ textTransform: "uppercase" }}>Add Image</Pi>
+                      <IconCover height="40px" width="40px" marginRight="50px">
+                        <FileInput type="file" onChange={fileChange} />
+                      </IconCover>
+                    </CoverRow>
+                  </CoverRow>
+                ) : (
+                  <div className={classes.imgCont}>
+                    <img width={130} height={130} src={imgUrl} />
+                  </div>
+                )}
+              </li>
               <li>
                 <p>Name:</p>
                 <span> {filtereduser && filtereduser.name}</span>
@@ -131,7 +174,7 @@ const Userpage = ({ user, userInfo, location, userAdditional }) => {
                 ))}
             </ul>
             <div className={classes.everet}>
-              <Link href={`/adders/user/ownevents/${user.uid}`}>
+              <Link href={`/events/calendar/${user.uid}`}>
                 Your Added Events Click to wiew
               </Link>
             </div>

@@ -1,5 +1,5 @@
 import firebase from "firebase";
-
+import "firebase/storage";
 export default function FirebaseClient() {
   if (!firebase.apps.length) {
     firebase.initializeApp({

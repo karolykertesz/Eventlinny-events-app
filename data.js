@@ -170,6 +170,24 @@ export const getUserEvents = async (id) => {
   return docArray;
 };
 
+export const getuserimage = async (uid) => {
+  let url;
+  const dataref = await db
+    .collection("user_aditional")
+    .doc(uid)
+    .get()
+    .then((doc) => {
+      if (doc.exists) {
+        const data = doc.data();
+        url = data.image_url;
+      } else {
+        url = null;
+      }
+    })
+    .catch((err) => console.log(err));
+  return url;
+};
+
 export const findById = async (id) => {
   let ren = {};
   try {

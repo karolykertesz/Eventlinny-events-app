@@ -4,7 +4,7 @@ import { AuthProvider } from "../components/Layout/UserContext";
 import Layout from "../components/Layout/Layout";
 import Head from "next/head";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import { firebase } from "../helpers/firebase";
+
 function MyApp({ Component, pageProps }) {
   return (
     <>

@@ -164,3 +164,24 @@
   text-align: center;
   margin: 10px;
 }
+.imgCont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.imgCont img {
+  border-radius: 10px;
+  transition: transform 0.2s;
+  margin: 0 300px;
+  -webkit-transition: transform 0.2s;
+  -moz-transition: transform 0.2s;
+  -ms-transition: transform 0.2s;
+  -o-transition: transform 0.2s;
+}
+.imgCont img:hover {
+  transform: scale(1.5);
+  -webkit-transform: scale(1.5);
+  -moz-transform: scale(1.5);
+  -ms-transform: scale(1.5);
+  -o-transform: scale(1.5);
+}
