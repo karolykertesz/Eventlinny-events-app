@@ -1,4 +1,4 @@
-import react, { useState, useEffect } from "react";
+import react, { useState, useEffect, Fragment } from "react";
 import firebase from "firebase";
 import Link from "next/link";
 import Image from "next/image";
@@ -19,7 +19,6 @@ const Userpage = ({ user, userInfo, location, userAdditional, imgUrl }) => {
   const userInfoNames = userInfo && userInfo.map((item) => item.name);
   const userLocation = location && location.location;
   const countryCode = location && location.countryCode.toUpperCase();
-  console.log(imgUrl, "gjj");
   const deleteElement = async (element) => {
     const docref = firebase
       .firestore()
@@ -54,95 +53,102 @@ const Userpage = ({ user, userInfo, location, userAdditional, imgUrl }) => {
   };
 
   return (
-    <>
+    <Fragment>
       {!user || !location || !userInfo ? (
         <div>Loadin ...</div>
       ) : (
         <div className={classes.top}>
           <div className={classes.inner}>
-            <ul className={classes.userInfo}>
-              <li>
-                {!imgUrl ? (
-                  <CoverRow>
-                    <IconCover height="100px" width="100px">
-                      <UserIcon />
-                    </IconCover>
-                    <CoverRow>
-                      <Pi style={{ textTransform: "uppercase" }}>Add Image</Pi>
-                      <IconCover height="40px" width="40px" marginRight="50px">
+            <table className={classes.usertable}>
+              <tbody>
+                <tr>
+                  <td style={{ textAlign: "center" }}>Your Personal Details</td>
+                  <td></td>
+                  <td>
+                    {imgUrl ? (
+                      <>
+                        <Image
+                          width={100}
+                          height={100}
+                          src={imgUrl}
+                          quality={100}
+                        />
+                      </>
+                    ) : (
+                      <CoverRow>
                         <FileInput type="file" onChange={fileChange} />
-                      </IconCover>
-                    </CoverRow>
-                  </CoverRow>
-                ) : (
-                  <div className={classes.imgCont}>
-                    <img width={130} height={130} src={imgUrl} />
-                  </div>
-                )}
-              </li>
-              <li>
-                <p>Name:</p>
-                <span> {filtereduser && filtereduser.name}</span>
-                <p>
-                  <Link href="/userpage/edit/name">Change ...</Link>
-                </p>
-              </li>
-              <li>
-                <p>email:</p>
-                <span>{filtereduser.email}</span>
-                <p>
-                  <Link href="/userpage/edit/email">Change ...</Link>
-                </p>
-              </li>
-              <li>
-                <p>Your Location: </p>
-                <span>{userLocation}</span>
-                <span>
-                  <Link
-                    href={`/userpage/edit/location?def=${countryCode}&uid=${user.uid}`}
-                  >
-                    Change ...
-                  </Link>
-                </span>
-              </li>
-              <li>
-                <p>Birthday:</p>
-                {
-                  <span>
-                    {userAdditional.birthday ? userAdditional.birthday : ""}
-                  </span>
-                }
-                <p>
-                  <Link href={`/userpage/edit/birthday?uid=${user.uid}`} ui>
+                        <Pi style={{ textTransform: "uppercase" }}>
+                          Add Image
+                        </Pi>
+                        <IconCover height="60px" width="50px">
+                          <UserIcon />
+                        </IconCover>
+                      </CoverRow>
+                    )}
+                  </td>
+                </tr>
+                <tr>
+                  <th>Name</th>
+                  <td>{filtereduser && filtereduser.name}</td>
+                  <td>
+                    <Link href="/userpage/edit/name">Change ...</Link>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Email:</th>
+                  <td>{filtereduser.email}</td>
+                  <td>
+                    <Link href="/userpage/edit/email">Change ...</Link>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Location:</th>
+                  <td>{userLocation}</td>
+                  <td>
+                    <Link href="/userpage/edit/email">Change ...</Link>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Birthday:</th>
+                  <td>
                     {userAdditional.birthday
-                      ? "change.."
-                      : "Add birthday date.."}
-                  </Link>
-                </p>
-              </li>
-              <li>
-                <p>Bio:</p>
-                <span>{userAdditional.bio ? userAdditional.bio : ""}</span>
-                <p>
-                  <Link href="/userpage/edit/bio">
-                    {userAdditional.bio ? "change.." : "Add your bio.."}
-                  </Link>
-                </p>
-              </li>
-              <li>
-                <p>language:</p>
-                <span>
-                  {userAdditional.language ? userAdditional.language : ""}
-                </span>
-                <p>
-                  <Link href={`/userpage/edit/language?uid=${user.uid}`}>
+                      ? userAdditional.birthday
+                      : "Add your birthday.."}
+                  </td>
+                  <td>
+                    <Link href={`/userpage/edit/birthday?uid=${user.uid}`} ui>
+                      {userAdditional.birthday
+                        ? "change.."
+                        : "Add birthday date.."}
+                    </Link>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Bio:</th>
+                  <td>{userAdditional.bio ? userAdditional.bio : ""}</td>
+                  <td>
+                    <Link href="/userpage/edit/bio">
+                      {userAdditional.bio ? "change.." : "Add your bio.."}
+                    </Link>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Language:</th>
+                  <td>
                     {userAdditional.language
-                      ? "change.."
-                      : "Add your prefered language.."}
-                  </Link>
-                </p>
-              </li>
-            </ul>
+                      ? userAdditional.language
+                      : "Add Your Language"}
+                  </td>
+                  <td>
+                    <Link href={`/userpage/edit/language?uid=${user.uid}`}>
+                      {userAdditional.language
+                        ? "change.."
+                        : "Add your prefered language.."}
+                    </Link>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
 
             <div className={classes.iconHolder}>
               <p className={classes.singleP}>YOUR PREFERENCES:</p>
@@ -181,7 +187,7 @@ const Userpage = ({ user, userInfo, location, userAdditional, imgUrl }) => {
           </div>
         </div>
       )}
-    </>
+    </Fragment>
   );
 };
 

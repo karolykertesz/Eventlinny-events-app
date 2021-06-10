@@ -179,7 +179,7 @@ export const getuserimage = async (uid) => {
     .then((doc) => {
       if (doc.exists) {
         const data = doc.data();
-        url = data.image_url;
+        url = data.image_url ? data.image_url : null;
       } else {
         url = null;
       }
@@ -212,6 +212,64 @@ export const findById = async (id) => {
     console.log(err);
   }
   return ren;
+};
+
+export const getusercat = async (uid) => {
+  let catArreay;
+  let useritems = await db.collection("cookies").doc(uid);
+  await useritems
+    .get()
+    .then(async (docu) => {
+      const arr = await docu.data().pref_events;
+      catArreay = arr;
+    })
+    .then(() => console.log("hh"));
+  const catArr = await catArreay;
+  const getcat = async () => {
+    const docref = await db.collection("startup");
+    const promises = await catArr.map((item) => docref.doc(item).get());
+    return Promise.all(promises).then((dock) => {
+      let categories = [];
+      dock.forEach((i) => {
+        categories.push(i.data().category);
+      });
+      return categories;
+    });
+  };
+  const caties = await getcat();
+  return caties;
+};
+
+export const getuserPrefWithWithCat = async (caRray) => {
+  const docref = await db.collection("user_add_events");
+  const getdataOnce = async () => {
+    const promises = await caRray.map((it) =>
+      docref.where("category", "==", it).get()
+    );
+    return Promise.all(promises).then(async (docsItems) => {
+      let docsArray = [];
+      await docsItems.forEach((items) => {
+        items.forEach((item) => {
+          docsArray.push({
+            id: item.id,
+            start: item.data().starts.toMillis(),
+            end: item.data().ends.toMillis(),
+            category: item.data().category,
+            added_by: item.data().added_by,
+            location: item.data().location,
+            attendies: item.data().attendies,
+            premium: item.data().premium,
+            description: item.data().description,
+          });
+        });
+      });
+
+      return docsArray;
+    });
+  };
+  const dataBack = await getdataOnce();
+  console.log(dataBack);
+  return dataBack;
 };
 
 export const language = [

@@ -1,18 +1,22 @@
 import react, { useEffect, useState, useCallback } from "react";
-import gettoken from "../../helpers/gettoken";
 import { Layer } from "../../components/UI/uiLayer ";
 import FirstPageItem from "../../components/UI/firstpageItem";
 import { NameDiv, Pi } from "../../components/UI/firstpageItem";
 import Loader from "../../components/UI/loader";
 import classes from "../../components/UI/ui-modules/first.module.css";
 import { useAuth } from "../../components/Layout/UserContext";
+import { getusercat, getuserPrefWithWithCat } from "../../data";
+import EventList from "../../components/EventList";
 const First = () => {
   const userInfo = useAuth().user;
   const [data, setData] = useState();
   const [user, setuser] = useState();
   const [userLocation, setuserlocation] = useState();
+  const [userPrefs, setUserPrefs] = useState();
 
   const t = data;
+  // const rr = getusercat(userInfo.uid);
+  console.log(userPrefs, "jjj");
   const call = useCallback(async () => {
     const mess = await fetch("/api/users/helpers/firstPage");
     const d = await mess.json();
@@ -24,6 +28,19 @@ const First = () => {
   useEffect(() => {
     call();
   }, [call]);
+
+  useEffect(() => {
+    const getStaticData = async () => {
+      const uid = userInfo ? userInfo.uid : null;
+      const categories = uid !== null && (await getusercat(uid));
+      const prefItems =
+        uid !== null &&
+        (await getuserPrefWithWithCat(categories).then((items) =>
+          setUserPrefs(items)
+        ));
+    };
+    return () => getStaticData();
+  }, []);
   const getLocation = async (uid) => {
     if (uid !== null || uid !== undefined) {
       try {
@@ -80,7 +97,9 @@ const First = () => {
           <h5>Events close to {userLocation.location}</h5>
         </div>
       )}
+      {userPrefs && <EventList items={userPrefs} />}
     </div>
   );
 };
+
 export default First;

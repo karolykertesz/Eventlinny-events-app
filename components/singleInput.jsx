@@ -53,7 +53,7 @@ const Singleinput = ({ item }) => {
         .collection("user_aditional")
         .doc(user.uid);
       return docref
-        .set({
+        .update({
           bio: updateItem,
         })
         .then(() => {

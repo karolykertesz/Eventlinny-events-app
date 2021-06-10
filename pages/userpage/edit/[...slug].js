@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { allUserPref } from "../../../helpers/wrappers/userPrefwrap";
 import StartItem from "../../../components/startitem";
 import CreateEvent from "../../../components/createEvent";
+import { Grid } from "../../../components/UI/styledindex";
 
 const Slug = () => {
   const [data, seTdata] = useState();
@@ -47,14 +48,14 @@ const Slug = () => {
   return (
     <div>
       {query && query[0] === "addNewPref" ? (
-        <div>
+        <Grid>
           {data !== undefined &&
             data.map((items, indx) => (
-              <div key={items.id}>
+              <span key={items.id}>
                 <StartItem items={items} addUserInt={addUserInt} />
-              </div>
+              </span>
             ))}
-        </div>
+        </Grid>
       ) : (
         <div>
           {query ? <CreateEvent uid={query && query[1]} /> : <p>Loading</p>}

@@ -61,3 +61,17 @@ export const Error = styled.div`
   text-transform: uppercase;
   text-align: center;
 `;
+
+export const Grid = styled.div`
+  display: grid;
+  grid-gap: 50px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  /* @media (max-width: 900px) {
+    grid-template-columns: 1fr 1fr;
+  } */
+
+  @media (max-width: 600px) {
+    display: flex;
+    flex-direction: column;
+  }
+`;

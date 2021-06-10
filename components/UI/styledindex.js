@@ -6,6 +6,7 @@ export {
   CatContainer,
   Error,
   CoverRow,
+  Grid,
 } from "./styledComponents";
 export {
   Input,

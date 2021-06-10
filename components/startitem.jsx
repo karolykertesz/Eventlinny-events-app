@@ -7,7 +7,7 @@ const StartItem = ({ items, addUserInt }) => {
   const [selected, setSelected] = useState(false);
   const item = items && items;
   return (
-    <div>
+    <div style={{ width: "100%" }}>
       <Divlayer>
         <span
           className={selected ? classes.divlayer : classes.divImage}
@@ -16,8 +16,8 @@ const StartItem = ({ items, addUserInt }) => {
           <Image
             src={"/" + item.image}
             alt={item.title}
-            width={300}
-            height={200}
+            width={350}
+            height={250}
             quality={100}
           />
           {/* "/" */}
@@ -75,6 +75,7 @@ const Divlayer = styled.div`
   justify-content: flex-start;
   flex-direction: column;
   align-items: center;
+  /* width: 100%; */
 `;
 export const Pi = styled.div`
   text-align: center;

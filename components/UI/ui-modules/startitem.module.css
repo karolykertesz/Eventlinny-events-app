@@ -1,11 +1,12 @@
 .divlayer img {
-    filter: sepia(100%);
-     border-radius: 5px;
+  filter: sepia(100%);
+  border-radius: 5px;
 }
 
-
-
 .divImage img {
-    border-radius: 5px;
-
+  border-radius: 5px;
+  margin-top: 50px;
+}
+.divImage span {
+  width: 100%;
 }
