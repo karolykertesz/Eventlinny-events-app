@@ -12,7 +12,7 @@
 }
 
 .icon {
-  margin-right: 1rem;
+  /* margin-right: 1rem; */
   color: rgb(189, 143, 83);
 }
 
@@ -25,5 +25,19 @@
   .item {
     align-items: flex-start;
     text-align: left;
+  }
+}
+@media (max-width: 768px) {
+  .icon svg {
+    width: 2rem;
+    height: 2rem;
+  }
+  .item {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .icon svg {
+    margin: 0;
   }
 }

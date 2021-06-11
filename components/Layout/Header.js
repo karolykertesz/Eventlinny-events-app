@@ -66,7 +66,9 @@ const Header = () => {
     <div className={classes.nav}>
       <input type="checkbox" id="nav-check" className={classes.navCheck} />
       <div className={classes.navHeader}>
-        <div className={classes.navTitle}>Eventlinny</div>
+        <div className={classes.navTitle}>
+          <Link href="/events/first">Eventlinny</Link>
+        </div>
       </div>
 
       <div className={classes.navBtn}>

@@ -29,7 +29,12 @@
   text-decoration: none;
   font-family: Arial, Helvetica, sans-serif;
 }
-
+.nav > .navHeader > .navTitle a {
+  font-size: 24px;
+  color: papayawhip;
+  padding: 10px 10px 10px 10px;
+  text-decoration: none;
+}
 .nav > .navBtn {
   display: none;
 }

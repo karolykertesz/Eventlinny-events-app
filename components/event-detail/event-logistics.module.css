@@ -55,12 +55,38 @@
     height: 20rem;
   }
 
-  .image img {
-    width: 20rem;
-    height: 20rem;
-  }
-
   .list {
     align-items: flex-start;
+  }
+}
+@media (max-width: 768px) {
+  .logistics {
+    /* padding: 1rem; */
+    margin: 5px auto;
+    /* gap: 1rem; */
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: center;
+    padding: 20px;
+
+    width: 100%;
+    height: 38vh;
+  }
+  .logistics address {
+    font-size: 18px;
+    text-align: left;
+
+    /* margin: 3px; */
+  }
+  .logistics time {
+    font-size: 18px;
+  }
+  .image {
+    margin-top: 50px;
+    width: 10rem;
+    height: 10rem;
+  }
+  .list {
+    height: 34vh;
   }
 }

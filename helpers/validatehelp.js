@@ -14,6 +14,8 @@ export const useRedirect = () => {
     }
   };
   useEffect(() => {
-    validate();
+    return () => {
+      validate;
+    };
   }, []);
 };

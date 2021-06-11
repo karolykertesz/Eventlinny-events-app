@@ -16,6 +16,6 @@ export const Layer = styled.div`
     grid-template-columns: 1fr 1fr;
   }
   @media screen and (min-width: 780px) {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 `;

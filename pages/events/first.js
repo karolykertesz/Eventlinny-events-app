@@ -7,7 +7,9 @@ import classes from "../../components/UI/ui-modules/first.module.css";
 import { useAuth } from "../../components/Layout/UserContext";
 import { getusercat, getuserPrefWithWithCat } from "../../data";
 import EventList from "../../components/EventList";
+import { useRedirect } from "../../helpers/validatehelp";
 const First = () => {
+  const valid = useRedirect();
   const userInfo = useAuth().user;
   const [data, setData] = useState();
   const [user, setuser] = useState();
@@ -15,8 +17,6 @@ const First = () => {
   const [userPrefs, setUserPrefs] = useState();
 
   const t = data;
-  // const rr = getusercat(userInfo.uid);
-  console.log(userPrefs, "jjj");
   const call = useCallback(async () => {
     const mess = await fetch("/api/users/helpers/firstPage");
     const d = await mess.json();
@@ -32,14 +32,22 @@ const First = () => {
   useEffect(() => {
     const getStaticData = async () => {
       const uid = userInfo ? userInfo.uid : null;
-      const categories = uid !== null && (await getusercat(uid));
-      const prefItems =
-        uid !== null &&
-        (await getuserPrefWithWithCat(categories).then((items) =>
-          setUserPrefs(items)
-        ));
+      if (uid !== null) {
+        try {
+          const categories = await getusercat(uid && uid);
+          const prefItems = await getuserPrefWithWithCat(categories)
+            .then((items) => {
+              return setUserPrefs(items);
+            })
+            .then(() => {
+              console.log("j");
+            });
+        } catch (err) {
+          console.log(err);
+        }
+      }
     };
-    return () => getStaticData();
+    return getStaticData();
   }, []);
   const getLocation = async (uid) => {
     if (uid !== null || uid !== undefined) {
@@ -66,7 +74,7 @@ const First = () => {
 
   useEffect(() => {
     const uid = userInfo ? userInfo.uid : null;
-    getLocation(uid);
+    return getLocation(uid);
   }, [user]);
   return !data || !user ? (
     <Loader />
@@ -92,9 +100,9 @@ const First = () => {
             </span>
           ))}
       </Layer>
-      {userLocation && (
+      {userPrefs && (
         <div className={classes.location}>
-          <h5>Events close to {userLocation.location}</h5>
+          <h5>Events from Your Selected categories</h5>
         </div>
       )}
       {userPrefs && <EventList items={userPrefs} />}
