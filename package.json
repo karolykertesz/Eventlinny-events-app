@@ -37,6 +37,7 @@
     "react-datepicker": "^3.8.0",
     "react-dom": "17.0.1",
     "react-icons": "^4.2.0",
+    "react-map-gl": "^6.1.16",
     "styled-components": "^5.2.3",
     "swr": "^0.5.5",
     "uuidv4": "^6.2.8",

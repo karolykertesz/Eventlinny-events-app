@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import EventSummary from "./event-detail/event-summary";
 import EventLog from "./event-detail/event-logistics";
 import EventContent from "./event-detail/event-content";
-import { PiBig } from "./UI/styledComponents";
+import { PiBig, Pi } from "./UI/styledComponents";
 import EventMap from "../components/eventMap";
 
 const EventComp = ({ single }) => {
@@ -27,10 +27,11 @@ const EventComp = ({ single }) => {
       return;
     }
   };
+  console.log(loc);
   useEffect(() => {
     return add();
   }, []);
-  console.log(loc);
+  // console.log(loc.postalCodes[0].lat, "loc");
   return (
     <Fragment>
       <EventSummary title={single.category} />
@@ -46,8 +47,14 @@ const EventComp = ({ single }) => {
         end={single.end}
       />
       <EventContent>
-        {/* <PiBig>event Description: {single.description}</PiBig> */}
-        <EventMap />
+        <Pi>event Description: {single.description}</Pi>
+        {loc && (
+          <EventMap
+            latitude={loc && loc.postalCodes[0].lat}
+            longitude={loc && loc.postalCodes[0].lng}
+            location={single.location}
+          />
+        )}
       </EventContent>
     </Fragment>
   );

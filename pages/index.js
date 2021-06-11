@@ -2,6 +2,7 @@ import { useState } from "react";
 import EventList from "../components/EventList";
 import { db } from "../helpers/firebase";
 import Head from "next/head";
+import EventMap from "../components/eventMap";
 const Home = ({ eventss }) => {
   const [fetched, useFetched] = useState(eventss);
 
@@ -12,6 +13,7 @@ const Home = ({ eventss }) => {
         <meta name="description" content="Great events by Next events" />
       </Head>
       <EventList items={fetched} />
+      <EventMap />
     </div>
   );
 };
