@@ -65,7 +65,7 @@ const Eventadder = ({
   const startDate = startDay && startDay;
   const displayname = user.name;
   const initialState = {
-    selectedcategory: category === "create" ? "" : category,
+    selectedcategory: category,
     eventLocation: null,
     selectedCountry: "",
     startDay: null,
@@ -73,7 +73,6 @@ const Eventadder = ({
     selectedCity: "",
     description: null,
   };
-
   const [state, dispatch] = useReducer(eventsReducer, initialState);
   const {
     selectedCountry,
@@ -118,12 +117,13 @@ const Eventadder = ({
           .set({
             added_by: uid,
             attendies: firebase.firestore.FieldValue.arrayUnion(uid),
-            category: category,
+            category: selectedcategory.toLowerCase(),
             location: "online",
             starts: firebase.firestore.Timestamp.fromDate(new Date(startDay)),
             ends: firebase.firestore.Timestamp.fromDate(new Date(endDay)),
             premium: false,
             description: description.toLowerCase(),
+            created_by: displayname,
           })
           .then(() => {
             return new Promise((resolve, reject) => {
@@ -132,7 +132,7 @@ const Eventadder = ({
                   email,
                   displayname,
                   startToSend,
-                  selectedcategory,
+                  selectedcategory.toLowerCase(),
                   docId,
                   description.toLowerCase()
                 )
@@ -155,13 +155,14 @@ const Eventadder = ({
           .set({
             added_by: uid,
             attendies: firebase.firestore.FieldValue.arrayUnion(uid),
-            category: category.toLowerCase(),
+            category: selectedcategory.toLowerCase(),
             location: loctString.toLowerCase(),
             location_country: selectedCountry,
             starts: new Date(startDay),
             ends: new Date(endDay),
             premium: false,
             description: description.toLowerCase(),
+            created_by: displayname,
           })
           .then(() => {
             return new Promise((resolve, reject) => {

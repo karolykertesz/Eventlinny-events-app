@@ -1,29 +1,19 @@
-import React, { useEffect, useState, Fragment } from "react";
-import { Image } from "next/image";
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import firebase from "firebase";
+import { Pi } from "../components/UI/styledindex";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 import classes from "../components/UI/ui-modules/eventmap.module.css";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_ID;
 import { addlocation } from "../helpers/axios/add";
 
-const EventMap = ({ location, cd, added_by }) => {
+const EventMap = ({ location, added_by, created_by }) => {
   const [popOpen, setOpen] = useState(false);
   const [loc, setLoc] = useState();
   const [imgUrl, setImg] = useState();
   const [viewport, setViewport] = useState();
-  useEffect(() => {
-    if (!location) return;
-    return addlocation(location).then((item) => {
-      const { zoom, latitude, longitude } = item;
-      return setViewport({
-        zoom: zoom,
-        latitude: latitude,
-        longitude: longitude,
-      });
-    });
-  }, []);
-  console.log(viewport);
   useEffect(() => {
     return firebase
       .firestore()
@@ -38,17 +28,33 @@ const EventMap = ({ location, cd, added_by }) => {
         } else {
           return;
         }
-      });
+      })
+      .then(async () => {
+        const { zoom, longitude, latitude } = await addlocation(location);
+        return {
+          zoom,
+          longitude,
+          latitude,
+        };
+      })
+      .then(({ zoom, longitude, latitude }) => {
+        setViewport({
+          zoom: zoom,
+          longitude,
+          latitude,
+        });
+      })
+      .then(() => console.log("h"));
   }, []);
-  console.log(imgUrl);
+
   return (
     <div className={classes.conpI}>
       {viewport && (
         <ReactMapGL
           {...viewport}
           mapboxApiAccessToken={MAPBOX_TOKEN}
-          width="170%"
-          height="200px"
+          width="210%"
+          height="170px"
           onViewportChange={(viewport) => setViewport(viewport)}
           mapStyle="mapbox://styles/karesz37/ckpsl4rgp2wa317o4isgr3ivi"
         >
@@ -66,7 +72,7 @@ const EventMap = ({ location, cd, added_by }) => {
               <div className={classes.text}>
                 <ul>
                   <li>city: {location},</li>
-                  {/* <li>country code:{cd}</li> */}
+                  <li></li>
                 </ul>
               </div>
             </Popup>
@@ -74,13 +80,18 @@ const EventMap = ({ location, cd, added_by }) => {
         </ReactMapGL>
       )}
 
-      {/* <div className={classes.box}>
+      <div className={classes.box}>
         <Image
           width={150}
           height={150}
           src={imgUrl ? imgUrl : "/images/noimage.svg"}
         />
-      </div> */}
+        <div className={classes.content}>
+          <Pi>Location: {location}</Pi>
+          <Pi>Created By:</Pi>
+          <Pi>{created_by}</Pi>
+        </div>
+      </div>
     </div>
   );
 };

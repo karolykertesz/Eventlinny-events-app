@@ -7,9 +7,12 @@ import PersonIcon from "./UI/icons/person-icon";
 import ArrowIcon from "./UI/icons/arrow-right-icon";
 import NotApply from "./UI/icons/not-apply";
 import Image from "next/image";
+import { categories } from "../data";
 
 const EventItem = (props) => {
   const { start, end, category, location, id, attendies } = props;
+  const isImageurl = categories.includes(category);
+
   const [isValid, setValid] = useState(() => {
     return start > new Date().getTime();
   });
@@ -20,7 +23,7 @@ const EventItem = (props) => {
     <span className={!isValid ? classes.falseItem : ""}>
       <span className={classes.item}>
         <Image
-          src={`/images/${category}.jpg`}
+          src={isImageurl ? `/images/${category}.jpg` : "/images/salmon.jpg"}
           alt={category}
           width={200}
           height={180}

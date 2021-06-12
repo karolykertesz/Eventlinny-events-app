@@ -1,13 +1,14 @@
 const admin = require("firebase-admin");
-const serviceAccount = require("../service/next-events-309cd-firebase-adminsdk-5vizw-f25b60cc6e.json");
-
-if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DB_URL,
-  });
-}
-
+const serviceAccount = require("../service/serviceAccountKey");
+export const fireAdm = () => {
+  if (!admin.apps.length) {
+    return admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+      databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DB_URL,
+    });
+  }
+};
+const app = admin.initializeApp();
 export default function getToken(token) {
   if (!admin.apps.length) {
     admin.initializeApp({

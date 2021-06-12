@@ -49,8 +49,23 @@
   right: 0;
 }
 .box {
-  background-color: cadetblue;
+  background-color: rgb(240, 236, 230);
   width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.box img {
+  width: 80px;
+  height: 80px;
+  margin: 10px;
+  float: right;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
 }
 .comp {
   display: inline-block;
@@ -80,8 +95,12 @@
 .conpI {
   display: block;
   margin: 0 auto;
-  width: 800px;
+  width: 700px;
+  height: auto;
   display: flex;
   flex-direction: row;
   border: 3px solid burlywood;
+}
+.mapCont {
+  width: 300px;
 }

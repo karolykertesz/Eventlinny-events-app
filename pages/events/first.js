@@ -8,6 +8,7 @@ import { useAuth } from "../../components/Layout/UserContext";
 import { getusercat, getuserPrefWithWithCat } from "../../data";
 import EventList from "../../components/EventList";
 import { useRedirect } from "../../helpers/validatehelp";
+import firebase from "firebase";
 const First = () => {
   const valid = useRedirect();
   const userInfo = useAuth().user;
@@ -15,7 +16,7 @@ const First = () => {
   const [user, setuser] = useState();
   const [userLocation, setuserlocation] = useState();
   const [userPrefs, setUserPrefs] = useState();
-
+  console.log(userInfo && userInfo.uid);
   const t = data;
   const call = useCallback(async () => {
     const mess = await fetch("/api/users/helpers/firstPage");
@@ -28,6 +29,26 @@ const First = () => {
   useEffect(() => {
     call();
   }, [call]);
+
+  useEffect(() => {
+    return new Promise((resolve, reject) => {
+      const docInfo = firebase
+        .firestore()
+        .collection("user_aditional")
+        .doc(userInfo.uid);
+      return docInfo.get().then((docs) => {
+        if (docs.exists) return;
+        else {
+          docInfo.set({
+            email: userInfo && userInfo.email,
+            name: userInfo && userInfo.name,
+          });
+        }
+      });
+    })
+      .then(() => console.log("k"))
+      .catch((err) => console.log(err));
+  }, []);
 
   useEffect(() => {
     const getStaticData = async () => {

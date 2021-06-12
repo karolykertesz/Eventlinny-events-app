@@ -7,7 +7,6 @@ const ValidPage = () => {
   const [ready, setReady] = useState(false);
   const router = useRouter();
   const email = router.query && router.query.email;
-  console.log(email);
 
   const sander = async () => {
     const mess = await fetch("/api/users/vid", {
@@ -32,7 +31,7 @@ const ValidPage = () => {
       console.log(re);
     });
     return () => {
-      unsubscribe;
+      unsubscribe();
     };
   }, []);
 

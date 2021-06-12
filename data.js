@@ -206,6 +206,7 @@ export const findById = async (id) => {
           attendies: item.data().attendies,
           premium: item.data().premium,
           description: item.data().description,
+          created_by: item.data().created_by,
         };
       });
   } catch (err) {

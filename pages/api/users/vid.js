@@ -14,7 +14,6 @@ export default async function handler(req, res) {
     }
   );
   const status = await mess.status;
-  console.log(status);
   if (status === 200) {
     res.status(200).json({ m: "done" });
     return;
