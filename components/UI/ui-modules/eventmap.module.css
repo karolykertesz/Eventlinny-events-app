@@ -25,6 +25,22 @@
   align-items: center;
   margin: 0 auto;
 }
+.btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.btn img {
+  width: 20px;
+  height: 20px;
+}
+.text ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: burlywood;
+  text-transform: capitalize;
+}
 .map {
   position: relative;
   /* top: 0; */

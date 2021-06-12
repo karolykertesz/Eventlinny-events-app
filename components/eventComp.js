@@ -1,4 +1,10 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, {
+  Fragment,
+  useEffect,
+  useState,
+  useCallback,
+  useMemo,
+} from "react";
 import EventSummary from "./event-detail/event-summary";
 import EventLog from "./event-detail/event-logistics";
 import EventContent from "./event-detail/event-content";
@@ -6,32 +12,23 @@ import { PiBig, Pi } from "./UI/styledComponents";
 import EventMap from "../components/eventMap";
 
 const EventComp = ({ single }) => {
+  // useEffect(() => {
+  //   return () => {
+  //     add()
+  //       .then((items) => addMem(items))
+  //       .then(() => console.log("jh"));
+  //   };
+  // }, [loc]);
+  // const addMem = (tr) => {
+  //   if (!loc) {
+  //     setLoc(tr);
+  //   } else {
+  //     return;
+  //   }
+  // };
   const attendies = single && single.attendies;
-  const [loc, setLoc] = useState();
   const location = single !== null && single.location;
-  const add = async () => {
-    if (location && location === "online") {
-      setLoc("online");
-    } else if (location && location !== "online") {
-      try {
-        const mess = await fetch(
-          `http://api.geonames.org/postalCodeSearchJSON?placename=${location}&maxRows=1&username=carlo12345`
-        );
-        const data = await mess.json();
-        setLoc(data);
-      } catch (err) {
-        console.log(err);
-      }
-    } else {
-      console.log("no data");
-      return;
-    }
-  };
-  console.log(loc);
-  useEffect(() => {
-    return add();
-  }, []);
-  // console.log(loc.postalCodes[0].lat, "loc");
+
   return (
     <Fragment>
       <EventSummary title={single.category} />
@@ -48,16 +45,17 @@ const EventComp = ({ single }) => {
       />
       <EventContent>
         <Pi>event Description: {single.description}</Pi>
-        {loc && (
+        {location !== "online" && (
           <EventMap
-            latitude={loc && loc.postalCodes[0].lat}
-            longitude={loc && loc.postalCodes[0].lng}
+            // latitude={loc && loc.postalCodes[0].lat}
+            // longitude={loc && loc.postalCodes[0].lng}
             location={single.location}
+            // cd={loc && loc.postalCodes[0].countryCode}
+            added_by={single && single.added_by}
           />
         )}
       </EventContent>
     </Fragment>
   );
 };
-
 export default EventComp;
