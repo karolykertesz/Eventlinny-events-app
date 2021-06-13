@@ -7,7 +7,6 @@ import LogisticsItem from "../../../components/event-detail/logistics-item";
 import Plus from "../../../components/UI/icons/plus";
 import Reactmodal from "../../../components/UI/reactbootstrap/modal";
 import { useRouter } from "next/router";
-import { route } from "next/dist/next-server/server/router";
 
 const UserEvents = ({ single }) => {
   const router = useRouter();

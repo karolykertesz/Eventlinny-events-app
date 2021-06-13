@@ -1,12 +1,12 @@
 export {
   Pi,
   PiBig,
-  list,
   Cover,
   CatContainer,
   Error,
   CoverRow,
   Grid,
+  List,
 } from "./styledComponents";
 export {
   Input,

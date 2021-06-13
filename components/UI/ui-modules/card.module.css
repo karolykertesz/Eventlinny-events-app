@@ -1,0 +1,44 @@
+.top {
+  width: 150px;
+  height: 150px;
+  background-color: bisque;
+  border-radius: 5px;
+  border-color: burlywood;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  margin-top: 20px;
+}
+.top a {
+  color: burlywood;
+  text-decoration: none;
+}
+.body {
+  border: none !important;
+}
+.img {
+  width: 70px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  height: 70px;
+  margin: 0 auto;
+  border-color: beige;
+  z-index: 1;
+}
+.title {
+  text-transform: capitalize;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  color: burlywood;
+}
+.member {
+  text-transform: capitalize;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  color: burlywood;
+  background-color: beige;
+}

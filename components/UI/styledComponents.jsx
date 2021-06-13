@@ -1,6 +1,6 @@
 import react from "react";
 import styled from "styled-components";
-import classes from "/components/event-item.module.css";
+import classes from "../../components/event-item.module.css";
 
 export const Pi = styled.p`
   text-align: center;

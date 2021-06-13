@@ -1,5 +1,5 @@
-import react, { useState } from "react";
-import classes from "./event-item.module.css";
+import React, { useState } from "react";
+import classes from "../components/event-item.module.css";
 import Button from "./UI/Button";
 import DateIcon from "./UI/icons/date-icon";
 import AddresIcon from "./UI/icons/address-icon";

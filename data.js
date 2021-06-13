@@ -269,10 +269,31 @@ export const getuserPrefWithWithCat = async (caRray) => {
     });
   };
   const dataBack = await getdataOnce();
-  console.log(dataBack);
   return dataBack;
 };
+export const getAttendiesInfo = async (attendies) => {
+  const getdata = async () => {
+    let arr = [];
+    const dataref = db.collection("user_aditional");
+    const promises = attendies.map((item) => dataref.doc(item).get());
+    const t = await Promise.all(promises).then(async (docu) => {
+      await docu.forEach((i) => {
+        console.log(i.data());
+        arr.push({
+          id: i.id,
+          name: i.data().name,
+          imgUrl: i.data().image_url
+            ? i.data().image_url
+            : "/images/noimage.svg",
+        });
+      });
+    });
+    return arr;
+  };
+  const dataArray = await getdata();
 
+  return dataArray;
+};
 export const language = [
   "english",
   "magyar",

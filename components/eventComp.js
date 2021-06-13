@@ -2,15 +2,30 @@ import React, { Fragment, useEffect, useState } from "react";
 import EventSummary from "./event-detail/event-summary";
 import EventLog from "./event-detail/event-logistics";
 import EventContent from "./event-detail/event-content";
-import { PiBig, Pi, Grid } from "./UI/styledComponents";
+import { PiBig, Pi, Grid, List } from "./UI/styledComponents";
 import EventMap from "../components/eventMap";
 import { categories } from "../data";
 import classes from "../components/UI/ui-modules/eventComp.module.css";
 import RecTCard from "../components/UI/reactbootstrap/card";
+import { getAttendiesInfo } from "../data";
 const EventComp = ({ single }) => {
   const attendies = single && single.attendies;
   const location = single !== null && single.location;
   const isImgUrl = categories.includes(single.category);
+  const [atttendiesInfo, setInfo] = useState();
+  useEffect(() => {
+    const setAttendies = async () => {
+      return getAttendiesInfo(attendies && attendies)
+        .then((items) => {
+          return setInfo(items);
+        })
+        .then(() => {});
+    };
+    return () => {
+      return setAttendies();
+    };
+  }, []);
+  console.log(atttendiesInfo);
   return (
     <Fragment>
       <EventSummary title={single.category} />
@@ -43,12 +58,22 @@ const EventComp = ({ single }) => {
             )}
           </EventContent>
           <div className={classes.cover}>
+            <PiBig>Attendies ({attendies.length})</PiBig>
             <Grid>
-              <RecTCard
-                memberlink="/members"
-                title="kertesz"
-                cargHeigth="150px"
-              />
+              {
+                atttendiesInfo &&
+                  atttendiesInfo.map((item) => (
+                    <RecTCard
+                      key={item.id}
+                      memberlink={`/users/members/${item.id}`}
+                      title={item.name}
+                      cargHeigth="120px"
+                      member={item.id == single.added_by ? "Host" : "Member"}
+                      src={item.imgUrl}
+                    />
+                  ))
+                //
+              }
             </Grid>
           </div>
         </div>

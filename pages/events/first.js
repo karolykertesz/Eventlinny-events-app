@@ -1,4 +1,4 @@
-import react, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Layer } from "../../components/UI/uiLayer ";
 import FirstPageItem from "../../components/UI/firstpageItem";
 import { NameDiv, Pi } from "../../components/UI/firstpageItem";
@@ -16,7 +16,6 @@ const First = () => {
   const [user, setuser] = useState();
   const [userLocation, setuserlocation] = useState();
   const [userPrefs, setUserPrefs] = useState();
-  console.log(userInfo && userInfo.uid);
   const t = data;
   const call = useCallback(async () => {
     const mess = await fetch("/api/users/helpers/firstPage");
@@ -31,15 +30,16 @@ const First = () => {
   }, [call]);
 
   useEffect(() => {
-    return new Promise((resolve, reject) => {
-      const docInfo = firebase
+    if (!userInfo) return;
+    return new Promise(async (resolve, reject) => {
+      const docInfo = await firebase
         .firestore()
         .collection("user_aditional")
-        .doc(userInfo.uid);
+        .doc(userInfo && userInfo.uid);
       return docInfo.get().then((docs) => {
         if (docs.exists) return;
         else {
-          docInfo.set({
+          docInfo.update({
             email: userInfo && userInfo.email,
             name: userInfo && userInfo.name,
           });

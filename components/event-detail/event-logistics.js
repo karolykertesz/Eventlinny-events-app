@@ -10,7 +10,6 @@ import Image from "next/image";
 import { useAuth } from "../Layout/UserContext";
 import Loader from "../../components/UI/loader";
 import Reactmodal from "../UI/reactbootstrap/modal";
-// import calendar from "../../helpers/calendar";
 import sendcal from "../../helpers/sendcal";
 
 function EventLogistics(props) {

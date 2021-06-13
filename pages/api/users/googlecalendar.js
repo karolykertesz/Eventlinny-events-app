@@ -1,6 +1,5 @@
 const { google } = require("googleapis");
-const path = require("path");
-const privatekey = require("../../../service/next-events-309cd-firebase-adminsdk-5vizw-f25b60cc6e.json");
+const privatekey = require("../../../service/serviceAccountKey.json");
 
 import { formater } from "../../../helpers/calendardateFormater";
 
