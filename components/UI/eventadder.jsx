@@ -10,6 +10,7 @@ import EventDatePicker from "../eventDatepicker";
 import { useAuth } from "../../components/Layout/UserContext";
 import { sendEmailWithEvent } from "../../helpers/sendEmailWithEvent";
 import Loader from "../UI/loader";
+import { TablePopOver } from "../UI/reactbootstrap/popover";
 
 const eventsReducer = (state, action) => {
   switch (action.type) {
@@ -85,7 +86,7 @@ const Eventadder = ({
   } = state;
 
   const startToSend = new Date(startDay).getTime();
-
+  console.log(complete);
   const [allcountrie, setAllcounries] = useState();
   const formSubmit = (e, value) => {
     e.preventDefault();
@@ -212,6 +213,16 @@ const Eventadder = ({
   return (
     <Layer>
       <div className={classes.form}>
+        {complete && (
+          <TablePopOver
+            location={selectedCity || "online"}
+            category={selectedcategory}
+            start={new Date(startDay).toLocaleDateString()}
+            end={new Date(endDay).toLocaleDateString()}
+            description={description}
+            country={selectedCountry}
+          />
+        )}
         <form onSubmit={formSubmit}>
           {category === "create" ? (
             <div className={classes.control}>
@@ -286,7 +297,13 @@ const Eventadder = ({
             )}
             {citydone === true && (
               <div>
-                <EventDatePicker addDate={dispatch} formSubmit={formSubmit} />
+                <EventDatePicker
+                  addDate={dispatch}
+                  formSubmit={formSubmit}
+                  location={eventLocation}
+                  category={selectedcategory}
+                  setComplete={setComplete}
+                />
               </div>
             )}
           </div>

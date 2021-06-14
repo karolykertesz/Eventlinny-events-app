@@ -1,0 +1,55 @@
+.title {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  text-transform: uppercase;
+  color: burlywood;
+}
+.body {
+  text-transform: capitalize;
+  font-size: 14px;
+  color: burlywood;
+  background-color: cornsilk;
+}
+.top {
+  max-width: 450px;
+  min-width: 350px;
+}
+.btn {
+  text-decoration: none;
+  cursor: pointer;
+  font: inherit;
+  background-color: rgb(235, 163, 68);
+  border: 1px solid papayawhip;
+  border-radius: 17px;
+  color: white;
+  padding: none;
+  text-align: center;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+  width: 120px;
+  height: 30px;
+  -webkit-border-radius: 17px;
+  -moz-border-radius: 17px;
+  -ms-border-radius: 17px;
+  -o-border-radius: 17px;
+}
+.cls {
+  width: 10px;
+  height: 10px;
+  /* color: navajowhite; */
+}
+.btn:hover,
+.btn:active {
+  background-color: #a3af02;
+  border-color: #a3af02;
+}
+.table {
+  color: burlywood;
+}
+.table thead tr th {
+  color: burlywood;
+  border-collapse: collapse;
+  border: none;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  text-transform: capitalize;
+}

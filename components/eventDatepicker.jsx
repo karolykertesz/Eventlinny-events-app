@@ -1,10 +1,10 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, Fragment } from "react";
 import DatePicker from "react-datepicker";
 require("react-datepicker/dist/react-datepicker.css");
-import format from "date-fns/format";
 import classes from "./UI/ui-modules/datepicker.module.css";
 import { Pi } from "./UI/styledComponents";
-const EventDatePicker = ({ addDate, formSubmit }) => {
+import { PopButton } from "./UI/reactbootstrap/popover";
+const EventDatePicker = ({ addDate, formSubmit, setComplete }) => {
   const [startDate, setStartDate] = useState(new Date());
   const [end, setEnd] = useState(new Date());
   const [completed, setcompleted] = useState(false);
@@ -70,13 +70,16 @@ const EventDatePicker = ({ addDate, formSubmit }) => {
         setcompleted(true);
       })
       .then(() => {
+        setComplete(true);
+      })
+      .then(() => {
         done(true);
       });
   };
 
   return (
     <div className={classes.topDiv}>
-      <Pi>Please add the start of the event</Pi>
+      <Pi>{!first ? "Please add the start of the event" : ""}</Pi>
       <DatePicker
         selected={startDate}
         onChange={(date) => handleChange(date)}
@@ -89,7 +92,7 @@ const EventDatePicker = ({ addDate, formSubmit }) => {
       />
       {first && (
         <div className={classes.topDiv}>
-          <Pi>Please add the end of the event</Pi>
+          <Pi>{!second ? "Please add the end of the event" : ""}</Pi>
           <DatePicker
             selected={end}
             onChange={(date) => handleEnd(date)}
@@ -105,7 +108,7 @@ const EventDatePicker = ({ addDate, formSubmit }) => {
       {second && (
         <div>
           <div className={descComp ? classes.none : ""}>
-            <Pi>Add Your Description!</Pi>
+            <Pi>{!descri ? "Add Your Description!" : ""}</Pi>
             <label htmlFor="description"></label>
             <textarea
               id="description"
@@ -126,7 +129,6 @@ const EventDatePicker = ({ addDate, formSubmit }) => {
               </span>
             </div>
           </div>
-          {descComp && <Pi>Your event Description: {descri}</Pi>}
         </div>
       )}
       {completed && (

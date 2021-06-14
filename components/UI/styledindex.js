@@ -7,6 +7,7 @@ export {
   CoverRow,
   Grid,
   List,
+  EventTop,
 } from "./styledComponents";
 export {
   Input,

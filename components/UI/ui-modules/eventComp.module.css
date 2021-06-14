@@ -1,14 +1,19 @@
 .cover {
   display: block;
-  margin: 0 auto;
+  margin: 50px auto;
   max-width: 700px;
 }
 .allGrid {
+  margin-top: 50px;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 .eventLog {
-  margin-top: 250px;
+  margin-top: 150px;
+}
+.eventLog img {
+  width: 100px;
 }
 
 @media (max-width: 600px) {

@@ -22,54 +22,29 @@ const First = () => {
     const d = await mess.json();
     setData(d);
   }, [setData]);
-  useEffect(() => {
-    setuser(userInfo);
-  }, [userInfo]);
-  useEffect(() => {
-    call();
-  }, [call]);
-
-  useEffect(() => {
-    if (!userInfo) return;
-    return new Promise(async (resolve, reject) => {
-      const docInfo = await firebase
-        .firestore()
-        .collection("user_aditional")
-        .doc(userInfo && userInfo.uid);
-      return docInfo.get().then((docs) => {
-        if (docs.exists) return;
-        else {
-          docInfo.update({
-            email: userInfo && userInfo.email,
-            name: userInfo && userInfo.name,
+  const getStaticData = async () => {
+    const uid = userInfo ? userInfo.uid : null;
+    if (uid !== null) {
+      try {
+        const categories = await getusercat(uid && uid);
+        const prefItems = await getuserPrefWithWithCat(categories)
+          .then((items) => {
+            return setUserPrefs(items);
+          })
+          .then(() => {
+            console.log("j");
           });
-        }
-      });
-    })
-      .then(() => console.log("k"))
-      .catch((err) => console.log(err));
-  }, []);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
 
   useEffect(() => {
-    const getStaticData = async () => {
-      const uid = userInfo ? userInfo.uid : null;
-      if (uid !== null) {
-        try {
-          const categories = await getusercat(uid && uid);
-          const prefItems = await getuserPrefWithWithCat(categories)
-            .then((items) => {
-              return setUserPrefs(items);
-            })
-            .then(() => {
-              console.log("j");
-            });
-        } catch (err) {
-          console.log(err);
-        }
-      }
-    };
-    return getStaticData();
+    // setuser(userInfo);
+    return call().then(() => getStaticData());
   }, []);
+
   const getLocation = async (uid) => {
     if (uid !== null || uid !== undefined) {
       try {
@@ -93,11 +68,7 @@ const First = () => {
     }
   };
 
-  useEffect(() => {
-    const uid = userInfo ? userInfo.uid : null;
-    return getLocation(uid);
-  }, [user]);
-  return !data || !user ? (
+  return !data || !userInfo ? (
     <Loader />
   ) : (
     <div>

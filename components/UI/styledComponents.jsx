@@ -51,6 +51,26 @@ export const CatContainer = (props) => {
   return <CoverRow>{props.children}</CoverRow>;
 };
 
+export const EventTop = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  /* background-color: azure; */
+  background-image: linear-gradient(
+    to bottom left,
+    rgb(215, 190, 158),
+    rgba(230, 224, 213, 0.8)
+  );
+  border-bottom: 1px solid rgba(230, 224, 213, 0.8);
+  width: 100%;
+  height: 10rem;
+`;
+
+export const TopContainer = (props) => {
+  return <EventTop>{props.children}</EventTop>;
+};
+
 export const Error = styled.div`
   display: flex;
   justify-content: center;

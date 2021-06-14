@@ -8,11 +8,31 @@ import { getAllAStartUp } from "../data";
 import styled from "styled-components";
 import Head from "next/head";
 import { send } from "../helpers/helpers";
-
+import { useAuth } from "../components/Layout/UserContext";
 const StartUp = ({ allStart }) => {
+  const user = useAuth().user;
+
   useEffect(() => {
-    getLock();
-  });
+    return getLock().then(() => {
+      return new Promise((resolve, reject) => {
+        const docInfo = firebase
+          .firestore()
+          .collection("user_aditional")
+          .doc(user && user.uid);
+        return docInfo.get().then((docs) => {
+          if (docs.exists) return;
+          else {
+            docInfo.update({
+              email: user && user.email,
+              name: user && user.name,
+            });
+          }
+        });
+      })
+        .then(() => console.log("k"))
+        .catch((err) => console.log(err));
+    });
+  }, []);
   const [userInt, setUserInt] = useState([]);
   const router = useRouter();
   const [location, setLocation] = useState([]);

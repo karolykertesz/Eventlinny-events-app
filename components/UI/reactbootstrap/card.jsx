@@ -8,10 +8,12 @@ const RecTCard = (props) => {
   return (
     <div className={classes.top}>
       <Card
+        className={classes.topcard}
         style={{
           width: props.cardwidth,
           height: props.cargHeigth,
-          backgroundColor: "beige",
+          backgroundColor: "#f0e5c7",
+          // borderTop: "none",
         }}
       >
         <Card.Img variant="top" src={props.src} className={classes.img} />

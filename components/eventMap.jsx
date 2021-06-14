@@ -48,12 +48,12 @@ const EventMap = ({ location, added_by, created_by }) => {
   }, []);
 
   return (
-    <div className={classes.conpI}>
+    <div className={classes.conpI} style={{ marginBottom: "20px" }}>
       {viewport && (
         <ReactMapGL
           {...viewport}
           mapboxApiAccessToken={MAPBOX_TOKEN}
-          width="210%"
+          width="200%"
           height="170px"
           onViewportChange={(viewport) => setViewport(viewport)}
           mapStyle="mapbox://styles/karesz37/ckpsl4rgp2wa317o4isgr3ivi"
@@ -80,18 +80,18 @@ const EventMap = ({ location, added_by, created_by }) => {
         </ReactMapGL>
       )}
 
-      <div className={classes.box}>
+      {/* <div className={classes.box}>
         <Image
           width={150}
           height={150}
           src={imgUrl ? imgUrl : "/images/noimage.svg"}
         />
         <div className={classes.content}>
-          <Pi>Location: {location}</Pi>
+          
           <Pi>Created By:</Pi>
           <Pi>{created_by}</Pi>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -278,7 +278,6 @@ export const getAttendiesInfo = async (attendies) => {
     const promises = attendies.map((item) => dataref.doc(item).get());
     const t = await Promise.all(promises).then(async (docu) => {
       await docu.forEach((i) => {
-        console.log(i.data());
         arr.push({
           id: i.id,
           name: i.data().name,

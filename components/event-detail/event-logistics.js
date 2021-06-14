@@ -33,7 +33,7 @@ function EventLogistics(props) {
   const abst = new Date().getTime();
   const userName = useAuth().user && useAuth().name;
 
-  const humanReadableDate = new Date(abst).toLocaleDateString("en-US", {
+  const humanReadableDate = new Date(start).toLocaleDateString("en-US", {
     day: "numeric",
     month: "long",
     year: "numeric",
