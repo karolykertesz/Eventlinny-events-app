@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import React from "react";
+import Comments from "../UI/icons/comments";
+import classes from "../UI/ui-modules/startitem.module.css";
 
 export const IconCover = styled.div.attrs((props) => ({}))`
   display: block;

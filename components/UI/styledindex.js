@@ -8,6 +8,7 @@ export {
   Grid,
   List,
   EventTop,
+  TopContainer,
 } from "./styledComponents";
 export {
   Input,
@@ -16,5 +17,6 @@ export {
   Cdiv,
   IconCover,
   FileInput,
+  CommentsCover,
 } from "./formInputs";
 export { SVG } from "../startitem";

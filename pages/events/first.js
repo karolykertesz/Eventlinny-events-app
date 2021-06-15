@@ -41,8 +41,7 @@ const First = () => {
   };
 
   useEffect(() => {
-    // setuser(userInfo);
-    return call().then(() => getStaticData());
+    return Promise.all([getStaticData(), call()]).then(() => console.log("h"));
   }, []);
 
   const getLocation = async (uid) => {

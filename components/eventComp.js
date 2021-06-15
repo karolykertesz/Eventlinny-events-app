@@ -2,18 +2,21 @@ import React, { Fragment, useEffect, useState } from "react";
 import EventSummary from "./event-detail/event-summary";
 import EventLog from "./event-detail/event-logistics";
 import EventContent from "./event-detail/event-content";
-import { PiBig, Pi, Grid, List, TopContainer } from "./UI/styledComponents";
+import { PiBig, Pi, Grid, List, TopContainer } from "./UI/styledindex";
 import EventMap from "../components/eventMap";
-import { categories } from "../data";
+import { categories, getComments } from "../data";
 import classes from "../components/UI/ui-modules/eventComp.module.css";
 import RecTCard from "../components/UI/reactbootstrap/card";
 import { getAttendiesInfo } from "../data";
 import TopImage from "../components/UI/topimage";
+import { IconDock } from "../components/UI/icons/iconcovers";
+import Comments from "../components/UI/icons/comments";
 const EventComp = ({ single }) => {
   const attendies = single && single.attendies;
   const location = single !== null && single.location;
   const isImgUrl = categories.includes(single.category);
   const [atttendiesInfo, setInfo] = useState();
+  const [comments, setComents] = useState();
   const humanReadableDate = new Date(single.start).toLocaleDateString("en-US", {
     day: "numeric",
     month: "long",
@@ -26,7 +29,7 @@ const EventComp = ({ single }) => {
         .then((items) => {
           return setInfo(items);
         })
-        .then(() => {});
+        .then(() => getComments(single.id).then((items) => console.log(items)));
     };
 
     return setAttendies();
@@ -91,11 +94,14 @@ const EventComp = ({ single }) => {
                 ))
               //
             }
-            {/* <PiBig>Attendies ({attendies.length})</PiBig> */}
           </Grid>
+          <div className={classes.comentsec}>
+            <IconDock icon={Comments} />
+          </div>
         </div>
       </div>
     </Fragment>
   );
 };
 export default EventComp;
+// "f098bDiH8MVY9d2xNMv8YzCWVdj1"

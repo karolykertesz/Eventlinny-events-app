@@ -1,7 +1,8 @@
 .cover {
-  display: block;
+  display: flex;
   margin: 50px auto;
   max-width: 700px;
+  flex-direction: column;
 }
 .allGrid {
   margin-top: 50px;
@@ -20,4 +21,14 @@
   .allGrid {
     grid-template-columns: 1fr;
   }
+}
+.comentsec {
+  width: auto;
+  max-width: 700px;
+  min-width: 500px;
+  background-color: chocolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
 }

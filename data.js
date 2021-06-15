@@ -293,6 +293,28 @@ export const getAttendiesInfo = async (attendies) => {
 
   return dataArray;
 };
+export const getComments = async (docId) => {
+  console.log(docId);
+  let comArray = [];
+  const docscont = await db
+    .collection("comments")
+    .doc(docId)
+    .get()
+    .then((doc) => {
+      if (!doc.exists) {
+        return;
+      } else {
+        const data = doc.data();
+        comArray.push({
+          added_by: data.added_by,
+          liked: data.liked,
+          replies: data.replies,
+        });
+      }
+    });
+  console.log(comArray);
+  return comArray;
+};
 export const language = [
   "english",
   "magyar",
