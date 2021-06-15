@@ -307,7 +307,7 @@ export const getComments = async (docId) => {
         const data = doc.data();
         comArray.push({
           added_by: data.added_by,
-          liked: data.liked,
+          likes: data.likes,
           replies: data.replies,
         });
       }
@@ -369,3 +369,5 @@ const categoryimages = [
     src: "https://cdn.pixabay.com/photo/2017/11/25/17/17/sandwich-2977251_960_720.jpg",
   },
 ];
+// 11ae22e6-9abc-4cba-95c6-4aea402ae5cf
+// f098bDiH8MVY9d2xNMv8YzCWVdj1

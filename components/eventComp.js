@@ -11,25 +11,31 @@ import { getAttendiesInfo } from "../data";
 import TopImage from "../components/UI/topimage";
 import { IconDock } from "../components/UI/icons/iconcovers";
 import Comments from "../components/UI/icons/comments";
+import {
+  ComentContainer,
+  UseComentTop,
+} from "../components/UI/icons/iconcovers";
 const EventComp = ({ single }) => {
   const attendies = single && single.attendies;
   const location = single !== null && single.location;
   const isImgUrl = categories.includes(single.category);
   const [atttendiesInfo, setInfo] = useState();
   const [comments, setComents] = useState();
+  // const commentsAddedBy = comments !== null && comments.added_by;
+  console.log(comments);
   const humanReadableDate = new Date(single.start).toLocaleDateString("en-US", {
     day: "numeric",
     month: "long",
     year: "numeric",
   });
-  console.log(humanReadableDate, "teh");
+
   useEffect(() => {
     const setAttendies = async () => {
       return getAttendiesInfo(attendies && attendies)
         .then((items) => {
           return setInfo(items);
         })
-        .then(() => getComments(single.id).then((items) => console.log(items)));
+        .then(() => getComments(single.id).then((items) => setComents(items)));
     };
 
     return setAttendies();
@@ -95,9 +101,14 @@ const EventComp = ({ single }) => {
               //
             }
           </Grid>
-          <div className={classes.comentsec}>
-            <IconDock icon={Comments} />
-          </div>
+          {comments && (
+            <div className={classes.comentsec}>
+              <ComentContainer>
+                <UseComentTop uid={comments && comments[0].added_by} />
+                <IconDock icon={Comments} />
+              </ComentContainer>
+            </div>
+          )}
         </div>
       </div>
     </Fragment>
