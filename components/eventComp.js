@@ -11,10 +11,13 @@ import { getAttendiesInfo } from "../data";
 import TopImage from "../components/UI/topimage";
 import { IconDock } from "../components/UI/icons/iconcovers";
 import Comments from "../components/UI/icons/comments";
+import firebase from "firebase";
 import {
   ComentContainer,
   UseComentTop,
 } from "../components/UI/icons/iconcovers";
+import "firebase/functions";
+
 const EventComp = ({ single }) => {
   const attendies = single && single.attendies;
   const location = single !== null && single.location;
@@ -28,7 +31,13 @@ const EventComp = ({ single }) => {
     month: "long",
     year: "numeric",
   });
-
+  const saySomething = () => {
+    // const ss = firebase   HttpsCallable("sendTest");
+    const ss = firebase.functions().httpsCallable("sendTest");
+    ss({ name: "kertesz" }).then((resoult) => {
+      console.log(resoult.data);
+    });
+  };
   useEffect(() => {
     const setAttendies = async () => {
       return getAttendiesInfo(attendies && attendies)
@@ -48,14 +57,7 @@ const EventComp = ({ single }) => {
 
   return (
     <Fragment>
-      <EventSummary title={single.category} />
-      <TopContainer>
-        <TopImage added_by={single.added_by} />
-        {/* <p style={{ color: "#c49e7d" }}>start: {humanReadableDate}</p>
-        <p style={{ color: "#c49e7d", marginLeft: "150px" }}>
-          Event: {single.description}
-        </p> */}
-      </TopContainer>
+      <EventSummary title={single.category} added_by={single.added_by} />
       <div className={classes.allGrid}>
         <div>
           <div className={classes.eventLog}>

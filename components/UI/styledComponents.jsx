@@ -59,13 +59,12 @@ export const EventTop = styled.div`
   align-items: center;
   background-image: linear-gradient(
     to right bottom,
-    rgba(215, 190, 158, 0.735),
+    #dfd7d7,
     rgba(230, 224, 213, 0.8)
   );
   border-bottom: 1px solid rgba(230, 224, 213, 0.8);
-  width: 100%;
-  height: 11rem;
-  clip-path: polygon(0 0, 60% 0, 20% 70%);
+  width: 500px;
+  height: 7rem;
 `;
 
 export const TopContainer = (props) => {

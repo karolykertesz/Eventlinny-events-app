@@ -22,14 +22,17 @@ h6 {
 }
 ul li a {
   list-style-type: none;
+  text-decoration: none;
 }
 ul {
   margin: 0;
   padding: 0;
   list-style-type: none;
+  text-decoration: none;
 }
 li {
   list-style-type: none;
+  text-decoration: none;
 }
 .center {
   margin: auto;

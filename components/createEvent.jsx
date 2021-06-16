@@ -19,7 +19,7 @@ const CreateEvent = ({ uid }) => {
   };
   return (
     <Fragment>
-      <Pi>Create a category</Pi>
+      <h2 className={classes.heading}>Create a category</h2>
       <div className={classes.coverdiv}>
         <div className={classes.grid}>
           {categories.map((item) => (

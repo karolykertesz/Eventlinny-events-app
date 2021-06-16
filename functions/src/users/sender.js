@@ -1,4 +1,3 @@
-/* eslint-disable */
 const nodemailer = require("nodemailer");
 const hbs = require("nodemailer-express-handlebars");
 

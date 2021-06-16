@@ -4,3 +4,6 @@
   align-items: center;
   margin-top: 30px;
 }
+.cover:hover {
+  cursor: pointer;
+}

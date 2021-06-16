@@ -16,10 +16,13 @@
   text-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
   color: white;
   animation-name: leftIn;
-  animation-duration: 2s;
-  animation-timing-function: linear;
-  /* animation-delay: 1s; */
+  animation-duration: 1.6s;
+  animation-timing-function: ease-in;
+  backface-visibility: hidden;
+  /*animation-delay: 1s;
+  */
   text-transform: capitalize;
+  -webkit-backface-visibility: hidden;
 }
 
 @media (max-width: 768px) {

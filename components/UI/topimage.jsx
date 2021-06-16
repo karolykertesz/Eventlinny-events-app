@@ -35,9 +35,7 @@ const TopImage = ({ added_by }) => {
         <div className={classes.top}>
           <Image src={userdata && userdata.url} height="70px" width="70px" />
           <div>
-            <p style={{ color: "#c49e7d" }}>
-              Hosted By: {userdata && userdata.name}
-            </p>
+            <h5>Hosted By: {userdata && userdata.name}</h5>
           </div>
         </div>
       )}
