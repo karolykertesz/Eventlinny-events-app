@@ -21,22 +21,28 @@ export const CommentHolder = (props) => {
 
 export const UseComentTop = (props) => {
   const { uid } = props;
-  console.log(uid);
   const [info, setInfo] = useState();
   useEffect(() => {
-    return firebase
-      .firestore()
-      .collection("user_aditional")
-      .doc(uid)
-      .get()
-      .then((docU) => {
-        const data = docU.data();
-        return setInfo({
-          name: data.name,
-          url: data.image_url ? data.image_url : "/images/noimage.svg",
+    const comentData = async () => {
+      const t = await firebase
+        .firestore()
+        .collection("user_aditional")
+        .doc(uid)
+        .get()
+        .then(async (docU) => {
+          const data = await docU.data();
+          return setInfo({
+            name: data.name,
+            url: data.image_url ? data.image_url : "/images/noimage.svg",
+          });
+        })
+        .then(() => {
+          console.log("g");
         });
-      })
-      .then(() => {});
+    };
+    return () => {
+      comentData();
+    };
   }, []);
 
   return (

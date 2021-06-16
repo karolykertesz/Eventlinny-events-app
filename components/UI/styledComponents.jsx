@@ -53,18 +53,19 @@ export const CatContainer = (props) => {
 
 export const EventTop = styled.div`
   display: flex;
+  text-align: center;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
-  /* background-color: azure; */
+  align-items: center;
   background-image: linear-gradient(
-    to bottom left,
-    rgb(215, 190, 158),
+    to right bottom,
+    rgba(215, 190, 158, 0.735),
     rgba(230, 224, 213, 0.8)
   );
   border-bottom: 1px solid rgba(230, 224, 213, 0.8);
   width: 100%;
-  height: 10rem;
+  height: 11rem;
+  clip-path: polygon(0 0, 60% 0, 20% 70%);
 `;
 
 export const TopContainer = (props) => {

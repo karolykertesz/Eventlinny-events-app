@@ -10,7 +10,8 @@ import Image from "next/image";
 import { categories } from "../data";
 
 const EventItem = (props) => {
-  const { start, end, category, location, id, attendies } = props;
+  const { start, end, category, location, id, attendies, added_by } = props;
+
   const isImageurl = categories.includes(category);
 
   const [isValid, setValid] = useState(() => {

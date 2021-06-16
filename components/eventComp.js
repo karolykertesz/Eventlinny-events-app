@@ -20,7 +20,7 @@ const EventComp = ({ single }) => {
   const location = single !== null && single.location;
   const isImgUrl = categories.includes(single.category);
   const [atttendiesInfo, setInfo] = useState();
-  const [comments, setComents] = useState();
+  const [comments, setComents] = useState(null);
   // const commentsAddedBy = comments !== null && comments.added_by;
   console.log(comments);
   const humanReadableDate = new Date(single.start).toLocaleDateString("en-US", {
@@ -35,7 +35,12 @@ const EventComp = ({ single }) => {
         .then((items) => {
           return setInfo(items);
         })
-        .then(() => getComments(single.id).then((items) => setComents(items)));
+        .then(() =>
+          getComments(single.id).then(async (items) => {
+            const data = await items;
+            setComents(data);
+          })
+        );
     };
 
     return setAttendies();
@@ -45,13 +50,11 @@ const EventComp = ({ single }) => {
     <Fragment>
       <EventSummary title={single.category} />
       <TopContainer>
-        <PiBig style={{ color: "#c49e7d", marginLeft: "100px" }}>
-          event start: {humanReadableDate}
-        </PiBig>
-        <PiBig style={{ color: "#c49e7d", marginLeft: "100px" }}>
-          Event Name: {single.description}
-        </PiBig>
         <TopImage added_by={single.added_by} />
+        {/* <p style={{ color: "#c49e7d" }}>start: {humanReadableDate}</p>
+        <p style={{ color: "#c49e7d", marginLeft: "150px" }}>
+          Event: {single.description}
+        </p> */}
       </TopContainer>
       <div className={classes.allGrid}>
         <div>
@@ -104,7 +107,7 @@ const EventComp = ({ single }) => {
           {comments && (
             <div className={classes.comentsec}>
               <ComentContainer>
-                <UseComentTop uid={comments && comments[0].added_by} />
+                <UseComentTop uid={comments && comments.added_by} />
                 <IconDock icon={Comments} />
               </ComentContainer>
             </div>

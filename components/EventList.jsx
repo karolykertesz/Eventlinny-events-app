@@ -20,6 +20,7 @@ const EventList = (props) => {
               attendies={item.attendies}
               description={item.description}
               end={item.end}
+              added_by={item.added_by}
             />
           ))}
       </ul>

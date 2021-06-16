@@ -23,10 +23,12 @@ function EventLogistics(props) {
     description,
     location,
     imageAlt,
+    addedby,
   } = props;
 
   const [signedUp, setSignedUp] = useState();
   const [showmodal, setShowModal] = useState(false);
+  const [userImage, setuserImage] = useState();
   const userId = useAuth().user && useAuth().user.uid;
   const email = useAuth().user && useAuth().user.email;
   console.log(email);
@@ -94,12 +96,11 @@ function EventLogistics(props) {
           <time>{humanReadableDate}</time>
           <time style={{ marginLeft: "10px" }}>{humanStartTime}</time>
         </LogisticsItem>
-
         <LogisticsItem icon={AddressIcon}>
           <address>{addressText}</address>
         </LogisticsItem>
         <LogisticsItem icon={PersonIcon}>
-          <address>{attendies.length}</address>
+          <address className={classes.divided}>{attendies.length}</address>
         </LogisticsItem>
 
         {!signedUp && (

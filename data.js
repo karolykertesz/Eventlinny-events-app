@@ -188,6 +188,22 @@ export const getuserimage = async (uid) => {
   return url;
 };
 
+export const getimageUrl = async (uid) => {
+  let url;
+  const dataref = await db
+    .collection("user_aditional")
+    .doc(uid)
+    .get()
+    .then(async (doc) => {
+      if (doc.exists) {
+        const data = await doc.data();
+        url = data.image_url ? data.image_url : "/images/noimage.svg";
+      }
+    })
+    .catch((err) => console.log(err));
+  return url;
+};
+
 export const findById = async (id) => {
   let ren = {};
   try {
@@ -294,26 +310,24 @@ export const getAttendiesInfo = async (attendies) => {
   return dataArray;
 };
 export const getComments = async (docId) => {
-  console.log(docId);
-  let comArray = [];
+  let comobj = {};
   const docscont = await db
     .collection("comments")
     .doc(docId)
-    .get()
-    .then((doc) => {
-      if (!doc.exists) {
+    .onSnapshot(async (document) => {
+      if (!document.exists) {
         return;
       } else {
-        const data = doc.data();
-        comArray.push({
+        const data = await document.data();
+        return (comobj = {
           added_by: data.added_by,
           likes: data.likes,
           replies: data.replies,
         });
       }
     });
-  console.log(comArray);
-  return comArray;
+  const tr = await comobj;
+  return tr;
 };
 export const language = [
   "english",

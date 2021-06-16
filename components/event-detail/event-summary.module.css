@@ -15,6 +15,11 @@
   text-align: center;
   text-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
   color: white;
+  animation-name: leftIn;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  /* animation-delay: 1s; */
+  text-transform: capitalize;
 }
 
 @media (max-width: 768px) {
@@ -25,5 +30,30 @@
   .summary {
     height: 12vh !important;
     padding-bottom: 10px;
+  }
+}
+
+@keyframes leftIn {
+  0% {
+    transform: translateX(-1000px);
+    -webkit-transform: translateX(-1000px);
+    -moz-transform: translateX(-1000px);
+    -ms-transform: translateX(-1000px);
+    -o-transform: translateX(-1000px);
+  }
+
+  80% {
+    transform: translateX(40px);
+    -webkit-transform: translateX(40px);
+    -moz-transform: translateX(40px);
+    -ms-transform: translateX(40px);
+    -o-transform: translateX(40px);
+  }
+  100% {
+    transform: translateX(0);
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
   }
 }

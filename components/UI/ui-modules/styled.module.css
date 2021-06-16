@@ -1,13 +1,17 @@
 .icontop {
   width: 20px;
   height: 20px;
-  color: white;
+  color: burlywood;
 }
 .comentCont {
   padding: 20px;
   margin: 10px auto;
   list-style-type: none;
-  background-color: burlywood;
+  background-image: linear-gradient(
+    to right bottom,
+    rgba(215, 190, 158, 0.488),
+    rgba(230, 224, 213, 0.8)
+  );
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -48,6 +52,6 @@
   font-family: Arial, Helvetica, sans-serif;
   text-transform: capitalize;
   font-weight: 500;
-  color: aliceblue;
+  color: burlywood;
   line-height: 1.1rem;
 }
