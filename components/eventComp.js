@@ -128,7 +128,7 @@ const EventComp = ({ single }) => {
                   }
                 /> */}
             {/* <IconDock icon={Comments} /> */}
-            {/* </ComentContainer> */} */
+            {/* </ComentContainer> */}
           </div>
         </div>
       </div>

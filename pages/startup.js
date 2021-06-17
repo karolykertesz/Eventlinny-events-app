@@ -9,28 +9,24 @@ import styled from "styled-components";
 import Head from "next/head";
 import { send } from "../helpers/helpers";
 import { useAuth } from "../components/Layout/UserContext";
+import firebase from "firebase";
 const StartUp = ({ allStart }) => {
   const user = useAuth().user;
-
   useEffect(() => {
     return getLock().then(() => {
-      return new Promise((resolve, reject) => {
-        const docInfo = firebase
-          .firestore()
-          .collection("user_aditional")
-          .doc(user && user.uid);
-        return docInfo.get().then((docs) => {
-          if (docs.exists) return;
-          else {
-            docInfo.update({
-              email: user && user.email,
-              name: user && user.name,
-            });
-          }
-        });
-      })
-        .then(() => console.log("k"))
-        .catch((err) => console.log(err));
+      return new Promise(async (resolve, reject) => {
+        if (user) {
+          const docInfo = await firebase
+            .firestore()
+            .collection("user_aditional")
+            .doc(user && user.uid)
+            .set(
+              { email: user && user.email, name: user && user.name },
+              { merge: true }
+            )
+            .then(() => console.log("k"));
+        }
+      }).catch((err) => console.log(err));
     });
   }, []);
   const [userInt, setUserInt] = useState([]);

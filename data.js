@@ -311,27 +311,29 @@ export const getAttendiesInfo = async (attendies) => {
 };
 export const getComments = async (docId) => {
   let comobj = {};
-  const docscont = await db.collection("comments").doc(docId);
-  await docscont.get().then(async (doc) => {
-    if (!doc.exists) {
-      comobj = null;
-    } else {
-      const data = await doc.data();
-      comobj = await {
-        ...comobj,
-        added_by: data.added_by,
-        likes: data.likes,
-        replies: data.replies,
-      };
-    }
-  });
+  const docscont = await db
+    .collection("comments")
+    .doc(docId)
+    .onSnapshot(async (doc) => {
+      if (!doc.exists) {
+        comobj = null;
+      } else {
+        const data = await doc.data();
+        comobj = await {
+          ...comobj,
+          added_by: data.added_by,
+          likes: data.likes,
+          replies: data.replies,
+        };
+      }
+    });
   return comobj;
 };
 
 export const allrepliesOfComments = async (arr) => {
   const docref = db.collection("user_aditional");
   const getAll = () => {
-    const promises = arr.map((item) => docref.doc(item).get());
+    const promises = arr.map((item) => docref.doc(item.who).get());
     return Promise.all(promises).then((items) => {
       let DockArray = [];
       items.forEach((item) => {
