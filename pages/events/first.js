@@ -8,7 +8,6 @@ import { useAuth } from "../../components/Layout/UserContext";
 import { getusercat, getuserPrefWithWithCat } from "../../data";
 import EventList from "../../components/EventList";
 import { useRedirect } from "../../helpers/validatehelp";
-import firebase from "firebase";
 const First = () => {
   const valid = useRedirect();
   const userInfo = useAuth().user;
@@ -41,31 +40,37 @@ const First = () => {
   };
 
   useEffect(() => {
-    return Promise.all([getStaticData(), call()]).then(() => console.log("h"));
+    return new Promise((resolve, reject) => {
+      resolve(getStaticData());
+    })
+      .then(() => {
+        call();
+      })
+      .then(() => console.log("k"));
   }, []);
 
-  const getLocation = async (uid) => {
-    if (uid !== null || uid !== undefined) {
-      try {
-        const mess = await fetch("/api/users/helpers/userlocation", {
-          method: "POST",
-          body: JSON.stringify({
-            uid: uid,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-        });
-        const message = await mess.json();
-        return setuserlocation(message.m);
-      } catch (err) {
-        console.log(err);
-      }
-    } else {
-      return;
-    }
-  };
+  // const getLocation = async (uid) => {
+  //   if (uid !== null || uid !== undefined) {
+  //     try {
+  //       const mess = await fetch("/api/users/helpers/userlocation", {
+  //         method: "POST",
+  //         body: JSON.stringify({
+  //           uid: uid,
+  //         }),
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Accept: "application/json",
+  //         },
+  //       });
+  //       const message = await mess.json();
+  //       return setuserlocation(message.m);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   } else {
+  //     return;
+  //   }
+  // };
 
   return !data || !userInfo ? (
     <Loader />

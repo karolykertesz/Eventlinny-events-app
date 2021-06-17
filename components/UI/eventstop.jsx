@@ -6,7 +6,7 @@ import { Pi } from "../UI/styledComponents";
 const EventsTop = ({ item, additem, clicked }) => {
   return (
     <div className={classes.coverdiv}>
-      <div onClick={() => additem(item)}>
+      <div onClick={() => additem(item)} className={classes.topItem}>
         {!clicked ? (
           <div className={!clicked && classes.btn + " " + classes.unclicked}>
             <p>{item}</p>

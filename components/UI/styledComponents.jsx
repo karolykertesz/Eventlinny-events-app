@@ -91,7 +91,14 @@ export const Grid = styled.div`
   } */
 
   @media (max-width: 600px) {
-    display: flex;
-    flex-direction: column;
+    /* display: flex; */
+    /* flex-direction: column; */
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    /* margin-right: 60px; */
+  }
+  @media (max-width: 850px) {
+    grid-gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 `;

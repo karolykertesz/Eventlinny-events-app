@@ -31,7 +31,6 @@ function EventLogistics(props) {
   const [userImage, setuserImage] = useState();
   const userId = useAuth().user && useAuth().user.uid;
   const email = useAuth().user && useAuth().user.email;
-  console.log(email);
   const abst = new Date().getTime();
   const userName = useAuth().user && useAuth().name;
 

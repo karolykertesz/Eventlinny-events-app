@@ -22,15 +22,44 @@
 }
 .btn:hover,
 .btn:active {
-  background-color: #a3af02;
-  border-color: #a3af02;
+  background-color: rgba(206, 181, 141, 0.5);
+  border-color: rgba(206, 181, 141, 0.5);
   transform: translateY(-2px);
   -webkit-transform: translateY(-2px);
   -moz-transform: translateY(-2px);
   -ms-transform: translateY(-2px);
   -o-transform: translateY(-2px);
+  text-decoration: none;
+  color: white;
 }
-
+.btn::after {
+  content: "";
+  display: inline-block;
+  width: 90%;
+  height: 90%;
+  border-radius: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  transition: all 0.6s;
+  -webkit-transition: all 0.6s;
+  -moz-transition: all 0.6s;
+  -ms-transition: all 0.6s;
+  -o-transition: all 0.6s;
+  background-color: rgba(206, 181, 141, 0.5);
+}
+.bttb {
+  position: relative;
+}
+.btn:hover::after {
+  transform: scaleX(1.5) scaleY(1.7);
+  -webkit-transform: scaleX(1.5) scaleY(1.7);
+  -moz-transform: scaleX(1.5) scaleY(1.7);
+  -ms-transform: scaleX(1.5) scaleY(1.7);
+  -o-transform: scaleX(1.5) scaleY(1.7);
+  opacity: 0;
+}
 .dispNone {
   display: none;
 }

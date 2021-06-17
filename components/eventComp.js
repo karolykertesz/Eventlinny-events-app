@@ -8,53 +8,62 @@ import { categories, getComments } from "../data";
 import classes from "../components/UI/ui-modules/eventComp.module.css";
 import RecTCard from "../components/UI/reactbootstrap/card";
 import { getAttendiesInfo } from "../data";
-import TopImage from "../components/UI/topimage";
 import { IconDock } from "../components/UI/icons/iconcovers";
 import Comments from "../components/UI/icons/comments";
-import firebase from "firebase";
+import CommentsAddedBy from "../components/comentsAddedBy";
+import ComentsCross from "../components/holders/commentscross.jsx";
 import {
   ComentContainer,
   UseComentTop,
 } from "../components/UI/icons/iconcovers";
 import "firebase/functions";
+import { TopHolder } from "../components/holders/indexholders";
 
 const EventComp = ({ single }) => {
+  // const commentRef = React.useRef(null);
+  const [comments, setComments] = useState(null);
   const attendies = single && single.attendies;
   const location = single !== null && single.location;
   const isImgUrl = categories.includes(single.category);
   const [atttendiesInfo, setInfo] = useState();
-  const [comments, setComents] = useState(null);
   // const commentsAddedBy = comments !== null && comments.added_by;
-  console.log(comments);
   const humanReadableDate = new Date(single.start).toLocaleDateString("en-US", {
     day: "numeric",
     month: "long",
     year: "numeric",
   });
-  const saySomething = () => {
-    // const ss = firebase   HttpsCallable("sendTest");
-    const ss = firebase.functions().httpsCallable("sendTest");
-    ss({ name: "kertesz" }).then((resoult) => {
-      console.log(resoult.data);
-    });
-  };
+  // const trueRef = React.useRef(true);
+  // const saySomething = () => {
+  //   // const ss = firebase   HttpsCallable("sendTest");
+  //   const ss = firebase.functions().httpsCallable("sendTest");
+  //   ss({ name: "kertesz" }).then((resoult) => {
+  //     console.log(resoult.data);
+  //   });
+  // };
+  // const t = getComments("11ae22e6-9abc-4cba-95c6-4aea402ae5cf").then((item) =>
+  //   console.log(item)
+  // );
+
   useEffect(() => {
     const setAttendies = async () => {
-      return getAttendiesInfo(attendies && attendies)
-        .then((items) => {
-          return setInfo(items);
-        })
-        .then(() =>
-          getComments(single.id).then(async (items) => {
-            const data = await items;
-            setComents(data);
-          })
-        );
+      const r = await getAttendiesInfo(attendies && attendies).then((items) =>
+        setAttendies(items)
+      );
     };
+    // const ddd = async () => {
+    //   const data = await getComments(
+    //     "11ae22e6-9abc-4cba-95c6-4aea402ae5cf"
+    //   ).then(() => console.log("hhh"));
+    //   return setComments(data);
+    // };
+    // return ddd();
 
-    return setAttendies();
+    return () => {
+      setAttendies();
+      // trueRef.current = false;
+    };
   }, []);
-
+  // console.log(comments, "ggg");
   return (
     <Fragment>
       <EventSummary title={single.category} added_by={single.added_by} />
@@ -106,14 +115,21 @@ const EventComp = ({ single }) => {
               //
             }
           </Grid>
-          {comments && (
-            <div className={classes.comentsec}>
+
+          <div className={classes.comentsec}>
+            <TopHolder>
+              <ComentsCross id={single.id} />
+            </TopHolder>
+            {/* <CommentsAddedBy added_by={comments.added_by} />
               <ComentContainer>
-                <UseComentTop uid={comments && comments.added_by} />
-                <IconDock icon={Comments} />
-              </ComentContainer>
-            </div>
-          )}
+                {/* <UseComentTop
+                  uid={
+                    commentRef.current !== null && commentRef.current.added_by
+                  }
+                /> */}
+            {/* <IconDock icon={Comments} /> */}
+            {/* </ComentContainer> */} */
+          </div>
         </div>
       </div>
     </Fragment>

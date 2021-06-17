@@ -88,8 +88,8 @@ const Header = () => {
           <IconWrap onClick={() => setShow(!show)}>
             <IconContext.Provider
               value={{
-                className: classes.icon,
-                size: "25px",
+                className: classes.iconColor,
+                size: "29px",
               }}
             >
               <BsFillPersonFill />

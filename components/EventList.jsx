@@ -8,7 +8,7 @@ const EventList = (props) => {
       <ul className={classes.list}>
         {items
           .sort((a, b) => {
-            return a.start - b.start;
+            return b.start - a.start;
           })
           .map((item, indx) => (
             <EventItem
