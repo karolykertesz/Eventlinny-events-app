@@ -32,6 +32,7 @@ const EventComp = ({ single }) => {
     month: "long",
     year: "numeric",
   });
+
   // const trueRef = React.useRef(true);
   // const saySomething = () => {
   //   // const ss = firebase   HttpsCallable("sendTest");
@@ -45,25 +46,17 @@ const EventComp = ({ single }) => {
   // );
 
   useEffect(() => {
-    const setAttendies = async () => {
-      const r = await getAttendiesInfo(attendies && attendies).then((items) =>
-        setAttendies(items)
-      );
-    };
-    // const ddd = async () => {
-    //   const data = await getComments(
-    //     "11ae22e6-9abc-4cba-95c6-4aea402ae5cf"
-    //   ).then(() => console.log("hhh"));
-    //   return setComments(data);
-    // };
-    // return ddd();
-
+    let mode = true;
+    getAttendiesInfo(attendies && attendies).then((items) => {
+      if (mode) {
+        setInfo(items);
+      }
+    });
     return () => {
-      setAttendies();
-      // trueRef.current = false;
+      mode = false;
     };
   }, []);
-  // console.log(comments, "ggg");
+  console.log(atttendiesInfo, "gggg");
   return (
     <Fragment>
       <EventSummary title={single.category} added_by={single.added_by} />
@@ -118,7 +111,7 @@ const EventComp = ({ single }) => {
 
           <div className={classes.comentsec}>
             <TopHolder>
-              <ComentsCross id={single.id} />
+              <ComentsCross id={single.id && single.id} />
             </TopHolder>
             {/* <CommentsAddedBy added_by={comments.added_by} />
               <ComentContainer>

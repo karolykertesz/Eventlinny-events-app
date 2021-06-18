@@ -9,6 +9,7 @@ import { getusercat, getuserPrefWithWithCat } from "../../data";
 import EventList from "../../components/EventList";
 import { useRedirect } from "../../helpers/validatehelp";
 const First = () => {
+  let mode = true;
   const valid = useRedirect();
   const userInfo = useAuth().user;
   const [data, setData] = useState();
@@ -26,13 +27,13 @@ const First = () => {
     if (uid !== null) {
       try {
         const categories = await getusercat(uid && uid);
-        const prefItems = await getuserPrefWithWithCat(categories)
-          .then((items) => {
-            return setUserPrefs(items);
-          })
-          .then(() => {
-            console.log("j");
-          });
+        const prefItems = await getuserPrefWithWithCat(categories).then(
+          (items) => {
+            if (mode) {
+              setUserPrefs(items);
+            }
+          }
+        );
       } catch (err) {
         console.log(err);
       }
@@ -40,37 +41,13 @@ const First = () => {
   };
 
   useEffect(() => {
-    return new Promise((resolve, reject) => {
-      resolve(getStaticData());
-    })
-      .then(() => {
-        call();
-      })
-      .then(() => console.log("k"));
+    getStaticData().then(() => {
+      call();
+    });
+    return () => {
+      mode = false;
+    };
   }, []);
-
-  // const getLocation = async (uid) => {
-  //   if (uid !== null || uid !== undefined) {
-  //     try {
-  //       const mess = await fetch("/api/users/helpers/userlocation", {
-  //         method: "POST",
-  //         body: JSON.stringify({
-  //           uid: uid,
-  //         }),
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Accept: "application/json",
-  //         },
-  //       });
-  //       const message = await mess.json();
-  //       return setuserlocation(message.m);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   } else {
-  //     return;
-  //   }
-  // };
 
   return !data || !userInfo ? (
     <Loader />

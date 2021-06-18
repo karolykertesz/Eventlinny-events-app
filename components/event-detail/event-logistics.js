@@ -62,7 +62,9 @@ function EventLogistics(props) {
         setSignedUp(false);
       }
     };
-    return checkisSigned();
+    return () => {
+      checkisSigned();
+    };
   }, []);
   if (!userId || !address) {
     return <Loader />;

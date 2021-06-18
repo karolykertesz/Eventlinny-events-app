@@ -3,6 +3,7 @@ import firebase from "firebase";
 import Image from "next/image";
 import { PiBig } from "../UI/styledindex";
 import classes from "../UI/ui-modules/topimage.module.css";
+import { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } from "constants";
 const TopImage = ({ added_by }) => {
   const [userdata, setdata] = useState();
   const geturl = () => {
@@ -17,17 +18,18 @@ const TopImage = ({ added_by }) => {
           name: data.name,
           url: data.image_url ? data.image_url : "/images/noimage.svg",
         };
-      })
-      .then((item) => {
-        const { name, url } = item;
-        setdata({
-          name,
-          url,
-        });
       });
   };
   useEffect(() => {
-    return geturl();
+    let mode = true;
+    geturl().then((items) => {
+      if (mode) {
+        setdata(items);
+      }
+    });
+    return () => {
+      mode = false;
+    };
   }, []);
   return (
     <Fragment>

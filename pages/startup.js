@@ -13,21 +13,26 @@ import firebase from "firebase";
 const StartUp = ({ allStart }) => {
   const user = useAuth().user;
   useEffect(() => {
-    return getLock().then(() => {
-      return new Promise(async (resolve, reject) => {
-        if (user) {
-          const docInfo = await firebase
-            .firestore()
-            .collection("user_aditional")
-            .doc(user && user.uid)
-            .set(
-              { email: user && user.email, name: user && user.name },
-              { merge: true }
-            )
-            .then(() => console.log("k"));
-        }
-      }).catch((err) => console.log(err));
-    });
+    const getmedata = async () => {
+      const ad = await getLock().then(() => {
+        return new Promise(async (resolve, reject) => {
+          if (user) {
+            const docInfo = await firebase
+              .firestore()
+              .collection("user_aditional")
+              .doc(user && user.uid)
+              .set(
+                { email: user && user.email, name: user && user.name },
+                { merge: true }
+              )
+              .then(() => console.log("k"));
+          }
+        }).catch((err) => console.log(err));
+      });
+    };
+    return () => {
+      return getmedata();
+    };
   }, []);
   const [userInt, setUserInt] = useState([]);
   const router = useRouter();

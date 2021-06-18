@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;700&display=swap");
 
-* {
-  box-sizing: border-box;
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
 }
 
 body {
@@ -9,6 +11,7 @@ body {
   font-family: "Open Sans", "Lato", sans-serif;
   color: #414141;
   background-color: papayawhip !important;
+  box-sizing: border-box;
 }
 
 h1,

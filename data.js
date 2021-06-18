@@ -310,24 +310,24 @@ export const getAttendiesInfo = async (attendies) => {
   return dataArray;
 };
 export const getComments = async (docId) => {
-  let comobj = {};
-  const docscont = await db
+  let obj = {};
+  let r = await db
     .collection("comments")
     .doc(docId)
-    .onSnapshot(async (doc) => {
-      if (!doc.exists) {
-        comobj = null;
-      } else {
-        const data = await doc.data();
-        comobj = await {
-          ...comobj,
-          added_by: data.added_by,
-          likes: data.likes,
-          replies: data.replies,
+    .get()
+    .then((doc) => {
+      if (doc.exists) {
+        const data = doc.data();
+        obj = {
+          ...data,
         };
+      } else {
+        obj = null;
       }
     });
-  return comobj;
+  return obj;
+  // console.log(dt, "dt");
+  // return dt;
 };
 
 export const allrepliesOfComments = async (arr) => {
@@ -336,12 +336,13 @@ export const allrepliesOfComments = async (arr) => {
     const promises = arr.map((item) => docref.doc(item.who).get());
     return Promise.all(promises).then((items) => {
       let DockArray = [];
-      items.forEach((item) => {
+      items.forEach((item, index) => {
         DockArray.push({
           name: item.data().name,
           url: item.data().image_url
             ? item.data().image_url
             : "/images/noimage.svg",
+          data: arr[index],
         });
       });
       return DockArray;

@@ -3,35 +3,42 @@ import { getComments } from "../../data";
 import { Nocomments } from "./indexholders";
 import CommentHead from "../holders/commentsHead";
 import Loader from "../UI/loader";
+import CommentsBody from "../holders/commentsbody";
 const ComentsCross = ({ id }) => {
   const [comments, setComments] = useState(null);
   const [loading, setLoading] = useState(false);
-
   useEffect(() => {
-    setLoading(true);
-    const renderAll = async () => {
-      const data = await getComments(id)
-        .then((data) => {
-          setComments(data);
-        })
-        .then(() => {
-          setLoading(false);
-        });
-    };
+    let mode = true;
+    getComments(id).then((items) => {
+      if (mode) {
+        setComments(items);
+      }
+    });
 
-    renderAll();
+    return () => {
+      mode = false;
+    };
   }, []);
+
   if (loading) {
     return <Loader />;
   }
+
   return (
     <div>
-      {comments === null ? (
+      {!comments ? (
         <div>
           <Nocomments />
         </div>
       ) : (
-        <div>{comments && <CommentHead id={comments.added_by} />}</div>
+        <div>
+          {comments && (
+            <Fragment>
+              <CommentHead id={comments.added_by} />
+              <CommentsBody arr={comments.replies} />
+            </Fragment>
+          )}
+        </div>
       )}
     </div>
   );
