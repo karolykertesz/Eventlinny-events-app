@@ -1,0 +1,43 @@
+.top {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  color: white;
+  justify-content: space-between;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  text-transform: uppercase;
+}
+.body {
+  margin: 0;
+  padding-top: 10px;
+  background-color: rgb(218, 197, 169);
+  color: white;
+}
+.button {
+  background-color: rgba(230, 161, 71, 0.605);
+  color: white;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+.button:hover {
+  background-color: chocolate;
+}
+.input:focus {
+  outline-style: none;
+  box-shadow: none;
+  border-color: transparent;
+}
+.input::placeholder {
+  text-transform: capitalize;
+  color: chocolate;
+  opacity: 0.3;
+}

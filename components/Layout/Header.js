@@ -1,6 +1,6 @@
 import Link from "next/link";
 import firebase from "firebase";
-import { useEffect, useState, Fragment, useCallback } from "react";
+import { useEffect, useState, Fragment, useCallback, useRef } from "react";
 import classes from "./main-header.module.css";
 import styled from "styled-components";
 import { useRouter } from "next/router";
@@ -12,22 +12,27 @@ import MobileLogout from "../UI/mobillogout";
 
 FirebaseClient();
 const Header = () => {
+  const modeRef = useRef(true);
   const [userS, setUserS] = useState();
   const router = useRouter();
   const [show, setShow] = useState(false);
-  useEffect(() => {
-    const check = () => {
-      return firebase.auth().onAuthStateChanged((user) => {
-        if (!user) {
+  const check = useCallback(() => {
+    return firebase.auth().onAuthStateChanged((user) => {
+      if (!user) {
+        if (modeRef.current) {
           setUserS(null);
-        } else {
+        }
+      } else {
+        if (modeRef.current) {
           setUserS(user);
         }
-      });
-    };
-    const unsubsribe = check();
+      }
+    });
+  }, [setUserS]);
+  useEffect(() => {
+    check();
     return () => {
-      unsubsribe();
+      modeRef.current = false;
     };
   }, []);
   useEffect(() => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import Image from "next/image";
 import firebase from "firebase";
 import { Pi } from "../components/UI/styledindex";
@@ -8,43 +8,52 @@ import classes from "../components/UI/ui-modules/eventmap.module.css";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_ID;
 import { addlocation } from "../helpers/axios/add";
-
 const EventMap = ({ location, added_by, created_by }) => {
+  const metRef = useRef(true);
   const [popOpen, setOpen] = useState(false);
   const [loc, setLoc] = useState();
   const [imgUrl, setImg] = useState();
   const [viewport, setViewport] = useState();
-  useEffect(() => {
-    return firebase
-      .firestore()
-      .collection("user_aditional")
-      .doc(added_by)
-      .get()
-      .then((docu) => {
-        if (docu.exists) {
-          const data = docu.data();
-          const url = data.image_url ? data.image_url : null;
-          return setImg(url);
-        } else {
-          return;
-        }
-      })
-      .then(async () => {
-        const { zoom, longitude, latitude } = await addlocation(location);
-        return {
-          zoom,
-          longitude,
-          latitude,
-        };
-      })
-      .then(({ zoom, longitude, latitude }) => {
-        setViewport({
-          zoom: zoom,
-          longitude,
-          latitude,
+  const addData = useCallback(() => {
+    if (metRef.current) {
+      return firebase
+        .firestore()
+        .collection("user_aditional")
+        .doc(added_by)
+        .get()
+        .then((docu) => {
+          if (docu.exists) {
+            const data = docu.data();
+            const url = data.image_url ? data.image_url : null;
+            if (metRef.current) {
+              return setImg(url);
+            }
+          } else {
+            return;
+          }
+        })
+        .then(async () => {
+          const { zoom, longitude, latitude } = await addlocation(location);
+          return {
+            zoom,
+            longitude,
+            latitude,
+          };
+        })
+        .then(({ zoom, longitude, latitude }) => {
+          setViewport({
+            zoom: zoom,
+            longitude,
+            latitude,
+          });
         });
-      })
-      .then(() => console.log("h"));
+    }
+  }, [metRef.current]);
+  useEffect(() => {
+    addData();
+    return () => {
+      metRef.current = false;
+    };
   }, []);
 
   return (
@@ -79,19 +88,6 @@ const EventMap = ({ location, added_by, created_by }) => {
           )}
         </ReactMapGL>
       )}
-
-      {/* <div className={classes.box}>
-        <Image
-          width={150}
-          height={150}
-          src={imgUrl ? imgUrl : "/images/noimage.svg"}
-        />
-        <div className={classes.content}>
-          
-          <Pi>Created By:</Pi>
-          <Pi>{created_by}</Pi>
-        </div>
-      </div> */}
     </div>
   );
 };

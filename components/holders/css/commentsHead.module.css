@@ -2,13 +2,13 @@
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
-  width: 300px;
+  width: 500px;
   background-color: rgb(218, 197, 169);
   height: 70px;
   margin-bottom: 5px;
@@ -22,10 +22,53 @@
   -o-border-radius: 50%;
 }
 .top p {
-  text-align: center;
-  margin-left: 10px;
+  /* align-self: flex-end; */
+  /* margin-left: 10px; */
   font-family: Georgia, "Times New Roman", Times, serif;
-  font: 18px;
+  font: 16px;
   text-transform: capitalize;
   color: white;
+}
+.cov {
+  /* width: 20%; */
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  /* padding: 10px; */
+  /* margin: 10px; */
+}
+.cov p {
+  text-align: center;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+.icon {
+  width: 35px;
+  color: white;
+}
+.liketext {
+  color: white;
+  text-align: center;
+  margin-bottom: 8px;
+  text-transform: capitalize;
+}
+.iconButton {
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  background-color: rgb(218, 197, 169);
+  border: none;
+  margin-bottom: 5px;
+  color: rgb(128, 128, 128);
+}
+.icontop {
+  color: rgb(172, 163, 163);
+  width: 30px;
+  height: 25px;
+}
+.iconLike {
+  color: goldenrod;
+  width: 30px;
+  height: 25px;
 }

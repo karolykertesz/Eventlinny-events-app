@@ -1,29 +1,37 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, {
+  Fragment,
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+} from "react";
 import { getComments } from "../../data";
 import { Nocomments } from "./indexholders";
 import CommentHead from "../holders/commentsHead";
 import Loader from "../UI/loader";
 import CommentsBody from "../holders/commentsbody";
 const ComentsCross = ({ id }) => {
-  const [comments, setComments] = useState(null);
+  const [comments, setComments] = useState();
   const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    let mode = true;
-    getComments(id).then((items) => {
-      if (mode) {
+  const modeRef = useRef(true);
+  const datafetch = useCallback(() => {
+    return getComments(id).then((items) => {
+      if (modeRef.current) {
         setComments(items);
       }
     });
-
+  }, [setComments]);
+  useEffect(() => {
+    datafetch();
     return () => {
-      mode = false;
+      modeRef.current = false;
     };
-  }, []);
-
+  }, [datafetch]);
+  console.log(comments);
   if (loading) {
     return <Loader />;
   }
-
+  console.log(comments);
   return (
     <div>
       {!comments ? (
@@ -34,7 +42,11 @@ const ComentsCross = ({ id }) => {
         <div>
           {comments && (
             <Fragment>
-              <CommentHead id={comments.added_by} />
+              <CommentHead
+                id={comments.added_by}
+                likes={comments.likes}
+                docid={comments.id}
+              />
               <CommentsBody arr={comments.replies} />
             </Fragment>
           )}

@@ -54,16 +54,22 @@ function EventLogistics(props) {
       .then(() => setShowModal(true));
   };
   useEffect(() => {
+    let mode = true;
     const checkisSigned = () => {
-      const isThere = attendies.find((i) => i === userId);
+      const isThere = attendies && attendies.find((i) => i === userId);
       if (isThere) {
-        setSignedUp(true);
+        if (mode) {
+          setSignedUp(true);
+        }
       } else {
-        setSignedUp(false);
+        if (mode) {
+          setSignedUp(false);
+        }
       }
     };
+    checkisSigned();
     return () => {
-      checkisSigned();
+      mode = false;
     };
   }, []);
   if (!userId || !address) {

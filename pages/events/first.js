@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import { Layer } from "../../components/UI/uiLayer ";
 import FirstPageItem from "../../components/UI/firstpageItem";
 import { NameDiv, Pi } from "../../components/UI/firstpageItem";
@@ -9,7 +9,7 @@ import { getusercat, getuserPrefWithWithCat } from "../../data";
 import EventList from "../../components/EventList";
 import { useRedirect } from "../../helpers/validatehelp";
 const First = () => {
-  let mode = true;
+  const modeRef = useRef(true);
   const valid = useRedirect();
   const userInfo = useAuth().user;
   const [data, setData] = useState();
@@ -17,35 +17,35 @@ const First = () => {
   const [userLocation, setuserlocation] = useState();
   const [userPrefs, setUserPrefs] = useState();
   const t = data;
-  const call = useCallback(async () => {
+  const call = async () => {
     const mess = await fetch("/api/users/helpers/firstPage");
     const d = await mess.json();
-    setData(d);
-  }, [setData]);
-  const getStaticData = async () => {
+    return setData(d);
+  };
+  const getStaticData = useCallback(async () => {
     const uid = userInfo ? userInfo.uid : null;
     if (uid !== null) {
       try {
         const categories = await getusercat(uid && uid);
-        const prefItems = await getuserPrefWithWithCat(categories).then(
-          (items) => {
-            if (mode) {
-              setUserPrefs(items);
-            }
+        return getuserPrefWithWithCat(categories).then((items) => {
+          if (modeRef.current) {
+            setUserPrefs(items);
           }
-        );
+        });
       } catch (err) {
         console.log(err);
       }
     }
-  };
-
+  }, [setUserPrefs]);
   useEffect(() => {
-    getStaticData().then(() => {
-      call();
+    getStaticData().then(async () => {
+      if (modeRef.current) {
+        const daa = await call();
+      }
     });
+
     return () => {
-      mode = false;
+      modeRef.current = false;
     };
   }, []);
 

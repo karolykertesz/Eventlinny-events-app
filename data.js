@@ -319,6 +319,7 @@ export const getComments = async (docId) => {
       if (doc.exists) {
         const data = doc.data();
         obj = {
+          id: doc.id,
           ...data,
         };
       } else {
