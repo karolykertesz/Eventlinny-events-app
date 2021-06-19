@@ -1,7 +1,7 @@
 .icontop {
   width: 20px;
   height: 20px;
-  color: burlywood;
+  color: rgb(81, 85, 7);
 }
 .comentCont {
   padding: 20px;
@@ -9,7 +9,7 @@
   list-style-type: none;
   background-image: linear-gradient(
     to right bottom,
-    rgba(215, 190, 158, 0.488),
+    rgba(225, 168, 93, 0.488),
     rgba(230, 224, 213, 0.8)
   );
   border-radius: 10px;
@@ -28,9 +28,9 @@
 .holder {
   width: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
 }
 .commentDiv {
   display: flex;

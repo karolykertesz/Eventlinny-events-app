@@ -27,11 +27,10 @@ const ComentsCross = ({ id }) => {
       modeRef.current = false;
     };
   }, [datafetch]);
-  console.log(comments);
   if (loading) {
     return <Loader />;
   }
-  console.log(comments);
+
   return (
     <div>
       {!comments ? (

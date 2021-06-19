@@ -1,5 +1,6 @@
 import firebase from "firebase";
 import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import {
   Card,
   Accordion,
@@ -11,6 +12,7 @@ import {
 import Plus from "../icons/plus";
 import classes from "../ui-modules/accordion.module.css";
 import { useAuth } from "../../Layout/UserContext";
+
 const CustomToggle = ({ children, eventKey }) => {
   const toggleButton = useAccordionToggle(eventKey, () => {
     console.log("h");
@@ -23,13 +25,28 @@ const CustomToggle = ({ children, eventKey }) => {
 };
 
 const AddCommentsAccordion = (props) => {
+  const id = props.docId;
   const user = props.user;
   const [text, settext] = useState();
   const [dis, setDis] = useState(false);
   const userid = useAuth().user && useAuth().user.uid;
   const sendsummit = (e) => {
     e.preventDefault();
+    setDis(true);
+    const docref = firebase.firestore().collection("comments").doc(id);
     const date = new Date();
+    return docref
+      .update({
+        replies: firebase.firestore.FieldValue.arrayUnion({
+          id: uuidv4(),
+          what: text,
+          when: date,
+          who: userid,
+          likes: [],
+        }),
+      })
+      .then(() => setDis(false))
+      .then(() => alert("You Got It"));
   };
   return (
     <Accordion defaultActiveKey="0">
@@ -56,8 +73,9 @@ const AddCommentsAccordion = (props) => {
                 />
                 <Button
                   className={classes.button}
-                  onClick={() => {}}
+                  // onClick={() => sendsummit()}
                   disabled={dis}
+                  type="submit"
                 >
                   Submit
                 </Button>

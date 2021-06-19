@@ -8,25 +8,19 @@ import { categories, getComments } from "../data";
 import classes from "../components/UI/ui-modules/eventComp.module.css";
 import RecTCard from "../components/UI/reactbootstrap/card";
 import { getAttendiesInfo } from "../data";
-import { IconDock } from "../components/UI/icons/iconcovers";
-import Comments from "../components/UI/icons/comments";
-import CommentsAddedBy from "../components/comentsAddedBy";
 import ComentsCross from "../components/holders/commentscross.jsx";
-import {
-  ComentContainer,
-  UseComentTop,
-} from "../components/UI/icons/iconcovers";
+import // ComentContainer,
+// UseComentTop,
+"../components/UI/icons/iconcovers";
 import "firebase/functions";
 import { TopHolder } from "../components/holders/indexholders";
 
 const EventComp = ({ single }) => {
-  // const commentRef = React.useRef(null);
   const [comments, setComments] = useState(null);
   const attendies = single && single.attendies;
   const location = single !== null && single.location;
   const isImgUrl = categories.includes(single.category);
   const [atttendiesInfo, setInfo] = useState();
-  // const commentsAddedBy = comments !== null && comments.added_by;
   const humanReadableDate = new Date(single.start).toLocaleDateString("en-US", {
     day: "numeric",
     month: "long",
@@ -41,9 +35,6 @@ const EventComp = ({ single }) => {
   //     console.log(resoult.data);
   //   });
   // };
-  // const t = getComments("11ae22e6-9abc-4cba-95c6-4aea402ae5cf").then((item) =>
-  //   console.log(item)
-  // );
 
   useEffect(() => {
     let mode = true;
@@ -56,7 +47,6 @@ const EventComp = ({ single }) => {
       mode = false;
     };
   }, []);
-  console.log(atttendiesInfo, "gggg");
   return (
     <Fragment>
       <EventSummary title={single.category} added_by={single.added_by} />

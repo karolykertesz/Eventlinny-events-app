@@ -2,7 +2,6 @@ import React, { useEffect, useState, useCallback, useRef } from "react";
 import Image from "next/image";
 import firebase from "firebase";
 import classes from "../holders/css/commentsHead.module.css";
-import Plus from "../UI/icons/plus";
 import AddCommentsAccordion from "../UI/reactbootstrap/accordion";
 import { BiLike } from "react-icons/bi";
 import { IconContext } from "react-icons";
@@ -93,7 +92,7 @@ const CommentHead = ({ id, likes, docid }) => {
             </span>
           </div> */}
           </div>
-          <AddCommentsAccordion />
+          <AddCommentsAccordion docId={docid} />
         </div>
       )}
     </div>

@@ -1,0 +1,44 @@
+.button {
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  border: none;
+}
+.icon {
+  width: 35px;
+  color: white;
+}
+.liketext {
+  color: white;
+  text-align: center;
+  margin-bottom: 8px;
+  text-transform: capitalize;
+}
+.image {
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+.iconButton {
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  background-color: rgb(218, 197, 169);
+  border: none;
+  margin-bottom: 5px;
+  color: rgb(128, 128, 128);
+}
+.icontop {
+  color: rgba(222, 184, 135, 0.673);
+  width: 30px;
+  height: 25px;
+}
+.iconLike {
+  color: goldenrod;
+  width: 30px;
+  height: 25px;
+}

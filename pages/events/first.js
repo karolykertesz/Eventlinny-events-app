@@ -20,7 +20,7 @@ const First = () => {
   const call = async () => {
     const mess = await fetch("/api/users/helpers/firstPage");
     const d = await mess.json();
-    return setData(d);
+    setData(d);
   };
   const getStaticData = useCallback(async () => {
     const uid = userInfo ? userInfo.uid : null;
@@ -38,12 +38,8 @@ const First = () => {
     }
   }, [setUserPrefs]);
   useEffect(() => {
-    getStaticData().then(async () => {
-      if (modeRef.current) {
-        const daa = await call();
-      }
-    });
-
+    getStaticData();
+    call();
     return () => {
       modeRef.current = false;
     };
