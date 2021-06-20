@@ -10,9 +10,13 @@ import { BiLike } from "react-icons/bi";
 import { IconContext } from "react-icons";
 import classes from "./css/comment.module.css";
 import Comments from "../UI/icons/comments";
+import firebase from "firebase";
 
-const Mapper = (props) => {
+const Mapper = ({ item, docid }) => {
   const [liked, setLiked] = useState(false);
+  const [itemId, setItemid] = useState(() => {
+    return item.map((i) => i.id);
+  });
   const userId = useAuth().user.uid;
   const humanReadableDate = (item) => {
     const t = item.toDate().toLocaleDateString("en-US", {
@@ -22,8 +26,20 @@ const Mapper = (props) => {
     });
     return t;
   };
-  const item = props.item;
-  console.log(item);
+  const giveOrtake = (id) => {
+    const dataref = firebase.firestore().collection("comments").doc(docid);
+    setLiked(!liked);
+    if (!liked) {
+      setItemid(itemId.filter((i) => i !== id));
+      return dataref.update({
+        replies: 
+      });
+    } else {
+      setItemid(itemId.concat(id));
+    }
+  };
+
+  // console.log(item, "item");
 
   return (
     <div>
@@ -46,12 +62,14 @@ const Mapper = (props) => {
                   </p>
                   <IconContext.Provider
                     value={{
-                      className: !liked ? classes.icontop : classes.iconLike,
+                      className: itemId.includes(i.id)
+                        ? classes.icontop
+                        : classes.iconLike,
                     }}
                   >
                     <button
                       className={classes.button}
-                      onClick={() => setLiked(!liked)}
+                      onClick={() => giveOrtake(i.id)}
                     >
                       <BiLike />
                     </button>

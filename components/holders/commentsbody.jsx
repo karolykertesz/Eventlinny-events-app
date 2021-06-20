@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback, useRef } from "react";
 import Mapper from "./mapper";
 import firebase from "firebase";
 import { allrepliesOfComments } from "../../data";
-const CommentsBody = ({ arr }) => {
+const CommentsBody = ({ arr, docid }) => {
   const modeRef = useRef(true);
   const runref = useRef(true);
   const [comments, setComments] = useState(null);
@@ -30,6 +30,6 @@ const CommentsBody = ({ arr }) => {
   if (loading) {
     return <div>Loading....</div>;
   }
-  return <div>{comments && <Mapper item={comments} />}</div>;
+  return <div>{comments && <Mapper item={comments} docid={docid} />}</div>;
 };
 export default CommentsBody;

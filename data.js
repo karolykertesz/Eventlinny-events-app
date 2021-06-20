@@ -116,20 +116,6 @@ export async function findDate(year, month) {
   return arr;
 }
 
-export const getKeys = async () => {
-  const keys = [];
-  try {
-    const k = await db.collection("user_add_events").onSnapshot((snapshot) => {
-      const ids = snapshot.docs.forEach((i) => {
-        keys.push(i.id);
-      });
-    });
-  } catch (err) {
-    console.log(err);
-  }
-  return keys;
-};
-
 export const user_events_data = async () => {
   const docref = db.collection("user_add_events").get();
   const dockArray = (await docref).docs.map((item) => ({
@@ -309,23 +295,41 @@ export const getAttendiesInfo = async (attendies) => {
 
   return dataArray;
 };
+
+export const getKeys = async () => {
+  const keys = [];
+  try {
+    const k = await db.collection("user_add_events").onSnapshot((snapshot) => {
+      const ids = snapshot.docs.forEach((i) => {
+        keys.push(i.id);
+      });
+    });
+  } catch (err) {
+    console.log(err);
+  }
+  return keys;
+};
+
 export const getComments = async (docId) => {
   let obj = {};
-  let r = await db
-    .collection("comments")
-    .doc(docId)
-    .get()
-    .then((doc) => {
-      if (doc.exists) {
-        const data = doc.data();
-        obj = {
-          id: doc.id,
-          ...data,
-        };
-      } else {
-        obj = null;
-      }
-    });
+  try {
+    const t = await db
+      .collection("comments")
+      .doc(docId)
+      .onSnapshot(async (doc) => {
+        if (doc.exists) {
+          obj = {
+            id: doc.id,
+            data: doc.data(),
+          };
+        } else {
+          obj = null;
+        }
+      });
+  } catch (err) {
+    console.log(err);
+  }
+
   return obj;
   // console.log(dt, "dt");
   // return dt;
@@ -339,6 +343,7 @@ export const allrepliesOfComments = async (arr) => {
       let DockArray = [];
       items.forEach((item, index) => {
         DockArray.push({
+          id: arr[index].id,
           name: item.data().name,
           url: item.data().image_url
             ? item.data().image_url
