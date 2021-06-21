@@ -13,6 +13,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-bottom: 50px;
 }
 .noTop p {
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;

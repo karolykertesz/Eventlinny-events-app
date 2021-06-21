@@ -7,7 +7,15 @@ import { BiLike } from "react-icons/bi";
 import { IconContext } from "react-icons";
 import { useAuth } from "../Layout/UserContext";
 
-const CommentHead = ({ id, likes, docid }) => {
+const CommentHead = ({ id, likes, docid, commentBody }) => {
+  function addNewlines(str) {
+    let result = "";
+    while (str.length > 0) {
+      result += str.substring(0, 50) + "\n";
+      str = str.substring(60);
+    }
+    return result;
+  }
   const [userdata, setdata] = useState();
   const [liked, setLiked] = useState(false);
   const userId = useAuth().user && useAuth().user.uid;
@@ -92,7 +100,11 @@ const CommentHead = ({ id, likes, docid }) => {
             </span>
           </div> */}
           </div>
-          <AddCommentsAccordion docId={docid} />
+          <div className={classes.body}>
+            <p style={{ textAlign: "center" }}>{userdata.name} said:</p>
+            <p>{addNewlines(commentBody)}</p>
+          </div>
+          <AddCommentsAccordion docId={docid} isCom={true} />
         </div>
       )}
     </div>

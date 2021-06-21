@@ -49,7 +49,7 @@ const ComentsCross = ({ id }) => {
     <div>
       {!comments ? (
         <div>
-          <Nocomments />
+          <Nocomments docid={comments && comments.id} id={id} />
         </div>
       ) : (
         <div>
@@ -59,6 +59,7 @@ const ComentsCross = ({ id }) => {
                 id={comments.data.added_by}
                 likes={comments.data.likes}
                 docid={comments.id}
+                commentBody={comments.data.comment_body}
               />
               <CommentsBody
                 arr={comments && comments.data.replies}

@@ -13,6 +13,28 @@
   height: 70px;
   margin-bottom: 5px;
 }
+.body {
+  max-width: 500px;
+  background-color: rgb(218, 197, 169);
+  color: white;
+  /* min-height: 50px; */
+  height: auto;
+  margin: 10px auto;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.body p {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-weight: 500;
+  line-height: 1.7rem;
+  text-transform: capitalize;
+  white-space: pre-line;
+  margin-left: 20px;
+  /* white-space: pre-wrap; */
+}
 .top img {
   border-radius: 50%;
 

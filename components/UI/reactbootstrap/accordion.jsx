@@ -27,30 +27,50 @@ const CustomToggle = ({ children, eventKey }) => {
 const AddCommentsAccordion = (props) => {
   const id = props.docId;
   const user = props.user;
+  const isTrue = props.isCom;
   const [text, settext] = useState();
   const [dis, setDis] = useState(false);
+  const eventId = props.id;
   const userid = useAuth().user && useAuth().user.uid;
   const sendsummit = (e) => {
     e.preventDefault();
     setDis(true);
     const docref = firebase.firestore().collection("comments").doc(id);
+    const reDoc = firebase.firestore().collection("comments").doc(eventId);
+
     const date = new Date();
-    return docref
-      .update({
-        replies: firebase.firestore.FieldValue.arrayUnion({
-          id: uuidv4(),
-          what: text,
-          when: date,
-          who: userid,
-          likes: [],
-        }),
-      })
-      .then(() => setDis(false))
-      .then(() => alert("You Got It"));
+
+    if (isTrue) {
+      return docref
+        .update({
+          replies: firebase.firestore.FieldValue.arrayUnion({
+            id: uuidv4(),
+            what: text,
+            when: date,
+            who: userid,
+            likes: [],
+          }),
+        })
+        .then(() => setDis(false))
+        .then(() => alert("You Got It"));
+    } else {
+      return reDoc
+        .set(
+          {
+            added_by: userid,
+            likes: [],
+            replies: [],
+          },
+          { merge: true }
+        )
+        .then(() => {
+          alert("comment added");
+        });
+    }
   };
   return (
     <Accordion defaultActiveKey="0">
-      <Card>
+      <Card className={classes.card}>
         <Card.Header style={{ backgroundColor: "rgb(218, 197, 169)" }}>
           <CustomToggle eventKey="0">
             <span style={{ width: "30px", height: "30px" }}>
@@ -63,7 +83,9 @@ const AddCommentsAccordion = (props) => {
           <Card.Body className={classes.body}>
             <Form onSubmit={sendsummit}>
               <Form.Group>
-                <Form.Label>Add Comment</Form.Label>
+                <Form.Label>
+                  {isTrue ? "Add Comment" : "Create Comment for the Event"}
+                </Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Your comment"
@@ -71,12 +93,7 @@ const AddCommentsAccordion = (props) => {
                   value={text}
                   className={classes.input}
                 />
-                <Button
-                  className={classes.button}
-                  // onClick={() => sendsummit()}
-                  disabled={dis}
-                  type="submit"
-                >
+                <Button className={classes.button} disabled={dis} type="submit">
                   Submit
                 </Button>
               </Form.Group>

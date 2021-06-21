@@ -27,19 +27,16 @@ const Mapper = ({ item, docid }) => {
     return t;
   };
   const giveOrtake = (id) => {
-    const dataref = firebase.firestore().collection("comments").doc(docid);
     setLiked(!liked);
     if (!liked) {
       setItemid(itemId.filter((i) => i !== id));
-      return dataref.update({
-        replies: 
-      });
+      // return dataref.update({
+      //   replies:
+      // });
     } else {
       setItemid(itemId.concat(id));
     }
   };
-
-  // console.log(item, "item");
 
   return (
     <div>

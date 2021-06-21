@@ -336,6 +336,7 @@ export const getComments = async (docId) => {
 };
 
 export const allrepliesOfComments = async (arr) => {
+  if (arr.length === 0) return [];
   const docref = db.collection("user_aditional");
   const getAll = () => {
     const promises = arr.map((item) => docref.doc(item.who).get());
