@@ -45,6 +45,7 @@ const ComentsCross = ({ id }) => {
   if (loading) {
     return <Loader />;
   }
+
   return (
     <div>
       {!comments ? (

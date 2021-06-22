@@ -56,11 +56,7 @@ const AddCommentsAccordion = (props) => {
     } else {
       return reDoc
         .set(
-          {
-            added_by: userid,
-            likes: [],
-            replies: [],
-          },
+          { comment_body: text, added_by: userid, likes: [], replies: [] },
           { merge: true }
         )
         .then(() => {
@@ -76,7 +72,6 @@ const AddCommentsAccordion = (props) => {
             <span style={{ width: "30px", height: "30px" }}>
               <Plus />
             </span>
-            Add comments
           </CustomToggle>
         </Card.Header>
         <Accordion.Collapse eventKey="0">

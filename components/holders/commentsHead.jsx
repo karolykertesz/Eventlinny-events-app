@@ -16,6 +16,7 @@ const CommentHead = ({ id, likes, docid, commentBody }) => {
     }
     return result;
   }
+  console.log(commentBody, "gg");
   const [userdata, setdata] = useState();
   const [liked, setLiked] = useState(false);
   const userId = useAuth().user && useAuth().user.uid;
@@ -102,7 +103,7 @@ const CommentHead = ({ id, likes, docid, commentBody }) => {
           </div>
           <div className={classes.body}>
             <p style={{ textAlign: "center" }}>{userdata.name} said:</p>
-            <p>{addNewlines(commentBody)}</p>
+            <p>{addNewlines(commentBody && commentBody)}</p>
           </div>
           <AddCommentsAccordion docId={docid} isCom={true} />
         </div>

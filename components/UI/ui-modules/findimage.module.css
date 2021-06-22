@@ -1,0 +1,19 @@
+.top {
+  max-width: 250px;
+  max-height: 200px;
+  background-color: burlywood;
+}
+
+.inner {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: peachpuff;
+}

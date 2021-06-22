@@ -13,10 +13,22 @@ import Comments from "../UI/icons/comments";
 import firebase from "firebase";
 
 const Mapper = ({ item, docid }) => {
+  // const likedArr = item && item.data;
   const [liked, setLiked] = useState(false);
   const [itemId, setItemid] = useState(() => {
     return item.map((i) => i.id);
   });
+  // const itemArr = item.map((i) => ({ id: i.id, like: i.data.likes.length }));
+  const [likeCount, setLike] = useState(() => {
+    const t = item.map((i) => ({ id: i.id, like: i.data.likes.length }));
+    return t;
+  });
+
+  const getLikeCount = (itemId) => {
+    const one = likeCount.filter((i) => i.id === itemId);
+    const count = one[0].like;
+    return count;
+  };
   const userId = useAuth().user.uid;
   const humanReadableDate = (item) => {
     const t = item.toDate().toLocaleDateString("en-US", {
@@ -30,11 +42,30 @@ const Mapper = ({ item, docid }) => {
     setLiked(!liked);
     if (!liked) {
       setItemid(itemId.filter((i) => i !== id));
+      const tr = likeCount.find((i) => i.id === id);
+      const newObj = { id: id, like: tr.like >= 1 ? tr.like - 1 : 0 };
+      let arr = likeCount.filter((i) => i.id !== id);
+      arr = [...arr, newObj];
+      setLike(arr);
+
+      // const arrayClone =
+      // setLike(likeCount[id].like - 1);
+
+      // console.log(likeCount.id);
+
       // return dataref.update({
       //   replies:
       // });
     } else {
       setItemid(itemId.concat(id));
+      const tr = likeCount.find((i) => i.id === id);
+      const newObj = { id: id, like: tr.like + 1 };
+      let arr = likeCount.filter((i) => i.id !== id);
+      arr = [...arr, newObj];
+      setLike(arr);
+      // setLike(likeCount.id.like + 1);
+      // console.log(likeCount.id);
+      // console.log(id);
     }
   };
 
@@ -60,8 +91,8 @@ const Mapper = ({ item, docid }) => {
                   <IconContext.Provider
                     value={{
                       className: itemId.includes(i.id)
-                        ? classes.icontop
-                        : classes.iconLike,
+                        ? classes.iconLike
+                        : classes.icontop,
                     }}
                   >
                     <button
@@ -76,7 +107,7 @@ const Mapper = ({ item, docid }) => {
                   <IconDock icon={Comments} />
                   <p className={classes.liketext}>{i.data.what}</p>
                   <p className={classes.liketext}>
-                    likes: ({i.data.likes.length})
+                    likes: ({getLikeCount(i.id)})
                   </p>
                 </CommentHolder>
               </ComentContainer>
