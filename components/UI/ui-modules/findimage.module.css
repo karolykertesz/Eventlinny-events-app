@@ -11,9 +11,12 @@
   flex-direction: column;
   align-items: center;
 }
-.inner img {
-  /* width: 400px; */
-  /* height: 200px; */
+.imgInner {
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
 }
 .bottom {
   display: flex;
@@ -23,3 +26,14 @@
   background-color: peachpuff;
   width: 100%;
 }
+.imgCon {
+  position: relative;
+}
+/* .imgCon  {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  z-index: 1;
+  right: 20px;
+  top: 10px;
+} */

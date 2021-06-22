@@ -1,8 +1,20 @@
 .top {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   margin: 0 20px;
+  gap: 20px;
 }
+@media (max-width: 800px) {
+  .top {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .top {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* .secTop {
   display: grid;
   gap: 10px;
@@ -11,5 +23,9 @@
 .ul {
   display: grid;
   gap: 15px;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  padding: 20px;
+}
+.li {
+  margin: 10px auto;
 }

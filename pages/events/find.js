@@ -31,6 +31,7 @@ import { getuserPrefWithWithCat, getusercat } from "../../data";
 import { useAuth } from "../../components/Layout/UserContext";
 import FindImage from "../../components/findImage";
 import firebase from "firebase";
+
 const find = () => {
   const [category, setCat] = useState("");
   const [location, setLoc] = useState("");
@@ -52,10 +53,11 @@ const find = () => {
     const docref = firebase.firestore().collection("user_add_events");
     const docArray = [];
     const date = new Date();
+    const randomLength = Math.floor(Math.random() * 6);
 
     const tr = await docref
       .where("starts", ">=", date)
-      .limit(6)
+      .limit(randomLength)
       .get()
       .then((docs) => {
         docs.forEach((i) => {
@@ -203,7 +205,7 @@ const find = () => {
         <ul className={classes.ul}>
           {userSug &&
             userSug.map((item) => (
-              <li key={item.id}>
+              <li key={item.id} className={classes.li}>
                 <FindImage item={item} />
               </li>
             ))}

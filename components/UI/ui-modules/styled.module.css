@@ -55,3 +55,8 @@
   color: burlywood;
   line-height: 1.1rem;
 }
+.vidCam {
+  position: absolute;
+  z-index: 1;
+  left: 10px;
+}
