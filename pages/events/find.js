@@ -30,6 +30,7 @@ import classes from "../../components/UI/ui-modules/find.module.css";
 import { getuserPrefWithWithCat, getusercat } from "../../data";
 import { useAuth } from "../../components/Layout/UserContext";
 import FindImage from "../../components/findImage";
+import firebase from "firebase";
 const find = () => {
   const [category, setCat] = useState("");
   const [location, setLoc] = useState("");
@@ -41,27 +42,38 @@ const find = () => {
   const [userSug, setuserSug] = useState();
   const modeRef = useRef(true);
   const user = useAuth().user;
+
   const setitems = () => {
     setIscat(!isCat);
     setError("");
   };
 
-  const getSugestion = async () => {
-    if (!modeRef.current) return;
-    setLoading(true);
-    const uid = user ? user.uid : null;
-    if (uid !== null) {
-      const usecats = await getusercat(uid);
-      return getuserPrefWithWithCat(usecats)
-        .then((items) => {
-          if (modeRef.current) {
-            setuserSug(items);
-          }
-        })
-        .then(() => setLoading(false));
-    }
-  };
+  const getSugestion = useCallback(async () => {
+    const docref = firebase.firestore().collection("user_add_events");
+    const docArray = [];
+    const date = new Date();
 
+    const tr = await docref
+      .where("starts", ">=", date)
+      .limit(6)
+      .get()
+      .then((docs) => {
+        docs.forEach((i) => {
+          docArray.push({
+            id: i.id,
+            attendies: i.data().attendies.length,
+            category: i.data().category,
+            location: i.data().location,
+          });
+        });
+      })
+      .then(() => {
+        if (modeRef.current) {
+          setuserSug(docArray);
+        }
+      });
+  }, [setuserSug]);
+  console.log(userSug);
   useEffect(() => {
     getSugestion();
     return () => {
@@ -185,10 +197,10 @@ const find = () => {
         </Cover>
         <Cover>{items && <EventList items={items} />}</Cover>
       </div>
-      <div></div>
+      {/* <div>kertesz</div> */}
       <div className={classes.secTop}>
         <PiBig>Suggestions</PiBig>
-        <ul>
+        <ul className={classes.ul}>
           {userSug &&
             userSug.map((item) => (
               <li key={item.id}>

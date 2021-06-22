@@ -1,11 +1,15 @@
 .top {
   display: grid;
-  gap: 50px;
-  grid-template-columns: 1fr 1fr 1fr;
-  margin: 0 50px;
+  grid-template-columns: 1fr 1fr;
+  margin: 0 20px;
 }
-.secTop {
+/* .secTop {
   display: grid;
   gap: 10px;
+  grid-template-columns: 1fr 1fr 1fr;
+} */
+.ul {
+  display: grid;
+  gap: 15px;
   grid-template-columns: 1fr 1fr 1fr;
 }

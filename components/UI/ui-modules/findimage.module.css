@@ -2,6 +2,7 @@
   max-width: 250px;
   max-height: 200px;
   background-color: burlywood;
+  cursor: pointer;
 }
 
 .inner {
@@ -10,10 +11,15 @@
   flex-direction: column;
   align-items: center;
 }
+.inner img {
+  /* width: 400px; */
+  /* height: 200px; */
+}
 .bottom {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   background-color: peachpuff;
+  width: 100%;
 }
