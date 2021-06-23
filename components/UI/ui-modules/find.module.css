@@ -1,7 +1,7 @@
 .top {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  margin: 0 20px;
+  margin: 10px 30px;
   gap: 20px;
 }
 @media (max-width: 800px) {
@@ -25,7 +25,8 @@
   gap: 15px;
   grid-template-columns: 1fr 1fr;
   padding: 20px;
+  margin: 20px auto;
 }
 .li {
-  margin: 10px auto;
+  margin-bottom: 100px;
 }

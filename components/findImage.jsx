@@ -5,6 +5,7 @@ import classes from "./UI/ui-modules/findimage.module.css";
 import { categories } from "../data";
 import Videocamera from "./UI/icons/videocamera";
 import AddressIcon from "./UI/icons/address";
+import Users from "./UI/icons/users";
 
 const FindImage = ({ item }) => {
   const findItem = categories.findIndex((it) => it === item.category);
@@ -12,14 +13,18 @@ const FindImage = ({ item }) => {
   const imgLink = `/images/sugimages/${
     findItem < 0 ? "healthy" : item.category
   }.jpg`;
-  console.log(imgLink, "jjsss");
+  const starts = item.starts.toDate().toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
   return (
     <div className={classes.top}>
       <div className={classes.inner}>
         <div className={classes.imgInner}>
           <div className={classes.imgCon}>
             {item.location === "online" ? (
-              <Videocamera color="burlywood" width="40px" />
+              <Videocamera color="burlywood" width="40px" inPutType="find" />
             ) : (
               <AddressIcon color="burlywood" width="40px" />
             )}
@@ -37,7 +42,14 @@ const FindImage = ({ item }) => {
         </div>
 
         <div className={classes.bottom}>
-          <p>{item.category}</p>
+          <div className={classes.innerCover}>
+            <Users color="burlywood" width="20px" />
+            <p>{item.attendies}</p>
+          </div>
+          <div className={classes.innerSec}>
+            <p>Event: {item.category}</p>
+            <p>Starts: {starts}</p>
+          </div>
         </div>
       </div>
     </div>

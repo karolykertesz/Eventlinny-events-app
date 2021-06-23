@@ -53,7 +53,7 @@ const find = () => {
     const docref = firebase.firestore().collection("user_add_events");
     const docArray = [];
     const date = new Date();
-    const randomLength = Math.floor(Math.random() * 6);
+    const randomLength = Math.floor(Math.random() * 4);
 
     const tr = await docref
       .where("starts", ">=", date)
@@ -66,6 +66,7 @@ const find = () => {
             attendies: i.data().attendies.length,
             category: i.data().category,
             location: i.data().location,
+            starts: i.data().starts,
           });
         });
       })

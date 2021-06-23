@@ -9,9 +9,8 @@ import classes from "../components/UI/ui-modules/eventComp.module.css";
 import RecTCard from "../components/UI/reactbootstrap/card";
 import { getAttendiesInfo } from "../data";
 import ComentsCross from "../components/holders/commentscross.jsx";
-import // ComentContainer,
-// UseComentTop,
-"../components/UI/icons/iconcovers";
+import Nomap from "../components/noMap";
+
 import "firebase/functions";
 import { TopHolder } from "../components/holders/indexholders";
 
@@ -26,15 +25,6 @@ const EventComp = ({ single }) => {
     month: "long",
     year: "numeric",
   });
-
-  // const trueRef = React.useRef(true);
-  // const saySomething = () => {
-  //   // const ss = firebase   HttpsCallable("sendTest");
-  //   const ss = firebase.functions().httpsCallable("sendTest");
-  //   ss({ name: "kertesz" }).then((resoult) => {
-  //     console.log(resoult.data);
-  //   });
-  // };
 
   useEffect(() => {
     let mode = true;
@@ -71,12 +61,16 @@ const EventComp = ({ single }) => {
           <div>
             <EventContent>
               {/* <Pi>event Description: {single.description}</Pi> */}
-              {location !== "online" && (
+              {location !== "online" ? (
                 <EventMap
                   location={single && single.location}
                   added_by={single && single.added_by}
                   created_by={single && single.created_by}
                 />
+              ) : (
+                <div>
+                  <Nomap />
+                </div>
               )}
             </EventContent>
           </div>
