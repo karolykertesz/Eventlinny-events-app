@@ -10,7 +10,6 @@ import EventList from "../../components/EventList";
 import { useRedirect } from "../../helpers/validatehelp";
 const First = () => {
   const modeRef = useRef(true);
-  const valid = useRedirect();
   const userInfo = useAuth().user;
   const [data, setData] = useState();
   const [user, setuser] = useState();
@@ -44,7 +43,7 @@ const First = () => {
       modeRef.current = false;
     };
   }, []);
-
+  useRedirect();
   return !data || !userInfo ? (
     <Loader />
   ) : (

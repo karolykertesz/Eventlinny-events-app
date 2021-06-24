@@ -17,6 +17,35 @@
   -o-transition: all 0.2;
   box-shadow: 0 4px 6px rgba(41, 38, 22, 0.2);
 }
+@media (max-width: 600px) {
+  .top {
+    width: 100px;
+    height: 100px;
+  }
+  .img {
+    width: 40px;
+    height: 40px;
+  }
+  .member {
+    height: 40px;
+    font-size: 13px;
+    font-weight: bold;
+  }
+  .MemberLink {
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .MemberLink a {
+    font-size: 10px;
+    font-weight: bold;
+  }
+}
+
 .top:hover {
   cursor: pointer;
   transform: translateY(-4px);

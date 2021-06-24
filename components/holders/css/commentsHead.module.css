@@ -9,15 +9,40 @@
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
   width: 500px;
-  background-color: rgb(218, 197, 169);
+  background-color: #f0e5c7;
   height: 70px;
   margin-bottom: 5px;
 }
+@media (max-width: 600px) {
+  .top {
+    width: 90vw;
+  }
+  .top img {
+    width: 50px;
+    height: 50px;
+  }
+  .iconLike {
+    height: 20px !important;
+    margin-bottom: 10px;
+  }
+  .icontop {
+    height: 20px !important;
+    margin-bottom: 10px;
+  }
+  .liketext {
+    margin-bottom: 14px !important;
+    font-size: 14px;
+  }
+  .body p {
+    line-height: 25px;
+  }
+}
 .body {
   max-width: 500px;
-  background-color: rgb(218, 197, 169);
+  background-color: #f0e5c7;
   color: white;
-  /* min-height: 50px; */
+  /*min-height: 50px;
+  */
   height: auto;
   margin: 10px auto;
   border-radius: 10px;
@@ -29,7 +54,7 @@
 .body p {
   font-family: Georgia, "Times New Roman", Times, serif;
   font-weight: 500;
-  line-height: 1.7rem;
+  /* line-height: 1.7rem; */
   text-transform: capitalize;
   white-space: pre-line;
   margin-left: 20px;
@@ -72,20 +97,21 @@
 .liketext {
   color: white;
   text-align: center;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   text-transform: capitalize;
 }
+
 .iconButton {
   margin: 0;
   padding: 0;
   cursor: pointer;
-  background-color: rgb(218, 197, 169);
+  background-color: #f0e5c7;
   border: none;
   margin-bottom: 5px;
   color: rgb(128, 128, 128);
 }
 .icontop {
-  color: rgb(172, 163, 163);
+  color: peru;
   width: 30px;
   height: 25px;
 }

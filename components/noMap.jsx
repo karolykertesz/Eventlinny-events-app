@@ -5,7 +5,7 @@ const Nomap = () => {
     <div className={classes.nocameraTop}>
       <p>Online Event:</p>
       <div className={classes.abs}>
-        <Videocamera color="white" width="40px" inPutType="map" />
+        <Videocamera color="papayawhip" width="40px" inPutType="map" />
       </div>
     </div>
   );

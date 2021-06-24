@@ -20,11 +20,11 @@ const RecTCard = (props) => {
         <Card.Body className={classes.body}>
           <Card.Title className={classes.title}>{props.title}</Card.Title>
         </Card.Body>
-        <ListGroup className="list-group-flush">
+        <ListGroup className={"list-group-flush" + " " + classes.listitem}>
           <ListGroupItem className={classes.member}>
             {props.member}
           </ListGroupItem>
-          <ListGroupItem>
+          <ListGroupItem className={classes.MemberLink}>
             <Link href={props.memberlink}>View member</Link>
           </ListGroupItem>
         </ListGroup>

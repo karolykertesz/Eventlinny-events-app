@@ -53,11 +53,14 @@ const find = () => {
     const docref = firebase.firestore().collection("user_add_events");
     const docArray = [];
     const date = new Date();
-    const randomLength = Math.floor(Math.random() * 4);
+    const randomL = () => {
+      const randomLength = Math.floor(Math.random() * 4);
+      return randomLength;
+    };
 
     const tr = await docref
       .where("starts", ">=", date)
-      .limit(randomLength)
+      .limit(randomL())
       .get()
       .then((docs) => {
         docs.forEach((i) => {

@@ -95,6 +95,7 @@ const Header = () => {
               value={{
                 className: classes.iconColor,
                 size: "29px",
+                color: "papayawhip",
               }}
             >
               <BsFillPersonFill />

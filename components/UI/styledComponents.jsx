@@ -95,7 +95,7 @@ export const Grid = styled.div`
     /* flex-direction: column; */
     grid-template-columns: 1fr 1fr;
     grid-gap: 10px;
-    /* margin-right: 60px; */
+    margin: 0 60px;
   }
   @media (max-width: 850px) {
     grid-gap: 20px;

@@ -28,7 +28,13 @@ const AllEvents = ({ eventss }) => {
         />
       </Head>
       {/* <EventSearch onSelected={onSelected} /> */}
-      {event && <EventList items={event} />}
+      {event && (
+        <div style={{ marginTop: "100px" }}>
+          <EventList items={event} />
+          <div></div>
+          <div></div>
+        </div>
+      )}
     </>
   );
 };

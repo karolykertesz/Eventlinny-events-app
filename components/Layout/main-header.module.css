@@ -76,6 +76,9 @@
   color: papayawhip;
   margin: auto 0;
 }
+.iconColor:hover {
+  cursor: pointer;
+}
 .icon:hover {
   background-color: rgba(218, 209, 209, 0.3);
 }

@@ -57,7 +57,7 @@ const EventMap = ({ location, added_by, created_by }) => {
   }, []);
 
   return (
-    <div className={classes.conpI} style={{ marginBottom: "20px" }}>
+    <div className={classes.conpI} style={{ marginBottom: "10px" }}>
       {viewport && (
         <ReactMapGL
           {...viewport}
