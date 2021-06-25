@@ -9,6 +9,7 @@ import { IconContext } from "react-icons";
 import { BsFillPersonFill, BsViewStacked } from "react-icons/bs";
 import DropDown from "../../components/dropdown";
 import MobileLogout from "../UI/mobillogout";
+import ButtonPop from "../UI/buttonpop";
 
 FirebaseClient();
 const Header = () => {
@@ -90,24 +91,26 @@ const Header = () => {
           <Link href="/startup">Event pick</Link>
           <Link href="/events">All Events</Link>
           <Link href="/events/find">Find an Event</Link>
-          <IconWrap onClick={() => setShow(!show)}>
+          <Link href="/events/find">Your Profile</Link>
+
+          {/* <IconWrap onClick={() => setShow(!show)}>
             <IconContext.Provider
               value={{
-                className: classes.iconColor,
                 size: "29px",
-                color: "papayawhip",
               }}
             >
               <BsFillPersonFill />
             </IconContext.Provider>
-          </IconWrap>
-          <span>
-            <span className={classes.link} onClick={() => sout()}>
-              Sign Out
-            </span>
-          </span>
+          </IconWrap> */}
 
-          <DropDown cls={show} uid={1} setShow={setShow} />
+          {/* <span className={classes.profile}> */}
+          <ButtonPop />
+          <span className={classes.link} onClick={() => sout()}>
+            Sign Out
+          </span>
+          {/* </span> */}
+
+          {/* <DropDown cls={show} uid={1} setShow={setShow} /> */}
         </div>
       ) : (
         <Fragment>
@@ -123,12 +126,22 @@ export default Header;
 const IconWrap = styled.span`
   padding: auto 0;
   display: inline;
+  color: papayawhip;
   margin-top: 10px;
   padding-top: 3px;
+  height: 30px;
+  cursor: pointer;
   float: right;
   @media (max-width: 600px) {
-    left: 10px;
-    top: 200px;
+    /* left: 10px; */
+    /* top: 200px; */
     position: absolute;
+    color: peru;
+    display: block;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    font-size: 40px;
+    right: 0;
   }
 `;

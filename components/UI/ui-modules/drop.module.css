@@ -33,8 +33,11 @@
 }
 @media screen and (max-width: 600px) {
   .top {
-    /* margin-bottom: 10px; */
+    margin-bottom: 10px;
     top: 16px;
+    left: 0;
+
+    width: 40px;
   }
   .top ul li {
     padding: -10px;

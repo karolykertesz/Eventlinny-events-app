@@ -29,14 +29,16 @@ const FindImage = ({ item }) => {
               <AddressIcon color="burlywood" width="40px" />
             )}
           </div>
-          <Link href={`${item.id}`}>
-            <Image
-              width="300px"
-              height="250px"
-              src={imgLink}
-              alt={item.category}
-              quality="100"
-            />
+          <Link href={item.id}>
+            <div>
+              <Image
+                width="300px"
+                height="250px"
+                src={imgLink}
+                alt={item.category}
+                quality="100"
+              />
+            </div>
           </Link>
           {/* <div className={classes.imgInner}></div> */}
         </div>
