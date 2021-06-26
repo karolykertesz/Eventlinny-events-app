@@ -1,45 +1,42 @@
 .top {
   min-width: 300px;
   max-width: 600px;
-  border: none;
-  background-color: rgba(219, 156, 55, 0.803);
+  background-color: rgba(219, 156, 55, 0.803) !important;
 }
 .popButton {
   width: 100px;
   height: 55px;
   text-align: center;
   line-height: 1.5rem;
-  border-radius: 6px;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  -ms-border-radius: 6px;
-  -o-border-radius: 6px;
+  border-radius: 6px !important;
+  -webkit-border-radius: 6px !important;
+  -moz-border-radius: 6px !important;
+  -ms-border-radius: 6px !important;
+  -o-border-radius: 6px !important;
   margin-left: 10px;
-  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2) !important;
   text-transform: capitalize;
   font-family: Georgia, "Times New Roman", Times, serif;
   font-weight: 500;
 }
-.popButton:focus {
-  outline: none;
+
+.popButton :active {
+  outline: none !important;
+  box-shadow: none;
 }
-@media (min-width: 700px) {
+@media (min-width: 600px) {
   .popButton {
     height: auto;
     width: auto;
-    border-radius: 0;
-    box-shadow: none;
+    margin-top: 3px;
     background-color: #c49e7d !important;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    -ms-border-radius: 0;
-    -o-border-radius: 0;
     border: none;
-    font-size: 20px;
+    font-size: 19px !important;
     color: papayawhip;
-    font-weight: 500;
+    font-weight: 600 !important;
     margin-bottom: 5px;
     font-family: Arial, Helvetica, sans-serif;
+    box-shadow: none !important;
   }
   .popButton:active {
     border: #c49e7d;
@@ -58,14 +55,28 @@
   text-transform: capitalize;
   color: #c49e7d;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-  font-weight: 600;
+  font-weight: 700 !important;
   line-height: 1.2rem;
   text-align: center;
-  background-color: papayawhip;
+  background-color: papayawhip !important;
 }
 .body {
   font-weight: 600;
   line-height: 1.2rem;
   text-align: center;
-  background-color: papayawhip;
+}
+.link {
+  width: 100%;
+  border-bottom: 1px solid papayawhip;
+}
+
+.link a {
+  color: #c49e7d;
+  text-transform: capitalize;
+  font-size: 18px;
+}
+.link a:hover,
+.link a:active {
+  text-decoration: none;
+  color: papayawhip;
 }

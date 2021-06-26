@@ -54,7 +54,7 @@ const find = () => {
     const docArray = [];
     const date = new Date();
     const randomL = () => {
-      const randomLength = Math.floor(Math.random() * 4);
+      const randomLength = Math.floor(Math.random() * 3 + 1);
       return randomLength;
     };
 

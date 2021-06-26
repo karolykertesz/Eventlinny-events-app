@@ -40,7 +40,6 @@ const FindImage = ({ item }) => {
               />
             </div>
           </Link>
-          {/* <div className={classes.imgInner}></div> */}
         </div>
 
         <div className={classes.bottom}>

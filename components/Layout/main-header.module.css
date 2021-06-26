@@ -84,9 +84,9 @@
   .control {
     max-height: 200px !important;
   }
-  .navbar {
+  /* .navbar {
     width: 100%;
-  }
+  } */
   .profile {
     display: flex;
     flex-direction: row;
@@ -95,6 +95,7 @@
     margin-left: 10px;
   }
   .navLinks {
+    margin-top: 0;
     display: grid !important;
     /* flex-direction: row; */
     /* justify-content: space-around; */
@@ -112,7 +113,7 @@
     /* display: none; */
   }
   .link {
-    color: #c49e7d;
+    color: papayawhip;
     width: 90px;
     background-color: #c49e7d;
     /* height: 50px; */
@@ -127,7 +128,7 @@
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
-    color: white;
+
     cursor: pointer;
     /* position: relative; */
     /* float: left; */
@@ -140,11 +141,11 @@
   .linkButton {
     width: 0;
     height: 0;
-    color: #c49e7d;
-    background-color: tomato;
+    color: papayawhip;
+    /* background-color: tomato; */
   }
   .icon {
-    color: #c49e7d;
+    color: papayawhip;
     width: 30px;
     height: 70px;
   }
@@ -153,7 +154,7 @@
     background-color: papayawhip;
   }
   .nav > .navLinks > a {
-    color: #c49e7d;
+    color: papayawhip;
     width: 30px;
     background-color: #c49e7d;
     height: 50px;
@@ -168,7 +169,6 @@
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
-    color: white;
     cursor: pointer;
     font-family: Georgia, "Times New Roman", Times, serif;
     text-transform: capitalize;
@@ -188,11 +188,11 @@
   .nav > .navBtn > label > span {
     display: block;
     width: 25px;
-    height: 10px;
+    height: 7px;
     border-top: 2px solid #eee;
+    position: relative;
   }
   .nav > .navLinks {
-    /* position: relative; */
     display: block;
     width: 100%;
 
