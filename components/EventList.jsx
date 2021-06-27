@@ -4,7 +4,7 @@ import classes from "./event-list.module.css";
 const EventList = (props) => {
   const { items } = props;
   return (
-    <div>
+    <div className={classes.block}>
       <ul className={classes.list}>
         {items
           .sort((a, b) => {

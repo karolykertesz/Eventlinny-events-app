@@ -91,26 +91,11 @@ const Header = () => {
           <Link href="/startup">Event pick</Link>
           <Link href="/events">All Events</Link>
           <Link href="/events/find">Find an Event</Link>
-          <Link href="/events/find">Your Profile</Link>
-
-          {/* <IconWrap onClick={() => setShow(!show)}>
-            <IconContext.Provider
-              value={{
-                size: "29px",
-              }}
-            >
-              <BsFillPersonFill />
-            </IconContext.Provider>
-          </IconWrap> */}
-
-          {/* <span className={classes.profile}> */}
+          <Link href="/events/archive">Archive</Link>
           <ButtonPop />
           <span className={classes.link} onClick={() => sout()}>
             Sign Out
           </span>
-          {/* </span> */}
-
-          {/* <DropDown cls={show} uid={1} setShow={setShow} /> */}
         </div>
       ) : (
         <Fragment>

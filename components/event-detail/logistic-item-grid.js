@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import classes from "../components/event-item.module.css";
-import Button from "./UI/Button";
-import DateIcon from "./UI/icons/date-icon";
-import AddresIcon from "./UI/icons/address-icon";
-import PersonIcon from "./UI/icons/person-icon";
-import ArrowIcon from "./UI/icons/arrow-right-icon";
-import NotApply from "./UI/icons/not-apply";
+import classes from "../UI/ui-modules/logistic-item-grid.module.css";
+import Button from "../UI/Button";
+import DateIcon from "../UI/icons/date-icon";
+import AddresIcon from "../UI/icons/address-icon";
+import PersonIcon from "../UI/icons/person-icon";
+import ArrowIcon from "../UI/icons/arrow-right-icon";
+import NotApply from "../UI/icons/not-apply";
 import Image from "next/image";
-import ImagePop from "./imagePop";
+import ImagePop from "../imagePop";
 
-import { categories } from "../data";
-import { useAuth } from "./Layout/UserContext";
-const EventItem = (props) => {
-  const { start, end, category, location, id, attendies, added_by } = props;
+import { categories } from "../../data";
+import { useAuth } from "../Layout/UserContext";
+const LogisticGrid = (props) => {
+  const { start, category, location, id, attendies, added_by } = props;
   const user = useAuth().user && useAuth().user;
   const uid = user && user.uid;
   const isImageurl = categories.includes(category);
@@ -25,7 +25,7 @@ const EventItem = (props) => {
   const linkTo = `/events/${id}`;
   return (
     <span className={!isValid ? classes.falseItem : ""}>
-      <span className={classes.item}>
+      <div className={classes.item}>
         <Image
           src={isImageurl ? `/images/${category}.jpg` : "/images/salmon.jpg"}
           alt={category}
@@ -51,7 +51,7 @@ const EventItem = (props) => {
                     <ImagePop />
                   </div>
                 ) : (
-                  <div>hhh</div>
+                  <div>{""}</div>
                 )}
               </div>
             )}
@@ -59,13 +59,8 @@ const EventItem = (props) => {
 
           <div className={classes.date}>
             <DateIcon />
-            <time> starts {new Date(start).toLocaleDateString()}</time>
-            <time> at {new Date(start).toLocaleTimeString()}</time>
-          </div>
-          <div className={classes.date}>
-            <DateIcon />
-            <time>Ends {new Date(end).toLocaleDateString()}</time>
-            <time>at {new Date(end).toLocaleTimeString()}</time>
+            <time> {new Date(start).toLocaleDateString()}</time>
+            <time>{new Date(start).toLocaleTimeString()}</time>
           </div>
           <div className={classes.address}>
             <AddresIcon />
@@ -94,9 +89,9 @@ const EventItem = (props) => {
             </Button>
           </div>
         </div>
-      </span>
+      </div>
     </span>
   );
 };
 
-export default EventItem;
+export default LogisticGrid;

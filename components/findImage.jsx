@@ -44,7 +44,7 @@ const FindImage = ({ item }) => {
 
         <div className={classes.bottom}>
           <div className={classes.innerCover}>
-            <Users color="burlywood" width="20px" />
+            <Users color="papayawhip" width="20px" />
             <p>{item.attendies}</p>
           </div>
           <div className={classes.innerSec}>

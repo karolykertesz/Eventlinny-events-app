@@ -1,5 +1,6 @@
 .top {
   max-width: 250px;
+  min-width: 200px;
   max-height: 200px;
   background-color: burlywood;
   cursor: pointer;
@@ -23,7 +24,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  background-color: rgba(138, 80, 32, 0.783);
+  background-color: burlywood;
   width: 100%;
 }
 .innerCover {
@@ -33,10 +34,10 @@
   justify-content: space-between;
 }
 .innerCover p {
-  margin-top: 2px;
-  line-height: 1.7rem;
+  margin-top: 6px;
+  line-height: 1rem;
   font-size: 19px;
-  color: burlywood;
+  color: papayawhip;
   padding-left: 5px;
   text-transform: capitalize;
 }
@@ -53,9 +54,9 @@
 }
 .innerSec p {
   margin-top: 2px;
-  line-height: 1.2rem;
+  line-height: 1.1rem;
   font-size: 15px;
-  color: burlywood;
+  color: papayawhip;
   padding-left: 2px;
   text-transform: capitalize;
   font-family: Georgia, "Times New Roman", Times, serif;

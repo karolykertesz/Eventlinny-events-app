@@ -32,7 +32,7 @@
   text-decoration: none;
   color: white;
 }
-.btn::after {
+/* .btn::after {
   content: "";
   display: inline-block;
   width: 90%;
@@ -48,7 +48,7 @@
   -ms-transition: all 0.6s;
   -o-transition: all 0.6s;
   background-color: rgba(206, 181, 141, 0.5);
-}
+} */
 .bttb {
   position: relative;
 }

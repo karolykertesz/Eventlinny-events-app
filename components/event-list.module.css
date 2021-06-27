@@ -1,5 +1,22 @@
 .list {
-    width: 90%;
-    max-width: 40rem;
-    margin: 5rem auto;
+  width: 80%;
+  max-width: 40rem;
+  margin: 2rem auto;
+}
+.block {
+  overflow: hidden;
+}
+@media (max-width: 600px) {
+  .list {
+    width: 100%;
+    margin-right: 170px;
+    /* display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+
+    width: 50%;
+    max-width: 10rem;
+    margin: 0 auto; */
+    /* overflow: hidden; */
+  }
 }

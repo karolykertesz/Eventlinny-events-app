@@ -117,7 +117,31 @@ export async function findDate(year, month) {
 }
 
 export const user_events_data = async () => {
-  const docref = db.collection("user_add_events").get();
+  const date = new Date();
+  const docref = db
+    .collection("user_add_events")
+    .where("starts", ">=", date)
+    .get();
+  const dockArray = (await docref).docs.map((item) => ({
+    id: item.id,
+    start: item.data().starts.toMillis(),
+    end: item.data().ends.toMillis(),
+    category: item.data().category,
+    added_by: item.data().added_by,
+    location: item.data().location,
+    attendies: item.data().attendies,
+    premium: item.data().premium,
+    description: item.data().description,
+  }));
+  return dockArray;
+};
+
+export const user_archive = async () => {
+  const date = new Date();
+  const docref = db
+    .collection("user_add_events")
+    .where("starts", "<", date)
+    .get();
   const dockArray = (await docref).docs.map((item) => ({
     id: item.id,
     start: item.data().starts.toMillis(),

@@ -1,0 +1,46 @@
+.top {
+  min-width: 300px;
+  max-width: 600px;
+  background-color: papayawhip;
+}
+.title {
+  text-align: center;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-weight: 600;
+  text-transform: capitalize;
+  border-bottom: 1px solid burlywood;
+  background-color: white;
+  color: burlywood;
+}
+.cardtitle {
+  width: 100%;
+  text-transform: uppercase;
+  border-bottom: 1px solid burlywood;
+  color: burlywood;
+}
+.btn {
+  width: 0;
+  height: 0;
+  border: none;
+  margin-right: 10px;
+}
+.text {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-weight: 600;
+  color: burlywood;
+}
+.send {
+  width: 100%;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  color: white;
+  background-color: peru;
+  text-transform: uppercase;
+  border: none;
+}
+.send:active {
+  box-shadow: 1px 1px 1px 0 peru;
+}
