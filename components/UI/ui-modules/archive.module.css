@@ -1,0 +1,26 @@
+.flexDiv {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+}
+
+.StyledUl {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+@media (max-width: 800px) {
+  .li {
+    width: 100%;
+  }
+  .StyledUl {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+  }
+}
+@media (max-width: 600px) {
+  .StyledUl {
+    grid-template-columns: 1fr;
+  }
+}

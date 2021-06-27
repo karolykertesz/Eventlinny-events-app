@@ -1,11 +1,33 @@
+import React, { useState } from "react";
 import { Card, Popover, OverlayTrigger } from "react-bootstrap";
 import classes from "../components/UI/ui-modules/imagePop.module.css";
 import Photo from "../components/UI/icons/photo";
 import firebase from "firebase";
 import { useAuth } from "./Layout/UserContext";
-const ImagePop = (prop) => {
+import Tinyspinner from "../components/UI/tinyspinner";
+const ImagePop = ({ uid }) => {
+  const fileChange = async (e) => {
+    const file = e.target.files[0];
+    const storageRef = firebase.storage().ref();
+    const fileRef = storageRef.child(file.name);
+    await fileRef.put(file);
+    const fileUrl = await fileRef.getDownloadURL();
+    setLoading(true);
+    return (
+      firebase
+        .firestore()
+        .collection("user_add_events")
+        .doc(uid)
+        .update({
+          archive_photos: firebase.firestore.FieldValue.arrayUnion(fileUrl),
+        })
+        // .then(() => setLoading(false))
+        .then(() => setLoading(false))
+        .catch((err) => console.log(err))
+    );
+  };
   const user = useAuth().user && useAuth().user;
-
+  const [loading, setLoading] = useState(false);
   const popover = (
     <Popover id="popover-basic" className={classes.top}>
       <Popover.Title as="h3" className={classes.title}>
@@ -15,7 +37,7 @@ const ImagePop = (prop) => {
         <Card>
           <Card.Body>
             <p className={classes.text}>Upload</p>
-            <input type="file" />
+            <input type="file" onChange={fileChange} />
           </Card.Body>
           <Card.Footer>
             <button onClick={() => {}} className={classes.send}>
@@ -26,12 +48,18 @@ const ImagePop = (prop) => {
       </Popover.Content>
     </Popover>
   );
+
+  if (loading) {
+    return <Tinyspinner />;
+  }
   return (
-    <OverlayTrigger trigger="click" placement="left" overlay={popover}>
-      <button className={classes.btn}>
-        <Photo width="30px" color="burlywood" />
-      </button>
-    </OverlayTrigger>
+    <div>
+      <OverlayTrigger trigger="click" placement="left" overlay={popover}>
+        <button className={classes.btn}>
+          <Photo width="30px" color="burlywood" />
+        </button>
+      </OverlayTrigger>
+    </div>
   );
 };
 

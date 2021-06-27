@@ -152,6 +152,7 @@ export const user_archive = async () => {
     attendies: item.data().attendies,
     premium: item.data().premium,
     description: item.data().description,
+    isArchive: item.data().archive_photos ? true : false,
   }));
   return dockArray;
 };

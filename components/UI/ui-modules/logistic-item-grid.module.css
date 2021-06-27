@@ -143,3 +143,13 @@
     justify-content: flex-end;
   }
 }
+.holder {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+.eye {
+  cursor: pointer;
+  margin-top: 7px;
+}

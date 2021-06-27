@@ -4,15 +4,19 @@ import Button from "../UI/Button";
 import DateIcon from "../UI/icons/date-icon";
 import AddresIcon from "../UI/icons/address-icon";
 import PersonIcon from "../UI/icons/person-icon";
+import Eye from "../UI/icons/eye-icon";
 import ArrowIcon from "../UI/icons/arrow-right-icon";
 import NotApply from "../UI/icons/not-apply";
 import Image from "next/image";
 import ImagePop from "../imagePop";
 
+import Link from "next/link";
 import { categories } from "../../data";
 import { useAuth } from "../Layout/UserContext";
 const LogisticGrid = (props) => {
-  const { start, category, location, id, attendies, added_by } = props;
+  const { start, category, location, id, attendies, added_by, isArchive } =
+    props;
+  console.log(isArchive);
   const user = useAuth().user && useAuth().user;
   const uid = user && user.uid;
   const isImageurl = categories.includes(category);
@@ -47,8 +51,15 @@ const LogisticGrid = (props) => {
             {!isValid && (
               <div>
                 {uid === added_by ? (
-                  <div>
-                    <ImagePop />
+                  <div className={classes.holder}>
+                    <ImagePop uid={id} />
+                    {isArchive && (
+                      <Link href="/">
+                        <div className={classes.eye}>
+                          <Eye width="35px" color="burlywood" />
+                        </div>
+                      </Link>
+                    )}
                   </div>
                 ) : (
                   <div>{""}</div>

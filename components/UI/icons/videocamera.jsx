@@ -2,7 +2,6 @@ import classes from "../ui-modules/styled.module.css";
 
 const Videocamera = (props) => {
   const inPutType = props.inPutType;
-  console.log(props);
   return (
     <div
       style={{ width: props.width, height: props.height, color: props.color }}

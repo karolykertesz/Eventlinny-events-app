@@ -19,6 +19,7 @@ const Userpage = ({ user, userInfo, location, userAdditional, imgUrl }) => {
   const userInfoNames = userInfo && userInfo.map((item) => item.name);
   const userLocation = location && location.location;
   const countryCode = location && location.countryCode.toUpperCase();
+
   const deleteElement = async (element) => {
     const docref = firebase
       .firestore()
@@ -66,14 +67,14 @@ const Userpage = ({ user, userInfo, location, userAdditional, imgUrl }) => {
                   <td></td>
                   <td>
                     {imgUrl ? (
-                      <>
+                      <div>
                         <Image
                           width={100}
                           height={100}
                           src={imgUrl}
                           quality={100}
                         />
-                      </>
+                      </div>
                     ) : (
                       <CoverRow>
                         <FileInput type="file" onChange={fileChange} />
