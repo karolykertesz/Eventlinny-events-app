@@ -17,10 +17,15 @@
   .StyledUl {
     grid-template-columns: 1fr 1fr;
     grid-gap: 10px;
+    position: absolute;
+    top: calc(19%);
   }
 }
 @media (max-width: 600px) {
   .StyledUl {
     grid-template-columns: 1fr;
   }
+}
+.classes {
+  margin-top: 50px;
 }

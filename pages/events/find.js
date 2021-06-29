@@ -31,8 +31,10 @@ import { getuserPrefWithWithCat, getusercat } from "../../data";
 import { useAuth } from "../../components/Layout/UserContext";
 import FindImage from "../../components/findImage";
 import firebase from "firebase";
+import { useRedirect } from "../../helpers/validatehelp";
 
 const find = () => {
+  useRedirect();
   const [category, setCat] = useState("");
   const [location, setLoc] = useState("");
   const [closed, setClose] = useState(false);

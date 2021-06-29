@@ -19,7 +19,6 @@ const EventList = (props) => {
               category={item.category}
               attendies={item.attendies}
               description={item.description}
-              end={item.end}
               added_by={item.added_by}
             />
           ))}

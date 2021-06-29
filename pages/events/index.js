@@ -6,10 +6,12 @@ import { getAllEvents, user_events_data } from "../../data";
 import firebase from "firebase";
 import Head from "next/head";
 import FirebaseClient from "../../helpers/firebase";
+import { useRedirect } from "../../helpers/validatehelp";
 FirebaseClient();
 const db = firebase.firestore();
 
 const AllEvents = ({ eventss }) => {
+  useRedirect();
   const [event, setEvent] = useState(eventss);
 
   const router = useRouter();

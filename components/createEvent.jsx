@@ -9,7 +9,6 @@ import { Pi } from "../components/UI/styledComponents";
 const CreateEvent = ({ uid }) => {
   const [category, setCat] = useState();
   const [clicked, setcicked] = useState(false);
-  console.log(category);
   const additem = (item) => {
     setCat(item);
     setcicked(!clicked);

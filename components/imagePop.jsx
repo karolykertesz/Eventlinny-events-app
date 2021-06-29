@@ -6,6 +6,7 @@ import firebase from "firebase";
 import { useAuth } from "./Layout/UserContext";
 import Tinyspinner from "../components/UI/tinyspinner";
 const ImagePop = ({ uid }) => {
+  const user = useAuth().user && useAuth().user;
   const fileChange = async (e) => {
     const file = e.target.files[0];
     const storageRef = firebase.storage().ref();
@@ -20,13 +21,15 @@ const ImagePop = ({ uid }) => {
         .doc(uid)
         .update({
           archive_photos: firebase.firestore.FieldValue.arrayUnion(fileUrl),
+          archive_image_added: firebase.firestore.FieldValue.arrayUnion(
+            user && user.uid
+          ),
         })
         // .then(() => setLoading(false))
         .then(() => setLoading(false))
         .catch((err) => console.log(err))
     );
   };
-  const user = useAuth().user && useAuth().user;
   const [loading, setLoading] = useState(false);
   const popover = (
     <Popover id="popover-basic" className={classes.top}>
@@ -39,11 +42,7 @@ const ImagePop = ({ uid }) => {
             <p className={classes.text}>Upload</p>
             <input type="file" onChange={fileChange} />
           </Card.Body>
-          <Card.Footer>
-            <button onClick={() => {}} className={classes.send}>
-              Send
-            </button>
-          </Card.Footer>
+          <Card.Footer></Card.Footer>
         </Card>
       </Popover.Content>
     </Popover>

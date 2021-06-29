@@ -70,7 +70,6 @@ const Eventadder = ({
     eventLocation: null,
     selectedCountry: "",
     startDay: null,
-    endDay: null,
     selectedCity: "",
     description: null,
   };
@@ -81,12 +80,10 @@ const Eventadder = ({
     selectedcategory,
     eventLocation,
     startDay,
-    endDay,
     description,
   } = state;
 
   const startToSend = new Date(startDay).getTime();
-  console.log(complete);
   const [allcountrie, setAllcounries] = useState();
   const formSubmit = (e, value) => {
     e.preventDefault();
@@ -121,7 +118,6 @@ const Eventadder = ({
             category: selectedcategory.toLowerCase(),
             location: "online",
             starts: firebase.firestore.Timestamp.fromDate(new Date(startDay)),
-            ends: firebase.firestore.Timestamp.fromDate(new Date(endDay)),
             premium: false,
             description: description.toLowerCase(),
             created_by: displayname,
@@ -160,7 +156,6 @@ const Eventadder = ({
             location: loctString.toLowerCase(),
             location_country: selectedCountry,
             starts: new Date(startDay),
-            ends: new Date(endDay),
             premium: false,
             description: description.toLowerCase(),
             created_by: displayname,
@@ -218,7 +213,6 @@ const Eventadder = ({
             location={selectedCity || "online"}
             category={selectedcategory}
             start={new Date(startDay).toLocaleDateString()}
-            end={new Date(endDay).toLocaleDateString()}
             description={description}
             country={selectedCountry}
           />

@@ -5,9 +5,6 @@ import classes from "./main-header.module.css";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import FirebaseClient from "../../helpers/firebase";
-import { IconContext } from "react-icons";
-import { BsFillPersonFill, BsViewStacked } from "react-icons/bs";
-import DropDown from "../../components/dropdown";
 import MobileLogout from "../UI/mobillogout";
 import ButtonPop from "../UI/buttonpop";
 

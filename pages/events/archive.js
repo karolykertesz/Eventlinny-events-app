@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { user_archive } from "../../data";
 import LogisticGrid from "../../components/event-detail/logistic-item-grid";
 import classes from "../../components/UI/ui-modules/archive.module.css";
+import { useRedirect } from "../../helpers/validatehelp";
 const MainArchive = ({ eventss }) => {
+  useRedirect();
   return (
-    <div className={classes.classes}>
+    <div>
       {eventss && (
         <ul className={classes.StyledUl}>
           {eventss.map((item) => (

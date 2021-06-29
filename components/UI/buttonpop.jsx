@@ -8,8 +8,7 @@ import Link from "next/link";
 import { useAuth } from "../Layout/UserContext";
 
 const ButtonPop = () => {
-  const name = useAuth().user && useAuth().user.name;
-  const uid = useAuth().user && useAuth().user.uid;
+  const user = useAuth().user && useAuth().user;
   const popover = (
     <Popover id="popover-basic" className={classes.top}>
       <Popover.Title as="h2" className="text-warning text-uppercase">
@@ -18,22 +17,26 @@ const ButtonPop = () => {
       <Popover.Content>
         <Card>
           <Card.Header className={classes.header}>
-            <Card.Title>{name}</Card.Title>
+            <Card.Title>{user && user.name}</Card.Title>
           </Card.Header>
           <Card.Body className={classes.body}>
             <div className={classes.link}>
-              <Link href={`/userpage/${uid}`}>Your Info</Link>
+              <Link href={`/userpage/${user && user.uid}`}>Your Info</Link>
             </div>
             <div className={classes.link}>
-              <Link href={`/userpage/edit/createEvent/${uid}`}>
+              <Link href={`/userpage/edit/createEvent/${user && user.uid}`}>
                 create an event
               </Link>
             </div>
             <div className={classes.link}>
-              <Link href={`/events/calendar/${uid}`}>Go Premium</Link>
+              <Link href={`/events/calendar/${user && user.uid}`}>
+                Go Premium
+              </Link>
             </div>
             <div className={classes.link}>
-              <Link href={`/events/calendar/${uid}`}>Create chat</Link>
+              <Link href={`/events/calendar/${user && user.uid}`}>
+                Create chat
+              </Link>
             </div>
           </Card.Body>
         </Card>

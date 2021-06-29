@@ -6,10 +6,8 @@ import { Pi } from "./UI/styledComponents";
 import { PopButton } from "./UI/reactbootstrap/popover";
 const EventDatePicker = ({ addDate, formSubmit, setComplete }) => {
   const [startDate, setStartDate] = useState(new Date());
-  const [end, setEnd] = useState(new Date());
   const [completed, setcompleted] = useState(false);
   const [first, setFirst] = useState(false);
-  const [second, setSecond] = useState(false);
   const [descri, setDes] = useState("");
   const [descComp, done] = useState(false);
   const [endd, setU] = useState();
@@ -45,17 +43,7 @@ const EventDatePicker = ({ addDate, formSubmit, setComplete }) => {
         });
       });
   };
-  const handleEnd = (data) => {
-    return new Promise((resolve, reject) => {
-      resolve(setEnd(data));
-    })
-      .then(() => {
-        setSecond(true);
-      })
-      .then(() => {
-        addDate({ type: "field", fildName: "endDay", payload: data });
-      });
-  };
+
   const addonchange = () => {
     return new Promise((resolve, reject) => {
       resolve(
@@ -90,22 +78,8 @@ const EventDatePicker = ({ addDate, formSubmit, setComplete }) => {
         className={classes.border}
         minDate={startDate}
       />
+
       {first && (
-        <div className={classes.topDiv}>
-          <Pi>{!second ? "Please add the end of the event" : ""}</Pi>
-          <DatePicker
-            selected={end}
-            onChange={(date) => handleEnd(date)}
-            timeInputLabel="Time:"
-            dateFormat="MM/dd/yyyy h:mm"
-            showTimeInput
-            calendarClassName={classes.calendar}
-            className={classes.border}
-            minDate={endd && endd}
-          />
-        </div>
-      )}
-      {second && (
         <div>
           <div className={descComp ? classes.none : ""}>
             <Pi>{!descri ? "Add Your Description!" : ""}</Pi>

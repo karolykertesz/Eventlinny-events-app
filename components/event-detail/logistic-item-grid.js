@@ -13,10 +13,12 @@ import ImagePop from "../imagePop";
 import Link from "next/link";
 import { categories } from "../../data";
 import { useAuth } from "../Layout/UserContext";
+import Tooltip from "../UI/reactbootstrap/tooltip";
+
 const LogisticGrid = (props) => {
   const { start, category, location, id, attendies, added_by, isArchive } =
     props;
-  console.log(isArchive);
+
   const user = useAuth().user && useAuth().user;
   const uid = user && user.uid;
   const isImageurl = categories.includes(category);
@@ -52,13 +54,20 @@ const LogisticGrid = (props) => {
               <div>
                 {uid === added_by ? (
                   <div className={classes.holder}>
-                    <ImagePop uid={id} />
+                    <Tooltip title="Click and Upload images" place="right">
+                      <ImagePop uid={id} />
+                    </Tooltip>
                     {isArchive && (
-                      <Link href="/">
-                        <div className={classes.eye}>
-                          <Eye width="35px" color="burlywood" />
-                        </div>
-                      </Link>
+                      <Tooltip
+                        title="Click and See images in event archive"
+                        place="left"
+                      >
+                        <Link href="/">
+                          <div className={classes.eye}>
+                            <Eye width="35px" color="burlywood" />
+                          </div>
+                        </Link>
+                      </Tooltip>
                     )}
                   </div>
                 ) : (

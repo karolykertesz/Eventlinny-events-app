@@ -125,7 +125,6 @@ export const user_events_data = async () => {
   const dockArray = (await docref).docs.map((item) => ({
     id: item.id,
     start: item.data().starts.toMillis(),
-    end: item.data().ends.toMillis(),
     category: item.data().category,
     added_by: item.data().added_by,
     location: item.data().location,
@@ -145,7 +144,6 @@ export const user_archive = async () => {
   const dockArray = (await docref).docs.map((item) => ({
     id: item.id,
     start: item.data().starts.toMillis(),
-    end: item.data().ends.toMillis(),
     category: item.data().category,
     added_by: item.data().added_by,
     location: item.data().location,
@@ -281,7 +279,6 @@ export const getuserPrefWithWithCat = async (caRray) => {
           docsArray.push({
             id: item.id,
             start: item.data().starts.toMillis(),
-            end: item.data().ends.toMillis(),
             category: item.data().category,
             added_by: item.data().added_by,
             location: item.data().location,

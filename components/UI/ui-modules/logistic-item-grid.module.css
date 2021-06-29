@@ -145,11 +145,11 @@
 }
 .holder {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   flex-direction: row-reverse;
 }
 .eye {
   cursor: pointer;
-  margin-top: 7px;
+  margin-right: 40px;
 }

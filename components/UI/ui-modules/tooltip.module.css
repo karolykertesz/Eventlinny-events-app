@@ -1,0 +1,14 @@
+.btn {
+  width: 0;
+  height: 0;
+  border: none;
+}
+.top {
+  width: 200px;
+  top: 60px;
+  left: 50px;
+}
+.all {
+  margin-right: 30px;
+  border: none;
+}

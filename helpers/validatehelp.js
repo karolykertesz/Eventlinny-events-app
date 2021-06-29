@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 export const useRedirect = () => {
+  const trueRef = useRef(true);
   const router = useRouter();
   const validate = async () => {
     try {
@@ -14,8 +15,11 @@ export const useRedirect = () => {
     }
   };
   useEffect(() => {
+    if (trueRef.current) {
+      validate();
+    }
     return () => {
-      validate;
+      trueRef.current = false;
     };
   }, []);
 };

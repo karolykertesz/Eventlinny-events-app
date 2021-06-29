@@ -13,12 +13,10 @@ import Comments from "../UI/icons/comments";
 import firebase from "firebase";
 
 const Mapper = ({ item, docid }) => {
-  // const likedArr = item && item.data;
   const [liked, setLiked] = useState(false);
   const [itemId, setItemid] = useState(() => {
     return item.map((i) => i.id);
   });
-  // const itemArr = item.map((i) => ({ id: i.id, like: i.data.likes.length }));
   const [likeCount, setLike] = useState(() => {
     const t = item.map((i) => ({ id: i.id, like: i.data.likes.length }));
     return t;
@@ -47,15 +45,6 @@ const Mapper = ({ item, docid }) => {
       let arr = likeCount.filter((i) => i.id !== id);
       arr = [...arr, newObj];
       setLike(arr);
-
-      // const arrayClone =
-      // setLike(likeCount[id].like - 1);
-
-      // console.log(likeCount.id);
-
-      // return dataref.update({
-      //   replies:
-      // });
     } else {
       setItemid(itemId.concat(id));
       const tr = likeCount.find((i) => i.id === id);

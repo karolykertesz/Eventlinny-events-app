@@ -12,7 +12,7 @@ import ImagePop from "./imagePop";
 import { categories } from "../data";
 import { useAuth } from "./Layout/UserContext";
 const EventItem = (props) => {
-  const { start, end, category, location, id, attendies, added_by } = props;
+  const { start, category, location, id, attendies, added_by } = props;
   const user = useAuth().user && useAuth().user;
   const uid = user && user.uid;
   const isImageurl = categories.includes(category);
@@ -61,11 +61,6 @@ const EventItem = (props) => {
             <DateIcon />
             <time> starts {new Date(start).toLocaleDateString()}</time>
             <time> at {new Date(start).toLocaleTimeString()}</time>
-          </div>
-          <div className={classes.date}>
-            <DateIcon />
-            <time>Ends {new Date(end).toLocaleDateString()}</time>
-            <time>at {new Date(end).toLocaleTimeString()}</time>
           </div>
           <div className={classes.address}>
             <AddresIcon />
