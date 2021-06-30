@@ -1,12 +1,11 @@
 import Image from "next/image";
 import classes from "../components/UI/ui-modules/archiveitem.module.css";
 import { categories } from "../data";
-import { Card, ListGroup } from "react-bootstrap";
 
 const ArchiveOneItem = (props) => {
   const item = props.items;
+  const length = props.length;
   const findItem = categories.findIndex((i) => i === item.category);
-
   return (
     <div className={classes.top}>
       <div className={classes.imgHolder}>

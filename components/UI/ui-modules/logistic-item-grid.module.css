@@ -153,3 +153,9 @@
   cursor: pointer;
   margin-right: 40px;
 }
+.tooltipHolder {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+}

@@ -46,12 +46,12 @@ const EventItem = (props) => {
             </h2>
             {!isValid && (
               <div>
-                {uid === added_by ? (
+                {attendies.indexOf((item) => item === uid) > -1 ? (
                   <div>
                     <ImagePop />
                   </div>
                 ) : (
-                  <div>hhh</div>
+                  <div></div>
                 )}
               </div>
             )}

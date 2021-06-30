@@ -33,20 +33,22 @@ const Header = () => {
       modeRef.current = false;
     };
   }, []);
-  useEffect(() => {
-    return () => validate();
+  useEffect(async () => {
+    const status = await validate();
+    if (modeRef.current && status === 200) {
+      setUserS(true);
+    } else if (modeRef.current && status === 400) {
+      setUserS(false);
+    }
+    return () => {
+      modeRef.current = false;
+    };
   }, []);
-  const navigate = () => {};
-  const validate = useCallback(async () => {
+  const validate = async () => {
     const mess = await fetch("/api/users/validateSesion");
     const status = await mess.status;
-    if (status === 400) {
-      setUserS(null);
-      router.push("/login");
-    } else {
-      setUserS(true);
-    }
-  }, [setUserS]);
+    return status;
+  };
 
   const sout = async () => {
     try {

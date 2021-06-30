@@ -1,0 +1,13 @@
+.topdiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.date {
+  width: 100%;
+  background-color: burlywood;
+  /* border-top: 0.2px solid burlywood; */
+  text-align: center;
+}

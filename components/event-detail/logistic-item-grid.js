@@ -51,28 +51,28 @@ const LogisticGrid = (props) => {
               {category}
             </h2>
             {!isValid && (
-              <div>
-                {uid === added_by ? (
+              <div className={classes.tooltipHolder}>
+                {uid === added_by && (
                   <div className={classes.holder}>
                     <Tooltip title="Click and Upload images" place="right">
                       <ImagePop uid={id} />
                     </Tooltip>
-                    {isArchive && (
-                      <Tooltip
-                        title="Click and See images in event archive"
-                        place="left"
-                      >
-                        <Link href={`/archive/${id}`}>
-                          <div className={classes.eye}>
-                            <Eye width="35px" color="burlywood" />
-                          </div>
-                        </Link>
-                      </Tooltip>
-                    )}
                   </div>
-                ) : (
-                  <div>{""}</div>
                 )}
+                <div>
+                  {isArchive && (
+                    <Tooltip
+                      title="Click and See images in event archive"
+                      place="left"
+                    >
+                      <Link href={`/archive/${id}`}>
+                        <div className={classes.eye}>
+                          <Eye width="35px" color="burlywood" />
+                        </div>
+                      </Link>
+                    </Tooltip>
+                  )}
+                </div>
               </div>
             )}
           </div>

@@ -221,6 +221,12 @@ export const findById = async (id) => {
       .doc(id)
       .get()
       .then((item) => {
+        const image_archive = item.data().archive_photos
+          ? item.data().archive_photos.map((it) => ({
+              ...it,
+              image_added_at: new Date(it.image_added_at).getTime(),
+            }))
+          : null;
         ren = {
           id: item.id,
           start: item.data().starts.toMillis(),
@@ -232,12 +238,7 @@ export const findById = async (id) => {
           premium: item.data().premium,
           description: item.data().description,
           created_by: item.data().created_by,
-          archive_photos: item.data().archive_photos
-            ? item.data().archive_photos
-            : null,
-          archive_image_added: item.data().archive_image_added
-            ? item.data().archive_image_added
-            : null,
+          archive_photos: image_archive,
         };
       });
   } catch (err) {

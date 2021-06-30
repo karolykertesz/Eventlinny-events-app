@@ -1,17 +1,23 @@
-import { findById, getUserAddIds, getAttendiesInfo } from "../../data";
+import { findById, getUserAddIds } from "../../data";
 import classes from "../../components/UI/ui-modules/archiveitem.module.css";
 import ArchiveOneItem from "../../components/archiveOneItem";
+import { useRedirect } from "../../helpers/validatehelp";
+import Archiveimages from "../../components/achiveImages";
 
-const archiveItem = ({ items, users }) => {
+const archiveItem = ({ items }) => {
+  useRedirect();
+
   console.log(items);
   return (
     <div className={classes.coverGrid}>
       {items && (
         <>
           <div className={classes.first}>
-            <ArchiveOneItem items={items} />
+            <ArchiveOneItem items={items} length={items.length} />
           </div>
-          <div className={classes.first}></div>
+          <div className={classes.first}>
+            <Archiveimages archive={items.archive_photos} />
+          </div>
         </>
       )}
     </div>
@@ -29,7 +35,7 @@ export async function getStaticPaths() {
   }));
   return {
     paths,
-    fallback: true,
+    fallback: "blocking",
   };
 }
 
@@ -45,21 +51,9 @@ export async function getStaticProps({ params }) {
       },
     };
   }
-  if (allEv.archive_image_added !== null) {
-    const users = await getAttendiesInfo(allEv.archive_image_added);
-    return {
-      props: {
-        items: allEv,
-        users,
-      },
-      revalidate: 1000,
-    };
-  } else {
-    return {
-      props: {
-        items: allEv,
-        users: null,
-      },
-    };
-  }
+  return {
+    props: {
+      items: allEv,
+    },
+  };
 }

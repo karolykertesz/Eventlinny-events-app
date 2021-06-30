@@ -14,21 +14,19 @@ const ImagePop = ({ uid }) => {
     await fileRef.put(file);
     const fileUrl = await fileRef.getDownloadURL();
     setLoading(true);
-    return (
-      firebase
-        .firestore()
-        .collection("user_add_events")
-        .doc(uid)
-        .update({
-          archive_photos: firebase.firestore.FieldValue.arrayUnion(fileUrl),
-          archive_image_added: firebase.firestore.FieldValue.arrayUnion(
-            user && user.uid
-          ),
-        })
-        // .then(() => setLoading(false))
-        .then(() => setLoading(false))
-        .catch((err) => console.log(err))
-    );
+    return firebase
+      .firestore()
+      .collection("user_add_events")
+      .doc(uid)
+      .update({
+        archive_photos: firebase.firestore.FieldValue.arrayUnion({
+          url: fileUrl,
+          image_added_at: Date.now(),
+          archive_image_added: user && user.uid,
+        }),
+      })
+      .then(() => setLoading(false))
+      .catch((err) => console.log(err));
   };
   const [loading, setLoading] = useState(false);
   const popover = (
