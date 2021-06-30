@@ -249,6 +249,7 @@ export const findById = async (id) => {
 
 export const getusercat = async (uid) => {
   let catArreay;
+
   let useritems = await db.collection("cookies").doc(uid);
   await useritems
     .get()
