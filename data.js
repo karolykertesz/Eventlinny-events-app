@@ -232,6 +232,12 @@ export const findById = async (id) => {
           premium: item.data().premium,
           description: item.data().description,
           created_by: item.data().created_by,
+          archive_photos: item.data().archive_photos
+            ? item.data().archive_photos
+            : null,
+          archive_image_added: item.data().archive_image_added
+            ? item.data().archive_image_added
+            : null,
         };
       });
   } catch (err) {
@@ -380,6 +386,21 @@ export const allrepliesOfComments = async (arr) => {
   const userInfo = await getAll();
   return userInfo;
 };
+
+export const getUserAddIds = async () => {
+  const docArray = [];
+  const docef = await db
+    .collection("user_aditional")
+    .get()
+    .then((docks) => {
+      docks.forEach((doc) => {
+        docArray.push(doc.id);
+      });
+    })
+    .catch((err) => console.log(err));
+  return docArray;
+};
+
 export const language = [
   "english",
   "magyar",

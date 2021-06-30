@@ -1,11 +1,13 @@
 import firebase from "firebase";
 
 export const locAndCat = (loc, cat) => {
+  const date = new Date();
   return firebase
     .firestore()
     .collection("user_add_events")
     .where("location", "==", loc.toLowerCase())
     .where("category", "==", cat.toLowerCase())
+    .where("starts", ">=", date)
     .get()
     .then((doc) => {
       let itemArray = [];
@@ -27,10 +29,12 @@ export const locAndCat = (loc, cat) => {
 };
 
 export const onlyLoc = (loc) => {
+  const date = new Date();
   return firebase
     .firestore()
     .collection("user_add_events")
     .where("location", "==", loc.toLowerCase())
+    .where("starts", ">=", date)
     .get()
     .then((doc) => {
       let itemArray = [];
@@ -52,10 +56,12 @@ export const onlyLoc = (loc) => {
 };
 
 export const onlyCat = (cat) => {
+  const date = new Date();
   return firebase
     .firestore()
     .collection("user_add_events")
     .where("category", "==", cat.toLowerCase())
+    .where("starts", ">=", date)
     .get()
     .then((doc) => {
       let itemArray = [];

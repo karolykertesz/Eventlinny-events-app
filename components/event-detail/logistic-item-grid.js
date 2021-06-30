@@ -62,7 +62,7 @@ const LogisticGrid = (props) => {
                         title="Click and See images in event archive"
                         place="left"
                       >
-                        <Link href="/">
+                        <Link href={`/archive/${id}`}>
                           <div className={classes.eye}>
                             <Eye width="35px" color="burlywood" />
                           </div>
