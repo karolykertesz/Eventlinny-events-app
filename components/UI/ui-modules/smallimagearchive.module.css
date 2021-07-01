@@ -7,7 +7,20 @@
 }
 .date {
   width: 100%;
-  background-color: burlywood;
+  background-color: papayawhip;
   /* border-top: 0.2px solid burlywood; */
   text-align: center;
+}
+.img img {
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.btn {
+  /* width: 0; */
+  /* height: 0; */
+  border: none;
+  background-color: papayawhip;
 }

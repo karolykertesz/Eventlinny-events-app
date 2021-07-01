@@ -52,7 +52,7 @@ const LogisticGrid = (props) => {
             </h2>
             {!isValid && (
               <div className={classes.tooltipHolder}>
-                {uid === added_by && (
+                {attendies.includes(uid) && (
                   <div className={classes.holder}>
                     <Tooltip title="Click and Upload images" place="right">
                       <ImagePop uid={id} />
