@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import { useRouter } from "next/router";
-import axios from "axios";
 import { useEffect, useState, Fragment } from "react";
-// import sender from "../../helpers/sender";
 const ValidPage = () => {
   const [ready, setReady] = useState(false);
   const router = useRouter();
@@ -21,19 +19,13 @@ const ValidPage = () => {
       },
     });
     const status = await mess.status;
-    console.log(status, "the staus");
     if (status === 200) {
       setReady(true);
     }
   };
   useEffect(() => {
-    const unsubscribe = sander().then((re) => {
-      console.log(re);
-    });
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+    sander();
+  }, [sander]);
 
   return (
     <Fragment>

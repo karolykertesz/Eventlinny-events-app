@@ -1,0 +1,37 @@
+.title {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  background-color: peru;
+  color: white;
+}
+.popBtn {
+  background-color: peru;
+  border: none !important;
+  box-shadow: none !important;
+}
+.popBtn:hover,
+.popBtn:active,
+.popBtn:focus {
+  background-color: peachpuff !important;
+  color: rgb(194, 122, 28);
+  border-color: peachpuff !important;
+}
+.formButton {
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  border: none;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+.formButton:active {
+  background-color: rgb(194, 122, 28);
+  color: white;
+}
+.input::placeholder {
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.input {
+  outline-style: none !important;
+  box-shadow: none !important;
+  border-color: #cccc !important;
+}

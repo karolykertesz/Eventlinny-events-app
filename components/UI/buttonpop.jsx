@@ -34,7 +34,7 @@ const ButtonPop = () => {
               </Link>
             </div>
             <div className={classes.link}>
-              <Link href={`/events/calendar/${user && user.uid}`}>
+              <Link href={`/chat/create/?id=${user && user.uid}`}>
                 Create chat
               </Link>
             </div>
