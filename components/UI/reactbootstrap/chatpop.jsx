@@ -34,7 +34,7 @@ const ChatPop = (props) => {
     const value = await validate.single(room, {
       presence: true,
       format: {
-        pattern: /^[a-zA-Zs\s]*$/,
+        pattern: /^[a-zA-Z0-9_.-]*$/,
       },
       length: { minimum: 3 },
     });
@@ -56,16 +56,37 @@ const ChatPop = (props) => {
         });
         return dt;
       })
-      .then((dt) => {
+      .then(async (dt) => {
         if (typeof dt == "undefined") {
           setError("No Email Found in Eventlinny Database");
+          setLoading(false);
           return;
         } else {
-          setLoading(false);
-          setError(null);
-          setDone(true);
-          setIsemail(true);
-          return;
+          const docref = await firebase
+            .firestore()
+            .collection("private_chat")
+            .doc(room);
+          await docref.get().then((doc) => {
+            if (doc.exists) {
+              docref
+                .update({
+                  users: firebase.firestore.FieldValue.arrayUnion({
+                    email: email,
+                    isVerified: false,
+                  }),
+                })
+                .then(() => {
+                  setLoading(false);
+                  setError("Email verified and sent");
+                  setIsemail(false);
+                  return;
+                });
+            } else {
+              setLoading(false);
+              setDone(true);
+              setIsemail(true);
+            }
+          });
         }
       });
   }, [email]);
@@ -80,7 +101,7 @@ const ChatPop = (props) => {
       const value = await validate.single(pass, {
         presence: true,
         format: {
-          pattern: /^[a-zA-Zs\s]*$/,
+          pattern: /^[a-zA-Z0-9_.-]*$/,
         },
         length: { minimum: 6 },
       });
@@ -95,36 +116,25 @@ const ChatPop = (props) => {
         .collection("private_chat")
         .doc(room);
       await docref
-        .get()
-        .then(async (doc) => {
-          if (doc.exists) {
-            await docref.update({
-              users: firebase.firestore.FieldValue.arrayUnion({
-                email: email,
-                isVerified: false,
-              }),
-            });
-          } else {
-            await docref.set(
+        .set(
+          {
+            password: pass,
+            host: user && user.email,
+            users: [
               {
-                password: pass,
-                host: user && user.email,
-                users: [
-                  {
-                    email: user && user.email,
-                    isVerified: true,
-                  },
-                ],
+                email: user && user.email,
+                isVerified: true,
               },
-              {
-                merge: true,
-              }
-            );
+            ],
+          },
+          {
+            merge: true,
           }
-        })
+        )
+
         .then(() => {
           setLoading(false);
-          alert("Done");
+          setIsemail(false);
         });
     }
   };
@@ -133,7 +143,7 @@ const ChatPop = (props) => {
   const popover = (
     <Popover id="popover-basic" className={classes.top}>
       <Popover.Title as="h3" className={classes.title}>
-        {!done ? "Add invitation Email" : "Add Private Password"}
+        {!done ? "Add invitation Email and Room name" : "Add Private Password"}
       </Popover.Title>
       <Popover.Content>
         {!loading ? (
@@ -142,7 +152,7 @@ const ChatPop = (props) => {
               {!isEmail && (
                 <div className={classes.room}>
                   <FormControl
-                    placeholder="Add Your Chat Room"
+                    placeholder="Add Your Chat Room Name"
                     aria-describedby="basic-addon1"
                     type="text"
                     value={room || ""}
@@ -158,7 +168,7 @@ const ChatPop = (props) => {
                     <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
                   </InputGroup.Prepend>
                   <FormControl
-                    placeholder="Email"
+                    placeholder="Invitation Email Address"
                     aria-describedby="basic-addon1"
                     type="email"
                     value={email || ""}
@@ -197,7 +207,7 @@ const ChatPop = (props) => {
   );
   return (
     <div>
-      <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+      <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
         <Button className={classes.popBtn}>{props.btntitle}</Button>
       </OverlayTrigger>
     </div>

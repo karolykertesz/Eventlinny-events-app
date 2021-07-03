@@ -121,22 +121,12 @@ const Eventadder = ({
             premium: false,
             description: description.toLowerCase(),
             created_by: displayname,
+            user_email: user.email,
           })
           .then(() => {
-            return new Promise((resolve, reject) => {
-              resolve(
-                sendEmailWithEvent(
-                  email,
-                  displayname,
-                  startToSend,
-                  selectedcategory.toLowerCase(),
-                  docId,
-                  description.toLowerCase()
-                )
-              );
-            }).then(() => {
-              setLoading(false);
-            });
+            setLoading(false);
+            alert("Done");
+            //   });
           })
           .then(() => {
             router.push("/events/first");
@@ -159,22 +149,24 @@ const Eventadder = ({
             premium: false,
             description: description.toLowerCase(),
             created_by: displayname,
+            user_email: user.email,
           })
           .then(() => {
-            return new Promise((resolve, reject) => {
-              resolve(
-                sendEmailWithEvent(
-                  email,
-                  displayname,
-                  startToSend,
-                  selectedcategory.toLowerCase(),
-                  docId,
-                  description.toLowerCase()
-                )
-              );
-            }).then(() => {
-              setLoading(false);
-            });
+            // return new Promise((resolve, reject) => {
+            //   resolve(
+            //     sendEmailWithEvent(
+            //       email,
+            //       displayname,
+            //       startToSend,
+            //       selectedcategory.toLowerCase(),
+            //       docId,
+            //       description.toLowerCase()
+            //     )
+            //   );
+            // }).then(() => {
+            setLoading(false);
+            alert("Done");
+            // });
           })
           .then(() => {
             router.push("/events");

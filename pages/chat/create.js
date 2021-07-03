@@ -39,7 +39,7 @@ const Chat = () => {
               setR={setR}
               btntitle={
                 isprivate
-                  ? "Add Email to send Invitation"
+                  ? "create room and send inviatation or add users to existing chat"
                   : "Unclick private to cancel"
               }
             />
