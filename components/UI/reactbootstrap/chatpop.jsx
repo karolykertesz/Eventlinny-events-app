@@ -12,37 +12,88 @@ import {
 import classes from "../../UI/ui-modules/chatpop.module.css";
 import firebase from "firebase";
 import Tinyspinner from "../tinyspinner";
+import { v4 as uuid_v4 } from "uuid";
 
 const ChatPop = (props) => {
   const setR = props.setR;
 
   const [email, setEmail] = useState();
   const [loading, setLoading] = useState(false);
+  const [roomDone, setRoomDone] = useState(false);
   const [done, setDone] = useState(false);
   const [pass, setPass] = useState();
   const [error, setError] = useState(null);
   const [room, setRoom] = useState();
   const [isEmail, setIsemail] = useState(false);
   const user = useAuth().user && useAuth().user;
-
-  const checkEmail = useCallback(async () => {
-    setError(null);
+  const createRoom = async () => {
     if (!room) {
-      setError("Room name cannot be Empty");
+      setError("Room name cannot be Empty Or password cannot be empty");
       return;
     }
     const value = await validate.single(room, {
       presence: true,
       format: {
-        pattern: /^[a-zA-Z0-9_.-]*$/,
+        pattern: "[^<>{}()]+",
       },
       length: { minimum: 3 },
     });
-
-    if (typeof value !== "undefined") {
-      setError("Invalid Room name values");
+    const passvalue = await validate.single(pass, {
+      presence: true,
+      format: {
+        pattern: "[^<>{}()]+",
+      },
+      length: { minimum: 6 },
+    });
+    if (typeof value !== "undefined" || typeof passvalue !== "undefined") {
+      setError("Invalid Characters or length");
       return;
     }
+    setLoading(true);
+    const docref = await firebase
+      .firestore()
+      .collection("private_chat")
+      .doc(room);
+    await docref
+      .get()
+      .then(async (doc) => {
+        if (doc.exists) {
+          setError(
+            "There is a private room on this name,Plase select a different Name!!"
+          );
+          return;
+        } else {
+          await docref
+            .set(
+              {
+                password: pass,
+                host: user && user.email,
+                linkVerif: uuid_v4(),
+                createrUid: user && user.uid,
+                users: [
+                  {
+                    email: user && user.email,
+                    isVerified: true,
+                  },
+                ],
+              },
+              {
+                merge: true,
+              }
+            )
+            .then(() => {
+              setLoading(false);
+              setRoomDone(true);
+            });
+        }
+      })
+      .then(() => {
+        setLoading(false);
+      });
+  };
+  const checkEmail = useCallback(async () => {
+    setError(null);
+
     const docRef = firebase.firestore().collection("user_aditional");
     setLoading(true);
     return docRef
@@ -98,44 +149,13 @@ const ChatPop = (props) => {
     }
     if (pass && done && room) {
       setLoading(true);
-      const value = await validate.single(pass, {
-        presence: true,
-        format: {
-          pattern: /^[a-zA-Z0-9_.-]*$/,
-        },
-        length: { minimum: 6 },
-      });
 
-      if (typeof value !== "undefined") {
-        setLoading(false);
-        setError("invalid characters");
-        return;
-      }
-      const docref = await firebase
-        .firestore()
-        .collection("private_chat")
-        .doc(room);
-      await docref
-        .set(
-          {
-            password: pass,
-            host: user && user.email,
-            users: [
-              {
-                email: user && user.email,
-                isVerified: true,
-              },
-            ],
-          },
-          {
-            merge: true,
-          }
-        )
-
-        .then(() => {
-          setLoading(false);
-          setIsemail(false);
-        });
+      // .then(() => {
+      //   setLoading(false);
+      //   setIsemail(false);
+      //   setDone(false);
+      //   setEmail("");
+      // });
     }
   };
   // XWSfgOoaeGYzRSxXaoE1uhCWmg52
@@ -153,7 +173,6 @@ const ChatPop = (props) => {
                 <div className={classes.room}>
                   <FormControl
                     placeholder="Add Your Chat Room Name"
-                    aria-describedby="basic-addon1"
                     type="text"
                     value={room || ""}
                     onChange={(e) => setRoom(e.target.value)}
@@ -165,11 +184,10 @@ const ChatPop = (props) => {
               {!done && (
                 <div className={classes.control}>
                   <InputGroup.Prepend>
-                    <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
+                    <InputGroup.Text>@</InputGroup.Text>
                   </InputGroup.Prepend>
                   <FormControl
                     placeholder="Invitation Email Address"
-                    aria-describedby="basic-addon1"
                     type="email"
                     value={email || ""}
                     onChange={(e) => setEmail(e.target.value)}

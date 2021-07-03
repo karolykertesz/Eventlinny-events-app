@@ -25,15 +25,22 @@ const Chat = () => {
           </Form.Group>
         )}
         <Form.Group controlId="formBasicCheckbox">
-          <Form.Check
-            type="checkbox"
-            label={
-              !roomseted
-                ? "Private"
-                : "Uncheck if you dont want to send anymore emails"
-            }
-            onChange={(e) => setPrivate(!isprivate)}
-          />
+          <p className={classes.label}>
+            {!isprivate ? "Create a private chat by slide" : "go back by slide"}
+          </p>
+          <label className={classes.switch}>
+            <input
+              type="checkbox"
+              label={
+                !roomseted
+                  ? "Private"
+                  : "Uncheck if you dont want to send anymore emails"
+              }
+              onChange={(e) => setPrivate(!isprivate)}
+            />
+            <span className={classes.slider + " " + classes.round}></span>
+          </label>
+
           {isprivate && (
             <ChatPop
               setR={setR}
