@@ -22,6 +22,7 @@
   font-family: Georgia, "Times New Roman", Times, serif;
   border: none;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  text-transform: capitalize;
 }
 .formButton:active {
   background-color: rgb(194, 122, 28);
@@ -34,4 +35,25 @@
   outline-style: none !important;
   box-shadow: none !important;
   border-color: #cccc !important;
+}
+.top {
+  min-width: 300px;
+}
+.sent {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  text-align: center;
+  color: burlywood;
+}
+.error {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  text-align: center;
+  color: palevioletred;
+  text-transform: uppercase;
+}
+.control {
+  display: flex;
+  flex-direction: row;
+}
+.room input {
+  width: 230px;
 }
