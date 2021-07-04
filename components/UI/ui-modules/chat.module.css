@@ -70,3 +70,12 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+.cover {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.pop {
+  display: block;
+  margin: 100px 120px !important;
+}
