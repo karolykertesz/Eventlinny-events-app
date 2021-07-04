@@ -24,7 +24,7 @@ const ChatPop = ({ current, truthy }) => {
   const [room, setRoom] = useState();
   const [password, setPassrord] = useState();
 
-  const user = useAuth().user && useAuth().user;
+  const user = useAuth().user;
 
   const createMainTitle = () => {
     let title;

@@ -1,19 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useRouter } from "next/router";
 import classes from "../../components/UI/ui-modules/chat.module.css";
 import ChatPop from "../../components/UI/reactbootstrap/chatpop";
+import ChatModal from "../../components/UI/reactbootstrap/chatmodal";
 const Chat = () => {
   const router = useRouter();
   const id = router.query.id;
-  const [isprivate, setPrivate] = useState(false);
-  const [truthy, setTruth] = useState(false);
-  const [invite, setInvide] = useState(false);
-  const [publicState, setPublic] = useState(false);
-  const [current, setCurrent] = useState(null);
 
-  const [roomseted, setR] = useState(false);
-  const setStatus = (name) => {
+  const [truthy, setTruth] = useState(false);
+
+  const [current, setCurrent] = useState(null);
+  const publicRef = useRef();
+  const privateRef = useRef();
+  const inviteRef = useRef();
+  const closeRef = () => {
+    setTruth(false);
+    if (current === "private") {
+      privateRef.current.checked = false;
+    }
+    if (current === "public") {
+      publicRef.current.checked = false;
+    }
+    if (current === "invite") {
+      inviteRef.current.checked = false;
+    }
+  };
+  const setStatus = (name, ref) => {
     setCurrent(name);
     setTruth(!truthy);
   };
@@ -24,19 +37,12 @@ const Chat = () => {
         <Form.Group controlId="formBasicCheckbox">
           <div className={classes.cover}>
             <div>
-              <p className={classes.label}>
-                {!isprivate
-                  ? "Create a private chat by slide"
-                  : "go back by slide"}
-              </p>
-
+              <p className={classes.label}>Create a Public chat by slide</p>
               <label className={classes.switch}>
                 <input
                   type="checkbox"
                   name="public"
-                  label={
-                    !publicState ? "create public Chat" : "Slide to go back"
-                  }
+                  ref={publicRef}
                   onChange={(e) => setStatus(e.target.name)}
                 />
                 <span className={classes.slider + " " + classes.round}></span>
@@ -44,32 +50,26 @@ const Chat = () => {
             </div>
 
             <div>
-              <p className={classes.label}>
-                {!invite
-                  ? "Invite existing Eventliny users"
-                  : "go back by slide"}
-              </p>
+              <p className={classes.label}>Create a Private Chat by Slide</p>
               <label className={classes.switch}>
                 <input
                   type="checkbox"
                   onChange={(e) => setStatus(e.target.name)}
                   name="private"
+                  ref={privateRef}
                 />
                 <span className={classes.slider + " " + classes.round}></span>
               </label>
             </div>
 
             <div>
-              <p className={classes.label}>
-                {!invite
-                  ? "Invite existing Eventliny users"
-                  : "go back by slide"}
-              </p>
+              <p className={classes.label}>Invite existing Eventliny users</p>
               <label className={classes.switch}>
                 <input
                   type="checkbox"
                   onChange={(e) => setStatus(e.target.name)}
                   name="invite"
+                  ref={inviteRef}
                 />
                 <span className={classes.slider + " " + classes.round}></span>
               </label>
@@ -78,7 +78,7 @@ const Chat = () => {
         </Form.Group>
       </Form>
       <div className={classes.pop}>
-        {truthy && <ChatPop current={current} truthy={truthy} />}
+        <ChatModal current={current} show={truthy} onHide={() => closeRef()} />
       </div>
     </div>
   );

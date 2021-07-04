@@ -71,9 +71,19 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 .cover {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  display: inline-block;
+  /*flex-direction: coloumn !important;
+  */ /*justify-content: center;
+  */
+  margin: 20px 100px;
+  padding: 50px;
+  border: 5px solid burlywood;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  color: burlywood;
 }
 .pop {
   display: block;

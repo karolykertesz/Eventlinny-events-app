@@ -4,9 +4,8 @@ import { v4 as uuid_v4 } from "uuid";
 
 export async function createRoom(room, email, password) {
   let message;
-  if (!room) {
-    message = "Room value cannot be empty";
-    return;
+  if (!room || !email || !password) {
+    return "Missing Values";
   }
   const passvalue = await validate.single(password, {
     presence: true,
@@ -23,8 +22,7 @@ export async function createRoom(room, email, password) {
     length: { minimum: 3 },
   });
   if (typeof value !== "undefined" || typeof passvalue !== "undefined") {
-    message = "Invalid charecters or password to short";
-    return;
+    return "Invalid characters or password to short";
   }
   const docref = await firebase
     .firestore()
@@ -34,7 +32,6 @@ export async function createRoom(room, email, password) {
     if (doc.exists) {
       message =
         "There is a private room on this name,Plase select a different Name!!";
-      return;
     } else {
       await docref
         .set(
@@ -55,10 +52,13 @@ export async function createRoom(room, email, password) {
 
   return message;
 }
-export async function inviteUser(email, room) {
+export async function inviteUser(email, room, userEmail) {
   let message;
   if (!email || !room) {
-    message = "User Email or Room name";
+    return "User Email or Room name Missing";
+  }
+  if (email === userEmail) {
+    return "You don't need to invite yourself";
   }
   const value = await validate.single(room, {
     presence: true,
@@ -75,8 +75,7 @@ export async function inviteUser(email, room) {
     },
   });
   if (typeof value !== "undefined" || typeof emailValue !== "undefined") {
-    message = "Invalid characters";
-    return;
+    return "Invalid characters";
   }
   const docRef = firebase.firestore().collection("user_aditional");
   await docRef
@@ -121,13 +120,14 @@ export async function inviteUser(email, room) {
           });
       }
     });
+  console.log(message, "hhhh");
   return message;
 }
 
 export async function createPublic(email, room, userName) {
   let message;
-  if (!email || !room) {
-    message = "User Email or Room name";
+  if (!room) {
+    return "Room name cannot be empty";
   }
   const value = await validate.single(room, {
     presence: true,
@@ -144,13 +144,12 @@ export async function createPublic(email, room, userName) {
     },
   });
   if (typeof value !== "undefined" || typeof emailValue !== "undefined") {
-    message = await "Invalid characters";
-    return;
+    return "Invalid characters";
   }
   const docref = firebase.firestore().collection("public_chat").doc(room);
   await docref.get().then(async (doc) => {
     if (doc.exists) {
-      message = await "Sorry ,There is a chat room on this name!!";
+      message = "Sorry ,There is a chat room on this name!!";
       return;
     } else {
       await docref.set(

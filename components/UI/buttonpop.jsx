@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useAuth } from "../Layout/UserContext";
 
 const ButtonPop = () => {
-  const user = useAuth().user ? useAuth().user : null;
+  const user = useAuth().user;
   const popover = (
     <Popover id="popover-basic" className={classes.top}>
       <Popover.Title as="h2" className="text-warning text-uppercase">

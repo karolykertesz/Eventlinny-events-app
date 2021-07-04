@@ -1,7 +1,9 @@
 .title {
   font-family: Georgia, "Times New Roman", Times, serif;
-  background-color: peru;
+  background-color: burlywood;
   color: white;
+  width: 100%;
+  text-align: center;
 }
 .popBtn {
   background-color: peru;
@@ -36,6 +38,10 @@
   box-shadow: none !important;
   border-color: #cccc !important;
   width: 240px !important;
+  text-align: center;
+}
+.input::placeholder {
+  color: burlywood;
 }
 .top {
   min-width: 300px;
@@ -47,14 +53,40 @@
 }
 .error {
   font-family: Georgia, "Times New Roman", Times, serif;
-  text-align: center;
-  color: palevioletred;
+  text-align: center !important;
+  padding-left: 20px !important;
+  color: rgb(216, 159, 112);
   text-transform: uppercase;
+}
+.footer div {
+  display: block;
+  height: 10px;
+}
+.footerDiv p {
+  text-align: center !important;
+  margin-left: 50px !important;
 }
 .control {
   display: flex;
   flex-direction: row;
+  width: 100%;
+}
+.control input::placeholder {
+  color: burlywood;
+  text-align: center;
 }
 .room input {
-  width: 280px !important;
+  width: 465px !important;
+  text-align: center;
+}
+.room input::placeholder {
+  color: burlywood;
+}
+@media (max-width: 600px) {
+  .room input {
+    width: 450px !important;
+  }
+  .title {
+    font-size: 18px;
+  }
 }
