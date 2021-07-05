@@ -4,3 +4,5 @@ export { sendCreate } from "./users/seneEventCreate";
 export { sendTest } from "./test/index";
 export { privateChat } from "./users/privatechat";
 export { onUpdate } from "./users/onchatuppdate";
+export { sendVerif } from "./users/sendverif";
+export { sendPassword } from "./users/sendpassword";

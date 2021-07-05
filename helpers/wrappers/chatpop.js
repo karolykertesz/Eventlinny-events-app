@@ -1,6 +1,7 @@
 import firebase from "firebase";
 import validate from "validate.js";
 import { v4 as uuid_v4 } from "uuid";
+import { getLinkVerif } from "./chathelpers";
 
 export async function createRoom(room, email, password) {
   let message;
@@ -60,6 +61,7 @@ export async function inviteUser(email, room, userEmail) {
   if (email === userEmail) {
     return "You don't need to invite yourself";
   }
+
   const value = await validate.single(room, {
     presence: true,
     format: {
@@ -77,9 +79,14 @@ export async function inviteUser(email, room, userEmail) {
   if (typeof value !== "undefined" || typeof emailValue !== "undefined") {
     return "Invalid characters";
   }
+  const linkVer = await getLinkVerif(room);
+  if (!linkVer) {
+    return "There is no Chatroom on this name";
+  }
+  const token = uuid_v4();
   const docRef = firebase.firestore().collection("user_aditional");
   await docRef
-    .where("email", "==", email.trim().toLowerCase())
+    .where("email", "==", email.toLowerCase())
     .limit(1)
     .get()
     .then((doc) => {
@@ -104,23 +111,54 @@ export async function inviteUser(email, room, userEmail) {
             if (doc.exists) {
               docR.update({
                 unverified: firebase.firestore.FieldValue.arrayUnion(email),
+                tokens: firebase.firestore.FieldValue.arrayUnion(token),
               });
             } else {
               docR.set(
                 {
                   unverified: [email],
+                  tokens: [token],
+                  verified: [],
                 },
                 { merge: true }
               );
             }
           })
           .then(async () => {
-            message = "Invition sent ";
+            const docref = await firebase
+              .firestore()
+              .collection("user_aditional")
+              .where("email", "==", email);
+            await docref
+              .get()
+              .then((doc) => {
+                let uid;
+                doc.forEach((i) => {
+                  uid = i.id;
+                });
+                return uid;
+              })
+              .then(async (uid) => {
+                const data = {
+                  link: `http://localhost:3000/chat/verify?r=${room}&to=${token}&l=${linkVer}&ui=${uid}`,
+                  email: email,
+                  room: room,
+                };
+
+                const verify = firebase.functions().httpsCallable("sendVerif");
+                await verify(data).then(() => {
+                  message = "Invitation Link Sent!!";
+                });
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+
             return;
           });
       }
     });
-  console.log(message, "hhhh");
+
   return message;
 }
 
