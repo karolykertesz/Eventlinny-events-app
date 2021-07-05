@@ -12,7 +12,7 @@ const handlebarOptions = {
   extName: ".hbs",
 };
 
-export const sender = async (email, firstname) => {
+export const sender = async (email) => {
   const transporter = nodemailer.createTransport({
     host: "smtp-mail.outlook.com",
     secure: false,
@@ -31,7 +31,7 @@ export const sender = async (email, firstname) => {
       subject: "Thank You",
       template: "main",
       text: "hh",
-      context: { from: "Eventlinny", name: firstname },
+      context: { from: "Eventlinny" },
     })
     .then(() => {
       console.log("sent");

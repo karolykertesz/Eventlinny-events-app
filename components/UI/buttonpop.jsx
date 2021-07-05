@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useCallback, useState, useRef } from "react";
 import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Button from "react-bootstrap/Button";
@@ -6,9 +6,38 @@ import Card from "react-bootstrap/Card";
 import classes from "../UI/ui-modules/buttonpop.module.css";
 import Link from "next/link";
 import { useAuth } from "../Layout/UserContext";
+import firebase from "firebase";
+import Bell from "../UI/icons/bell";
 
 const ButtonPop = () => {
   const user = useAuth().user;
+  const [note, setnote] = useState();
+  const modeRef = useRef(true);
+  const getNotifications = useCallback(async () => {
+    let isNotification;
+    const docref = firebase
+      .firestore()
+      .collection("notifications")
+      .doc(user && user.uid);
+    await docref.get().then((doc) => {
+      if (doc.exists) {
+        isNotification = doc.data().unread.length > 0 ? true : false;
+      } else {
+        isNotification = null;
+      }
+    });
+    return isNotification;
+  }, [user]);
+  useEffect(async () => {
+    const isNote = await getNotifications();
+    if (modeRef.current) {
+      setnote(isNote);
+    }
+    return () => {
+      modeRef.current = false;
+    };
+  }, [getNotifications]);
+
   const popover = (
     <Popover id="popover-basic" className={classes.top}>
       <Popover.Title as="h2" className="text-warning text-uppercase">
@@ -38,6 +67,22 @@ const ButtonPop = () => {
                 Create chat
               </Link>
             </div>
+            {note ? (
+              <div className={classes.link}>
+                <Link href={`/notifications/?id=${user && user.uid}`}>
+                  <div className={classes.notidiv}>
+                    <p className={classes.bellP}>Notifications</p>
+                    <div className={note ? classes.bellAlert : classes.bell}>
+                      <Bell />
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            ) : (
+              <div className={classes.bellP}>
+                You don't have any new notifications
+              </div>
+            )}
           </Card.Body>
         </Card>
       </Popover.Content>

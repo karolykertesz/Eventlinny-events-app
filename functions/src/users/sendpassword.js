@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
 
 export const sendPassword = functions.https.onCall((data, context) => {
   const email = data.email;
-  const password = data.link;
+  const password = data.password;
   const room = data.room;
   const mailOptions = {
     from: "node-test-kertesz@outlook.com",
@@ -24,7 +24,7 @@ export const sendPassword = functions.https.onCall((data, context) => {
     <p>Thank you for using Eventlinny!!!</p>
     `,
   };
-  functions.logger.log(link);
+
   return transporter.sendMail(mailOptions, (err, data) => {
     if (err) {
       functions.logger.log(err);

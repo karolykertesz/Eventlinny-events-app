@@ -1,28 +1,21 @@
 import styled from "styled-components";
 import { useRouter } from "next/router";
-import { useEffect, useState, Fragment } from "react";
+import { useEffect, useState, Fragment, useCallback } from "react";
+import firebase from "firebase";
 const ValidPage = () => {
   const [ready, setReady] = useState(false);
   const router = useRouter();
   const email = router.query && router.query.email;
 
-  const sander = async () => {
-    const mess = await fetch("/api/users/vid", {
-      method: "POST",
-      body: JSON.stringify({
-        email: email,
-      }),
-
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    });
-    const status = await mess.status;
-    if (status === 200) {
+  const sander = useCallback(async () => {
+    const data = {
+      email: email,
+    };
+    const sendEm = firebase.functions().httpsCallable("sendEmail");
+    await sendEm(data).then(() => {
       setReady(true);
-    }
-  };
+    });
+  }, [email]);
   useEffect(() => {
     sander();
   }, [sander]);

@@ -68,6 +68,7 @@
 .link {
   width: 100%;
   border-bottom: 1px solid papayawhip;
+  cursor: pointer;
 }
 
 .link a {
@@ -79,4 +80,59 @@
 .link a:active {
   text-decoration: none;
   color: papayawhip;
+}
+.bell {
+  width: 23px;
+  color: #ccc;
+  margin-left: 10px;
+}
+.bellAlert {
+  width: 23px;
+  color: #ccc;
+  animation-timing-function: cubic-bezier(12, 12, 12, 12);
+  animation-duration: 4000ms;
+  animation-iteration-count: 100;
+  animation-name: blink;
+  -webkit-animation-name: blink;
+  margin-left: 10px;
+}
+@keyframes blink {
+  0% {
+    color: red;
+  }
+  15.0% {
+    color: #ccc;
+  }
+  30.0% {
+    color: red;
+  }
+  50.0% {
+    color: #ccc;
+  }
+  75.0% {
+    color: red;
+  }
+  90.0% {
+    color: #ccc;
+  }
+  100.0% {
+    color: red;
+  }
+}
+.notidiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+.notidiv p {
+  color: #c49e7d;
+  text-transform: capitalize;
+  font-size: 18px;
+}
+.bellP {
+  color: #c49e7d;
+  text-transform: capitalize;
+  font-size: 14px;
+  font-weight: 600;
 }
