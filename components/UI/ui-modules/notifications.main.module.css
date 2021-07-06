@@ -1,0 +1,18 @@
+.top {
+  max-width: 800px;
+  background-color: rgb(245, 236, 220);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+  border-radius: 7px;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -ms-border-radius: 7px;
+  -o-border-radius: 7px;
+  display: block;
+  margin: 40px auto;
+}
+.unreadCont {
+  width: 100%;
+}
+.unreadCont ul {
+  display: grid;
+}

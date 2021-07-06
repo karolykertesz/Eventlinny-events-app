@@ -14,57 +14,33 @@ const Header = () => {
   const [userS, setUserS] = useState();
   const router = useRouter();
   const [show, setShow] = useState(false);
-  const check = useCallback(() => {
-    return firebase.auth().onAuthStateChanged((user) => {
-      if (!user) {
-        if (modeRef.current) {
-          setUserS(null);
-        }
-      } else {
-        if (modeRef.current) {
-          setUserS(user);
-        }
-      }
-    });
-  }, [setUserS]);
-  useEffect(() => {
-    check();
-    return () => {
-      modeRef.current = false;
-    };
-  }, []);
-  useEffect(async () => {
-    const status = await validate();
-    if (modeRef.current && status === 200) {
-      setUserS(true);
-    } else if (modeRef.current && status === 400) {
-      setUserS(false);
-    }
-    return () => {
-      modeRef.current = false;
-    };
-  }, []);
-  const validate = async () => {
+
+  const validate = useCallback(async () => {
     const mess = await fetch("/api/users/validateSesion");
     const status = await mess.status;
-    return status;
-  };
+    if (status === 200) {
+      setUserS(true);
+    } else if (status !== 200) setUserS(false);
+  }, [setUserS]);
+  useEffect(() => {
+    validate();
+    return () => {
+      modeRef.current = false;
+    };
+  }, [validate]);
 
-  const sout = async () => {
-    try {
-      await firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          setUserS(null);
-        })
-        .then(() => {
-          return (window.location.href = "/login");
-        })
-        .catch((err) => console.log(err));
-    } catch (err) {
-      console.log(err);
-    }
+  const sout = () => {
+    return firebase
+      .auth()
+      .signOut()
+      .then(async () => {
+        const logo = await fetch("/api/users/logout");
+      })
+      .then(() => {
+        setUserS(false);
+      })
+      .then(() => (window.location.href = "/login"))
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -85,7 +61,7 @@ const Header = () => {
           <span></span>
         </label>
       </div>
-      {userS !== null ? (
+      {userS !== false ? (
         <div className={classes.navLinks}>
           <Link href="/startup">Event pick</Link>
           <Link href="/events">All Events</Link>

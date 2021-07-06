@@ -69,7 +69,7 @@ const ButtonPop = () => {
             </div>
             {note ? (
               <div className={classes.link}>
-                <Link href={`/notifications/?id=${user && user.uid}`}>
+                <Link href={`/notifications/${user && user.uid}`}>
                   <div className={classes.notidiv}>
                     <p className={classes.bellP}>Notifications</p>
                     <div className={note ? classes.bellAlert : classes.bell}>

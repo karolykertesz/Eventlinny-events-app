@@ -104,7 +104,6 @@ export const writteNoti = async (uid, pass, room) => {
               id: uuid_v4(),
               text: `Remainder: Your credentials to enter , room name: ${room}, Your password: ${pass}`,
               created_at: Date.now(),
-              read: [],
             },
           ],
         },
