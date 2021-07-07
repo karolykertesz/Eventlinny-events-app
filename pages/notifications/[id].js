@@ -5,10 +5,13 @@ import {
   fetUserKeys,
 } from "../../helpers/notihelpers/getuserbyid";
 const UserNotes = ({ single }) => {
+  console.log(single, "single");
   return (
     <div className={classes.top}>
       <div className={classes.unreadCont}>
-        <ul></ul>
+        <ul className={classes.unreadUl}>
+          {/* {single && single.unread.map((item) => <li key={item.id}></li>)} */}
+        </ul>
       </div>
       <div className={classes.readCont}></div>
     </div>

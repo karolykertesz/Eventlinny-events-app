@@ -16,39 +16,48 @@ const First = () => {
   const [userLocation, setuserlocation] = useState();
   const [userPrefs, setUserPrefs] = useState();
   const t = data;
-  const call = async () => {
+  useRedirect();
+  const call = useCallback(async () => {
     const mess = await fetch("/api/users/helpers/firstPage");
     const d = await mess.json();
     setData(d);
-  };
+  }, [setData]);
   const getStaticData = useCallback(async () => {
     const uid = userInfo ? userInfo.uid : null;
     if (uid !== null) {
       try {
         const categories = await getusercat(uid && uid);
-        return getuserPrefWithWithCat(categories).then((items) => {
-          if (modeRef.current) {
-            setUserPrefs(items);
-          }
-        });
+        return getuserPrefWithWithCat(categories)
+          .then((items) => {
+            const date = Date.now();
+            const itemsTosort = items.filter((i) => i.start > date);
+            return setUserPrefs(itemsTosort);
+          })
+          .then(() => console.log("jj"));
       } catch (err) {
         console.log(err);
       }
     }
   }, [setUserPrefs]);
+
   useEffect(() => {
-    getStaticData();
     call();
     return () => {
       modeRef.current = false;
     };
-  }, []);
-  useRedirect();
+  }, [call]);
+  useEffect(() => {
+    getStaticData();
+
+    return () => {
+      modeRef.current = false;
+    };
+  }, [getStaticData]);
   return !data || !userInfo ? (
     <Loader />
   ) : (
     <div>
-      {user && (
+      {userInfo && (
         <NameDiv>
           <Pi>
             Dear {userInfo && userInfo.name} Your selection of cooking events

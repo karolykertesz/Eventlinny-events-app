@@ -25,7 +25,7 @@ const EventComp = ({ single }) => {
     month: "long",
     year: "numeric",
   });
-
+  console.log(single);
   useEffect(() => {
     let mode = true;
     getAttendiesInfo(attendies && attendies).then((items) => {

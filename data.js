@@ -215,6 +215,7 @@ export const getimageUrl = async (uid) => {
 
 export const findById = async (id) => {
   let ren = {};
+  console.log("hhhhhh");
   try {
     let t = await db
       .collection("user_add_events")
@@ -230,7 +231,6 @@ export const findById = async (id) => {
         ren = {
           id: item.id,
           start: item.data().starts.toMillis(),
-          end: item.data().ends.toMillis(),
           category: item.data().category,
           added_by: item.data().added_by,
           location: item.data().location,
@@ -244,6 +244,7 @@ export const findById = async (id) => {
   } catch (err) {
     console.log(err);
   }
+
   return ren;
 };
 

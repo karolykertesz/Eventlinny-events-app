@@ -6,6 +6,13 @@
   width: 100%;
   flex-direction: column;
 }
+.coverdiv img {
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+}
 .description {
   display: flex;
   justify-content: center;

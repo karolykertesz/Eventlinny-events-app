@@ -67,6 +67,11 @@ const ButtonPop = () => {
                 Create chat
               </Link>
             </div>
+            <div className={classes.link}>
+              <Link href={`/notifications/get/?id=${user && user.uid}`}>
+                Get Notifications
+              </Link>
+            </div>
             {note ? (
               <div className={classes.link}>
                 <Link href={`/notifications/${user && user.uid}`}>
