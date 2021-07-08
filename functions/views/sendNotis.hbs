@@ -1,0 +1,56 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .img-display {
+        width: 400px;
+        height: 200px;
+        display: block;
+        margin: 0 auto;
+      }
+      .head {
+        text-align: center;
+        color: burlywood;
+      }
+      .body {
+        width: 100%;
+        box-sizing: border-box;
+        background-color: papayawhip;
+        font-family: Georgia, "Times New Roman", Times, serif;
+        color: burlywood;
+      }
+      .pi {
+        font-size: 15px;
+        text-align: center;
+      }
+      .footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+    <title>Notificaton Email</title>
+  </head>
+  <body class="body">
+    <h2 class="head">Hi from {{from}}</h2>
+    <p class="pi">The following event category has been added, {{category}}</p>
+    <p class="pi">The events starts {{start}}</p>
+
+    <img src="{{image}}" class="img-display" alt="{{category}}" />
+    <p class="pi">Thank you for using {{from}}</p>
+    <p class="pi">Cheers!</p>
+
+    <div class="footer">
+      <p>
+        If you dont wish to have anymore notifications,you can set in your
+        options menu
+      </p>
+    </div>
+  </body>
+</html>

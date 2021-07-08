@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 const hbs = require("nodemailer-express-handlebars");
-import categoryImages from "./data";
+import { categoryImages } from "./data";
 
 const handlebarOptions = {
   viewEngine: {
@@ -52,11 +52,7 @@ export const createEvent = async (
       context: {
         from: "Eventlinny",
         name: displayname,
-        start: new Date(startToSend).toLocaleDateString("en-US", {
-          day: "numeric",
-          month: "long",
-          year: "numeric",
-        }),
+        start: startToSend,
         event: selectedcategory,
         image: source,
         eventName: description,

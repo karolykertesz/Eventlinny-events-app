@@ -125,7 +125,6 @@ const Eventadder = ({
           })
           .then(() => {
             setLoading(false);
-            alert("Done");
             //   });
           })
           .then(() => {
@@ -151,23 +150,8 @@ const Eventadder = ({
             created_by: displayname,
             user_email: user.email,
           })
-          .then(() => {
-            // return new Promise((resolve, reject) => {
-            //   resolve(
-            //     sendEmailWithEvent(
-            //       email,
-            //       displayname,
-            //       startToSend,
-            //       selectedcategory.toLowerCase(),
-            //       docId,
-            //       description.toLowerCase()
-            //     )
-            //   );
-            // }).then(() => {
-            setLoading(false);
-            alert("Done");
-            // });
-          })
+
+          .then(() => setLoading(false))
           .then(() => {
             router.push("/events");
           })
@@ -197,6 +181,7 @@ const Eventadder = ({
   if (loading) {
     return <Loader />;
   }
+  console.log(selectedcategory.toLowerCase());
   return (
     <Layer>
       <div className={classes.form}>

@@ -11,8 +11,12 @@ import { categories } from "../../data";
 import firebase from "firebase";
 import NotiItem from "../../components/UI/notificationItem";
 import Loader from "../../components/UI/loader";
+import { addtocategories } from "../../helpers/notihelpers/addtocategories";
+import { useAuth } from "../../components/Layout/UserContext";
+import { useRedirect } from "../../helpers/validatehelp";
 
 const GetNote = () => {
+  useRedirect();
   const modeRef = useRef(true);
   const router = useRouter();
   const id = router.query.id;
@@ -21,6 +25,8 @@ const GetNote = () => {
   const [isOn, setIsOn] = useState(false);
   const [arrayUpdated, setUpdated] = useState([]);
   const [loading, setLoading] = useState(false);
+  const user = useAuth().user;
+  const email = user ? user.email : null;
   const setItem = (item) => {
     if (cat.includes(item)) {
       let newArray = cat.filter((i) => i !== item);
@@ -79,6 +85,7 @@ const GetNote = () => {
           }
         })
         .then(() => {
+          addtocategories(email && email, cat);
           setLoading(false);
           setIsOn(false);
         });
@@ -96,7 +103,7 @@ const GetNote = () => {
         {arrayUpdated.length > 0 ? (
           <Fragment>
             <p>Would You like to recive Notifications?</p>
-            <p>Select from Categories Below!!</p>
+            <p>Select from Remaining Categories Below!!</p>
           </Fragment>
         ) : (
           <Fragment>
@@ -119,12 +126,14 @@ const GetNote = () => {
           ))}
       </div>
       <div className={classes.footer}>
-        {cat.length > 0 && (
+        {cat.length > 0 && arrayUpdated.length > 0 ? (
           <div>
             <button className={classes.btnSend} onClick={sendNoti}>
               Send
             </button>
           </div>
+        ) : (
+          <div></div>
         )}
       </div>
     </div>
