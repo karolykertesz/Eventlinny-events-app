@@ -11,6 +11,48 @@
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 .btnDiv {
+  background-color: peru;
+  text-align: center;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  text-transform: capitalize;
+  color: white;
+}
+
+.btnDiv:active {
+  box-shadow: 3px 3px 1px 1px rgba(222, 184, 135, 0.564);
+  background-color: hsla(30, 59%, 53%, 0.865);
+}
+.coverDiv {
+  display: flex;
+  margin: 50px auto;
+  max-width: 800px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width: 750px) {
+  .coverDiv {
+    position: absolute;
+    top: 130px;
+    left: 20px;
+  }
+  .btnDiv {
+    width: 100px;
+  }
+  .head p {
+    font-size: 14px;
+  }
+}
+.inactive {
   background-color: rgba(222, 184, 135, 0.564);
   text-align: center;
   border-radius: 5px;
@@ -18,11 +60,18 @@
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  text-transform: capitalize;
+  color: white;
+  filter: sepia(80%);
+  -webkit-filter: sepia(80%);
 }
-.coverDiv {
-  display: block;
-  margin: 50px auto;
-  max-width: 800px;
+.inactive:active {
+  background-color: peru;
 }
 .body {
   width: 100%;
@@ -38,4 +87,26 @@
   width: none;
   height: none;
   cursor: pointer;
+}
+.btnSend {
+  text-align: center;
+  background-color: rgba(225, 172, 102, 0.851);
+  width: 180px;
+  height: 40px;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+.btnSend:hover {
+  background-color: rgb(238, 129, 20);
+}
+.btnSend:active {
+  background-color: rgb(238, 129, 20);
+}
+.footer {
+  margin-top: 50px;
 }

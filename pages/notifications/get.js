@@ -1,9 +1,16 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  Fragment,
+} from "react";
 import classes from "../../components/UI/ui-modules/notification.get.module.css";
 import { useRouter } from "next/router";
 import { categories } from "../../data";
 import firebase from "firebase";
 import NotiItem from "../../components/UI/notificationItem";
+import Loader from "../../components/UI/loader";
 
 const GetNote = () => {
   const modeRef = useRef(true);
@@ -12,6 +19,8 @@ const GetNote = () => {
   const filteredCat = categories.filter((i) => i !== "create");
   const [cat, setCat] = useState([]);
   const [isOn, setIsOn] = useState(false);
+  const [arrayUpdated, setUpdated] = useState([]);
+  const [loading, setLoading] = useState(false);
   const setItem = (item) => {
     if (cat.includes(item)) {
       let newArray = cat.filter((i) => i !== item);
@@ -21,34 +30,103 @@ const GetNote = () => {
     }
     setIsOn(!isOn);
   };
+
   // const dt = filteredCat.filter((item, inx) => !arr.includes(item));
   const getNotiz = useCallback(async () => {
-    const docref = firebase.firestore().collection("user_aditional").doc(id);
-    await docref.get().then((doc) => {
-      let noteArray = doc.data().notification_pref
+    const docref = await firebase
+      .firestore()
+      .collection("user_aditional")
+      .doc(id);
+    await docref.onSnapshot(async (doc) => {
+      let noteArray = (await doc.data().notification_pref)
         ? doc.data().notification_pref
         : [];
+
       if (noteArray.length > 0) {
+        const arrayUpdate = await filteredCat.filter(
+          (item) => !doc.data().notification_pref.includes(item)
+        );
+        await setUpdated(arrayUpdate);
+      } else {
+        setUpdated(filteredCat);
       }
     });
-  }, [id]);
-
+  }, [id, setUpdated]);
+  useEffect(() => {
+    getNotiz();
+    return () => {
+      modeRef.current = false;
+    };
+  }, [getNotiz]);
+  const sendNoti = async () => {
+    setLoading(true);
+    try {
+      const dataref = firebase.firestore().collection("user_aditional").doc(id);
+      await dataref
+        .get()
+        .then(async (doc) => {
+          if (doc.data().notification_pref) {
+            cat.forEach((item) => {
+              dataref.update({
+                notification_pref:
+                  firebase.firestore.FieldValue.arrayUnion(item),
+              });
+            });
+          } else {
+            await dataref.update({
+              notification_pref: [...cat],
+            });
+          }
+        })
+        .then(() => {
+          setLoading(false);
+          setIsOn(false);
+        });
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
+    }
+  };
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <div className={classes.coverDiv}>
       <div className={classes.head}>
-        <p>Would You like to recive Notifications?</p>
-        <p>Select from Categories Below!!</p>
+        {arrayUpdated.length > 0 ? (
+          <Fragment>
+            <p>Would You like to recive Notifications?</p>
+            <p>Select from Categories Below!!</p>
+          </Fragment>
+        ) : (
+          <Fragment>
+            <p>You Have selected All Categories</p>
+          </Fragment>
+        )}
       </div>
       <div className={classes.body}>
-        {filteredCat.map((item) => (
-          <div className={classes.btn} onClick={() => setItem(item)} key={item}>
-            <div className={classes.btnDiv}>
-              <NotiItem item={item} />
+        {arrayUpdated &&
+          arrayUpdated.map((item) => (
+            <div
+              className={classes.btn}
+              onClick={() => setItem(item)}
+              key={item}
+            >
+              <div>
+                <NotiItem item={item} cat={cat} />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
-      <div className={classes.footer}></div>
+      <div className={classes.footer}>
+        {cat.length > 0 && (
+          <div>
+            <button className={classes.btnSend} onClick={sendNoti}>
+              Send
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

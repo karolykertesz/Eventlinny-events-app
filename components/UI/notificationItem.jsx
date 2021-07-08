@@ -1,5 +1,10 @@
 import Image from "next/image";
-const NotiItem = ({ item, isOn }) => {
-  return <div>{item}</div>;
+import classes from "../UI/ui-modules/notification.get.module.css";
+const NotiItem = ({ item, cat }) => {
+  return (
+    <div className={cat.includes(item) ? classes.inactive : classes.btnDiv}>
+      {item}
+    </div>
+  );
 };
 export default NotiItem;

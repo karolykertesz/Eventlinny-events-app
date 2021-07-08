@@ -12,7 +12,7 @@ export const sendCreate = functions.firestore
     const selectedcategory = data.category;
     const description = data.description;
     const displayname = data.created_by;
-    const startToSend = new Date(data.starts);
+    const startToSend = new Date(data.starts).valueOf();
     functions.logger.log(data);
     return await createEvent(
       email,

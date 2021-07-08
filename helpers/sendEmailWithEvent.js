@@ -1,3 +1,4 @@
+import firebase from "firebase";
 export const sendEmailWithEvent = async (
   email,
   displayname,
