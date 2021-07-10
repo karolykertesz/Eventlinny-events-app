@@ -1,0 +1,23 @@
+.title {
+  color: burlywood;
+  text-align: center;
+
+  width: 100%;
+}
+.top {
+  width: 100%;
+  background-color: rgba(250, 235, 215, 0.242);
+  /* opacity: 0.8; */
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.bodyDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: hidden;
+}
+.bodyDiv p {
+  color: burlywood;
+  /* text-transform: capitalize; */
+}

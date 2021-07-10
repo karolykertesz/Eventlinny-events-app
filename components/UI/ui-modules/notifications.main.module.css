@@ -7,12 +7,38 @@
   -moz-border-radius: 7px;
   -ms-border-radius: 7px;
   -o-border-radius: 7px;
-  display: block;
+  /* display: block; */
   margin: 40px auto;
+  display: flex;
+  flex-direction: column;
 }
 .unreadCont {
   width: 100%;
 }
-.unreadCont ul {
+.unreadUl {
   display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+}
+.btnDiv {
+  width: 0;
+  border: none;
+  background-color: inherit;
+}
+.click {
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 6%;
+  padding-bottom: 5px;
+  transform: translate(-50%, -10%);
+  -webkit-transform: translate(-50%, -10%);
+  -moz-transform: translate(-50%, -10%);
+  -ms-transform: translate(-50%, -10%);
+  -o-transform: translate(-50%, -10%);
+  color: burlywood;
+  text-transform: capitalize;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }

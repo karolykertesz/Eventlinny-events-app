@@ -9,6 +9,7 @@ import { getusercat, getuserPrefWithWithCat } from "../../data";
 import EventList from "../../components/EventList";
 import { useRedirect } from "../../helpers/validatehelp";
 const First = () => {
+  useRedirect();
   const modeRef = useRef(true);
   const userInfo = useAuth().user;
   const [data, setData] = useState();
@@ -16,7 +17,6 @@ const First = () => {
   const [userLocation, setuserlocation] = useState();
   const [userPrefs, setUserPrefs] = useState();
   const t = data;
-  useRedirect();
   const call = useCallback(async () => {
     const mess = await fetch("/api/users/helpers/firstPage");
     const d = await mess.json();

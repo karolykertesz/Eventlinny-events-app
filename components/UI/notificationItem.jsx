@@ -1,9 +1,14 @@
-import Image from "next/image";
-import classes from "../UI/ui-modules/notification.get.module.css";
+import classes from "../UI/ui-modules/notification.item.module.css";
 const NotiItem = ({ item, cat }) => {
   return (
-    <div className={cat.includes(item) ? classes.inactive : classes.btnDiv}>
-      {item}
+    <div className={classes.cover}>
+      <div className={cat === "read" ? classes.inactive : classes.btnDiv}>
+        <div className={classes.control}>
+          {item.text.map((it) => (
+            <p key={it}>{it}</p>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

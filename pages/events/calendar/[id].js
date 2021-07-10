@@ -10,8 +10,9 @@ import { useRouter } from "next/router";
 
 const UserEvents = ({ single }) => {
   const router = useRouter();
-  const name = useAuth().user && useAuth().user.name;
-  const id = useAuth().user && useAuth().user.uid;
+  const user = useAuth().user;
+  const name = user && user.name;
+  const id = user && user.uid;
   const [showmodal, setShowModal] = useState(false);
   const userAddEvents = () => {
     return new Promise((resolve, reject) => {

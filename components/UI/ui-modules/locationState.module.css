@@ -4,6 +4,14 @@
   align-items: center;
   max-width: 800;
   flex-direction: column;
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
 }
 .divinputCover {
   max-width: 350px !important;
@@ -17,6 +25,12 @@
   width: 350px;
   *background: #e7ac15;
   -webkit-appearance: none;
+}
+.mainselection select {
+  border: burlywood !important;
+}
+.mainselection select::content {
+  border: none !important;
 }
 .mainselection select option {
   font-size: 40px !important;
@@ -56,8 +70,8 @@
 
 .btn:hover,
 .btn:active {
-  background-color: #a3af02;
-  border-color: #a3af02;
+  background-color: peru;
+  border-color: peru;
   text-transform: capitalize;
 }
 

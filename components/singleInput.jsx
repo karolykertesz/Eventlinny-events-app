@@ -63,7 +63,7 @@ const Singleinput = ({ item }) => {
     }
   };
   return (
-    <span>
+    <div className={classes.holder}>
       {!thank ? (
         <div className={classes.divContainer}>
           <p> Update your {item}</p>
@@ -109,7 +109,7 @@ const Singleinput = ({ item }) => {
           </Buttondiv>
         </div>
       )}
-    </span>
+    </div>
   );
 };
 

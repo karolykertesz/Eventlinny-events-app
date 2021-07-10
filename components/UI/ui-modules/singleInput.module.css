@@ -14,8 +14,8 @@
 
 .btn:hover,
 .btn:active {
-  background-color: #a3af02;
-  border-color: #a3af02;
+  background-color: peru;
+  border-color: peru;
 }
 
 .update {
@@ -28,6 +28,16 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+.holder {
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
 }
 .divContainer p {
   color: burlywood;
@@ -51,8 +61,8 @@
 }
 
 .container:hover {
-  box-shadow: inset 9px 9px 16px rgb(163, 177, 198, 0.6),
-    inset -9px -9px 16px rgba(255, 255, 255, 0.7);
+  box-shadow: inset 9px 9px 16px peru,
+    inset -9px -9px 16px rgba(205, 134, 63, 0.16);
 }
 .container textarea {
   padding: 14px;
@@ -83,7 +93,10 @@
   -o-transition: 0.4s ease-in-out;
   text-transform: lowercase;
 }
-
+.container input::placeholder {
+  color: burlywood;
+  text-transform: capitalize;
+}
 .container input:hover {
   transform: scale(1.05, 1.05);
 }

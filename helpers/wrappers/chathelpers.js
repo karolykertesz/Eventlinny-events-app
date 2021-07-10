@@ -92,7 +92,9 @@ export const writteNoti = async (uid, pass, room) => {
       await docref.update({
         unread: firebase.firestore.FieldValue.arrayUnion({
           id: uuid_v4(),
-          text: `Remainder: Your credentials to enter , room name: ${room}, Your password ${pass}`,
+          text: [
+            `Remainder: Your credentials to enter , room name: ${room}, Your password ${pass}`,
+          ],
           created_at: Date.now(),
         }),
       });
@@ -102,7 +104,9 @@ export const writteNoti = async (uid, pass, room) => {
           unread: [
             {
               id: uuid_v4(),
-              text: `Remainder: Your credentials to enter , room name: ${room}, Your password: ${pass}`,
+              text: [
+                `Remainder: Your credentials to enter , room name: ${room}, Your password: ${pass}`,
+              ],
               created_at: Date.now(),
             },
           ],

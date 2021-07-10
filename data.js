@@ -166,7 +166,6 @@ export const getUserEvents = async (id) => {
         docArray.push({
           id: it.id,
           start: it.data().starts.toMillis(),
-          end: it.data().ends.toMillis(),
           category: it.data().category,
           added_by: it.data().added_by,
           location: it.data().location,
