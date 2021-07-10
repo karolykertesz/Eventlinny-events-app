@@ -1,0 +1,15 @@
+.title {
+  text-align: center;
+  text-transform: capitalize;
+  color: burlywood;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.body {
+  text-align: center;
+  overflow: hidden;
+  color: burlywood;
+  width: 100%;
+  text-transform: capitalize;
+  font-weight: 600;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}

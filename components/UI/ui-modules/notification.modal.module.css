@@ -21,3 +21,19 @@
   color: burlywood;
   /* text-transform: capitalize; */
 }
+.closeBtn {
+  width: 100%;
+  text-align: center;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  border: none;
+  background-color: peru;
+  color: white;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+.closeBtn:hover {
+  background-color: rgb(180, 135, 63);
+}

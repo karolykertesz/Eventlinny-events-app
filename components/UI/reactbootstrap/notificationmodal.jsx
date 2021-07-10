@@ -2,8 +2,40 @@ import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import firebase from "firebase";
 import classes from "../../UI/ui-modules/notification.modal.module.css";
+import { useAuth } from "../../Layout/UserContext";
 const NotificationModal = (props) => {
+  const user = useAuth().user;
   const { cat, id, single, setShow } = props;
+  const sendAndClose = async () => {
+    if (cat === "read") {
+      setShow(false);
+    } else {
+      const dataref = await firebase
+        .firestore()
+        .collection("notifications")
+        .doc(user && user.uid);
+      await dataref
+        .get()
+        .then(async (doc) => {
+          const data = await doc.data();
+          const dataArr = await data.unread;
+          const item = dataArr.find((i) => i.id === id);
+          const arrayToUpdate = dataArr.filter((i) => i.id !== id);
+          await dataref.update({
+            read: firebase.firestore.FieldValue.arrayUnion(item),
+          });
+          await dataref.set(
+            {
+              unread: arrayToUpdate,
+            },
+            { merge: true }
+          );
+        })
+        .then(() => {
+          setShow(false);
+        });
+    }
+  };
   const getcategory = () => {
     let items;
     if (cat && single) {
@@ -42,7 +74,9 @@ const NotificationModal = (props) => {
             {singleItem &&
               singleItem.text.map((item, indx) => <p key={indx}>{item}</p>)}
           </div>
-          <button onClick={() => setShow(false)}>Close</button>
+          <button onClick={() => sendAndClose()} className={classes.closeBtn}>
+            Close
+          </button>
         </Modal.Body>
       </Modal>
     </div>

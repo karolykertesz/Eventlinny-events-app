@@ -42,14 +42,14 @@ const UserNotes = () => {
   return (
     <div>
       <NotificationModal
-        onHide={() => setShow()}
+        onHide={() => setShow(false)}
         cat={category}
         id={noteId}
         show={show}
         setShow={setShow}
         single={singleData}
       />
-      <p className={classes.click}>click to view!!</p>
+      <p className={classes.click}>click to see or hover to view</p>
       <div className={classes.top}>
         <div className={classes.unreadCont}>
           {singleData && (
@@ -57,22 +57,27 @@ const UserNotes = () => {
               {singleData.unread !== null && (
                 <div className={classes.unreadUl}>
                   {singleData.unread.map((item) => (
-                    <button
+                    <div
                       key={item.id}
                       className={classes.btnDiv}
                       onClick={() => viewModal(item.id, "unread")}
                     >
                       <NotiItem item={item} cat="unread" />
-                    </button>
+                    </div>
                   ))}
                 </div>
               )}
               {singleData.read && (
                 <div className={classes.unreadUl}>
                   {singleData.read.map((item) => (
-                    <button key={item.id}>
+                    <div
+                      key={item.id}
+                      key={item.id}
+                      className={classes.btnDiv}
+                      onClick={() => viewModal(item.id, "read")}
+                    >
                       <NotiItem item={item} cat="read" />
-                    </button>
+                    </div>
                   ))}
                 </div>
               )}

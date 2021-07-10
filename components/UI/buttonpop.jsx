@@ -19,7 +19,7 @@ const ButtonPop = () => {
       .firestore()
       .collection("notifications")
       .doc(user && user.uid);
-    await docref.get().then((doc) => {
+    await docref.onSnapshot((doc) => {
       if (doc.exists) {
         isNotification = doc.data().unread.length > 0 ? true : false;
       } else {

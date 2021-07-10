@@ -1,14 +1,28 @@
 import classes from "../UI/ui-modules/notification.item.module.css";
+import Eye from "../UI/icons/eye-icon";
+import EyeOff from "../Ui/icons/eye-off";
+import NotificationOvarlay from "../UI/reactbootstrap/notificationoverlay";
 const NotiItem = ({ item, cat }) => {
+  console.log(item);
   return (
-    <div className={classes.cover}>
-      <div className={cat === "read" ? classes.inactive : classes.btnDiv}>
-        <div className={classes.control}>
-          {item.text.map((it) => (
-            <p key={it}>{it}</p>
-          ))}
+    <div className={cat === "unread" ? classes.cover : classes.inactive}>
+      <NotificationOvarlay body={item.created_at}>
+        <div>
+          <div className={classes.control}>
+            {cat === "unread" ? (
+              <div className={classes.inner}>
+                <p className={classes.pi}>Unread</p>
+                <Eye width="40px" heigth="50px" color="burlywood" />
+              </div>
+            ) : (
+              <div className={classes.inner}>
+                <p className={classes.pi}>Read</p>
+                <EyeOff width="40px" heigth="50px" color="#dfd2d2" />
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      </NotificationOvarlay>
     </div>
   );
 };
