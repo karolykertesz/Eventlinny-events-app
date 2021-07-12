@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "functions:build": "npm run build --prefix ./functions"
+    "functions:build": "npm run build --prefix ./functions",
+    "test": "jest"
   },
   "browser": {
     "child_process": false
@@ -50,6 +51,7 @@
   "devDependencies": {
     "babel-plugin-styled-components": "^1.12.0",
     "concurrently": "^6.2.0",
+    "jest": "^27.0.6",
     "nodemon": "^2.0.7"
   }
 }

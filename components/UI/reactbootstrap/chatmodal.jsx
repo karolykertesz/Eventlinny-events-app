@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   createPublic,
   createRoom,
@@ -8,6 +8,7 @@ import { Form, InputGroup, Modal, FormControl } from "react-bootstrap";
 import classes from "../../UI/ui-modules/chatpop.module.css";
 import Tinyspinner from "../tinyspinner";
 import { useAuth } from "../../Layout/UserContext";
+import { categories } from "../../../data";
 
 const ChatModal = (props) => {
   const [email, setEmail] = useState();
@@ -16,7 +17,16 @@ const ChatModal = (props) => {
   const [room, setRoom] = useState();
   const [password, setPassrord] = useState();
   const user = useAuth().user;
-  const { current } = props;
+  const { current, roomOpen } = props;
+  const selectedArray = () => {
+    let selectedCategories = categories.filter((i) => i !== "create");
+    if (!room) {
+      selectedCategories.unshift("Nothing Selected");
+    } else {
+      selectedCategories.shift();
+    }
+    return selectedCategories.map((i) => i.toUpperCase());
+  };
 
   const createMainTitle = () => {
     let title;
@@ -70,17 +80,18 @@ const ChatModal = (props) => {
       setRoom("");
     }
     if (current === "public") {
-      let msg = await createPublic(
-        user.email,
-        room.trim().toLowerCase(),
-        user.name
-      );
+      if (!room) {
+        setLoading(false);
+        setError("No room name given");
+        return;
+      }
+      let msg = await createPublic(user.email, room.toLowerCase(), user.name);
       setLoading(false);
       setError(msg);
       setRoom("");
     }
   };
-
+  console.log(room, "jjj");
   return (
     <div className={classes.top}>
       <Modal
@@ -103,14 +114,16 @@ const ChatModal = (props) => {
               {current === "public" && (
                 <InputGroup className="mb-3">
                   <div className={classes.room}>
-                    <FormControl
-                      placeholder="Add Your Chat Room Name"
-                      type="text"
-                      autoComplete="false"
-                      value={room || ""}
+                    <select
                       onChange={(e) => setRoom(e.target.value)}
-                      className={classes.input}
-                    />
+                      className={classes.select}
+                    >
+                      {selectedArray().map((item) => (
+                        <option value={item} className={classes.opt} key={item}>
+                          {item}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </InputGroup>
               )}

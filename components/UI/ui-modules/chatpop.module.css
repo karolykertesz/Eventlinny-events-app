@@ -90,3 +90,29 @@
     font-size: 18px;
   }
 }
+.select {
+  width: 465px;
+  height: 40px;
+  position: relative;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: burlywood;
+
+  /* padding: 20px auto; */
+  /* margin-left: 20px; */
+}
+.select::after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+@media (max-width: 600px) {
+  .select {
+    width: 450px;
+  }
+}

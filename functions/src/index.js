@@ -7,3 +7,4 @@ export { onUpdate } from "./users/onchatuppdate";
 export { sendVerif } from "./users/sendverif";
 export { sendPassword } from "./users/sendpassword";
 export { sendNotificationEmail } from "./users/sendNotificationEmails";
+export { publicChat } from "./users/publicchatceate";

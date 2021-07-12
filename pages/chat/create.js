@@ -4,13 +4,14 @@ import { useRouter } from "next/router";
 import classes from "../../components/UI/ui-modules/chat.module.css";
 import ChatPop from "../../components/UI/reactbootstrap/chatpop";
 import ChatModal from "../../components/UI/reactbootstrap/chatmodal";
+import { useRedirect } from "../../helpers/validatehelp";
 const Chat = () => {
+  useRedirect();
   const router = useRouter();
   const id = router.query.id;
-
   const [truthy, setTruth] = useState(false);
-
   const [current, setCurrent] = useState(null);
+
   const publicRef = useRef();
   const privateRef = useRef();
   const inviteRef = useRef();

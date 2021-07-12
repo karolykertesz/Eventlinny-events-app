@@ -63,7 +63,7 @@ const Header = () => {
       </div>
       {userS !== false ? (
         <div className={classes.navLinks}>
-          <Link href="/startup">Event pick</Link>
+          <Link href="/chat/main">Chats</Link>
           <Link href="/events">All Events</Link>
           <Link href="/events/find">Find an Event</Link>
           <Link href="/events/archive">Archive</Link>

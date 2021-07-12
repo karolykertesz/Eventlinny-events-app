@@ -164,41 +164,21 @@ export async function inviteUser(email, room, userEmail) {
 
 export async function createPublic(email, room, userName) {
   let message;
-  if (!room) {
-    return "Room name cannot be empty";
-  }
-  const value = await validate.single(room, {
-    presence: true,
-    format: {
-      pattern: "[^<>{}()]+",
-    },
-    length: { minimum: 3 },
-  });
-  const emailValue = await validate.single(email, {
-    presence: true,
-    email: true,
-    format: {
-      pattern: "[^<>{}()]+",
-    },
-  });
-  if (typeof value !== "undefined" || typeof emailValue !== "undefined") {
-    return "Invalid characters";
-  }
-  const docref = firebase.firestore().collection("public_chat").doc(room);
-  await docref.get().then(async (doc) => {
-    if (doc.exists) {
-      message = "Sorry ,There is a chat room on this name!!";
-      return;
-    } else {
-      await docref.set(
-        {
-          host: email,
-          userName: userName,
-        },
-        { merge: true }
-      );
-      message = await "Room Has Been Created, Thank You";
-    }
-  });
+  const id = uuid_v4();
+  await firebase
+    .firestore()
+    .collection("public_chat")
+    .doc(id)
+    .set({
+      category: room,
+      host: userName,
+      last_user: Date.now(),
+      active_users: [],
+      email: email,
+    })
+    .then(() => {
+      message = "Room Created ,Thank You!";
+    });
+
   return message;
 }
