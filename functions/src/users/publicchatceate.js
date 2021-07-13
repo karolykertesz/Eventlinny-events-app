@@ -43,4 +43,11 @@ export const publicChat = functions.firestore
     if (itemsToDelete.length > 0) {
       await itemsToDelete.map((i) => docref.doc(i).delete());
     }
+    await db
+      .collection("chat_rooms_counter")
+      .doc("public")
+      .update({ total: admin.firestore.FieldValue.increment(1) })
+      .catch((err) => {
+        functions.logger.log(err);
+      });
   });

@@ -1,5 +1,7 @@
 import * as functions from "firebase-functions";
 import nodemailer from "nodemailer";
+import admin from "firebase-admin";
+const db = admin.firestore();
 const transporter = nodemailer.createTransport({
   host: "smtp-mail.outlook.com",
   secure: false,
@@ -11,7 +13,7 @@ const transporter = nodemailer.createTransport({
 });
 export const privateChat = functions.firestore
   .document("private_chat/{docId}")
-  .onCreate((snap, context) => {
+  .onCreate(async (snap, context) => {
     const data = snap.data();
     const docName = context.params.docId;
 
@@ -26,9 +28,16 @@ export const privateChat = functions.firestore
       <p>Thank you for using Eventlinny!!!</p>
       `,
     };
-    return transporter.sendMail(mailOptions, (err, data) => {
+    await transporter.sendMail(mailOptions, (err, data) => {
       if (err) {
         functions.logger.log(err);
       }
     });
+    await db
+      .collection("chat_rooms_counter")
+      .doc("private")
+      .update({ total: admin.firestore.FieldValue.increment(1) })
+      .catch((err) => {
+        functions.logger.log(err);
+      });
   });
