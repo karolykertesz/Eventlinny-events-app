@@ -116,3 +116,23 @@ export const writteNoti = async (uid, pass, room) => {
     }
   });
 };
+
+export const getPublicChatsHelper = async () => {
+  const publicArray = [];
+  const docref = await firebase
+    .firestore()
+    .collection("public_chat")
+    .orderBy("last_user", "desc");
+  await docref.get().then((doc) => {
+    if (doc.exists) {
+      doc.forEach((sn) => {
+        publicArray.push({
+          id: sn.id,
+          ...sn.data(),
+        });
+      });
+    }
+  });
+
+  return publicArray;
+};

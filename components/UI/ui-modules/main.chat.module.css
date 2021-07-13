@@ -74,3 +74,8 @@
     right: -85%;
   }
 }
+.inactive {
+  cursor: crosshair;
+  filter: grayscale(60%) sepia(40%);
+  -webkit-filter: grayscale(60%) sepia(40%);
+}
