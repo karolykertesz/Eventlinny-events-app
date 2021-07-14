@@ -55,6 +55,10 @@ input:focus + .slider {
   .label {
     text-align: center;
   }
+  .top {
+    position: absolute;
+    top: 20%;
+  }
 }
 input:checked + .slider:before {
   -webkit-transform: translateX(26px);

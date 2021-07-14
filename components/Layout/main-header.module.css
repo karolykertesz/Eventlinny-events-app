@@ -11,7 +11,7 @@
   display: none;
 }
 .nav {
-  height: 50px;
+  height: 55px;
   width: 100%;
   background-color: #c49e7d;
   position: relative;
@@ -84,6 +84,9 @@
   .control {
     max-height: 200px !important;
   }
+  .nav {
+    height: 50px;
+  }
   /* .navbar {
     width: 100%;
   } */
@@ -103,7 +106,9 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: auto;
     overflow: hidden;
+
     gap: 5px;
+    /* clear: both; */
   }
   .nav > .navBtn {
     display: inline-block;

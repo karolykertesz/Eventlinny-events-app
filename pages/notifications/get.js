@@ -119,9 +119,7 @@ const GetNote = () => {
               onClick={() => setItem(item)}
               key={item}
             >
-              <div>
-                <NotiItem item={item} cat={cat} />
-              </div>
+              <div className={classes.btnDiv}>{item}</div>
             </div>
           ))}
       </div>

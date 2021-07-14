@@ -111,6 +111,13 @@ const ButtonPop = () => {
           color: "papayawhip",
           textAlign: "center",
           textTransform: "capitalize",
+          clear: "both",
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          display: "inline-block",
+          padding: "0",
+          height: "46px",
+
           // marginTop: "3px",
         }}
       >

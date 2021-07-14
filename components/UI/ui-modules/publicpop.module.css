@@ -1,0 +1,15 @@
+.btnTriger {
+  border: none;
+  background-color: papayawhip;
+  /* box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3); */
+}
+.body {
+  background-color: rgba(222, 184, 135, 0.194);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 16px;
+  text-transform: capitalize;
+}
+.title {
+  text-transform: uppercase;
+  color: burlywood;
+}
