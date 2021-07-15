@@ -2,14 +2,46 @@ import React, { useState } from "react";
 import { Form, FormControl, InputGroup } from "react-bootstrap";
 import { categories } from "../../../data";
 import classes from "../../UI/ui-modules/search.module.css";
+import Xcircle from "../../UI/icons/x-circle";
+import firebase from "firebase";
+import PublicItem from "../../publicitem";
 
 const Search = (props) => {
   const [isStart, setStart] = useState(false);
   const [isValue, setValue] = useState();
+  const [data, setData] = useState();
   const [selected, setselected] = useState();
   const [error, setError] = useState();
   const filteredCats = categories.filter((i) => i !== "create");
-  const formSubmit = () => {};
+  const formSubmit = async (e) => {
+    e.preventDefault();
+    setError(null);
+    if (!selected) {
+      setError("Search CRITERIA Needs to be Selected");
+      return;
+    }
+    const docref = await firebase
+      .firestore()
+      .collection("public_chat")
+      .where(isValue, "==", selected);
+    await docref.get().then(async (doc) => {
+      let arr = [];
+      await doc.forEach((i) => {
+        console.log(doc.length);
+        arr.push({
+          id: i.id,
+          ...i.data(),
+        });
+      });
+      if (arr.length === 0) {
+        setError("Please Refine Your Search");
+        setData(null);
+        return;
+      } else {
+        await setData(arr);
+      }
+    });
+  };
   const setVal = (val) => {
     setValue(val);
     setStart(true);
@@ -28,8 +60,11 @@ const Search = (props) => {
             </select>
           </div>
         ) : (
-          <div>
-            <InputGroup className="mb-3">
+          <div style={{ position: "relative" }}>
+            <div className={classes.xcircle} onClick={() => setStart(false)}>
+              <Xcircle color="peru" width="30px" />
+            </div>
+            <InputGroup className="mb-3" className={classes.inp}>
               {isValue === "category" ? (
                 <div className={classes.selectDiv}>
                   <select onChange={(e) => setselected(e.target.value)}>
@@ -54,6 +89,20 @@ const Search = (props) => {
           </div>
         )}
       </Form>
+      <div className={classes.holder}>
+        {error ? (
+          <div>{error}</div>
+        ) : (
+          <div>
+            {data &&
+              data.map((item) => (
+                <div key={item.id}>
+                  <PublicItem item={item} />
+                </div>
+              ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
