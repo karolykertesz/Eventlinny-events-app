@@ -1,0 +1,42 @@
+.cover {
+  width: 60vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  border: 1px solid red;
+  transform: translate(-50%, 5%);
+  left: 50%;
+  margin-top: 10px;
+  -webkit-transform: translate(-50%, 5%);
+  -moz-transform: translate(-50%, 5%);
+  -ms-transform: translate(-50%, 5%);
+  -o-transform: translate(-50%, 5%);
+  height: 70vh;
+}
+.btn {
+  color: white;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  border: none;
+  text-align: center;
+  background-color: peru;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  text-transform: capitalize;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 15px;
+}
+.btn:hover {
+  box-shadow: 1xp 1px 1px 1px rgba(205, 134, 63, 0.358);
+  background-color: rgb(216, 199, 175);
+  color: black;
+}
+.top {
+  position: relative;
+}

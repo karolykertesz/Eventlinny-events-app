@@ -21,6 +21,7 @@ const PublicItem = (props) => {
         active_users: firebase.firestore.FieldValue.arrayUnion(
           user && user.uid
         ),
+        last_user: Date.now(),
       })
       .then(() => router.push(`/chat/public?id=${item.id}`))
       .catch((err) => console.error(err));
