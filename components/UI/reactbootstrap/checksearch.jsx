@@ -13,17 +13,38 @@ const Search = (props) => {
   const [selected, setselected] = useState();
   const [error, setError] = useState();
   const filteredCats = categories.filter((i) => i !== "create");
+
+  const cancel = () => {
+    setStart(false);
+    setData(null);
+    setError(null);
+    setselected("");
+  };
   const formSubmit = async (e) => {
     e.preventDefault();
     setError(null);
     if (!selected) {
-      setError("Search CRITERIA Needs to be Selected");
+      setError("Search VALUE Needs to be Givenn");
       return;
+    }
+    if (isValue === "id") {
+      return firebase
+        .firestore()
+        .collection("public_chat")
+        .doc(selected)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            setData([{ id: doc.id, ...doc.data() }]);
+          } else {
+            setError("No chat exists with this chat id");
+          }
+        });
     }
     const docref = await firebase
       .firestore()
       .collection("public_chat")
-      .where(isValue, "==", selected);
+      .where(isValue, "==", selected.toLowerCase().toString());
     await docref.get().then(async (doc) => {
       let arr = [];
       await doc.forEach((i) => {
@@ -48,7 +69,11 @@ const Search = (props) => {
   };
   return (
     <div className={classes.top}>
-      <p>Search by Category Or Host Or Chat ID</p>
+      <p>
+        {!data
+          ? "Search by Category Or Host Or Chat ID"
+          : "Hover On Room for Info or Click to enter"}
+      </p>
       <Form onSubmit={formSubmit}>
         {!isStart ? (
           <div className={classes.selectDiv}>
@@ -61,7 +86,7 @@ const Search = (props) => {
           </div>
         ) : (
           <div style={{ position: "relative" }}>
-            <div className={classes.xcircle} onClick={() => setStart(false)}>
+            <div className={classes.xcircle} onClick={() => cancel()}>
               <Xcircle color="peru" width="30px" />
             </div>
             <InputGroup className="mb-3" className={classes.inp}>
@@ -91,9 +116,9 @@ const Search = (props) => {
       </Form>
       <div className={classes.holder}>
         {error ? (
-          <div>{error}</div>
+          <div className={classes.error}>{error}</div>
         ) : (
-          <div>
+          <div className={classes.grid}>
             {data &&
               data.map((item) => (
                 <div key={item.id}>

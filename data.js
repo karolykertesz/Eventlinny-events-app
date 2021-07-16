@@ -214,7 +214,6 @@ export const getimageUrl = async (uid) => {
 
 export const findById = async (id) => {
   let ren = {};
-  console.log("hhhhhh");
   try {
     let t = await db
       .collection("user_add_events")
@@ -330,6 +329,20 @@ export const getKeys = async () => {
   const keys = [];
   try {
     const k = await db.collection("user_add_events").onSnapshot((snapshot) => {
+      const ids = snapshot.docs.forEach((i) => {
+        keys.push(i.id);
+      });
+    });
+  } catch (err) {
+    console.log(err);
+  }
+  return keys;
+};
+
+export const getChatKeys = async () => {
+  const keys = [];
+  try {
+    const k = await db.collection("public_chat").onSnapshot((snapshot) => {
       const ids = snapshot.docs.forEach((i) => {
         keys.push(i.id);
       });

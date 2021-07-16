@@ -37,7 +37,7 @@ const PubliList = () => {
     <div className={classes.allTop}>
       <div className={classes.sliderHolder}>
         <p className={classes.label}>
-          {!checked ? "Slide to Find Your chat" : "close SLIDE"}
+          {!checked ? "Slide to Find Your chat" : "close BY SLIDE"}
         </p>
         <label className={classes.switch}>
           <input

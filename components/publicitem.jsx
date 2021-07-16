@@ -4,12 +4,31 @@ import PublicPop from "../components/UI/reactbootstrap/publicpop";
 import Image from "next/image";
 import classes from "../components/UI/ui-modules/publiclist.module.css";
 import IconUser from "../components/UI/icons/iconusers";
+import { useRouter } from "next/router";
+import firebase from "firebase";
+import { useAuth } from "../components/Layout/UserContext";
 const PublicItem = (props) => {
+  const user = useAuth().user;
   const { item } = props;
+  const router = useRouter();
+  const redirect = async () => {
+    const dataref = await firebase
+      .firestore()
+      .collection("public_chat")
+      .doc(item.id);
+    await dataref
+      .update({
+        active_users: firebase.firestore.FieldValue.arrayUnion(
+          user && user.uid
+        ),
+      })
+      .then(() => router.push(`/chat/public?id=${item.id}`))
+      .catch((err) => console.error(err));
+  };
 
   return (
     <PublicPop item={item}>
-      <div>
+      <div onClick={() => redirect()}>
         <div className={classes.inner}>
           <Image
             src={`/images/${item.category}.jpg`}
@@ -19,10 +38,6 @@ const PublicItem = (props) => {
           />
           <p>category:{item.category}</p>
           <p>host: {item.host}</p>
-          {/* <div className={classes.iconHolder}>
-            <IconUser color="peru" width="20px" />
-            <p>{item.active_users.length}</p>
-          </div> */}
         </div>
       </div>
     </PublicPop>

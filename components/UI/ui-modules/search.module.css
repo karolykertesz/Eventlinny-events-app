@@ -57,14 +57,34 @@
   right: -35px;
   cursor: pointer;
 }
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  position: absolute;
+  gap: 30px;
+  transform: translate(-50%, 10%);
+  -webkit-transform: translate(-50%, 10%);
+  -moz-transform: translate(-50%, 10%);
+  -ms-transform: translate(-50%, 10%);
+  -o-transform: translate(-50%, 10%);
+}
 .holder {
-  margin-top: 200px;
+  position: relative;
+}
+.error {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: rgba(196, 28, 28, 0.317);
+  font-size: 18px;
+  text-transform: capitalize;
 }
 @media (max-width: 650px) {
   .inp {
-    width: 350px;
+    width: 330px;
   }
   .selectDiv select {
-    width: 350px !important;
+    width: 330px !important;
+  }
+  .grid {
+    grid-template-columns: 1fr 1fr;
   }
 }
