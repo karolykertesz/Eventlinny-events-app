@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRedirect } from "../../helpers/validatehelp";
 import classes from "../../components/UI/ui-modules/main.chat.module.css";
 import firebase from "firebase";
+import Loader from "../../components/UI/loader";
 const Main = () => {
   useRedirect();
   const [pubCount, setPub] = useState();
@@ -44,6 +45,9 @@ const Main = () => {
       return <div className={classes.inactive}>{props.children}</div>;
     }
   };
+  if (!privCount || !pubCount) {
+    return <Loader />;
+  }
   return (
     <div className={classes.cover}>
       <p className={classes.intro}>

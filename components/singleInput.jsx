@@ -38,6 +38,15 @@ const Singleinput = ({ item }) => {
         .updateProfile({
           displayName: updateItem,
         })
+        .then(async () => {
+          const dataref = firebase
+            .firestore()
+            .collection("user_aditional")
+            .doc(user && user.uid);
+          await dataref.update({
+            name: updateItem,
+          });
+        })
         .then(() => {
           setThank(true);
           setMessage("Your name has been updated");

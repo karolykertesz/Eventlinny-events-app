@@ -7,9 +7,11 @@ import { useRouter } from "next/router";
 import FirebaseClient from "../../helpers/firebase";
 import MobileLogout from "../UI/mobillogout";
 import ButtonPop from "../UI/buttonpop";
+import { useAuth } from "../Layout/UserContext";
 
 FirebaseClient();
 const Header = () => {
+  const user = useAuth().user;
   const modeRef = useRef(true);
   const [userS, setUserS] = useState();
   const router = useRouter();
@@ -29,7 +31,9 @@ const Header = () => {
     };
   }, [validate]);
 
-  const sout = () => {
+  const sout = async () => {
+    const cancelChat = firebase.functions().httpsCallable("signCheckOut");
+    await cancelChat(user && user.uid).then(() => console.log("j"));
     return firebase
       .auth()
       .signOut()

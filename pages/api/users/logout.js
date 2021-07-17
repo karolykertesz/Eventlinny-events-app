@@ -1,7 +1,9 @@
-import firebase from "firebase";
 import cookie from "cookie";
+import admin from "firebase-admin";
+admin.initializeApp();
 
 const handler = async (req, res) => {
+  const { uid } = req.body;
   if (req.cookies.auth) {
     try {
       await res.setHeader(
@@ -17,6 +19,7 @@ const handler = async (req, res) => {
     } catch (err) {
       res.status(204).json({ m: "no" });
     }
+
     return res.status(200).json({ m: "hh" });
   }
   return res.status(200).json({ m: "done" });
