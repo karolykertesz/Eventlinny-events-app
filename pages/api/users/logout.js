@@ -1,7 +1,4 @@
 import cookie from "cookie";
-import admin from "firebase-admin";
-admin.initializeApp();
-
 const handler = async (req, res) => {
   const { uid } = req.body;
   if (req.cookies.auth) {

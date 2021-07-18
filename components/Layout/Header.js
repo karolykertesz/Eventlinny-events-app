@@ -4,12 +4,10 @@ import { useEffect, useState, Fragment, useCallback, useRef } from "react";
 import classes from "./main-header.module.css";
 import styled from "styled-components";
 import { useRouter } from "next/router";
-import FirebaseClient from "../../helpers/firebase";
 import MobileLogout from "../UI/mobillogout";
 import ButtonPop from "../UI/buttonpop";
 import { useAuth } from "../Layout/UserContext";
 
-FirebaseClient();
 const Header = () => {
   const user = useAuth().user;
   const modeRef = useRef(true);
@@ -33,7 +31,7 @@ const Header = () => {
 
   const sout = async () => {
     const cancelChat = firebase.functions().httpsCallable("signCheckOut");
-    await cancelChat(user && user.uid).then(() => console.log("j"));
+    await cancelChat();
     return firebase
       .auth()
       .signOut()

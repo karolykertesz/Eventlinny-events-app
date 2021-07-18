@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import classes from "../../components/UI/ui-modules/publicchat.module.css";
 import Image from "next/image";
 import ChatItem from "../../components/UI/chatitem";
+import Loader from "../../components/UI/loader";
 
 const Public = () => {
   useRedirect();
@@ -94,7 +95,9 @@ const Public = () => {
   useEffect(() => {
     setUser();
   }, [setUser]);
-
+  if (!data || !user) {
+    return <Loader />;
+  }
   return (
     <div className={classes.top}>
       <div className={classes.cover}>
