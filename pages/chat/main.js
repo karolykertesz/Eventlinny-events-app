@@ -5,8 +5,10 @@ import { useRedirect } from "../../helpers/validatehelp";
 import classes from "../../components/UI/ui-modules/main.chat.module.css";
 import firebase from "firebase";
 import Loader from "../../components/UI/loader";
+import useBanned from "../../helpers/checkBanned";
 const Main = () => {
   useRedirect();
+  const isBanned = useBanned();
   const [pubCount, setPub] = useState();
   const [privCount, setPriv] = useState();
   const setNumbers = useCallback(async () => {
@@ -47,6 +49,13 @@ const Main = () => {
   };
   if (!privCount || !pubCount) {
     return <Loader />;
+  }
+  if (isBanned) {
+    return (
+      <div className={classes.banned}>
+        <p>You are banned From chat</p>
+      </div>
+    );
   }
   return (
     <div className={classes.cover}>

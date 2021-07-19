@@ -3,6 +3,7 @@
   max-width: 600px;
   background-color: rgba(219, 156, 55, 0.803) !important;
 }
+
 .popButton {
   width: 100px;
   height: 55px;
@@ -95,6 +96,13 @@
   animation-name: blink;
   -webkit-animation-name: blink;
   margin-left: 10px;
+}
+.banned {
+  filter: sepia(90%);
+  -webkit-filter: sepia(90%);
+  color: #c49e7d;
+  text-transform: capitalize;
+  font-size: 18px;
 }
 @keyframes blink {
   0% {

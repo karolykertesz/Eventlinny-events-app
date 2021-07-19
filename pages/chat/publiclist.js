@@ -5,8 +5,10 @@ import firebase from "firebase";
 import { useRedirect } from "../../helpers/validatehelp";
 import PublicItem from "../../components/publicitem";
 import Search from "../../components/UI/reactbootstrap/checksearch";
+import useBanned from "../../helpers/checkBanned";
 const PubliList = () => {
   useRedirect();
+  const isBanned = useBanned();
   const modeRef = useRef(true);
 
   const [data, setData] = useState();
@@ -33,6 +35,13 @@ const PubliList = () => {
   useEffect(() => {
     getData();
   }, [getData]);
+  if (isBanned) {
+    return (
+      <div className={classes.banned}>
+        <p>You are banned From chat</p>
+      </div>
+    );
+  }
   return (
     <div className={classes.allTop}>
       <div className={classes.sliderHolder}>

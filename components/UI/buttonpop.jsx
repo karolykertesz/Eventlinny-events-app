@@ -8,9 +8,11 @@ import Link from "next/link";
 import { useAuth } from "../Layout/UserContext";
 import firebase from "firebase";
 import Bell from "../UI/icons/bell";
+import useBanned from "../../helpers/checkBanned";
 
 const ButtonPop = () => {
   const user = useAuth().user;
+  const isBanned = useBanned();
   const [note, setnote] = useState();
   const modeRef = useRef(true);
   const getNotifications = useCallback(async () => {
@@ -63,9 +65,15 @@ const ButtonPop = () => {
               </Link>
             </div>
             <div className={classes.link}>
-              <Link href={`/chat/create/?id=${user && user.uid}`}>
-                Create chat
-              </Link>
+              {!isBanned ? (
+                <>
+                  <Link href={`/chat/create/?id=${user && user.uid}`}>
+                    Create chat
+                  </Link>
+                </>
+              ) : (
+                <div className={classes.banned}>Chat disabled</div>
+              )}
             </div>
             <div className={classes.link}>
               <Link href={`/notifications/get/?id=${user && user.uid}`}>

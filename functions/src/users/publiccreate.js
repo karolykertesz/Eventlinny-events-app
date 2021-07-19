@@ -13,14 +13,25 @@ export const publicCreate = functions.firestore
         await snap.ref.update({
           text: `Eventlinny doesn't tolerate offensive language: ${cleaned}`,
         });
-        await db
-          .collection("user_aditional")
-          .doc(added_by)
-          .update({
-            banned_messages: admin.firestore.FieldValue.arrayUnion({
-              user_said: text,
-            }),
-          });
+        const userRef = await db.collection("user_aditional").doc(added_by);
+        await userRef.get().then(async (doc) => {
+          if (doc.data().banned_messages) {
+            await userRef.update({
+              banned_messages: admin.firestore.FieldValue.arrayUnion({
+                user_said: text,
+              }),
+            });
+            await db.collection("banned_users").doc(added_by).set({
+              status: "banned",
+            });
+          } else {
+            await userRef.update({
+              banned_messages: admin.firestore.FieldValue.arrayUnion({
+                user_said: text,
+              }),
+            });
+          }
+        });
       } catch (err) {
         functions.logger.log(err);
       }

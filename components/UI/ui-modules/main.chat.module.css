@@ -79,3 +79,19 @@
   filter: grayscale(60%) sepia(40%);
   -webkit-filter: grayscale(60%) sepia(40%);
 }
+.banned {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+}
+.banned p {
+  font-size: 24px;
+  color: crimson;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  text-transform: uppercase;
+}
