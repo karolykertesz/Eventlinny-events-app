@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "functions:build": "npm run build --prefix ./functions",
-    "test": "jest"
+    "test": "jest --detectOpenHandles"
   },
   "browser": {
     "child_process": false

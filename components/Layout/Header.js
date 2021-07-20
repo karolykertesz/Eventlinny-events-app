@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import MobileLogout from "../UI/mobillogout";
 import ButtonPop from "../UI/buttonpop";
 import { useAuth } from "../Layout/UserContext";
+import Loader from "../UI/loader";
 
 const Header = () => {
   const user = useAuth().user;
@@ -14,6 +15,7 @@ const Header = () => {
   const [userS, setUserS] = useState();
   const router = useRouter();
   const [show, setShow] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const validate = useCallback(async () => {
     const mess = await fetch("/api/users/validateSesion");
@@ -30,6 +32,7 @@ const Header = () => {
   }, [validate]);
 
   const sout = async () => {
+    setLoading(true);
     const cancelChat = firebase.functions().httpsCallable("signCheckOut");
     await cancelChat();
     return firebase
@@ -41,10 +44,13 @@ const Header = () => {
       .then(() => {
         setUserS(false);
       })
+      .then(() => setLoading(false))
       .then(() => (window.location.href = "/login"))
       .catch((err) => console.log(err));
   };
-
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <div className={classes.nav}>
       <input type="checkbox" id="nav-check" className={classes.navCheck} />
