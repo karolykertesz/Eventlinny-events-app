@@ -1,34 +1,45 @@
-import React, { useEffect, useState, useCallback } from "react";
-import firebase from "firebase";
+import React, { useEffect, useCallback, useState } from "react";
 import { useRedirect } from "../../helpers/validatehelp";
+import useBanned from "../../helpers/checkBanned";
 import { useAuth } from "../../components/Layout/UserContext";
 import { useRouter } from "next/router";
-import classes from "../../components/UI/ui-modules/publicchat.module.css";
-import Image from "next/image";
-import ChatItem from "../../components/UI/chatitem";
-import Loader from "../../components/UI/loader";
-import { singOut } from "../chat/chat-hooks";
+import firebase from "firebase";
 import Shared from "./chatShared";
 
-const Public = () => {
+const Pr = () => {
   useRedirect();
-  const user = useAuth().user;
+  const isBanned = useBanned();
   const router = useRouter();
-  const id = router.query.id;
+  const id = router.query.chi;
+  const user = useAuth().user;
   const [data, setdata] = useState();
   const [messages, Setmessages] = useState();
   const [currImage, setUserImage] = useState();
+  const [signedIn, setSigned] = useState(true);
+  const checkInSigned = useCallback(() => {
+    return firebase
+      .firestore()
+      .collection("private_chat")
+      .doc(id)
+      .get()
+      .then(async (doc) => {
+        const act_usr = await doc.data().active_users;
+        if (act_usr && act_usr.indexOf(user && user.uid) > -1) {
+          setSigned(true);
+        } else {
+          setSigned(false);
+        }
+      });
+  }, [setSigned]);
+  useEffect(() => {
+    checkInSigned();
+  }, [checkInSigned]);
+
   const getdataOnce = useCallback(async () => {
     const dataref = await firebase
       .firestore()
-      .collection("public_chat")
+      .collection("private_chat")
       .doc(id && id);
-    await dataref.get().then(async (doc) => {
-      setdata({
-        id: doc.id,
-        ...doc.data(),
-      });
-    });
     await dataref
       .collection("messages")
       .orderBy("created_at")
@@ -48,7 +59,7 @@ const Public = () => {
         }
         await Setmessages(arr);
       });
-  }, [setdata]);
+  }, [Setmessages]);
 
   const setUser = async () => {
     const dataref = firebase
@@ -71,19 +82,22 @@ const Public = () => {
   useEffect(() => {
     setUser();
   }, []);
-  if (!data || !user) {
-    return <Loader />;
+  if (isBanned) {
+    return <div>You have Been banned from Chat</div>;
+  }
+  if (!signedIn) {
+    return (window.location = "/chat/private");
   }
   return (
-    <div className={classes.top}>
+    <div style={{ position: "relative" }}>
       <Shared
-        type="public_chat"
+        type="private_chat"
         id={id && id}
-        messages={messages.length > 0 ? messages : null}
+        messages={messages && messages.length > 0 ? messages : null}
         user={user && user}
         currImage={currImage && currImage}
       />
     </div>
   );
 };
-export default Public;
+export default Pr;

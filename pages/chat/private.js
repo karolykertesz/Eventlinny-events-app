@@ -1,7 +1,13 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  useMemo,
+} from "react";
 import { useRedirect } from "../../helpers/validatehelp";
 import useBanned from "../../helpers/checkBanned";
-import classes from "../../components/UI/ui-modules/private.chat.login.module.css";
+import classes from "../../components/UI/private.chat.login.module.css";
 import { useAuth } from "../../components/Layout/UserContext";
 import { useRouter } from "next/router";
 import firebase from "firebase";
@@ -26,8 +32,13 @@ const Private = () => {
   const formsubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
+    if (!room || !password) {
+      setLoading(false);
+      return setError("Room Or Password cant't be empty");
+    }
     const value = validate({ room, password }, constraints);
     if (value) {
+      setLoading(false);
       return setError("Invalid Input values!!!");
     }
     const mess = await fetch("/api/users/helpers/csrf", {
