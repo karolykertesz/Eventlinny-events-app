@@ -24,7 +24,10 @@ const Shared = (props) => {
   };
   return (
     <div className={classes.cover}>
-      <button className={classes.btn} onClick={() => singOut(user.uid, id)}>
+      <button
+        className={classes.btn}
+        onClick={() => singOut(user && user.uid, id, type)}
+      >
         sign out
       </button>
       {messages && <MessageHolder messages={messages} uid={user.uid} />}
@@ -44,7 +47,7 @@ const Shared = (props) => {
             height="20px"
             src={currImage ? currImage : "/images/noimage.svg"}
           />
-          <p>{user.name}</p>
+          <p>{user && user.name}</p>
         </div>
       </div>
     </div>

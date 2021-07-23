@@ -24,6 +24,7 @@
 @media (max-width: 600px) {
   .StyledUl {
     grid-template-columns: 1fr;
+    margin: 10px 35px;
   }
 }
 .classes {

@@ -3,6 +3,7 @@ import "react-datepicker/dist/react-datepicker-cssmodules.css";
 import { AuthProvider } from "../components/Layout/UserContext";
 import Layout from "../components/Layout/Layout";
 import Head from "next/head";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function MyApp({ Component, pageProps }) {

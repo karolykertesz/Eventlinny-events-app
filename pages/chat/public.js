@@ -79,7 +79,7 @@ const Public = () => {
       <Shared
         type="public_chat"
         id={id && id}
-        messages={messages.length > 0 ? messages : null}
+        messages={messages && messages.length > 0 ? messages : null}
         user={user && user}
         currImage={currImage && currImage}
       />

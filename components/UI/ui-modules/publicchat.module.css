@@ -8,7 +8,7 @@
   border: 1px solid rgb(216, 199, 175);
   transform: translate(-50%, 5%);
   left: 50%;
-  margin-top: 10px;
+
   -webkit-transform: translate(-50%, 5%);
   -moz-transform: translate(-50%, 5%);
   -ms-transform: translate(-50%, 5%);
@@ -118,4 +118,9 @@
   width: 100%;
   overflow-y: auto;
   border: none !important ;
+}
+@media (max-width: 650px) {
+  .cover {
+    margin-top: 90px;
+  }
 }

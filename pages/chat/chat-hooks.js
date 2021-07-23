@@ -1,9 +1,9 @@
 import firebase from "firebase";
 import React, { useCallback } from "react";
-export const singOut = async (uid, id) => {
+export const singOut = async (uid, id, type) => {
   const dataref = firebase
     .firestore()
-    .collection("public_chat")
+    .collection(type)
     .doc(id && id);
   await dataref
     .update({

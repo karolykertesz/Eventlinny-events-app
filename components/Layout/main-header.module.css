@@ -141,6 +141,7 @@
     font-family: Georgia, "Times New Roman", Times, serif;
     text-transform: capitalize;
     text-align: center;
+    height: 45px;
     /* margin-right: 10px; */
   }
   .linkButton {
