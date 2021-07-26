@@ -1,6 +1,8 @@
-import { Fragment, useRef, useState, useCallback, useEffect } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
-import classes from "../components/UI/ui-modules/login.module.css";
+import Image from "next/image";
+import Link from "next/link";
+import classes from "../components/holders/css/form.login.module.css";
 import validate from "validate.js";
 import { constraints } from "../helpers/validators/login";
 import sender from "../helpers/sender";
@@ -11,7 +13,8 @@ import googleSign from "../helpers/googlesignin";
 import facebookSignIn from "../helpers/fb";
 import Head from "next/head";
 import firebase from "firebase";
-
+import Mail from "../components/UI/icons/mail";
+import Lock from "../components/UI/icons/lock";
 const Login = () => {
   const [error, setError] = useState("");
   const [tok, setTok] = useState();
@@ -74,39 +77,60 @@ const Login = () => {
   );
 
   return (
-    <Fragment>
-      <Layer>
-        <div className={classes.form}>
-          <form onSubmit={formSubmit}>
-            <div className={classes.control}>
-              <label htmlFor="email">Email</label>
-              <input type="email" id="email" ref={emailRef} />
-            </div>
-            <div className={classes.control}>
-              <label htmlFor="password">Passsword</label>
-              <input type="password" id="password" ref={passwordRef} />
-            </div>
-            <ForMButton>
-              <Pi>Login</Pi>
-            </ForMButton>
-          </form>
-          <GoogleButton onClick={() => googleSign()}>
-            <IconContext.Provider value={{ color: "white", size: "1.7em" }}>
-              <ImGoogle3 />
-            </IconContext.Provider>
-          </GoogleButton>
-          <GoogleButton
-            onClick={() => facebookSignIn()}
-            style={{ backgroundColor: "blue", border: "1px solid blue" }}
-          >
-            <IconContext.Provider value={{ color: "white", size: "1.7em" }}>
-              <ImFacebook2 />
-            </IconContext.Provider>
-          </GoogleButton>
-          <Error>{error && error}</Error>
+    <div className={classes.cover}>
+      <div className={classes.loginDiv}>
+        <div className={classes.logo}>
+          <Image src="/images/e.png" width="50px" height="50px" quality={100} />
         </div>
-      </Layer>
-    </Fragment>
+        <div className={classes.title}>Eventlinny Login</div>
+        <form onSubmit={formSubmit}>
+          <div className={classes.fields}>
+            <div className={classes.email}>
+              <div className={classes.icon}>
+                <Mail />
+              </div>
+              <input
+                type="email"
+                placeholder="Your Email"
+                className={classes.inputEmail}
+                ref={emailRef}
+              />
+            </div>
+            <div className={classes.pass}>
+              <div className={classes.icon}>
+                <Lock />
+              </div>
+              <input
+                type="password"
+                placeholder="Your Password"
+                className={classes.inputPassword}
+                ref={passwordRef}
+              />
+            </div>
+            <button className={classes.login}>Login</button>
+
+            <GoogleButton onClick={() => googleSign()}>
+              <IconContext.Provider
+                value={{ color: "white", className: classes.google }}
+              >
+                <ImGoogle3 />
+              </IconContext.Provider>
+            </GoogleButton>
+            <Fbbutton onClick={() => facebookSignIn()}>
+              <IconContext.Provider
+                value={{ color: "white", className: classes.google }}
+              >
+                <ImFacebook2 />
+              </IconContext.Provider>
+            </Fbbutton>
+            <div className={classes.link}>
+              <Link href="/signup">Sign Up</Link>
+            </div>
+          </div>
+        </form>
+        <Error>{error && error}</Error>
+      </div>
+    </div>
   );
 };
 export default Login;
@@ -137,11 +161,24 @@ export const GoogleButton = styled.button`
   cursor: pointer;
   background-color: red;
   border: 1px solid red;
-  border-radius: 6px;
+  border-radius: 30px;
   color: white;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
   width: 100%;
-  margin-top: 10px;
+  /* margin-top: 10px; */
+
+  margin: 0.2rem auto;
+  padding: 8px;
+`;
+export const Fbbutton = styled.button`
+  cursor: pointer;
+  background-color: blue;
+  border: 1px solid red;
+  border-radius: 30px;
+  color: white;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  /* margin-top: 10px; */
 
   margin: 0.2rem auto;
   padding: 8px;
@@ -164,7 +201,7 @@ const Error = styled.div`
   text-transform: uppercase;
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.2rem;
-  font-weight: bold;
+  font-size: 1.1rem;
+  font-weight: 600;
   margin-top: 10px;
 `;

@@ -4,7 +4,6 @@ import { useEffect, useState, Fragment, useCallback, useRef } from "react";
 import classes from "./main-header.module.css";
 import styled from "styled-components";
 import { useRouter } from "next/router";
-import MobileLogout from "../UI/mobillogout";
 import ButtonPop from "../UI/buttonpop";
 import { useAuth } from "../Layout/UserContext";
 import Loader from "../UI/loader";
@@ -56,7 +55,7 @@ const Header = () => {
       <input type="checkbox" id="nav-check" className={classes.navCheck} />
       <div className={classes.navHeader}>
         <div className={classes.navTitle}>
-          <Link href="/events/first">Eventlinny</Link>
+          <Link href={userS !== false ? "/events/first" : "#"}>Eventlinny</Link>
         </div>
       </div>
 
@@ -69,7 +68,7 @@ const Header = () => {
           <span></span>
         </label>
       </div>
-      {userS !== false ? (
+      {userS !== false && (
         <div className={classes.navLinks}>
           <Link href="/chat/main">Chats</Link>
           <Link href="/events">All Events</Link>
@@ -80,10 +79,6 @@ const Header = () => {
             Sign Out
           </span>
         </div>
-      ) : (
-        <Fragment>
-          <MobileLogout />
-        </Fragment>
       )}
     </div>
   );

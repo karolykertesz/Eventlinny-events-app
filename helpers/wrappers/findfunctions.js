@@ -68,7 +68,6 @@ export const onlyCat = (cat) => {
       doc.forEach((item) => {
         itemArray.push({
           start: item.data().starts.seconds * 1000,
-          end: item.data().ends.seconds * 1000,
           category: item.data().category,
           location: item.data().location,
           added_by: item.data().added_by,

@@ -1,9 +1,16 @@
 .top {
+  margin-top: 40px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  margin: 10px 30px;
-  gap: 20px;
+  gap: 30px;
   overflow: hidden;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 5%);
+  -webkit-transform: translate(-50%, 5%);
+  -moz-transform: translate(-50%, 5%);
+  -ms-transform: translate(-50%, 5%);
+  -o-transform: translate(-50%, 5%);
 }
 .ul {
   display: grid;
@@ -17,9 +24,16 @@
   margin: 20px 0 100px 0;
   height: auto;
 }
+.selectDiv {
+  position: absolute;
+  left: -15%;
+  top: 3%;
+  width: 60%;
+}
 
 @media (min-width: 800px) {
   .bg {
+    display: flex;
     justify-content: flex-start;
   }
 }

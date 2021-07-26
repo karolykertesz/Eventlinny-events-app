@@ -67,7 +67,10 @@ const GetNote = () => {
   const sendNoti = async () => {
     setLoading(true);
     try {
-      const dataref = firebase.firestore().collection("user_aditional").doc(id);
+      const dataref = await firebase
+        .firestore()
+        .collection("user_aditional")
+        .doc(id && id);
       await dataref
         .get()
         .then(async (doc) => {

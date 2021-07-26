@@ -1,12 +1,19 @@
 import { Fragment, useRef, useState } from "react";
 import styled from "styled-components";
-import classes from "../components/UI/ui-modules/login.module.css";
+import classes from "../components/holders/css/form.login.module.css";
 import { useRouter } from "next/router";
 import React from "react";
 import { GoogleButton } from "./login";
 import { IconContext } from "react-icons";
-import { ImGoogle3 } from "react-icons/im";
+import { ImGoogle3, ImFacebook2 } from "react-icons/im";
 import googleSign from "../helpers/googlesignin";
+import Image from "next/image";
+import Link from "next/link";
+import Mail from "../components/UI/icons/mail";
+import Lock from "../components/UI/icons/lock";
+import { Fbbutton } from "./login";
+import UserIcon from "../components/UI/icons/user-icon";
+
 const Login = () => {
   const router = useRouter();
   const [error, setError] = useState("");
@@ -15,8 +22,16 @@ const Login = () => {
   const passwordRef = useRef();
 
   const formSubmit = async (e) => {
+    setError(null);
     e.preventDefault();
-
+    if (
+      !firstNameRef.current.value ||
+      !emailRef.current.value ||
+      !passwordRef.current.value
+    ) {
+      setError("Missing Input values!!");
+      return;
+    }
     try {
       const mess = await fetch("/api/users/signer", {
         method: "POST",
@@ -39,45 +54,110 @@ const Login = () => {
   };
 
   return (
-    <Fragment>
-      <Layer>
-        <div className={classes.form}>
-          <form onSubmit={formSubmit}>
-            <div className={classes.control}>
-              <label htmlFor="firstname">First Name</label>
+    <div className={classes.cover}>
+      <div className={classes.loginDiv}>
+        <div className={classes.logo}>
+          <Image src="/images/e.png" width="50px" height="50px" quality={100} />
+        </div>
+        <div className={classes.title}>Eventlinny Sign Up</div>
+        <form onSubmit={formSubmit}>
+          <div className={classes.fields}>
+            <div className={classes.email}>
+              <div className={classes.icon}>
+                <UserIcon />
+              </div>
               <input
                 type="text"
-                id="firstname"
-                name="firstname"
+                placeholder="Your Name"
+                className={classes.inputEmail}
                 ref={firstNameRef}
               />
             </div>
-            <div className={classes.control}>
-              <label htmlFor="email">Email</label>
-              <input type="email" id="email" ref={emailRef} name="email" />
-            </div>
-            <div className={classes.control}>
-              <label htmlFor="password">Passsword</label>
+            <div className={classes.email}>
+              <div className={classes.icon}>
+                <Mail />
+              </div>
               <input
-                type="password"
-                id="password"
-                ref={passwordRef}
-                name="password"
+                type="email"
+                placeholder="Your Email"
+                className={classes.inputEmail}
+                ref={emailRef}
               />
             </div>
-            <ForMButton>
-              <Pi>Sign Up</Pi>
-            </ForMButton>
-          </form>
-          <GoogleButton onClick={() => googleSign()}>
-            <IconContext.Provider value={{ color: "white", size: "1.6em" }}>
-              <ImGoogle3 />
-            </IconContext.Provider>
-          </GoogleButton>
-          <Error>{error && error}</Error>
-        </div>
-      </Layer>
-    </Fragment>
+            <div className={classes.pass}>
+              <div className={classes.icon}>
+                <Lock />
+              </div>
+              <input
+                type="password"
+                placeholder="Your Password"
+                className={classes.inputPassword}
+                ref={passwordRef}
+              />
+            </div>
+            <button className={classes.login}>Sign Up</button>
+
+            <GoogleButton onClick={() => googleSign()}>
+              <IconContext.Provider
+                value={{ color: "white", className: classes.google }}
+              >
+                <ImGoogle3 />
+              </IconContext.Provider>
+            </GoogleButton>
+            <Fbbutton onClick={() => facebookSignIn()}>
+              <IconContext.Provider
+                value={{ color: "white", className: classes.google }}
+              >
+                <ImFacebook2 />
+              </IconContext.Provider>
+            </Fbbutton>
+            <div className={classes.link}>
+              <Link href="/signup">Log In</Link>
+            </div>
+          </div>
+        </form>
+        <Error>{error && error}</Error>
+      </div>
+    </div>
+    // <Fragment>
+    //   <Layer>
+    //     <div className={classes.form}>
+    //       <form onSubmit={formSubmit}>
+    //         <div className={classes.control}>
+    //           <label htmlFor="firstname">First Name</label>
+    //           <input
+    //             type="text"
+    //             id="firstname"
+    //             name="firstname"
+    //             ref={firstNameRef}
+    //           />
+    //         </div>
+    //         <div className={classes.control}>
+    //           <label htmlFor="email">Email</label>
+    //           <input type="email" id="email" ref={emailRef} name="email" />
+    //         </div>
+    //         <div className={classes.control}>
+    //           <label htmlFor="password">Passsword</label>
+    //           <input
+    //             type="password"
+    //             id="password"
+    //             ref={passwordRef}
+    //             name="password"
+    //           />
+    //         </div>
+    //         <ForMButton>
+    //           <Pi>Sign Up</Pi>
+    //         </ForMButton>
+    //       </form>
+    //       <GoogleButton onClick={() => googleSign()}>
+    //         <IconContext.Provider value={{ color: "white", size: "1.6em" }}>
+    //           <ImGoogle3 />
+    //         </IconContext.Provider>
+    //       </GoogleButton>
+    //       <Error>{error && error}</Error>
+    //     </div>
+    //   </Layer>
+    // </Fragment>
   );
 };
 export default Login;

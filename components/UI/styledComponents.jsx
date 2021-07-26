@@ -30,20 +30,19 @@ export const List = ({ children }) => {
 
 export const Cover = styled.div`
   display: flex;
-  box-sizing: border-box;
   justify-content: center;
-  max-width: 600px;
-  align-items: center;
+  max-width: 700px;
+  align-items: center !important;
   margin: 10px auto;
   flex-direction: column;
 `;
 
 export const CoverRow = styled.div`
   display: flex;
-  box-sizing: border-box;
+
   justify-content: center;
   max-width: 600px;
-  align-items: center;
+  align-items: flex-start;
   margin: 10px auto;
   flex-direction: row;
 `;

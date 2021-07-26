@@ -16,7 +16,6 @@ const CommentHead = ({ id, likes, docid, commentBody }) => {
     }
     return result;
   }
-  console.log(commentBody, "gg");
   const [userdata, setdata] = useState();
   const [liked, setLiked] = useState(false);
   const userId = useAuth().user && useAuth().user.uid;
@@ -67,7 +66,7 @@ const CommentHead = ({ id, likes, docid, commentBody }) => {
           likes: firebase.firestore.FieldValue.arrayRemove(userId),
         })
         .then(() => {
-          alert("gggg");
+          alert("Done");
         });
     }
   };

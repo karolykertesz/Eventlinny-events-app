@@ -51,9 +51,10 @@ const Button = styled.button`
 `;
 
 export const SendButton = styled(Button)`
+  margin-top: 15px;
   background: burlywood;
   &:hover {
-    background: #d2d6ac;
+    background-color: #d2d6ac;
   }
 `;
 
@@ -70,4 +71,5 @@ export const Cdiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 `;

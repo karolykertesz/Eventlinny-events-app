@@ -26,6 +26,7 @@ import {
   Error,
 } from "../../components/UI/styledindex";
 import SelectInput from "../../components/selectinput";
+import FindSelect from "../../components/UI/findselect";
 import classes from "../../components/UI/ui-modules/find.module.css";
 import { getuserPrefWithWithCat, getusercat } from "../../data";
 import { useAuth } from "../../components/Layout/UserContext";
@@ -143,11 +144,11 @@ const find = () => {
       <div className={classes.cc}>
         <div className={classes.bg}>
           <Cover>
-            <PiBig>Find Event</PiBig>
+            <PiBig>{!isCat && "Find Event"}</PiBig>
             {isCat && (
-              <Cdiv>
-                <SelectInput setCat={setCat} />
-              </Cdiv>
+              <div className={classes.selectDiv}>
+                <FindSelect setCat={setCat} />
+              </div>
             )}
             {!isCat && (
               <InputHolder>
@@ -203,12 +204,12 @@ const find = () => {
                 )}
               </SVG>
             </CatContainer>
+            {items && <EventList items={items} />}
 
             {error && <Error>{error}</Error>}
           </Cover>
         </div>
       </div>
-      {items && <EventList items={items} />}
       <div className={classes.secTop}>
         <PiBig>Suggestions</PiBig>
         <ul className={classes.ul}>
