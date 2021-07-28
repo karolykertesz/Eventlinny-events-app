@@ -23,7 +23,7 @@ const Layout = (props) => {
         <meta name="viewport" content="initial-scale=1.0 width=device-width" />
         <meta name="description" content="Next event App" />
       </Head>
-      <Header />
+      {isUser && <Header />}
       <main>{props.children}</main>
       {isUser && <Footer />}
     </Fragment>

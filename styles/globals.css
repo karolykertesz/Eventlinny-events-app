@@ -13,6 +13,7 @@ body {
   color: #414141;
   background-color: papayawhip !important;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 h1,

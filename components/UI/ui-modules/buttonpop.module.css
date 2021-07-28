@@ -1,32 +1,31 @@
 .top {
-  min-width: 300px;
+  min-width: 400px;
   max-width: 600px;
   background-color: rgba(219, 156, 55, 0.803) !important;
 }
 
 .popButton {
-  width: 100px;
-  height: 55px;
   text-align: center;
   line-height: 1.5rem;
-  border-radius: 6px !important;
-  -webkit-border-radius: 6px !important;
-  -moz-border-radius: 6px !important;
-  -ms-border-radius: 6px !important;
-  -o-border-radius: 6px !important;
-  margin-left: 10px;
-  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2) !important;
+  border: none;
+  border-radius: none !important;
+  -webkit-border-radius: none !important;
+  -moz-border-radius: none !important;
+  -ms-border-radius: none !important;
+  -o-border-radius: none !important;
+
   text-transform: capitalize;
   font-family: Georgia, "Times New Roman", Times, serif;
   font-weight: 500;
+  background-color: none;
+  color: papayawhip;
+  background-color: transparent;
+  width: auto;
+  font-weight: 600;
 }
 
-.popButton :active {
-  outline: none !important;
-  box-shadow: none;
-}
-@media (min-width: 600px) {
-  .popButton {
+@media (max-width: 650px) {
+  /* .popButton {
     height: auto;
     width: auto;
     margin-top: 3px;
@@ -38,8 +37,8 @@
     margin-bottom: 5px;
     font-family: Arial, Helvetica, sans-serif;
     box-shadow: none !important;
-  }
-  .popButton:active {
+  } */
+  /* .popButton:active {
     border: #c49e7d;
     box-shadow: 0;
     outline: none !important;
@@ -50,7 +49,7 @@
   }
   .popButton:hover {
     border: #c49e7d;
-  }
+  } */
 }
 .header {
   text-transform: capitalize;

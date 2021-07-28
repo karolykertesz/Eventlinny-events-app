@@ -1,12 +1,13 @@
 import Link from "next/link";
 import firebase from "firebase";
 import { useEffect, useState, Fragment, useCallback, useRef } from "react";
-import classes from "./main-header.module.css";
+import classes from "./main-nav.module.css";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import ButtonPop from "../UI/buttonpop";
 import { useAuth } from "../Layout/UserContext";
 import Loader from "../UI/loader";
+import Image from "next/image";
 
 const Header = () => {
   const user = useAuth().user;
@@ -51,60 +52,55 @@ const Header = () => {
     return <Loader />;
   }
   return (
-    <div className={classes.nav}>
-      <input type="checkbox" id="nav-check" className={classes.navCheck} />
-      <div className={classes.navHeader}>
-        <div className={classes.navTitle}>
-          <Link href={userS !== false ? "/events/first" : "#"}>Eventlinny</Link>
-        </div>
+    <nav className={classes.nav}>
+      <input type="checkbox" className={classes.toggle} id="nav-toggle" />
+      <div className={classes.logo}>
+        <Link href={userS !== false ? "/events/first" : "#"}>
+          <Image src="/images/e.png" width="30px" height="30px" />
+        </Link>
       </div>
-
-      <div className={classes.navBtn}>
-        <label htmlFor="nav-check">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </label>
+      <div className={classes.links}>
+        <Link href="/chat/main">Chats</Link>
+        <Link href="/events">All Events</Link>
+        <Link href="/events/find">Find an Event</Link>
+        <Link href="/events/archive">Archive</Link>
+        <span onClick={() => sout()}>
+          <Link href="#">Sign Out</Link>
+        </span>
+        <Link href="/events/archive">
+          <ButtonPop>Your profile</ButtonPop>
+        </Link>
       </div>
-      {userS !== false && (
-        <div className={classes.navLinks}>
-          <Link href="/chat/main">Chats</Link>
-          <Link href="/events">All Events</Link>
-          <Link href="/events/find">Find an Event</Link>
-          <Link href="/events/archive">Archive</Link>
-          <ButtonPop />
-          <span className={classes.link} onClick={() => sout()}>
-            Sign Out
-          </span>
-        </div>
-      )}
-    </div>
+      <label htmlFor="nav-toggle" className={classes.iconToggle}>
+        <div className={classes.line}></div>
+        <div className={classes.line}></div>
+        <div className={classes.line}></div>
+      </label>
+    </nav>
   );
 };
 
 export default Header;
 
-const IconWrap = styled.span`
-  padding: auto 0;
-  display: inline;
-  color: papayawhip;
-  margin-top: 10px;
-  padding-top: 3px;
-  height: 30px;
-  cursor: pointer;
-  float: right;
-  @media (max-width: 600px) {
-    /* left: 10px; */
-    /* top: 200px; */
-    position: absolute;
-    color: peru;
-    display: block;
-    cursor: pointer;
-    margin: 0;
-    padding: 0;
-    font-size: 40px;
-    right: 0;
-  }
-`;
+// const IconWrap = styled.span`
+//   padding: auto 0;
+//   display: inline;
+//   color: papayawhip;
+//   margin-top: 10px;
+//   padding-top: 3px;
+//   height: 30px;
+//   cursor: pointer;
+//   float: right;
+//   @media (max-width: 600px) {
+//     /* left: 10px; */
+//     /* top: 200px; */
+//     position: absolute;
+//     color: peru;
+//     display: block;
+//     cursor: pointer;
+//     margin: 0;
+//     padding: 0;
+//     font-size: 40px;
+//     right: 0;
+//   }
+// `;

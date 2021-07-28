@@ -10,7 +10,7 @@ import firebase from "firebase";
 import Bell from "../UI/icons/bell";
 import useBanned from "../../helpers/checkBanned";
 
-const ButtonPop = () => {
+const ButtonPop = (props) => {
   const user = useAuth().user;
   const isBanned = useBanned();
   const [note, setnote] = useState();
@@ -105,32 +105,9 @@ const ButtonPop = () => {
   );
   return (
     <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
-      <Button
-        aria-pressed="false"
-        className={classes.popButton}
-        style={{
-          backgroundColor: "#c49e7d",
-          border: "none",
-          outline: "none",
-          boxShadow: "none",
-          fontSize: "16px",
-          fontWeight: "500",
-          fontFamily: "Arial, Helvetica, sans-serif",
-          color: "papayawhip",
-          textAlign: "center",
-          textTransform: "capitalize",
-          clear: "both",
-          whiteSpace: "nowrap",
-          overflow: "hidden",
-          display: "inline-block",
-          padding: "0",
-          height: "46px",
-
-          // marginTop: "3px",
-        }}
-      >
-        your Profile
-      </Button>
+      <button aria-pressed="false" className={classes.popButton}>
+        {props.children}
+      </button>
     </OverlayTrigger>
   );
 };
