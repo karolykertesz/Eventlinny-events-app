@@ -55,9 +55,9 @@ const Header = () => {
     <nav className={classes.nav}>
       <input type="checkbox" className={classes.toggle} id="nav-toggle" />
       <div className={classes.logo}>
-        <Link href={userS !== false ? "/events/first" : "#"}>
+        <a href={userS !== false ? "/events/first" : "#"}>
           <Image src="/images/e.png" width="30px" height="30px" />
-        </Link>
+        </a>
       </div>
       <div className={classes.links}>
         <Link href="/chat/main">Chats</Link>

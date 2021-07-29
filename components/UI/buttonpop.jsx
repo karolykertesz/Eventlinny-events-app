@@ -1,7 +1,6 @@
-import React, { useEffect, useCallback, useState, useRef } from "react";
+import React, { useEffect, useCallback, useState, Fragment } from "react";
 import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import classes from "../UI/ui-modules/buttonpop.module.css";
 import Link from "next/link";
@@ -9,35 +8,28 @@ import { useAuth } from "../Layout/UserContext";
 import firebase from "firebase";
 import Bell from "../UI/icons/bell";
 import useBanned from "../../helpers/checkBanned";
+import { useRouter } from "next/router";
 
 const ButtonPop = (props) => {
+  const router = useRouter;
   const user = useAuth().user;
   const isBanned = useBanned();
   const [note, setnote] = useState();
-  const modeRef = useRef(true);
   const getNotifications = useCallback(async () => {
-    let isNotification;
     const docref = firebase
       .firestore()
       .collection("notifications")
       .doc(user && user.uid);
     await docref.onSnapshot((doc) => {
       if (doc.exists) {
-        isNotification = doc.data().unread.length > 0 ? true : false;
+        setnote(doc.data().unread.length > 0 ? true : false);
       } else {
-        isNotification = null;
+        setnote(null);
       }
     });
-    return isNotification;
   }, [user]);
-  useEffect(async () => {
-    const isNote = await getNotifications();
-    if (modeRef.current) {
-      setnote(isNote);
-    }
-    return () => {
-      modeRef.current = false;
-    };
+  useEffect(() => {
+    getNotifications();
   }, [getNotifications]);
 
   const popover = (
@@ -66,11 +58,9 @@ const ButtonPop = (props) => {
             </div>
             <div className={classes.link}>
               {!isBanned ? (
-                <>
-                  <Link href={`/chat/create/?id=${user && user.uid}`}>
-                    Create chat
-                  </Link>
-                </>
+                <Link href={`/chat/create/?id=${user && user.uid}`}>
+                  Create chat
+                </Link>
               ) : (
                 <div className={classes.banned}>Chat disabled</div>
               )}

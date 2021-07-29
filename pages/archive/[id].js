@@ -6,8 +6,6 @@ import Archiveimages from "../../components/achiveImages";
 
 const archiveItem = ({ items }) => {
   useRedirect();
-
-  console.log(items);
   return (
     <div className={classes.coverGrid}>
       {items && (

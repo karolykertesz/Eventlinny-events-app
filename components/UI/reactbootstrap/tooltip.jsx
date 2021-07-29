@@ -12,7 +12,7 @@ const TooltipTop = (props) => {
         delay={{ show: 250, hide: 400 }}
         overlay={renderTooltip}
       >
-        <button className={classes.btn}>{props.children}</button>
+        <div className={classes.btn}>{props.children}</div>
       </OverlayTrigger>
     </div>
   );
