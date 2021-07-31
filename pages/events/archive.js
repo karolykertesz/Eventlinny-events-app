@@ -3,6 +3,7 @@ import { user_archive } from "../../data";
 import LogisticGrid from "../../components/event-detail/logistic-item-grid";
 import classes from "../../components/UI/ui-modules/archive.module.css";
 import { useRedirect } from "../../helpers/validatehelp";
+import ArcCont from "../../components/arcivecontainer";
 const MainArchive = ({ eventss }) => {
   const [eventsBy, setEventsBy] = useState();
   const filterMe = useCallback(() => {
@@ -31,14 +32,19 @@ const MainArchive = ({ eventss }) => {
       setEventsBy(arrSep);
     });
   }, [setEventsBy]);
-
+  console.log(eventsBy);
   useRedirect();
   useEffect(() => {
     filterMe();
   }, [filterMe]);
-  console.log(eventsBy, "kjjjj");
   return (
-    <div>
+    <div className={classes.StyledUl}>
+      {eventsBy &&
+        eventsBy.map((item) => (
+          <div key={item.key}>
+            <ArcCont item={item} />
+          </div>
+        ))}
       {/* {eventss && (
         <ul className={classes.StyledUl}>
           {eventss.map((item) => (

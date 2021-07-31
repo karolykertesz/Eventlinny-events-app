@@ -61,7 +61,7 @@ const Footer = () => {
                 </div>
               </div>
             </div>
-            <div class="row">
+            <div className="row">
               <div className="col-md-12 copy">
                 <p className={classes.pi}>
                   &copy; Copyright 2021 - Company Name. All rights reserved.

@@ -1,0 +1,118 @@
+.card {
+  width: 350px;
+  height: 250px;
+  background-color: rgb(242, 213, 167);
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  overflow: hidden;
+  /* margin: 20px; */
+  box-shadow: 0px 0px 9px rgba(191, 155, 37, 0.584);
+  position: relative;
+}
+.cardheader {
+  overflow: hidden;
+  height: 250px;
+  position: relative;
+}
+.cardheader img {
+  height: 100%;
+  width: 350px;
+}
+.checker {
+  position: absolute;
+  top: -100px;
+}
+.hamCont {
+  /* display: flex;
+  flex-direction: column; */
+  position: relative;
+}
+.cardheader .cover {
+  position: absolute;
+  background: hsla(28, 100%, 86%, 0.338);
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.month {
+  position: absolute;
+  z-index: 10;
+  color: aliceblue;
+  right: 40%;
+  top: 10%;
+  transform: translateY(-50%, -50%);
+  -webkit-transform: translateY(-50%, -50%);
+  -moz-transform: translateY(-50%, -50%);
+  -ms-transform: translateY(-50%, -50%);
+  -o-transform: translateY(-50%, -50%);
+  font-size: 26px;
+  font-weight: 600;
+  opacity: 0.7;
+  letter-spacing: 5px;
+}
+.ham {
+  position: absolute;
+  /*/*top: 5%;
+  */
+  z-index: 100;
+  cursor: pointer;
+  right: 0;
+  bottom: 0;
+}
+
+.line {
+  width: 30px;
+  height: 5px;
+  background-color: white;
+  margin: 10px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  transition: all 0.4s ease;
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  -ms-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  cursor: pointer;
+}
+.card > .checker:checked ~ .hamCont .ham .line:nth-child(1) {
+  transform: translateY(10px) rotate(225deg);
+  -webkit-transform: translateY(10px) rotate(225deg);
+  -moz-transform: translateY(10px) rotate(225deg);
+  -ms-transform: translateY(10px) rotate(225deg);
+  -o-transform: translateY(10px) rotate(225deg);
+}
+.card > .checker:checked ~ .hamCont .ham .line:nth-child(2) {
+  transform: translateY(-5px) rotate(-225deg);
+  -webkit-transform: translateY(-5px) rotate(-225deg);
+  -moz-transform: translateY(-5px) rotate(-225deg);
+  -ms-transform: translateY(-5px) rotate(-225deg);
+  -o-transform: translateY(-5px) rotate(-225deg);
+}
+.card > .checker:not(:checked) ~ .cardheader img {
+  filter: grayscale(50%);
+  -webkit-filter: grayscale(60%);
+}
+.card > .checker:checked ~ .cardheader .month {
+  opacity: 0;
+}
+/* .card > .checker:checked ~ .cardheader > img {
+  background-color: red;
+  color: red;
+  /* display: none; */
+
+/* .hamCont .ham .open {
+  transform: rotate(720deg);
+} */
+.open ::after {
+  transform: rotate(-45deg) translate(3px, -7px);
+}
+.open ::before {
+  transform: rotate(45deg) translate(5px, 8px);
+}
