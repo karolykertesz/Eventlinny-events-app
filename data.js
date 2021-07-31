@@ -151,6 +151,9 @@ export const user_archive = async () => {
     premium: item.data().premium,
     description: item.data().description,
     isArchive: item.data().archive_photos ? true : false,
+    totalArchImages: item.data().archive_photos
+      ? item.data().archive_photos.length
+      : null,
   }));
   return dockArray;
 };

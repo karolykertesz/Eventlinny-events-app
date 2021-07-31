@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, Fragment } from "react";
 import { user_archive } from "../../data";
 import LogisticGrid from "../../components/event-detail/logistic-item-grid";
 import classes from "../../components/UI/ui-modules/archive.module.css";
@@ -38,30 +38,16 @@ const MainArchive = ({ eventss }) => {
     filterMe();
   }, [filterMe]);
   return (
-    <div className={classes.StyledUl}>
-      {eventsBy &&
-        eventsBy.map((item) => (
-          <div key={item.key}>
-            <ArcCont item={item} />
-          </div>
-        ))}
-      {/* {eventss && (
-        <ul className={classes.StyledUl}>
-          {eventss.map((item) => (
-            <li className={classes.li} key={item.id}>
-              <LogisticGrid
-                start={item.start}
-                category={item.category}
-                location={item.location}
-                id={item.id}
-                attendies={item.attendies}
-                added_by={item.added_by}
-                isArchive={item.isArchive}
-              />
-            </li>
+    <div>
+      <p className={classes.pi}>2021</p>
+      <div className={classes.StyledUl}>
+        {eventsBy &&
+          eventsBy.map((item) => (
+            <div key={item.key}>
+              <ArcCont item={item} />
+            </div>
           ))}
-        </ul>
-      )} */}
+      </div>
     </div>
   );
 };

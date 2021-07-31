@@ -4,11 +4,26 @@
   align-items: center;
   overflow: hidden;
 }
+.pi {
+  text-align: center;
+  font-size: 27px;
+  color: burlywood;
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  letter-spacing: 2px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  -webkit-transform: translate(-50%, -30%);
+  -moz-transform: translate(-50%, -30%);
+  -ms-transform: translate(-50%, -30%);
+  -o-transform: translate(-50%, -30%);
+}
 .top {
   margin: 120px auto;
 }
 .StyledUl {
-  margin: 100px 50px;
+  margin: 150px 50px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 30px;
@@ -19,6 +34,7 @@
     grid-template-columns: 1fr 1fr;
     grid-gap: 10px;
     position: absolute;
+    margin: 100px 50px;
   }
 }
 @media (max-width: 600px) {

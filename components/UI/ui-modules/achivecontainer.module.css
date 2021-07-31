@@ -14,11 +14,11 @@
 }
 .cardheader {
   overflow: hidden;
-  height: 250px;
+  height: 100%;
   position: relative;
 }
 .cardheader img {
-  height: 100%;
+  height: 300px;
   width: 350px;
 }
 .checker {
@@ -30,7 +30,8 @@
   flex-direction: column; */
   position: relative;
 }
-.cardheader .cover {
+
+.inner .cover {
   position: absolute;
   background: hsla(28, 100%, 86%, 0.338);
   position: absolute;
@@ -38,10 +39,39 @@
   width: 100%;
   height: 100%;
 }
+.inner .name {
+  margin-top: 15px !important;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: white;
+}
+.inner .last {
+  margin-top: -5px;
+  display: block;
+  font-size: 15px;
+  text-transform: capitalize;
+  overflow: hidden;
+  letter-spacing: 1px;
+}
+.globe {
+  align-items: flex-start;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.globe .gb {
+  margin-left: 10px;
+}
+.inner .first {
+  display: block;
+  font-size: 14px;
+  opacity: 0.7;
+}
 .month {
   position: absolute;
   z-index: 10;
-  color: aliceblue;
+  color: white;
   right: 40%;
   top: 10%;
   transform: translateY(-50%, -50%);
@@ -61,7 +91,7 @@
   z-index: 100;
   cursor: pointer;
   right: 0;
-  bottom: 0;
+  bottom: -30% !important;
 }
 
 .line {
@@ -96,23 +126,28 @@
   -o-transform: translateY(-5px) rotate(-225deg);
 }
 .card > .checker:not(:checked) ~ .cardheader img {
-  filter: grayscale(50%);
-  -webkit-filter: grayscale(60%);
+  filter: sepia(50%);
+  -webkit-filter: sepia(50%);
+}
+.card > .checker:checked ~ .cardheader img {
+  height: 150px;
+}
+.card > .checker:checked ~ .cardheader {
+  height: 50%;
+}
+.card > .checker:not(:checked) ~ .cardheader {
+  height: 100%;
+}
+.card > .checker:not(:checked) ~ .inner .name .last {
+  display: none;
 }
 .card > .checker:checked ~ .cardheader .month {
   opacity: 0;
 }
-/* .card > .checker:checked ~ .cardheader > img {
-  background-color: red;
-  color: red;
-  /* display: none; */
-
-/* .hamCont .ham .open {
-  transform: rotate(720deg);
-} */
-.open ::after {
-  transform: rotate(-45deg) translate(3px, -7px);
+.card > .checker:not(:checked) ~ .inner .name .globe p {
+  display: none;
 }
-.open ::before {
-  transform: rotate(45deg) translate(5px, 8px);
+
+.card > .checker:not(:checked) ~ .inner .name .globe .gb {
+  margin: -10px 0;
 }
