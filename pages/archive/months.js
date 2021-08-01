@@ -1,25 +1,23 @@
 import classes from "../../components/UI/ui-modules/month.archive.module.css";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import { getArchiveMont } from "../../data";
 import { useRouter } from "next/router";
 import LogisticGrid from "../../components/event-detail/logistic-item-grid";
 import { useRedirect } from "../../helpers/validatehelp";
 
 const Months = () => {
+  const getdata = useCallback(async () => {
+    const d = await getArchiveMont(month && month);
+    await setData(d);
+  }, []);
   useRedirect();
   const trueRef = useRef(true);
   const [data, setData] = useState();
   const router = useRouter();
   const month = router.query.m;
-  useEffect(async () => {
-    const dataArra = await getArchiveMont(month && month);
-    if (dataArra && trueRef.current) {
-      setData(dataArra);
-    }
-    return () => {
-      trueRef.current = false;
-    };
-  }, []);
+  useEffect(() => {
+    getdata();
+  }, [getdata]);
   console.log(data);
   return (
     <div className={classes.top}>

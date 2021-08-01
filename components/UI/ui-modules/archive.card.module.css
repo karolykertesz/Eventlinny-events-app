@@ -1,0 +1,112 @@
+.cover {
+  position: relative;
+  background-color: #c69b75;
+  width: 350px;
+  border: 1px solid rgba(255, 255, 255, 0.673);
+  filter: sepia(15%);
+  -webkit-filter: sepia(15%);
+  border-radius: 28px;
+  -webkit-border-radius: 28px;
+  -moz-border-radius: 28px;
+  -ms-border-radius: 28px;
+  -o-border-radius: 28px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.content {
+  position: relative;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+  opacity: 0.8;
+}
+.content:hover {
+  opacity: 1;
+}
+.cover::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgb(230, 211, 175);
+  clip-path: circle(90px at 100% 100%);
+}
+.cover::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgb(230, 211, 175);
+  clip-path: circle(90px at 0 20px);
+}
+.container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 40px 0;
+  overflow: hidden;
+}
+.imgBox {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  border: 10px solid rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  margin-top: 20px;
+}
+.imgBox img {
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.names li {
+  display: flex;
+  justify-content: space-between;
+  color: papayawhip;
+  align-items: flex-start;
+}
+.names li p:nth-child(2) {
+  margin-left: 10px;
+}
+.contenBox {
+  text-transform: capitalize;
+  letter-spacing: 2px;
+  font-weight: 500;
+  margin: 20px 0 10px 0;
+}
+.contenBox h4 {
+  color: papayawhip;
+  font-size: 18px;
+  text-align: center;
+  line-height: 1.8em;
+}
+@media (max-width: 850px) {
+  .cover {
+    margin-top: 50px;
+  }
+}
