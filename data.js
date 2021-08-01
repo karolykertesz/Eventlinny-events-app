@@ -157,7 +157,32 @@ export const user_archive = async () => {
   }));
   return dockArray;
 };
+export const getArchiveMont = async (month) => {
+  const date = new Date();
+  const startMonth = new Date(`2021-${month}-01`);
+  const endMonth = new Date(`2021-${month}-31`);
 
+  const docref = db
+    .collection("user_add_events")
+    .where("starts", ">=", startMonth)
+    .where("starts", "<=", endMonth)
+    .get();
+  const dockArray = (await docref).docs.map((item) => ({
+    id: item.id,
+    start: item.data().starts.toMillis(),
+    category: item.data().category,
+    added_by: item.data().added_by,
+    location: item.data().location,
+    attendies: item.data().attendies,
+    premium: item.data().premium,
+    description: item.data().description,
+    isArchive: item.data().archive_photos ? true : false,
+    totalArchImages: item.data().archive_photos
+      ? item.data().archive_photos.length
+      : null,
+  }));
+  return dockArray;
+};
 export const getUserEvents = async (id) => {
   let docArray = [];
   const docref = await db

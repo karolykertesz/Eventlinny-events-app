@@ -20,6 +20,7 @@
 .cardheader img {
   height: 300px;
   width: 350px;
+  object-fit: cover;
 }
 .checker {
   position: absolute;

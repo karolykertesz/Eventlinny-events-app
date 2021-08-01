@@ -54,7 +54,7 @@ const LogisticGrid = (props) => {
               <div className={classes.tooltipHolder}>
                 {attendies.includes(uid) && (
                   <div className={classes.holder}>
-                    <Tooltip title="Click and Upload images" place="right">
+                    <Tooltip title="Click and Upload images" place="bottom">
                       <ImagePop uid={id} />
                     </Tooltip>
                   </div>
@@ -67,7 +67,7 @@ const LogisticGrid = (props) => {
                     >
                       <Link href={`/archive/${id}`}>
                         <div className={classes.eye}>
-                          <Eye width="35px" color="burlywood" />
+                          <Eye width="30px" color="burlywood" />
                         </div>
                       </Link>
                     </Tooltip>

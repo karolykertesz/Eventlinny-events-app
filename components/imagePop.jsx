@@ -53,7 +53,7 @@ const ImagePop = ({ uid }) => {
     <div>
       <OverlayTrigger trigger="click" placement="left" overlay={popover}>
         <button className={classes.btn}>
-          <Photo width="30px" color="burlywood" />
+          <Photo width="25px" color="burlywood" />
         </button>
       </OverlayTrigger>
     </div>
