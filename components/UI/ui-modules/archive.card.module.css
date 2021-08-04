@@ -1,6 +1,6 @@
 .cover {
   position: relative;
-  background-color: #c69b75;
+  background-color: #d7af8c;
   width: 350px;
   border: 1px solid rgba(255, 255, 255, 0.673);
   filter: sepia(15%);
@@ -11,6 +11,7 @@
   -ms-border-radius: 28px;
   -o-border-radius: 28px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  overflow: hidden;
 }
 .card {
   position: relative;
@@ -39,7 +40,7 @@
   height: 100%;
   left: 0;
   top: 0;
-  background: rgb(230, 211, 175);
+  background: rgb(230, 205, 160);
   clip-path: circle(90px at 100% 100%);
 }
 .cover::after {
@@ -49,7 +50,7 @@
   height: 100%;
   left: 0;
   top: 0;
-  background: rgb(230, 211, 175);
+  background: rgb(230, 205, 160);
   clip-path: circle(90px at 0 20px);
 }
 .container {
@@ -95,15 +96,16 @@
 }
 .contenBox {
   text-transform: capitalize;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   font-weight: 500;
   margin: 20px 0 10px 0;
 }
 .contenBox h4 {
   color: papayawhip;
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
-  line-height: 1.8em;
+  line-height: 1.2em;
+  flex-wrap: wrap;
 }
 @media (max-width: 850px) {
   .cover {
