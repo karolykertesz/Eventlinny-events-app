@@ -3,17 +3,27 @@ import classes from "../../components/UI/ui-modules/carousel.archive.module.css"
 import ArchiveOneItem from "../../components/archiveOneItem";
 import { useRedirect } from "../../helpers/validatehelp";
 import Archiveimages from "../../components/achiveImages";
-import Head from "next/head";
-import React, { Fragment, useEffect, useCallback, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import Glide from "@glidejs/glide";
-
-// Optional Theme Stylesheet
+import React, { Fragment, useState } from "react";
 
 const archiveItem = ({ items }) => {
-  let isClass = "s";
+  const [URL, setUrl] = useState(null);
+  const [imgDate, setImgdate] = useState();
+  const firstindex = items.archive_photos
+    ? items.archive_photos[0].url
+    : "/images/salmon.jpg";
+  const setImgUrl = (url, date) => {
+    setUrl(url);
+    if (date) {
+      const smartDate = new Date(date).toLocaleDateString("en-GB", {
+        day: "2-digit",
+        year: "numeric",
+        month: "long",
+      });
+      setImgdate(smartDate);
+    }
+  };
   useRedirect();
+  console.log(imgDate);
   return (
     <Fragment>
       <div className={classes.coverGrid}>
@@ -26,11 +36,10 @@ const archiveItem = ({ items }) => {
               <div className={classes.slidshow + " " + classes.middle}>
                 <div className={classes.slides}>
                   <input
-                    className={classes.first}
+                    className={classes.fir}
                     type="radio"
                     name="r"
                     id="r1"
-                    checked="true"
                     onChange={() => {}}
                   />
                   <input
@@ -58,24 +67,27 @@ const archiveItem = ({ items }) => {
                     className={classes.first}
                   />
 
-                  <div className={classes.holder}>
-                    {items.archive_photos &&
-                      items.archive_photos.map((img, indx) => (
-                        <div key={img.url} className={classes.slide}>
-                          <img src={img.url} alt="image slider images" />
-                        </div>
-                      ))}
-                  </div>
+                  {items.archive_photos && (
+                    <div className={classes.slide}>
+                      <span className={classes.date}>{imgDate && imgDate}</span>
+                      <img src={URL !== null ? URL : firstindex} />
+                    </div>
+                  )}
                 </div>
+
                 <div className={classes.navigation}>
-                  <label htmlFor="r1" className={classes.bar} id="gg"></label>
-                  <label htmlFor="r2" className={classes.bar}></label>
-                  <label htmlFor="r3" className={classes.bar}></label>
-                  <label htmlFor="r4" className={classes.bar}></label>
-                  <label htmlFor="r5" className={classes.bar}></label>
+                  {items.archive_photos &&
+                    items.archive_photos.map((leb) => (
+                      <span key={leb.url}>
+                        <label
+                          htmlFor="r2"
+                          className={classes.bar}
+                          onClick={() => setImgUrl(leb.url, leb.image_added_at)}
+                        ></label>
+                      </span>
+                    ))}
                 </div>
               </div>
-              {/* // <Archiveimages archive={items.archive_photos} /> */}
             </div>
           </>
         )}
