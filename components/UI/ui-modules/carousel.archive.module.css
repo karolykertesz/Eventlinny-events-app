@@ -122,9 +122,20 @@
 .slides .fifth:checked ~ .holder .mat {
   margin-left: -80%;
 } */
-@media (max-width: 600px) {
+@media (min-width: 800px) {
+  .slidshow {
+    height: 500px;
+    width: 350px;
+  }
+  .coverGrid {
+    margin-top: 100px;
+  }
+}
+
+@media (max-width: 800px) {
   .coverGrid {
     grid-template-columns: 1fr;
+    gap: 60px;
   }
   .slidshow {
     width: 330px;

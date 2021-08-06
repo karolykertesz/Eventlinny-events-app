@@ -33,7 +33,7 @@ const AllEvents = ({ eventss }) => {
       {event && (
         <div style={{ marginTop: "100px" }}>
           <EventList items={event} />
-          <div></div>
+          <div>kkkkkk</div>
           <div></div>
         </div>
       )}
@@ -45,7 +45,6 @@ export default AllEvents;
 
 export async function getStaticProps() {
   const allEv = await user_events_data();
-  console.log(allEv);
   if (!allEv) {
     return {
       notFound: true,

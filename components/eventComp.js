@@ -1,8 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import EventSummary from "./event-detail/event-summary";
-import EventLog from "./event-detail/event-logistics";
 import EventContent from "./event-detail/event-content";
-import { PiBig, Pi, Grid, List, TopContainer } from "./UI/styledindex";
+import { Grid } from "./UI/styledindex";
 import EventMap from "../components/eventMap";
 import { categories, getComments } from "../data";
 import classes from "../components/UI/ui-modules/eventComp.module.css";
@@ -10,11 +9,14 @@ import RecTCard from "../components/UI/reactbootstrap/card";
 import { getAttendiesInfo } from "../data";
 import ComentsCross from "../components/holders/commentscross.jsx";
 import Nomap from "../components/noMap";
+import Eventcard from "../components/UI/eventcard";
+import { useRedirect } from "../helpers/validatehelp";
 
 import "firebase/functions";
 import { TopHolder } from "../components/holders/indexholders";
 
 const EventComp = ({ single }) => {
+  useRedirect();
   const [comments, setComments] = useState(null);
   const attendies = single && single.attendies;
   const location = single !== null && single.location;
@@ -25,7 +27,6 @@ const EventComp = ({ single }) => {
     month: "long",
     year: "numeric",
   });
-  console.log(single);
   useEffect(() => {
     let mode = true;
     getAttendiesInfo(attendies && attendies).then((items) => {
@@ -43,7 +44,7 @@ const EventComp = ({ single }) => {
       <div className={classes.allGrid}>
         <div>
           <div className={classes.eventLog}>
-            <EventLog
+            {/* <EventLog
               date={single.start}
               address={single.location}
               imageAlt={single.category}
@@ -56,12 +57,25 @@ const EventComp = ({ single }) => {
               id={single.id}
               end={single.end}
               created_by={single.created_by}
-            />
+            /> */}
           </div>
           <div>
             <EventContent>
+              <Eventcard
+                url={
+                  isImgUrl
+                    ? `/images/${single.category}.jpg`
+                    : "/images/salmon.jpg"
+                }
+                category={single.category}
+                date={single.start}
+                attendies={attendies}
+                address={single.location}
+                desc={single.description}
+                created_by={single.created_by}
+              />
               {/* <Pi>event Description: {single.description}</Pi> */}
-              {location !== "online" ? (
+              {/* {location !== "online" ? (
                 <EventMap
                   location={single && single.location}
                   added_by={single && single.added_by}
@@ -71,7 +85,7 @@ const EventComp = ({ single }) => {
                 <div>
                   <Nomap />
                 </div>
-              )}
+              )} */}
             </EventContent>
           </div>
         </div>

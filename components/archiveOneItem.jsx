@@ -4,6 +4,7 @@ import { categories } from "../data";
 import Users from "../components/UI/icons/users";
 import Photo from "../components/UI/icons/photo";
 import Location from "../components/UI/icons/locationmarker";
+import Title from "../components/UI/icons/title";
 const ArchiveOneItem = (props) => {
   const item = props.items;
   const length = props.length;
@@ -27,35 +28,27 @@ const ArchiveOneItem = (props) => {
               />
             </div>
             <div className={classes.contenBox}>
-              <h4> {item.description}</h4>
               <h4>{item.category} Event</h4>
             </div>
           </div>
           <ul className={classes.names}>
             <li>
-              <Users color="" width="25px" />
-              <p>{item.attendies.length}</p>
+              <Title color="" width="25px" />
+              <p>{item && item.description}</p>
             </li>
             <li>
-              <Location width="25px" /> <p>{item.location}</p>
+              <Users color="" width="25px" />
+              <p>{item && item.attendies.length}</p>
+            </li>
+            <li>
+              <Location width="25px" /> <p>{item && item.location}</p>
             </li>
             <li>
               <Photo width="25px" />
-              <p>{item.archive_photos.length}</p>
+              <p>{item && item.archive_photos.length}</p>
             </li>
           </ul>
         </div>
-
-        {/* <div className={classes.imgHolder}>
-       
-
-      {/* <div className={classes.title}>{item.category}</div>
-        <p>attendies: ({item.attendies.length})</p>
-        <p>finished event</p>
-        <p>name: {item.description}</p>
-        <p> Creator: {item.created_by}</p>
-        <p>images: ({item.archive_photos.length})</p>
-        <p>location: {item.location}</p> */}
       </div>
     </div>
   );

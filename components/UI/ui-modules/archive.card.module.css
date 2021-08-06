@@ -106,9 +106,16 @@
   text-align: center;
   line-height: 1.2em;
   flex-wrap: wrap;
+  margin-left: 15px;
 }
 @media (max-width: 850px) {
   .cover {
     margin-top: 50px;
+    height: 400px;
+    margin-bottom: 100px;
+  }
+  .imgBox {
+    width: 120px;
+    height: 120px;
   }
 }

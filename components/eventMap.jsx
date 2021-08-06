@@ -33,9 +33,9 @@ const EventMap = ({ location, added_by, created_by }) => {
           }
         })
         .then(async () => {
-          const { zoom, longitude, latitude } = await addlocation(location);
+          const { longitude, latitude } = await addlocation(location);
           return {
-            zoom,
+            zoom: 10,
             longitude,
             latitude,
           };

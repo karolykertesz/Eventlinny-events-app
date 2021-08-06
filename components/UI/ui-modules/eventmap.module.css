@@ -81,9 +81,11 @@
   width: 100vw;
 }
 .conpI {
+  /* position: absolute;
+  bottom: -10%; */
   display: block;
   margin: 0 auto;
-  width: 48rem;
+  width: 100% !important;
   height: auto;
   display: flex;
   flex-direction: row;
