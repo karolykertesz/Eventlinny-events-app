@@ -1,6 +1,6 @@
 .cover {
   display: flex;
-  margin: 50px auto;
+  margin: 10px auto;
   max-width: 700px;
   flex-direction: column;
 }
@@ -10,7 +10,7 @@
   }
 }
 .allGrid {
-  margin-top: 50px;
+  margin-top: 10px;
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -46,4 +46,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.hover {
+  text-align: center;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-weight: 600;
+  color: burlywood;
+  text-transform: capitalize;
 }

@@ -43,6 +43,7 @@ const EventComp = ({ single }) => {
       <EventSummary title={single.category} added_by={single.added_by} />
       <div className={classes.allGrid}>
         <div>
+          <h3 className={classes.hover}>Hover On image to see more</h3>
           <div className={classes.eventLog}>
             {/* <EventLog
               date={single.start}
@@ -74,8 +75,7 @@ const EventComp = ({ single }) => {
                 desc={single.description}
                 created_by={single.created_by}
               />
-              {/* <Pi>event Description: {single.description}</Pi> */}
-              {/* {location !== "online" ? (
+              {location !== "online" ? (
                 <EventMap
                   location={single && single.location}
                   added_by={single && single.added_by}
@@ -85,7 +85,7 @@ const EventComp = ({ single }) => {
                 <div>
                   <Nomap />
                 </div>
-              )} */}
+              )}
             </EventContent>
           </div>
         </div>

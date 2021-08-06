@@ -4,11 +4,10 @@
   /* width: 90%; */
   width: 20em !important;
   margin: auto;
-  margin-top: 8rem;
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: baseline;
   align-items: center;
   position: relative;
   height: 100%;

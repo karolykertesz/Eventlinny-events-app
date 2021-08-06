@@ -81,15 +81,19 @@
   width: 100vw;
 }
 .conpI {
-  /* position: absolute;
-  bottom: -10%; */
+  position: absolute;
+  transform: translate(0, 210%);
   display: block;
   margin: 0 auto;
-  width: 100% !important;
+  width: 20rem !important;
   height: auto;
   display: flex;
   flex-direction: row;
   border: 3px solid burlywood;
+  -webkit-transform: translate(0, 210%);
+  -moz-transform: translate(0, 210%);
+  -ms-transform: translate(0, 210%);
+  -o-transform: translate(0, 210%);
 }
 @media (max-width: 600px) {
   .conpI {

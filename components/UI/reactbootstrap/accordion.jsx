@@ -31,7 +31,8 @@ const AddCommentsAccordion = (props) => {
   const [text, settext] = useState();
   const [dis, setDis] = useState(false);
   const eventId = props.id;
-  const userid = useAuth().user && useAuth().user.uid;
+  const userInfo = useAuth().user;
+  const userid = userInfo && userInfo.uid;
   const sendsummit = (e) => {
     e.preventDefault();
     setDis(true);
@@ -47,7 +48,7 @@ const AddCommentsAccordion = (props) => {
             id: uuidv4(),
             what: text,
             when: date,
-            who: userid,
+            who: userid && userid,
             likes: [],
           }),
         })
