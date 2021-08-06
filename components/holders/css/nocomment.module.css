@@ -17,9 +17,10 @@
 }
 
 .nocameraTop {
-  width: 90%;
+  width: 330px;
   height: 100px;
-  /* background-color: rgba(210, 188, 152, 0.591); */
+  /*background-color: rgba(210, 188, 152, 0.591);
+  */
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -31,19 +32,14 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-left: 50px;
-  position: relative;
-}
-@media (max-width: 600px) {
-  .nocameraTop {
-    width: 100%;
-    display: block;
-    margin: 0 auto;
-  }
-  .nocameraTop p {
-    text-align: center;
-    padding: 40px;
-  }
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 370%);
+  -webkit-transform: translate(-50%, 370%);
+  -moz-transform: translate(-50%, 370%);
+  -ms-transform: translate(-50%, 370%);
+  -o-transform: translate(-50%, 370%);
 }
 .nocameraTop p {
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
@@ -73,11 +69,21 @@
   */
 }
 
-@media (max-width: 600px) {
+@media (max-width: 650px) {
   .noTop {
     width: 300px;
     display: block;
     margin: 20px auto;
+  }
+  .nocameraTop {
+    /*display: none;
+    */ /*bottom: 10%;
+    */
+    transform: translate(-50%, 190%);
+    -webkit-transform: translate(-50%, 210%);
+    -moz-transform: translate(-50%, 190%);
+    -ms-transform: translate(-50%, 190%);
+    -o-transform: translate(-50%, 190%);
   }
   .noTop p {
     font-size: 14px;

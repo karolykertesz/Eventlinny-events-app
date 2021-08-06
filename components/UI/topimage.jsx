@@ -41,9 +41,6 @@ const TopImage = ({ added_by }) => {
       {userdata && (
         <div className={classes.top}>
           <Image src={userdata && userdata.url} height="70px" width="70px" />
-          <div>
-            <h5>Hosted By: {userdata && userdata.name}</h5>
-          </div>
         </div>
       )}
     </Fragment>

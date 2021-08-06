@@ -3,7 +3,7 @@
   width: 50px;
   margin: 20px auto;
   border-radius: 50%;
-  border: dashed 1px #e8be34;
+  border: dashed 3px #e8be34;
   animation-name: loader-spin;
   animation-duration: 2s;
   animation-iteration-count: infinite;

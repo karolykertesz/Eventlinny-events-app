@@ -53,25 +53,7 @@ function EventLogistics(props) {
       .then(() => setSignedUp(true))
       .then(() => setShowModal(true));
   };
-  useEffect(() => {
-    let mode = true;
-    const checkisSigned = () => {
-      const isThere = attendies && attendies.find((i) => i === userId);
-      if (isThere) {
-        if (mode) {
-          setSignedUp(true);
-        }
-      } else {
-        if (mode) {
-          setSignedUp(false);
-        }
-      }
-    };
-    checkisSigned();
-    return () => {
-      mode = false;
-    };
-  }, []);
+
   if (!userId || !address) {
     return <Loader />;
   }
@@ -109,14 +91,6 @@ function EventLogistics(props) {
         <LogisticsItem icon={PersonIcon}>
           <address className={classes.divided}>{attendies.length}</address>
         </LogisticsItem>
-
-        {!signedUp && (
-          <span onClick={() => signUp()}>
-            <LogisticsItem icon={Plus}>
-              <address>Sign Up</address>
-            </LogisticsItem>
-          </span>
-        )}
       </ul>
       <span>
         <Reactmodal

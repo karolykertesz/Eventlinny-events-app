@@ -29,7 +29,7 @@ const AllEvents = ({ eventss }) => {
           content="all next events including non featured events"
         />
       </Head>
-      {/* <EventSearch onSelected={onSelected} /> */}
+
       {event && (
         <div style={{ marginTop: "100px" }}>
           <EventList items={event} />

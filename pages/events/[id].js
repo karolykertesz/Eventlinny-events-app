@@ -35,7 +35,6 @@ export async function getStaticPaths() {
 }
 export async function getStaticProps(context) {
   const id = context.params.id;
-  console.log(context.params);
   let dd = await findById(id);
   return {
     props: {

@@ -1,11 +1,9 @@
 .list {
-  width: 80%;
-  max-width: 40rem;
   margin: 2rem auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
-.block {
-  overflow: hidden;
-}
+
 @media (max-width: 600px) {
   .list {
     width: 100%;

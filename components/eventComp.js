@@ -74,6 +74,8 @@ const EventComp = ({ single }) => {
                 address={single.location}
                 desc={single.description}
                 created_by={single.created_by}
+                added_by={single.added_by}
+                id={single.id}
               />
               {location !== "online" ? (
                 <EventMap
@@ -91,7 +93,7 @@ const EventComp = ({ single }) => {
         </div>
         <div className={classes.cover}>
           <Grid>
-            {
+            {/* {
               atttendiesInfo &&
                 atttendiesInfo.map((item) => (
                   <RecTCard
@@ -104,13 +106,13 @@ const EventComp = ({ single }) => {
                   />
                 ))
               //
-            }
+            } */}
           </Grid>
 
           <div className={classes.comentsec}>
-            <TopHolder>
+            {/* <TopHolder>
               <ComentsCross id={single.id && single.id} />
-            </TopHolder>
+            </TopHolder> */}
             {/* <CommentsAddedBy added_by={comments.added_by} />
               <ComentContainer>
                 {/* <UseComentTop

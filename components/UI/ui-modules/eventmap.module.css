@@ -78,7 +78,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  width: 100vw;
+  /* width: 100vw; */
 }
 .conpI {
   position: absolute;
@@ -97,8 +97,9 @@
 }
 @media (max-width: 600px) {
   .conpI {
-    margin: 0 -33px;
-    width: 90vw;
+    /* margin: 0 -33px;
+    width: 90vw; */
+    bottom: -20px;
   }
 }
 
