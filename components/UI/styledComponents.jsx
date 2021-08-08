@@ -83,21 +83,15 @@ export const Error = styled.div`
 
 export const Grid = styled.div`
   display: grid;
-  grid-gap: 50px;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  /* @media (max-width: 900px) {
-    grid-template-columns: 1fr 1fr;
-  } */
+  grid-gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr;
 
-  @media (max-width: 600px) {
+  @media (max-width: 650px) {
     /* display: flex; */
     /* flex-direction: column; */
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
-    margin: 0 60px;
-  }
-  @media (max-width: 850px) {
-    grid-gap: 20px;
-    grid-template-columns: 1fr 1fr 1fr;
+    position: absolute;
+    left: 50%;
+    top: 75%;
+    transform: translate(-50%, -50%);
   }
 `;

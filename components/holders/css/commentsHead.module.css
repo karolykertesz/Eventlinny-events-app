@@ -8,14 +8,32 @@
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
-  width: 500px;
+  width: 400px;
   background-color: #f0e5c7;
   height: 70px;
   margin-bottom: 5px;
+  position: absolute;
+  top: 22%;
+  right: 0;
+  transform: translate(-50%, -90%);
+  -webkit-transform: translate(-50%, -90%);
+  -moz-transform: translate(-50%, -90%);
+  -ms-transform: translate(-50%, -90%);
+  -o-transform: translate(-50%, -90%);
 }
-@media (max-width: 600px) {
+.flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width: 650px) {
   .top {
-    width: 90vw;
+    /* width: 90vw; */
+
+    left: 50%;
+    width: 345px;
+    /* margin-top: 130px; */
   }
   .top img {
     width: 50px;

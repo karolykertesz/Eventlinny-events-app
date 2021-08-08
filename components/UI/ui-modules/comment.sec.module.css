@@ -1,0 +1,103 @@
+.container {
+  min-width: 350px;
+  width: 500px !important;
+  margin: auto;
+  margin-top: 4%;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.headerImg {
+  border-radius: 50%;
+  width: 60px;
+  margin-left: 5%;
+  margin-top: 12px;
+  float: left;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+.headerImg img {
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+.msgHeader {
+  border: 1px solid rgb(245, 239, 239);
+  width: 100%;
+  height: 10%;
+  border-bottom: none;
+  display: inline-block;
+  background: #f0e5c7;
+}
+.active {
+  width: 120px;
+  float: left;
+  margin-top: 10px;
+}
+.active h4 {
+  font-size: 20px;
+  margin-left: 10px;
+  color: #ffff;
+}
+.active h6 {
+  font-size: 15px;
+  margin-left: 10px;
+  line-height: 2px;
+  color: #fff;
+}
+.iconButton {
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  background-color: #f0e5c7;
+  border: none;
+  margin-bottom: 5px;
+  color: rgb(128, 128, 128);
+}
+.icontop {
+  color: #fff;
+  width: 30px;
+  height: 25px;
+}
+.iconLike {
+  color: goldenrod;
+  width: 30px;
+  height: 25px;
+}
+.iconPlane {
+  width: 25px;
+  height: 25px;
+  color: #fff;
+}
+.headerIcons {
+  width: 120px;
+  float: right;
+  margin: 25px 0 10px 0;
+  cursor: pointer;
+  display: inline-flex;
+}
+.commentsPage {
+  padding: 0 0 50px 0;
+}
+.inbox {
+  border: 1px solid #f0e5c7;
+  overflow: hidden;
+  padding-bottom: 30px;
+}
+.comments {
+  padding: 30px 15px 0 25px;
+}
+.commerInner {
+  min-height: 200px;
+  overflow-y: auto;
+}
+.group {
+  height: 98%;
+  background-color: #f0e5c7;
+  cursor: pointer;
+}
+.input::placeholder {
+  color: #f0e5c7;
+}

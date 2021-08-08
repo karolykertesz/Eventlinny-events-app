@@ -67,7 +67,7 @@ const Eventcard = (props) => {
             <div className={classes.logo}>
               <Image src="/images/e.png" width="80px" height="80px" />
             </div>
-            <h3>{desc}</h3>
+            <h3>{desc.toString().trim()}</h3>
             <div className={classes.backHolder}>
               <div className={classes.iconHolder}>
                 <p>{category}</p>

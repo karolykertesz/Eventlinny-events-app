@@ -5,6 +5,7 @@ import React, {
   useCallback,
   useRef,
 } from "react";
+import classes from "../UI/ui-modules/eventComp.module.css";
 import { getComments } from "../../data";
 import firebase from "firebase";
 import { Nocomments } from "./indexholders";
@@ -21,33 +22,21 @@ const ComentsCross = ({ id }) => {
       .collection("comments")
       .doc(id)
       .onSnapshot(async (snapShot) => {
-        if (snapShot.exists) {
-          if (modeRef.current) {
-            const data = await snapShot.data();
-            setComments({
-              id: snapShot.id,
-              data: data,
-            });
-          } else {
-            if (modeRef.current) {
-              setComments(null);
-            }
-          }
-        }
+        const data = await snapShot.data();
+        setComments({
+          id: snapShot.id,
+          data: data,
+        });
       });
-  }, [setComments, comments]);
+  }, [setComments]);
   useEffect(() => {
     datafetch();
-    return () => {
-      modeRef.current = false;
-    };
-  }, []);
+  }, [datafetch]);
   if (loading) {
     return <Loader />;
   }
-
   return (
-    <div>
+    <div className={classes.hold}>
       {!comments ? (
         <div>
           <Nocomments docid={comments && comments.id} id={id} />
@@ -57,12 +46,10 @@ const ComentsCross = ({ id }) => {
           {comments && (
             <Fragment>
               <CommentHead
+                date={comments.data.added_at}
                 id={comments.data.added_by}
                 likes={comments.data.likes}
-                docid={comments.id}
                 commentBody={comments.data.comment_body}
-              />
-              <CommentsBody
                 arr={comments && comments.data.replies}
                 docid={comments && comments.id}
               />

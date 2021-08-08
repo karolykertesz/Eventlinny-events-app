@@ -44,22 +44,7 @@ const EventComp = ({ single }) => {
       <div className={classes.allGrid}>
         <div>
           <h3 className={classes.hover}>Hover On image to see more</h3>
-          <div className={classes.eventLog}>
-            {/* <EventLog
-              date={single.start}
-              address={single.location}
-              imageAlt={single.category}
-              image={
-                isImgUrl ? `images/${single.category}.jpg` : "images/salmon.jpg"
-              }
-              start={single.start}
-              addedby={single.added_by}
-              attendies={attendies}
-              id={single.id}
-              end={single.end}
-              created_by={single.created_by}
-            /> */}
-          </div>
+          <div className={classes.eventLog}></div>
           <div>
             <EventContent>
               <Eventcard
@@ -93,7 +78,7 @@ const EventComp = ({ single }) => {
         </div>
         <div className={classes.cover}>
           <Grid>
-            {/* {
+            {
               atttendiesInfo &&
                 atttendiesInfo.map((item) => (
                   <RecTCard
@@ -106,23 +91,22 @@ const EventComp = ({ single }) => {
                   />
                 ))
               //
-            } */}
+            }
           </Grid>
-
-          <div className={classes.comentsec}>
-            {/* <TopHolder>
-              <ComentsCross id={single.id && single.id} />
-            </TopHolder> */}
-            {/* <CommentsAddedBy added_by={comments.added_by} />
+        </div>
+        <div className={classes.comentsec}>
+          <TopHolder>
+            <ComentsCross id={single.id && single.id} />
+          </TopHolder>
+          {/* <CommentsAddedBy added_by={comments.added_by} />
               <ComentContainer>
                 {/* <UseComentTop
                   uid={
                     commentRef.current !== null && commentRef.current.added_by
                   }
                 /> */}
-            {/* <IconDock icon={Comments} /> */}
-            {/* </ComentContainer> */}
-          </div>
+          {/* <IconDock icon={Comments} /> */}
+          {/* </ComentContainer> */}
         </div>
       </div>
     </Fragment>

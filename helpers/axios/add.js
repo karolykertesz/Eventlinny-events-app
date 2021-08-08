@@ -4,7 +4,6 @@ export const addlocation = async (location) => {
       `http://api.geonames.org/postalCodeSearchJSON?placename=${location}&maxRows=1&username=carlo12345`
     );
     const data = await mess.json();
-    console.log(data);
     if (data.postalCodes.length === 0) {
       return {
         zoom: 10,

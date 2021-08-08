@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import Mapper from "./mapper";
-import firebase from "firebase";
 import { allrepliesOfComments } from "../../data";
 const CommentsBody = ({ arr, docid }) => {
   const modeRef = useRef(true);

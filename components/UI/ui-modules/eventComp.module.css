@@ -4,6 +4,7 @@
   max-width: 700px;
   flex-direction: column;
 }
+
 @media (max-width: 600px) {
   .cover {
     margin: auto 25px;
@@ -29,9 +30,18 @@
   .allGrid {
     grid-template-columns: 1fr;
   }
+  .comentsec {
+    position: absolute;
+    bottom: -10%;
+    transform: translate(-50%, 0);
+    -webkit-transform: translate(-50%, 0);
+    -moz-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    -o-transform: translate(-50%, 0);
+    left: 50%;
+  }
 }
 .comentsec {
-  margin-top: 90px;
   /* width: auto; */
   max-width: 700px;
   min-width: 300px;

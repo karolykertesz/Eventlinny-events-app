@@ -1,5 +1,4 @@
-import React from "react";
-const Comments = (props) => {
+const Info = (props) => {
   return (
     <div style={{ width: props.width, color: props.color }}>
       <svg
@@ -13,11 +12,10 @@ const Comments = (props) => {
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth={2}
-          d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"
+          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
         />
       </svg>
     </div>
   );
 };
-
-export default Comments;
+export default Info;

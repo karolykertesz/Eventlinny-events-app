@@ -4,6 +4,7 @@ import { getKeys, findById } from "../../data";
 import { useAuth } from "../../components/Layout/UserContext";
 import Loader from "../../components/UI/loader";
 import EventComp from "../../components/eventComp";
+import classes from "../../components/UI/ui-modules/eventComp.module.css";
 const SingleEvent = ({ single }) => {
   if (!single) {
     return (
@@ -19,7 +20,9 @@ const SingleEvent = ({ single }) => {
         <title>{single.category}</title>
         <meta name="description" content="single next event" />
       </Head>
-      <EventComp single={single && single} />
+      <div className={classes.hol}>
+        <EventComp single={single && single} />
+      </div>
     </>
   );
 };
