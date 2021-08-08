@@ -7,13 +7,10 @@ const CommentsBody = ({ arr, docid }) => {
   const [comments, setComments] = useState(null);
   const [loading, Setloading] = useState(false);
   const applydata = useCallback(async () => {
-    if (!modeRef.current) return;
     Setloading(true);
     return allrepliesOfComments(arr)
       .then((items) => {
-        if (modeRef.current) {
-          setComments(items);
-        }
+        setComments(items);
       })
       .then(() => {
         Setloading(false);
@@ -21,10 +18,7 @@ const CommentsBody = ({ arr, docid }) => {
   }, [setComments]);
   useEffect(() => {
     applydata();
-    return () => {
-      modeRef.current = false;
-    };
-  }, []);
+  }, [applydata]);
 
   if (loading) {
     return <div>Loading....</div>;

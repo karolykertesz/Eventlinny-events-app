@@ -9,10 +9,10 @@ const Mapper = ({ item, docid }) => {
   const [itemId, setItemid] = useState(() => {
     return item.map((i) => i.id);
   });
-  const [likeCount, setLike] = useState(() => {
-    const t = item.map((i) => ({ id: i.id, like: i.data.likes.length }));
-    return t;
-  });
+  // const [likeCount, setLike] = useState(() => {
+  //   const t = item.map((i) => ({ id: i.id, like: i.data.likes.length }));
+  //   return t;
+  // });
   function addNewlines(str) {
     let result = "";
     while (str.length > 0) {
@@ -22,11 +22,11 @@ const Mapper = ({ item, docid }) => {
     return result;
   }
 
-  const getLikeCount = (itemId) => {
-    const one = likeCount.filter((i) => i.id === itemId);
-    const count = one[0].like;
-    return count;
-  };
+  // const getLikeCount = (itemId) => {
+  //   const one = likeCount.filter((i) => i.id === itemId);
+  //   const count = one[0].like;
+  //   return count;
+  // };
   const userId = useAuth().user.uid;
   const humanReadableDate = (item) => {
     const t = item.toDate().toLocaleDateString("en-US", {

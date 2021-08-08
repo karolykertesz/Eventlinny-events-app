@@ -1,6 +1,6 @@
 const Plus = (props) => {
   return (
-    <div style={{ width: props.width }}>
+    <div style={{ width: props.width, height: props.height }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="h-6 w-6"

@@ -13,22 +13,26 @@ import CommentHead from "../holders/commentsHead";
 import Loader from "../UI/loader";
 import CommentsBody from "../holders/commentsbody";
 const ComentsCross = ({ id }) => {
-  const [comments, setComments] = useState();
+  const [comments, setComments] = useState(null);
   const [loading, setLoading] = useState(false);
   const modeRef = useRef(true);
   const datafetch = useCallback(() => {
     firebase
       .firestore()
-      .collection("comments")
+      .collection("user_add_events")
       .doc(id)
+      .collection("comments")
+      .doc("comment")
       .onSnapshot(async (snapShot) => {
         const data = await snapShot.data();
-        setComments({
-          id: snapShot.id,
-          data: data,
-        });
+        if (data) {
+          setComments({
+            data: data,
+          });
+        }
       });
   }, [setComments]);
+  console.log();
   useEffect(() => {
     datafetch();
   }, [datafetch]);
@@ -37,26 +41,24 @@ const ComentsCross = ({ id }) => {
   }
   return (
     <div className={classes.hold}>
-      {!comments ? (
-        <div>
-          <Nocomments docid={comments && comments.id} id={id} />
-        </div>
-      ) : (
-        <div>
-          {comments && (
-            <Fragment>
-              <CommentHead
-                date={comments.data.added_at}
-                id={comments.data.added_by}
-                likes={comments.data.likes}
-                commentBody={comments.data.comment_body}
-                arr={comments && comments.data.replies}
-                docid={comments && comments.id}
-              />
-            </Fragment>
-          )}
-        </div>
-      )}
+      <div>
+        {comments !== null ? (
+          <Fragment>
+            <CommentHead
+              date={comments && comments.data.added_at}
+              id={comments && comments.data.added_by}
+              likes={comments && comments.data.likes}
+              commentBody={comments && comments.data.comment_body}
+              arr={comments && comments.data.replies}
+              docid={id}
+            />
+          </Fragment>
+        ) : (
+          <div>
+            <Nocomments id={id} />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

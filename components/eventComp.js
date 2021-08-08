@@ -69,7 +69,7 @@ const EventComp = ({ single }) => {
                   created_by={single && single.created_by}
                 />
               ) : (
-                <div>
+                <div className={classes.no}>
                   <Nomap />
                 </div>
               )}

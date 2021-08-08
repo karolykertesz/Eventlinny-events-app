@@ -1,8 +1,9 @@
 .container {
   min-width: 350px;
-  width: 500px !important;
-  margin: auto;
-  margin-top: 4%;
+  /* width: 500px !important; */
+  /* margin: auto; */
+  margin-top: 0;
+  margin-bottom: 3%;
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 .headerImg {

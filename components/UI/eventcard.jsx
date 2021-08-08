@@ -71,7 +71,7 @@ const Eventcard = (props) => {
             <div className={classes.backHolder}>
               <div className={classes.iconHolder}>
                 <p>{category}</p>
-                <Globe width="30px" height="30px" />
+                <Globe width="26px" height="30px" />
               </div>
               <div className={classes.iconHolder + " " + classes.user}>
                 <p>{created_by}</p>
@@ -79,15 +79,15 @@ const Eventcard = (props) => {
               </div>
               <div className={classes.iconHolder}>
                 <p>{attendies.length}</p>
-                <UsersIcon width="30px" height="30px" />
+                <UsersIcon width="26px" height="30px" />
               </div>
               <div className={classes.iconHolder}>
                 <p>{smartDate}</p>
-                <DateIcon width="30px" height="30px" />
+                <DateIcon width="26px" height="30px" />
               </div>
               <div className={classes.iconHolder}>
                 <p>{address}</p>
-                <AddressIcon width="30px" height="30px" />
+                <AddressIcon width="26px" height="30px" />
               </div>
               {!signedUp && (
                 <div

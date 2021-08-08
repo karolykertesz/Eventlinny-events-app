@@ -13,9 +13,10 @@
 }
 .body {
   margin: 0;
-  padding-top: 10px;
+  /* padding-top: 10px; */
   background-color: rgb(218, 197, 169);
   color: white;
+  width: 350px;
 }
 .card {
   box-shadow: 2px 2px 8px rgba(17, 11, 11, 0.3);
@@ -25,6 +26,7 @@
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
+  width: 350px;
 }
 .button {
   background-color: rgba(230, 161, 71, 0.605);

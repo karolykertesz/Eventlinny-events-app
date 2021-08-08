@@ -2,15 +2,15 @@ import React, { useEffect, useState, useCallback, useRef } from "react";
 import Image from "next/image";
 import firebase from "firebase";
 import classes from "../UI/ui-modules/comment.sec.module.css";
-import { v4 as uuidv4 } from "uuid";
 import { BiLike } from "react-icons/bi";
 import { IconContext } from "react-icons";
 import { useAuth } from "../Layout/UserContext";
 import Info from "../UI/icons/info";
 import CommentsBody from "../holders/commentsbody";
 import { BiPaperPlane } from "react-icons/bi";
+import Tinyspinner from "../UI/tinyspinner";
 
-const CommentHead = ({ id, likes, docid, commentBody, date, arr }) => {
+const CommentHead = ({ id, docid, date, arr }) => {
   const [com, setCom] = useState();
   const smartDate = new Date(date.seconds * 1000).toLocaleDateString("en-GB", {
     day: "numeric",
@@ -20,6 +20,7 @@ const CommentHead = ({ id, likes, docid, commentBody, date, arr }) => {
 
   const [userdata, setdata] = useState();
   const [liked, setLiked] = useState(false);
+  const [loading, setLoading] = useState(false);
   const userId = useAuth().user.uid;
   const modeRef = useRef(true);
   const geturl = useCallback(() => {
@@ -29,6 +30,7 @@ const CommentHead = ({ id, likes, docid, commentBody, date, arr }) => {
       .doc(id)
       .get()
       .then((docs) => {
+        console.log(docs.data());
         if (docs.exists) {
           if (modeRef.current) {
             return {
@@ -52,7 +54,12 @@ const CommentHead = ({ id, likes, docid, commentBody, date, arr }) => {
     };
   }, []);
   const functionLike = () => {
-    const dataRef = firebase.firestore().collection("comments").doc(docid);
+    const dataRef = firebase
+      .firestore()
+      .collection("user_add_events")
+      .doc(docid)
+      .collection("comments")
+      .doc("comment");
     setLiked(!liked);
     if (!liked) {
       dataRef
@@ -74,17 +81,24 @@ const CommentHead = ({ id, likes, docid, commentBody, date, arr }) => {
   };
   const addComment = () => {
     if (!com) return;
-    const reDoc = firebase.firestore().collection("comments").doc(docid);
+    setLoading(true);
+    const reDoc = firebase
+      .firestore()
+      .collection("user_add_events")
+      .doc(docid)
+      .collection("comments")
+      .doc("comment");
     const date = new Date();
-    return reDoc.update({
-      replies: firebase.firestore.FieldValue.arrayUnion({
-        id: uuidv4(),
-        what: com,
-        when: date,
-        who: userId && userId,
-        likes: [],
-      }),
-    });
+    return reDoc
+      .update({
+        replies: firebase.firestore.FieldValue.arrayUnion({
+          what: com,
+          when: date,
+          who: userId && userId,
+        }),
+      })
+      .then(() => setCom(""))
+      .then(() => setLoading(false));
   };
   return (
     <div className={classes.container}>
@@ -119,7 +133,13 @@ const CommentHead = ({ id, likes, docid, commentBody, date, arr }) => {
         <div className={classes.inbox}>
           <div className={classes.comments}>
             <div className={classes.commerInner}>
-              <CommentsBody arr={arr && arr} docid={docid} />
+              {loading ? (
+                <div>
+                  <Tinyspinner width="200px" height="200px" />
+                </div>
+              ) : (
+                <CommentsBody arr={arr && arr} docid={docid} />
+              )}
             </div>
           </div>
         </div>

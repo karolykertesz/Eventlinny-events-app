@@ -70,9 +70,8 @@ const AddCommentsAccordion = (props) => {
       <Card className={classes.card}>
         <Card.Header style={{ backgroundColor: "#f0e5c7" }}>
           <CustomToggle eventKey="0">
-            <span style={{ width: "30px", height: "30px" }}>
-              <Plus />
-            </span>
+            <Plus width="30px" height="40px" />
+            (0) comment
           </CustomToggle>
         </Card.Header>
         <Accordion.Collapse eventKey="0">

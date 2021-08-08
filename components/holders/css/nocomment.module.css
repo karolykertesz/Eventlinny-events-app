@@ -1,6 +1,6 @@
 .noTop {
-  width: 600px;
-  height: 60px;
+  width: 350px;
+  height: 50px;
   /* background-color: rgba(210, 188, 152, 0.591); */
   border-radius: 10px;
   -webkit-border-radius: 10px;
@@ -69,21 +69,33 @@
   */
 }
 
+.holder {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
 @media (max-width: 650px) {
-  .noTop {
+  .holder {
+    position: absolute;
+    /*top: 190% !important;
+    */
     width: 300px;
+    bottom: calc(10%);
     display: block;
+    left: 50%;
+    transform: translate(-50%, -50%);
     margin: 20px auto;
+    -webkit-transform: translate(-60%, -40%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
   }
   .nocameraTop {
-    /*display: none;
-    */ /*bottom: 10%;
-    */
-    transform: translate(-50%, 190%);
-    -webkit-transform: translate(-50%, 210%);
-    -moz-transform: translate(-50%, 190%);
-    -ms-transform: translate(-50%, 190%);
-    -o-transform: translate(-50%, 190%);
+    transform: translate(-50%, 50%);
+    -webkit-transform: translate(-50%, 50%);
+    -moz-transform: translate(-50%, 50%);
+    -ms-transform: translate(-50%, 50%);
+    -o-transform: translate(-50%, 50%);
   }
   .noTop p {
     font-size: 14px;
