@@ -83,7 +83,7 @@ const EventComp = ({ single }) => {
                 atttendiesInfo.map((item) => (
                   <RecTCard
                     key={item.id}
-                    memberlink={`/users/members/${item.id}`}
+                    memberlink={`/users/${item.id}`}
                     title={item.name}
                     cargHeigth="120px"
                     member={item.id == single.added_by ? "Host" : "Member"}

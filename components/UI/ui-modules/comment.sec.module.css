@@ -2,6 +2,7 @@
   min-width: 350px;
   /* width: 500px !important; */
   /* margin: auto; */
+  max-width: 500px;
   margin-top: 0;
   margin-bottom: 3%;
   font-family: Georgia, "Times New Roman", Times, serif;
@@ -23,6 +24,7 @@
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
+  object-fit: cover;
 }
 .msgHeader {
   border: 1px solid rgb(245, 239, 239);
@@ -42,10 +44,11 @@
   margin-left: 10px;
   color: #ffff;
 }
+
 .active h6 {
   font-size: 15px;
   margin-left: 10px;
-  line-height: 2px;
+  line-height: 1.5px;
   color: #fff;
 }
 .iconButton {
@@ -85,7 +88,7 @@
 .inbox {
   border: 1px solid #f0e5c7;
   overflow: hidden;
-  padding-bottom: 30px;
+  padding-bottom: 10px;
 }
 .comments {
   padding: 30px 15px 0 25px;
@@ -101,4 +104,12 @@
 }
 .input::placeholder {
   color: #f0e5c7;
+}
+@media (max-width: 650px) {
+  .inbox {
+    padding-bottom: 0;
+  }
+  .comments {
+    padding: 5px 5px 0 5px;
+  }
 }

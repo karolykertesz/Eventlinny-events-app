@@ -12,6 +12,7 @@ import {
 import Plus from "../icons/plus";
 import classes from "../ui-modules/accordion.module.css";
 import { useAuth } from "../../Layout/UserContext";
+import Tinyspinner from "../tinyspinner";
 
 const CustomToggle = ({ children, eventKey }) => {
   const toggleButton = useAccordionToggle(eventKey, () => {
@@ -25,46 +26,39 @@ const CustomToggle = ({ children, eventKey }) => {
 };
 
 const AddCommentsAccordion = (props) => {
-  const id = props.docId;
+  const id = props.id;
   const user = props.user;
   const isTrue = props.isCom;
   const [text, settext] = useState();
   const [dis, setDis] = useState(false);
+  const [loading, SetLoading] = useState(false);
   const eventId = props.id;
   const userInfo = useAuth().user;
   const userid = userInfo && userInfo.uid;
   const sendsummit = (e) => {
     e.preventDefault();
-    setDis(true);
-    const docref = firebase.firestore().collection("comments").doc(id);
-    const reDoc = firebase.firestore().collection("comments").doc(eventId);
+    SetLoading(true);
+    const docref = firebase
+      .firestore()
+      .collection("user_add_events")
+      .doc(id)
+      .collection("comments")
+      .doc("comment");
 
     const date = new Date();
-
-    if (isTrue) {
-      return docref
-        .update({
-          replies: firebase.firestore.FieldValue.arrayUnion({
-            id: uuidv4(),
-            what: text,
-            when: date,
-            who: userid && userid,
-            likes: [],
-          }),
-        })
-        .then(() => setDis(false))
-        .then(() => alert("You Got It"));
-    } else {
-      return reDoc
-        .set(
-          { comment_body: text, added_by: userid, likes: [], replies: [] },
-          { merge: true }
-        )
-        .then(() => {
-          alert("comment added");
-        });
-    }
+    return docref
+      .set({
+        added_at: date,
+        added_by: userid && userid,
+        replies: [{ what: text, when: date, who: userid && userid }],
+        comment_body: text,
+        added_by: userid && userid,
+        likes: [],
+      })
+      .then(() => SetLoading(false))
+      .then(() => alert("You Got It"));
   };
+
   return (
     <Accordion defaultActiveKey="0">
       <Card className={classes.card}>
@@ -75,25 +69,35 @@ const AddCommentsAccordion = (props) => {
           </CustomToggle>
         </Card.Header>
         <Accordion.Collapse eventKey="0">
-          <Card.Body className={classes.body}>
-            <Form onSubmit={sendsummit}>
-              <Form.Group>
-                <Form.Label>
-                  {isTrue ? "Add Comment" : "Create Comment for the Event"}
-                </Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Your comment"
-                  onChange={(e) => settext(e.target.value)}
-                  value={text}
-                  className={classes.input}
-                />
-                <Button className={classes.button} disabled={dis} type="submit">
-                  Submit
-                </Button>
-              </Form.Group>
-            </Form>
-          </Card.Body>
+          {!loading ? (
+            <Card.Body className={classes.body}>
+              <Form onSubmit={sendsummit}>
+                <Form.Group>
+                  <Form.Label>
+                    {isTrue ? "Add Comment" : "Create Comment for the Event"}
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Your comment"
+                    onChange={(e) => settext(e.target.value)}
+                    value={text}
+                    className={classes.input}
+                  />
+                  <Button
+                    className={classes.button}
+                    disabled={dis}
+                    type="submit"
+                  >
+                    Submit
+                  </Button>
+                </Form.Group>
+              </Form>
+            </Card.Body>
+          ) : (
+            <div style={{ background: "#fff", height: "100%" }}>
+              <Tinyspinner width="150px" height="150px" />
+            </div>
+          )}
         </Accordion.Collapse>
       </Card>
     </Accordion>

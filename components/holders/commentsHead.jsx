@@ -10,7 +10,7 @@ import CommentsBody from "../holders/commentsbody";
 import { BiPaperPlane } from "react-icons/bi";
 import Tinyspinner from "../UI/tinyspinner";
 
-const CommentHead = ({ id, docid, date, arr }) => {
+const CommentHead = ({ id, docid, date, arr, likes }) => {
   const [com, setCom] = useState();
   const smartDate = new Date(date.seconds * 1000).toLocaleDateString("en-GB", {
     day: "numeric",
@@ -30,7 +30,6 @@ const CommentHead = ({ id, docid, date, arr }) => {
       .doc(id)
       .get()
       .then((docs) => {
-        console.log(docs.data());
         if (docs.exists) {
           if (modeRef.current) {
             return {
@@ -113,6 +112,7 @@ const CommentHead = ({ id, docid, date, arr }) => {
         </div>
         <div className={classes.active}>
           <h4>{userdata && userdata.name}</h4>
+          <h6 style={{ padding: "3px" }}>likes: ({likes && likes.length})</h6>
           <h6>{smartDate}</h6>
         </div>
         <div className={classes.headerIcons}>

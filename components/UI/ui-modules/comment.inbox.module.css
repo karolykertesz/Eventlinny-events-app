@@ -8,6 +8,7 @@
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
+  object-fit: cover;
 }
 .added {
   display: inline-block;
@@ -51,4 +52,9 @@
   display: block;
   font-size: 12px;
   margin: 8px 0 0;
+}
+@media (max-width: 650px) {
+  .holder {
+    padding: 2px 5px 2px 5px;
+  }
 }

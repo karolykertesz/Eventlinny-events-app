@@ -36,27 +36,6 @@ const Mapper = ({ item, docid }) => {
     });
     return t;
   };
-  // const giveOrtake = (id) => {
-  //   setLiked(!liked);
-  //   if (!liked) {
-  //     setItemid(itemId.filter((i) => i !== id));
-  //     const tr = likeCount.find((i) => i.id === id);
-  //     const newObj = { id: id, like: tr.like >= 1 ? tr.like - 1 : 0 };
-  //     let arr = likeCount.filter((i) => i.id !== id);
-  //     arr = [...arr, newObj];
-  //     setLike(arr);
-  //   } else {
-  //     setItemid(itemId.concat(id));
-  //     const tr = likeCount.find((i) => i.id === id);
-  //     const newObj = { id: id, like: tr.like + 1 };
-  //     let arr = likeCount.filter((i) => i.id !== id);
-  //     arr = [...arr, newObj];
-  //     setLike(arr);
-  //     // setLike(likeCount.id.like + 1);
-  //     // console.log(likeCount.id);
-  //     // console.log(id);
-  //   }
-  // };
 
   return (
     <div>

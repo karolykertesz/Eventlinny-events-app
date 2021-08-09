@@ -50,7 +50,7 @@
 }
 .toggle {
   position: absolute;
-  top: -1000px;
+  top: -11000px;
 }
 .iconToggle {
   position: absolute;
@@ -89,12 +89,12 @@
     z-index: 10;
     background-color: rgba(196, 158, 125, 0.831);
     top: 80px;
-    left: -120px;
-    height: 85%;
-    width: 120%;
+    left: -320px;
+    height: 100%;
+    width: 165%;
     flex-direction: column;
     justify-content: flex-start;
-    margin-left: 50px;
+    padding-left: 350px;
 
     overflow: hidden;
     transition: all 0.4s ease;

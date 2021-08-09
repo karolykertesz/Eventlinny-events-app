@@ -444,6 +444,36 @@ export const getUserAddIds = async () => {
   return docArray;
 };
 
+export const getUserIds = async () => {
+  const userids = [];
+  const keys = await db
+    .collection("user_aditional")
+    .get()
+    .then((keyArray) => {
+      keyArray.docs.forEach((doc) => {
+        userids.push(doc.id);
+      });
+    });
+  return await userids;
+};
+
+export const getUserInfo = async (id) => {
+  let userInfo = {};
+  const user = await db
+    .collection("user_aditional")
+    .doc(id)
+    .get()
+    .then((docs) => {
+      const data = docs.data();
+      userInfo = {
+        name: data.name,
+        imgUrl: data.image_url ? data.image_url : "/images/noimage.svg",
+        language: data.language ? data.language : null,
+        bio: data.bio ? data.bio : null,
+      };
+    });
+  return userInfo;
+};
 export const language = [
   "english",
   "magyar",

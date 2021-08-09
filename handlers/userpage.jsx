@@ -5,6 +5,8 @@ import Image from "next/image";
 import classes from "../components/UI/ui-modules/userpage.module.css";
 import { VscChromeClose, VscDiffAdded } from "react-icons/vsc";
 import { IconContext } from "react-icons";
+import Plus from "../components/UI/icons/plus";
+import { useRouter } from "next/router";
 import {
   Pi,
   IconCover,
@@ -14,6 +16,7 @@ import {
 import UserIcon from "../components/UI/icons/user-icon";
 
 const Userpage = ({ user, userInfo, location, userAdditional, imgUrl }) => {
+  const router = useRouter();
   const [userPrefs, setUserPrefs] = useState();
   const filtereduser = user && user;
   const userInfoNames = userInfo && userInfo.map((item) => item.name);
@@ -92,21 +95,45 @@ const Userpage = ({ user, userInfo, location, userAdditional, imgUrl }) => {
                   <th>Name</th>
                   <td>{filtereduser && filtereduser.name}</td>
                   <td>
-                    <Link href="/userpage/edit/name">Change ...</Link>
+                    <span className={classes.desk}>
+                      <Link href="/userpage/edit/name">Change ...</Link>
+                    </span>
+                    <span
+                      className={classes.mobil}
+                      onClick={() => router.push("/userpage/edit/name")}
+                    >
+                      <Plus width="30px" />
+                    </span>
                   </td>
                 </tr>
                 <tr>
                   <th>Email:</th>
                   <td>{filtereduser.email}</td>
                   <td>
-                    <Link href="/userpage/edit/email">Change ...</Link>
+                    <span className={classes.desk}>
+                      <Link href="/userpage/edit/email">Change ...</Link>
+                    </span>
+                    <span
+                      className={classes.mobil}
+                      onClick={() => router.push("/userpage/edit/email")}
+                    >
+                      <Plus width="30px" />
+                    </span>
                   </td>
                 </tr>
                 <tr>
                   <th>Location:</th>
                   <td>{userLocation}</td>
                   <td>
-                    <Link href="/userpage/edit/email">Change ...</Link>
+                    <span className={classes.desk}>
+                      <Link href="/userpage/edit/location">Change ...</Link>
+                    </span>
+                    <span
+                      className={classes.mobil}
+                      onClick={() => router.push("/userpage/edit/location")}
+                    >
+                      <Plus width="30px" />
+                    </span>
                   </td>
                 </tr>
                 <tr>
@@ -117,20 +144,38 @@ const Userpage = ({ user, userInfo, location, userAdditional, imgUrl }) => {
                       : "Add your birthday.."}
                   </td>
                   <td>
-                    <Link href={`/userpage/edit/birthday?uid=${user.uid}`} ui>
-                      {userAdditional.birthday
-                        ? "change.."
-                        : "Add birthday date.."}
-                    </Link>
+                    <span className={classes.desk}>
+                      <Link href={`/userpage/edit/birthday?uid=${user.uid}`}>
+                        {userAdditional.birthday
+                          ? "change.."
+                          : "Add birthday date.."}
+                      </Link>
+                    </span>
+                    <span
+                      className={classes.mobil}
+                      onClick={() =>
+                        router.push(`/userpage/edit/birthday?uid=${user.uid}`)
+                      }
+                    >
+                      <Plus width="30px" />
+                    </span>
                   </td>
                 </tr>
                 <tr>
                   <th>Bio:</th>
                   <td>{userAdditional.bio ? userAdditional.bio : ""}</td>
                   <td>
-                    <Link href="/userpage/edit/bio">
-                      {userAdditional.bio ? "change.." : "Add your bio.."}
-                    </Link>
+                    <span className={classes.desk}>
+                      <Link href="/userpage/edit/bio">
+                        {userAdditional.bio ? "change.." : "Add your bio.."}
+                      </Link>
+                    </span>
+                    <span
+                      className={classes.mobil}
+                      onClick={() => router.push("/userpage/edit/bio")}
+                    >
+                      <Plus width="30px" />
+                    </span>
                   </td>
                 </tr>
                 <tr>
@@ -141,11 +186,21 @@ const Userpage = ({ user, userInfo, location, userAdditional, imgUrl }) => {
                       : "Add Your Language"}
                   </td>
                   <td>
-                    <Link href={`/userpage/edit/language?uid=${user.uid}`}>
-                      {userAdditional.language
-                        ? "change.."
-                        : "Add your prefered language.."}
-                    </Link>
+                    <span className={classes.desk}>
+                      <Link href={`/userpage/edit/language?uid=${user.uid}`}>
+                        {userAdditional.language
+                          ? "change.."
+                          : "Add your prefered language.."}
+                      </Link>
+                    </span>
+                    <span
+                      className={classes.mobil}
+                      onClick={() =>
+                        router.push(`/userpage/edit/language?uid=${user.uid}`)
+                      }
+                    >
+                      <Plus width="30px" />
+                    </span>
                   </td>
                 </tr>
               </tbody>
@@ -182,7 +237,7 @@ const Userpage = ({ user, userInfo, location, userAdditional, imgUrl }) => {
             </ul>
             <div className={classes.everet}>
               <Link href={`/events/calendar/${user.uid}`}>
-                Your Added Events Click to wiew
+                Your Added Events Click to view
               </Link>
             </div>
           </div>

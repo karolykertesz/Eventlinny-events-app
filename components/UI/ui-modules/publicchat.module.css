@@ -1,18 +1,17 @@
 .cover {
-  width: 60vw;
+  width: 50vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: absolute;
   border: 1px solid rgb(216, 199, 175);
-  transform: translate(-50%, 5%);
+  transform: translate(-50%, 15%);
   left: 50%;
-
-  -webkit-transform: translate(-50%, 5%);
-  -moz-transform: translate(-50%, 5%);
-  -ms-transform: translate(-50%, 5%);
-  -o-transform: translate(-50%, 5%);
+  -webkit-transform: translate(-50%, 15%);
+  -moz-transform: translate(-50%, 15%);
+  -ms-transform: translate(-50%, 15%);
+  -o-transform: translate(-50%, 15%);
   height: 70vh;
   background-color: #fff5e6;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
