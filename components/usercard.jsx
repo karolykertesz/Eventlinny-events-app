@@ -1,8 +1,8 @@
+import React, { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 import classes from "../components/UI/ui-modules/user.module.css";
 const UserCard = (props) => {
   const { user, events } = props;
-  console.log(events);
 
   return (
     <div className={classes.container}>

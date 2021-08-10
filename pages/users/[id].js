@@ -1,16 +1,38 @@
+import React, { useState, useCallback, useEffect } from "react";
 import { getUserIds, getUserEvents, getUserInfo } from "../../data";
 import classes from "../../components/UI/ui-modules/user.module.css";
 import UserCard from "../../components/usercard";
 import { useRedirect } from "../../helpers/validatehelp";
+import UserEventcard from "../../components/UI/usereventcard";
 const User = (props) => {
   useRedirect();
   const { user, userEvents } = props;
+  const [s, setSort] = useState();
+  const sorting = useCallback(async () => {
+    const arr = [];
+    const sorted = await userEvents.flatMap((e) => [e.category]);
+    await sorted.map((i) => !arr.includes(i) && arr.push(i));
+    await setSort(arr);
+  }, [setSort]);
+  useEffect(() => {
+    sorting();
+  }, [sorting]);
   return (
     <div className={classes.top}>
       <div className={classes.box}>
         <UserCard user={user} events={userEvents} />
       </div>
-      <div className={classes.events}>ii</div>
+      <div className={classes.events}>
+        <p>categories added</p>
+        <div className={classes.grid}>
+          {s &&
+            s.map((item) => (
+              <div key={item}>
+                <UserEventcard item={item} />
+              </div>
+            ))}
+        </div>
+      </div>
     </div>
   );
 };
