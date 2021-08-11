@@ -115,6 +115,7 @@ const PageTitle = styled.span`
   text-align: center;
   text-transform: uppercase;
   font-size: 17px;
+  margin-top: 100px;
 `;
 export const CoverDiv = styled.div`
   @media (max-width: 600px) {

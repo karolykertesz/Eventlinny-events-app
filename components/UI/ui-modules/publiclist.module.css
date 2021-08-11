@@ -5,7 +5,9 @@
   width: 100px;
   height: 80px;
 }
-
+.allTop {
+  margin-top: 100px;
+}
 .cover {
   position: absolute;
   left: 50%;

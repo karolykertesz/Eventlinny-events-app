@@ -5,21 +5,13 @@ import { allUserPref } from "../../../helpers/wrappers/userPrefwrap";
 import StartItem from "../../../components/startitem";
 import CreateEvent from "../../../components/createEvent";
 import { Grid } from "../../../components/UI/styledindex";
+import { useRedirect } from "../../../helpers/validatehelp";
 
 const Slug = () => {
+  useRedirect();
   const [data, seTdata] = useState();
   const router = useRouter();
   const query = router.query.slug;
-  useEffect(() => {
-    return new Promise(async (resolve, reject) => {
-      const mess = await fetch("/api/users/validateSesion");
-      resolve(mess);
-    }).then((response) => {
-      if (response.status === 400) {
-        router.push("/login");
-      }
-    });
-  }, []);
   useEffect(() => {
     let isTrue = true;
     if (query && isTrue) {

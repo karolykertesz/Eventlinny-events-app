@@ -126,11 +126,19 @@ const Userpage = ({ user, userInfo, location, userAdditional, imgUrl }) => {
                   <td>{userLocation}</td>
                   <td>
                     <span className={classes.desk}>
-                      <Link href="/userpage/edit/location">Change ...</Link>
+                      <Link
+                        href={`/userpage/edit/location?def=${countryCode}&uid=${user.uid}`}
+                      >
+                        Change ...
+                      </Link>
                     </span>
                     <span
                       className={classes.mobil}
-                      onClick={() => router.push("/userpage/edit/location")}
+                      onClick={() =>
+                        router.push(
+                          `/userpage/edit/location?def=${countryCode}&uid=${user.uid}`
+                        )
+                      }
                     >
                       <Plus width="30px" />
                     </span>

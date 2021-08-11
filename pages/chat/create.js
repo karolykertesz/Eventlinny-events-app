@@ -1,8 +1,7 @@
 import React, { useState, useRef } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { useRouter } from "next/router";
 import classes from "../../components/UI/ui-modules/chat.module.css";
-import ChatPop from "../../components/UI/reactbootstrap/chatpop";
 import ChatModal from "../../components/UI/reactbootstrap/chatmodal";
 import { useRedirect } from "../../helpers/validatehelp";
 const Chat = () => {

@@ -11,4 +11,5 @@ export { publicChat } from "./users/publicchatceate";
 export { signCheckOut } from "./users/signcheckout";
 export { publicCreate } from "./users/publiccreate";
 export { privateOncreate } from "./users/privateoncreate";
+export { getuserData } from "./users/getuserdata";
 // export { dailyDelete } from "./users/deletecron";

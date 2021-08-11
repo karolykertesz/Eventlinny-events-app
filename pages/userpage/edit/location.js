@@ -6,11 +6,11 @@ import LocationCity from "../../../components/locationCity";
 import LocationState from "../../../components/locationState";
 import classes from "../../../components/UI/ui-modules/location.module.css";
 import styled from "styled-components";
-import { ButtonComp } from "../../startup";
+import { useRedirect } from "../../../helpers/validatehelp";
 
 import { startup } from "../../../helpers/axios/getlocaion";
-import { route } from "next/dist/next-server/server/router";
 const LocationChange = () => {
+  useRedirect();
   const [country, setCountry] = useState();
   const [city, setCity] = useState();
   const [countrycode, setCountrycode] = useState();
@@ -28,12 +28,7 @@ const LocationChange = () => {
     selectedState && selectedCity && selectedCountry
       ? selectedCountry[0].name + " ," + selectedCity + " ," + selectedState
       : "";
-  const unsubscribe = async () => {
-    const validate = await fetch("/api/users/validateSesion");
-    if (validate.status > 350) {
-      return router.push("/login");
-    }
-  };
+
   const cancelAll = () => {
     setselectedstate(undefined);
     setgoback(true);
@@ -60,9 +55,7 @@ const LocationChange = () => {
     setSelectedCity(undefined);
     setgoback(false);
   };
-  useEffect(() => {
-    return unsubscribe;
-  }, []);
+
   useEffect(() => {
     return new Promise((resolve, reject) => {
       resolve(startup(city, setCountry));

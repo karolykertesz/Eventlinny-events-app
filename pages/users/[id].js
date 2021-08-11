@@ -6,7 +6,7 @@ import { useRedirect } from "../../helpers/validatehelp";
 import UserEventcard from "../../components/UI/usereventcard";
 const User = (props) => {
   useRedirect();
-  const { user, userEvents } = props;
+  const { user, userEvents, id } = props;
   const [s, setSort] = useState();
   const sorting = useCallback(async () => {
     const arr = [];
@@ -20,7 +20,7 @@ const User = (props) => {
   return (
     <div className={classes.top}>
       <div className={classes.box}>
-        <UserCard user={user} events={userEvents} />
+        <UserCard user={user} events={userEvents} id={id} />
       </div>
       <div className={classes.events}>
         <p>categories added</p>
@@ -47,6 +47,7 @@ export async function getStaticProps(context) {
   return {
     props: {
       user: dd,
+      id: context.params.id,
       userEvents: events,
     },
     revalidate: 30,
