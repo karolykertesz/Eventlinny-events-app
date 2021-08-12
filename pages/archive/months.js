@@ -6,15 +6,17 @@ import LogisticGrid from "../../components/event-detail/logistic-item-grid";
 import { useRedirect } from "../../helpers/validatehelp";
 
 const Months = () => {
-  const getdata = useCallback(async () => {
-    const d = await getArchiveMont(month && month);
-    await setData(d);
-  }, []);
   useRedirect();
-  const trueRef = useRef(true);
-  const [data, setData] = useState();
   const router = useRouter();
   const month = router.query.m;
+  const [data, setData] = useState();
+  const getdata = useCallback(async () => {
+    if (month) {
+      const d = await getArchiveMont(month && month.toLocaleLowerCase());
+      await setData(d);
+    }
+  }, [setData]);
+  const trueRef = useRef(true);
   useEffect(() => {
     getdata();
   }, [getdata]);

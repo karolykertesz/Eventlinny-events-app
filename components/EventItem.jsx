@@ -59,16 +59,15 @@ const EventItem = (props) => {
 
           <div className={classes.date}>
             <DateIcon />
-            <time> starts {new Date(start).toLocaleDateString()}</time>
-            <time> at {new Date(start).toLocaleTimeString()}</time>
+            <time> starts: {new Date(start).toLocaleDateString()}</time>
           </div>
           <div className={classes.address}>
             <AddresIcon />
-            <address>{addressV}</address>
+            <address className={classes.t}>{addressV}</address>
           </div>
           <div className={classes.address}>
             <PersonIcon />
-            <address style={{ textAlign: "center", marginBottom: "1px" }}>
+            <address style={{ textAlign: "center" }} className={classes.t}>
               {attEndiesLength}
             </address>
           </div>

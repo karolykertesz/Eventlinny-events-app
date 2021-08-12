@@ -1,22 +1,17 @@
 .top {
-  margin-top: 40px;
+  /*margin-top: 100px;
+  */
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 30px;
-  overflow: hidden;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 5%);
-  -webkit-transform: translate(-50%, 5%);
-  -moz-transform: translate(-50%, 5%);
-  -ms-transform: translate(-50%, 5%);
-  -o-transform: translate(-50%, 5%);
+  position: relative;
+  margin: 100px auto;
+  width: 100%;
 }
 .eventGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  width: 30vw;
-  overflow-y: auto;
+  width: 100%;
 }
 .ul {
   display: grid;
@@ -25,18 +20,123 @@
   padding: 20px;
   margin: 20px auto;
 }
-
+.disabled {
+  opacity: 0.3;
+}
+.input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .li {
   margin: 20px 0 100px 0;
   height: auto;
 }
-.selectDiv {
-  position: absolute;
-  left: -15%;
-  top: 3%;
-  width: 60%;
+.bg {
+  top: 20%;
+  left: 50%;
+  margin: 100px auto;
 }
-
+.bg p {
+  text-align: center;
+  position: absolute;
+  top: 20px;
+  left: -20px;
+  transform: translate(40%, -50%);
+  -webkit-transform: translate(40%, -50%);
+  -moz-transform: translate(40%, -50%);
+  -ms-transform: translate(40%, -50%);
+  -o-transform: translate(40%, -50%);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  text-transform: capitalize;
+  color: burlywood;
+  font-size: 18px;
+  font-weight: 500;
+}
+.search {
+  /*display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  */
+  width: 350px;
+  border-radius: 50%;
+  /*position: relative;
+  */
+  height: 60px;
+  margin: auto;
+  border-radius: 25px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  transition: all 0.6s ease;
+  background-color: burlywood;
+  -webkit-transition: all 0.6s ease;
+  -moz-transition: all 0.6s ease;
+  -ms-transition: all 0.6s ease;
+  -o-transition: all 0.6s ease;
+}
+.search:hover {
+  width: 350px;
+}
+.search:active {
+  width: 350px;
+}
+.input {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  margin-bottom: 10px;
+}
+.input input {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-radius: 25px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -o-border-radius: 25px;
+  outline: none;
+  border: none;
+  padding-left: 20px;
+}
+.input input::placeholder {
+  color: burlywood;
+  font-size: 19px;
+}
+.input .iconSearch {
+  position: absolute;
+  right: -3px;
+  top: 0;
+  width: 50px;
+  background: burlywood;
+  height: 100%;
+  width: 60px;
+  border-radius: 50%;
+  transition: all 0.6s ease;
+  font-weight: 700;
+  -webkit-transition: all 0.6s ease;
+  -moz-transition: all 0.6s ease;
+  -ms-transition: all 0.6s ease;
+  -o-transition: all 0.6s ease;
+  cursor: pointer;
+}
+.input .iconSearch:hover {
+  transform: rotate(320deg) scale(1.1);
+  -webkit-transform: rotate(320deg) scale(1.1);
+  -moz-transform: rotate(320deg) scale(1.1);
+  -ms-transform: rotate(320deg) scale(1.1);
+  -o-transform: rotate(320deg) scale(1.1);
+}
+/* .nav > .toggle:checked ~ .iconToggle .line:nth-child(1) {
+  transform: translateY(10px) rotate(225deg);
+  -webkit-transform: translateY(10px) rotate(225deg);
+  -moz-transform: translateY(10px) rotate(225deg);
+  -ms-transform: translateY(10px) rotate(225deg);
+  -o-transform: translateY(10px) rotate(225deg);
+} */
 @media (min-width: 800px) {
   .bg {
     display: flex;
@@ -45,7 +145,7 @@
 }
 @media (min-width: 1000px) {
   .top {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
@@ -73,7 +173,7 @@
   .ul {
     grid-template-columns: 1fr 1fr;
     gap: 25px;
-    margin: -40px 50px 0 0;
+    margin: -40px 0 0 30px;
   }
   .ul {
     width: 180px !important;

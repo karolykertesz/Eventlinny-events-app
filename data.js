@@ -157,7 +157,7 @@ export const user_archive = async () => {
   }));
   return dockArray;
 };
-export const getArchiveMont = async (month = "june") => {
+export const getArchiveMont = async (month) => {
   const date = new Date();
   const startMonth = new Date(`2021-${month}-01`);
   const endMonth = new Date(`2021-${month}-31`);
@@ -166,6 +166,7 @@ export const getArchiveMont = async (month = "june") => {
     .collection("user_add_events")
     .where("starts", ">=", startMonth)
     .where("starts", "<=", endMonth)
+    .where("starts", "<=", date)
     .get();
   const dockArray = (await docref).docs.map((item) => ({
     id: item.id,

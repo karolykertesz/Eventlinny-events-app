@@ -3,6 +3,7 @@ import EventList from "../../components/EventList";
 import EventSearch from "../../components/event-search.jsx";
 import { useRouter } from "next/router";
 import { getAllEvents, user_events_data } from "../../data";
+import styled from "styled-components";
 import firebase from "firebase";
 import Head from "next/head";
 import FirebaseClient from "../../helpers/firebase";
@@ -31,11 +32,11 @@ const AllEvents = ({ eventss }) => {
       </Head>
 
       {event && (
-        <div style={{ marginTop: "100px" }}>
+        <Cover>
           <EventList items={event} />
-          <div>kkkkkk</div>
           <div></div>
-        </div>
+          <div></div>
+        </Cover>
       )}
     </>
   );
@@ -60,3 +61,10 @@ export async function getStaticProps() {
     revalidate: 1800,
   };
 }
+
+const Cover = styled.div`
+  margin: 100px;
+  @media (max-width: 650px) {
+    margin: 100px 0 0 0;
+  }
+`;

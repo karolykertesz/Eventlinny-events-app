@@ -43,7 +43,8 @@ export const CoverRow = styled.div`
   justify-content: center;
   max-width: 600px;
   align-items: flex-start;
-  margin: 10px auto;
+  margin: 5px auto;
+  cursor: pointer;
   flex-direction: row;
 `;
 export const CatContainer = (props) => {

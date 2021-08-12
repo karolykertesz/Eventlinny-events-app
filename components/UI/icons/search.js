@@ -1,12 +1,13 @@
-const Info = (props) => {
+const Search = (props) => {
   return (
     <div
       style={{
-        width: props.width,
         color: props.color,
-        position: props.position,
-        top: props.top,
-        left: props.left,
+        width: props.width,
+        position: "absolute",
+        top: "30%",
+        left: "20%",
+        fontWeight: "700",
       }}
     >
       <svg
@@ -20,10 +21,10 @@ const Info = (props) => {
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth={2}
-          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
         />
       </svg>
     </div>
   );
 };
-export default Info;
+export default Search;

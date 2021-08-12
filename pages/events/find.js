@@ -33,7 +33,8 @@ import { useAuth } from "../../components/Layout/UserContext";
 import FindImage from "../../components/findImage";
 import firebase from "firebase";
 import { useRedirect } from "../../helpers/validatehelp";
-
+import Search from "../../components/UI/icons/search";
+import Info from "../../components/UI/icons/info";
 const find = () => {
   useRedirect();
   const [category, setCat] = useState("");
@@ -47,11 +48,10 @@ const find = () => {
   const modeRef = useRef(true);
   const user = useAuth().user;
 
-  const setitems = () => {
-    setIscat(!isCat);
-    setError("");
+  const resetFunc = () => {
+    setCat("");
+    setLoc("");
   };
-
   const getSugestion = useCallback(async () => {
     const docref = firebase.firestore().collection("user_add_events");
     const docArray = [];
@@ -95,6 +95,8 @@ const find = () => {
     setLoading(true);
     if (!category && !location) {
       setError("You Need to select eather a category or Location");
+      resetFunc();
+      setLoading(false);
       return;
     }
 
@@ -107,7 +109,8 @@ const find = () => {
           }
           return setItems(i);
         })
-        .then(() => setLoading(false));
+        .then(() => setLoading(false))
+        .then(() => resetFunc());
     }
     if (!location && category) {
       return onlyCat(category)
@@ -118,7 +121,8 @@ const find = () => {
           }
           return setItems(i);
         })
-        .then(() => setLoading(false));
+        .then(() => setLoading(false))
+        .then(() => resetFunc());
     }
     if (location && !category) {
       return onlyLoc(location)
@@ -129,7 +133,8 @@ const find = () => {
           }
           return setItems(i);
         })
-        .then(() => setLoading(false));
+        .then(() => setLoading(false))
+        .then(() => resetFunc());
     }
   };
   if (loading) {
@@ -142,70 +147,47 @@ const find = () => {
   return (
     <div className={classes.top}>
       <div className={classes.bg}>
-        <Cover>
-          <PiBig>{!isCat && "Find Event"}</PiBig>
-          {isCat && (
-            <div className={classes.selectDiv}>
-              <FindSelect setCat={setCat} />
-            </div>
-          )}
-          {!isCat && (
-            <InputHolder>
-              <Input
-                placeholder="By category"
-                onChange={(e) => setCat(e.target.value)}
-                value={category}
-              />
-              <Input
+        <p>Search Event By category or Location</p>
+        <div className={classes.box}>
+          <div className={classes.search}>
+            <div className={classes.input}>
+              <input
                 placeholder="By location"
                 onChange={(e) => setLoc(e.target.value)}
                 value={location}
               />
-            </InputHolder>
-          )}
-
-          <SendButton onClick={() => returnCateroies()}>Find Event</SendButton>
-          <CatContainer>
-            <Pi>{!isCat ? "Or select category" : "Cancel category"}</Pi>
-            <SVG onClick={() => setitems()}>
-              {!isCat ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              )}
-            </SVG>
-          </CatContainer>
-
-          {error && <Error>{error}</Error>}
-        </Cover>
+              <label
+                htmlFor="check"
+                className={classes.iconSearch}
+                onClick={() => returnCateroies()}
+              >
+                <Search width="25px" color="#FFF" />
+              </label>
+            </div>
+            <div className={classes.input}>
+              <input
+                placeholder="By category"
+                onChange={(e) => setCat(e.target.value)}
+                value={category}
+              />
+              <label
+                htmlFor="check"
+                className={classes.iconSearch}
+                onClick={() => returnCateroies()}
+              >
+                <Search
+                  width="25px"
+                  color="#FFF"
+                  position="absolute"
+                  top="30%"
+                  left="25%"
+                />
+              </label>
+            </div>
+            {error && <Error>{error}</Error>}
+          </div>
+        </div>
       </div>
-
       <div className={classes.secTop}>
         <PiBig>Suggestions</PiBig>
         <ul className={classes.ul}>

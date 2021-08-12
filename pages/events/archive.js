@@ -32,11 +32,11 @@ const MainArchive = ({ eventss }) => {
       setEventsBy(arrSep);
     });
   }, [setEventsBy]);
-  console.log(eventsBy);
   useRedirect();
   useEffect(() => {
     filterMe();
   }, [filterMe]);
+
   return (
     <div>
       <p className={classes.pi}>2021</p>
