@@ -13,28 +13,13 @@ import {
   locAndCat,
 } from "../../helpers/wrappers/findfunctions";
 
-import {
-  Pi,
-  PiBig,
-  Cover,
-  Input,
-  SendButton,
-  InputHolder,
-  SVG,
-  CatContainer,
-  Cdiv,
-  Error,
-} from "../../components/UI/styledindex";
-import SelectInput from "../../components/selectinput";
-import FindSelect from "../../components/UI/findselect";
+import { PiBig, Error } from "../../components/UI/styledindex";
 import classes from "../../components/UI/ui-modules/find.module.css";
-import { getuserPrefWithWithCat, getusercat } from "../../data";
 import { useAuth } from "../../components/Layout/UserContext";
 import FindImage from "../../components/findImage";
 import firebase from "firebase";
 import { useRedirect } from "../../helpers/validatehelp";
 import Search from "../../components/UI/icons/search";
-import Info from "../../components/UI/icons/info";
 const find = () => {
   useRedirect();
   const [category, setCat] = useState("");

@@ -10,7 +10,7 @@ import { getComments } from "../../data";
 import firebase from "firebase";
 import { Nocomments } from "./indexholders";
 import CommentHead from "../holders/commentsHead";
-import Loader from "../UI/loader";
+import BigLoader from "../UI/BigLoader";
 import CommentsBody from "../holders/commentsbody";
 const ComentsCross = ({ id }) => {
   const [comments, setComments] = useState(null);
@@ -37,7 +37,7 @@ const ComentsCross = ({ id }) => {
     datafetch();
   }, [datafetch]);
   if (loading) {
-    return <Loader />;
+    return <BigLoader />;
   }
   return (
     <div className={classes.hold}>

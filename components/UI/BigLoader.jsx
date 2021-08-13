@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "../UI/ui-modules/loader.module.css";
-const Loader = () => {
+const BigLoader = () => {
   return (
     <div className={classes.load}>
       <hr />
@@ -10,4 +10,4 @@ const Loader = () => {
     </div>
   );
 };
-export default Loader;
+export default BigLoader;

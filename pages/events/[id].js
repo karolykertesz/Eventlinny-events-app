@@ -2,14 +2,14 @@ import Head from "next/head";
 import { getKeys, findById } from "../../data";
 
 import { useAuth } from "../../components/Layout/UserContext";
-import Loader from "../../components/UI/loader";
+import BigLoader from "../../components/UI/BigLoader";
 import EventComp from "../../components/eventComp";
 import classes from "../../components/UI/ui-modules/eventComp.module.css";
 const SingleEvent = ({ single }) => {
   if (!single) {
     return (
       <span className="center">
-        <Loader />
+        <BigLoader />
       </span>
     );
   }

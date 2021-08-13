@@ -1,0 +1,69 @@
+.top {
+  margin-top: 100px;
+  min-width: 350px;
+  max-width: 550px;
+  position: relative;
+  display: block;
+  margin: 150px auto;
+}
+.header {
+  height: 50px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  width: 100%;
+  background-color: burlywood;
+  opacity: 0.2;
+  overflow: hidden;
+  border-radius: 15px 15px 0 0;
+  -webkit-border-radius: 15px 15px 0 0;
+  -moz-border-radius: 15px 15px 0 0;
+  -ms-border-radius: 15px 15px 0 0;
+  -o-border-radius: 15px 15px 0 0;
+}
+.header p {
+  opacity: 1 !important;
+  padding-left: 20px;
+  padding-right: 180px;
+  font-weight: 600;
+
+  color: black;
+  letter-spacing: 1px;
+  margin-top: 15px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.input::placeholder {
+  color: #f0e5c7;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  overflow: hidden;
+}
+.input {
+  padding: 0 0 0 30px;
+}
+.dis {
+  padding: 0 0 0 30px;
+}
+.dis::placeholder {
+  color: #e2b332;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  overflow: hidden;
+}
+.group {
+  height: 98%;
+  background-color: burlywood;
+  cursor: pointer;
+}
+.icon {
+  width: 25px;
+  height: 23px;
+  color: #fff;
+}
+.arrowIcon {
+  height: 50px;
+  color: #fff;
+  width: 50px;
+  cursor: pointer;
+}

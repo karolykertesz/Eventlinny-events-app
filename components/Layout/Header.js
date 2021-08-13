@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import ButtonPop from "../UI/buttonpop";
 import { useAuth } from "../Layout/UserContext";
-import Loader from "../UI/loader";
+import BigLoader from "../UI/BigLoader";
 import Image from "next/image";
 
 const Header = () => {
@@ -49,7 +49,7 @@ const Header = () => {
       .catch((err) => console.log(err));
   };
   if (loading) {
-    return <Loader />;
+    return <BigLoader />;
   }
   return (
     <nav className={classes.nav}>

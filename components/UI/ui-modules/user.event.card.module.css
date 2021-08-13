@@ -29,3 +29,9 @@
   font-size: large;
   font-weight: 600;
 }
+@media (max-width: 650px) {
+  .top {
+    width: 120px;
+    height: 120px;
+  }
+}

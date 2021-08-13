@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import firebase from "firebase";
 import classes from "../../components/UI/ui-modules/publicchat.module.css";
-import ChatItem from "../../components/UI/chatitem";
 import { singOut } from "../chat/chat-hooks";
 import Image from "next/image";
 import MessageHolder from "../../components/UI/messageholder";

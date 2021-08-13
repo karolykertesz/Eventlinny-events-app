@@ -9,7 +9,7 @@ import LocationCity from "../locationCity";
 import EventDatePicker from "../eventDatepicker";
 import { useAuth } from "../../components/Layout/UserContext";
 import { sendEmailWithEvent } from "../../helpers/sendEmailWithEvent";
-import Loader from "../UI/loader";
+import BigLoader from "../UI/BigLoader";
 import { TablePopOver } from "../UI/reactbootstrap/popover";
 
 const eventsReducer = (state, action) => {
@@ -179,7 +179,7 @@ const Eventadder = ({
     }
   }, [state.eventLocation]);
   if (loading) {
-    return <Loader />;
+    return <BigLoader />;
   }
   console.log(selectedcategory.toLowerCase());
   return (

@@ -23,7 +23,7 @@ const User = (props) => {
         <UserCard user={user} events={userEvents} id={id} />
       </div>
       <div className={classes.events}>
-        <p>categories added</p>
+        <p>{user.name} added categories</p>
         <div className={classes.grid}>
           {s &&
             s.map((item) => (

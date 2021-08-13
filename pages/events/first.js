@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback, useRef } from "react";
 import { Layer } from "../../components/UI/uiLayer ";
 import FirstPageItem from "../../components/UI/firstpageItem";
 import { NameDiv, Pi } from "../../components/UI/firstpageItem";
-import Loader from "../../components/UI/loader";
+import BigLoader from "../../components/UI/BigLoader";
 import classes from "../../components/UI/ui-modules/first.module.css";
 import { useAuth } from "../../components/Layout/UserContext";
 import { getusercat, getuserPrefWithWithCat } from "../../data";
@@ -54,7 +54,7 @@ const First = () => {
     };
   }, [getStaticData]);
   return !data || !userInfo ? (
-    <Loader />
+    <BigLoader />
   ) : (
     <div>
       {userInfo && (

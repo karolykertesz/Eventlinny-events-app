@@ -1,12 +1,16 @@
 import React, { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 import classes from "../components/UI/ui-modules/user.module.css";
-import { useAuth } from "../components/Layout/UserContext";
+import Mail from "../components/UI/icons/mail";
 import firebase from "firebase";
+import { useRouter } from "next/router";
+import { useAuth } from "./Layout/UserContext";
 const UserCard = (props) => {
+  const currentUser = useAuth().user;
+  const uid = currentUser && currentUser.uid;
   const { user, events, id } = props;
+  const router = useRouter();
   const [admin, setAdmin] = useState();
-
   const getUserdata = useCallback(async () => {
     if (id) {
       const getData = firebase.functions().httpsCallable("getuserData");
@@ -57,6 +61,15 @@ const UserCard = (props) => {
         <p>Events Added: {events ? events.length : "(0)"}</p>
         <p>Account Created: {admin && created}</p>
         <p>Last Visit: {admin && LastSigned}</p>
+        {uid !== id && (
+          <div
+            className={classes.mail}
+            onClick={() => router.push(`/chat/message/?i=${id}`)}
+          >
+            <p>contact {user.name}</p>
+            <Mail width="25px" color="#fff" />
+          </div>
+        )}
       </div>
     </div>
   );

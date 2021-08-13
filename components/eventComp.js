@@ -98,15 +98,6 @@ const EventComp = ({ single }) => {
           <TopHolder>
             <ComentsCross id={single.id && single.id} />
           </TopHolder>
-          {/* <CommentsAddedBy added_by={comments.added_by} />
-              <ComentContainer>
-                {/* <UseComentTop
-                  uid={
-                    commentRef.current !== null && commentRef.current.added_by
-                  }
-                /> */}
-          {/* <IconDock icon={Comments} /> */}
-          {/* </ComentContainer> */}
         </div>
       </div>
     </Fragment>
