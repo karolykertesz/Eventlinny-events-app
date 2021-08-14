@@ -3,7 +3,6 @@ import Eye from "../UI/icons/eye-icon";
 import EyeOff from "../Ui/icons/eye-off";
 import NotificationOvarlay from "../UI/reactbootstrap/notificationoverlay";
 const NotiItem = ({ item, cat }) => {
-  console.log(item);
   return (
     <div className={cat === "unread" ? classes.cover : classes.inactive}>
       <NotificationOvarlay body={item.created_at}>

@@ -15,6 +15,7 @@ const ButtonPop = (props) => {
   const user = useAuth().user;
   const isBanned = useBanned();
   const [note, setnote] = useState();
+
   const getNotifications = useCallback(async () => {
     const docref = firebase
       .firestore()

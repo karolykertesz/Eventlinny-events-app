@@ -108,26 +108,31 @@ const Login = () => {
               />
             </div>
             <button className={classes.login}>Login</button>
-
-            <GoogleButton onClick={() => googleSign()}>
-              <IconContext.Provider
-                value={{ color: "white", className: classes.google }}
-              >
-                <ImGoogle3 />
-              </IconContext.Provider>
-            </GoogleButton>
-            <Fbbutton onClick={() => facebookSignIn()}>
-              <IconContext.Provider
-                value={{ color: "white", className: classes.google }}
-              >
-                <ImFacebook2 />
-              </IconContext.Provider>
-            </Fbbutton>
-            <div className={classes.link}>
-              <Link href="/signup">Sign Up</Link>
-            </div>
           </div>
         </form>
+        <GoogleButton onClick={() => googleSign()}>
+          <IconContext.Provider
+            value={{
+              size: 23,
+              color: "#fff",
+            }}
+          >
+            <ImGoogle3 />
+          </IconContext.Provider>
+        </GoogleButton>
+        <Fbbutton onClick={() => facebookSignIn()}>
+          <IconContext.Provider
+            value={{
+              size: 23,
+              color: "#fff",
+            }}
+          >
+            <ImFacebook2 />
+          </IconContext.Provider>
+        </Fbbutton>
+        <div className={classes.link}>
+          <Link href="/signup">Sign Up</Link>
+        </div>
         <Error>{error && error}</Error>
       </div>
     </div>

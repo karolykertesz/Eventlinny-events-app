@@ -1,8 +1,5 @@
-import firebase from "firebase/app";
-import FirebaseClient from "../helpers/firebase";
-import "firebase/auth";
+import firebase from "firebase";
 const googleSign = (fn) => async () => {
-  FirebaseClient();
   const provider = new firebase.auth.GoogleAuthProvider();
   provider.addScope("profile");
   provider.addScope("email");

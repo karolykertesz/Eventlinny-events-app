@@ -36,6 +36,7 @@ const NotificationModal = (props) => {
         });
     }
   };
+
   const getcategory = () => {
     let items;
     if (cat && single) {
@@ -48,6 +49,7 @@ const NotificationModal = (props) => {
     return items;
   };
   const singleItem = getcategory();
+  console.log(cat);
   const noteAdded =
     singleItem &&
     new Date(singleItem.created_at).toLocaleDateString("EN-hu", {
@@ -71,8 +73,7 @@ const NotificationModal = (props) => {
 
         <Modal.Body>
           <div className={classes.bodyDiv}>
-            {singleItem &&
-              singleItem.text.map((item, indx) => <p key={indx}>{item}</p>)}
+            {singleItem && <p>{singleItem.text}</p>}
           </div>
           <button onClick={() => sendAndClose()} className={classes.closeBtn}>
             Close

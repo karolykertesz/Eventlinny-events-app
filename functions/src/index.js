@@ -12,4 +12,5 @@ export { signCheckOut } from "./users/signcheckout";
 export { publicCreate } from "./users/publiccreate";
 export { privateOncreate } from "./users/privateoncreate";
 export { getuserData } from "./users/getuserdata";
+export { notificationEmail } from "./users/notificationemail";
 // export { dailyDelete } from "./users/deletecron";

@@ -10,7 +10,7 @@ import { useRedirect } from "../../helpers/validatehelp";
 import { IoArrowUndoOutline } from "react-icons/io5";
 import { validate } from "validate.js";
 import { v4 as uuid_v4 } from "uuid";
-import { setNotifications, getuserimage } from "../../data";
+import { setNotifications } from "../../data";
 import Image from "next/image";
 
 const Message = () => {
@@ -62,18 +62,14 @@ const Message = () => {
       return;
     }
 
-    // const userImage = useCallback(() => {
-    //   if(id){
-    //     return firebase.f
-    //   }
-    // }, []);
-
     const currentRef = await firebase.firestore().collection("user_aditional");
     const docId = uuid_v4();
     const userArr = [uid, id];
     const notificationText = `Hi ${
       userDet && userDet.name
-    } you received a new message from ${currentUser.name}`;
+    } you received a new message from ${
+      currentUser && currentUser.name
+    } check Your messages`;
     const promises = userArr.map((item) =>
       currentRef.doc(item).collection("conversations")
     );
@@ -93,7 +89,18 @@ const Message = () => {
         const r = await setNotifications(id, docId, notificationText);
       })
       .then(() => setError("Your Message Sent"))
-      .then(() => setSent(true))
+      .then(async () => {
+        const sendEmail = firebase
+          .functions()
+          .httpsCallable("notificationEmail");
+        await sendEmail({
+          email: userDet && userDet.email,
+          sender: currentUser.name,
+          receiver: userDet && userDet.name,
+        }).then(() => {
+          setSent(true);
+        });
+      })
       .catch((err) => {
         setLoading(false);
         console.log(err);
@@ -102,7 +109,6 @@ const Message = () => {
   if (loading) {
     return <BigLoader />;
   }
-
   return (
     <div className={classes.cover}>
       {sent && (
@@ -143,7 +149,15 @@ const Message = () => {
               className={classes.group + " " + "input-group-text"}
               onClick={() => sendMessage()}
             >
-              <IconContext.Provider value={{ className: classes.icon }}>
+              <IconContext.Provider
+                value={{
+                  style: {
+                    width: "25px",
+                    height: "25px",
+                    color: "#fff",
+                  },
+                }}
+              >
                 <BiPaperPlane />
               </IconContext.Provider>
             </span>

@@ -112,7 +112,7 @@ const Login = () => {
               </IconContext.Provider>
             </Fbbutton>
             <div className={classes.link}>
-              <Link href="/signup">Log In</Link>
+              <Link href="/login">Log In</Link>
             </div>
           </div>
         </form>

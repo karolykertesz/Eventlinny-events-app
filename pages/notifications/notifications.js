@@ -25,8 +25,6 @@ const UserNotes = () => {
           unread: snap.data().unread ? snap.data().unread : "",
           read: snap.data().read ? snap.data().read : "",
         });
-      } else {
-        router.push("/events/first");
       }
     });
   }, [id]);
