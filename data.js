@@ -41,6 +41,32 @@ export function getFeaturedEvents() {
   return DUMMY_EVENTS.filter((event) => event.isFeatured);
 }
 
+export const setNotifications = async (id, docId, text) => {
+  const docref = db.collection("notifications").doc(id);
+  await docref.get().then((doc) => {
+    if (doc.exists) {
+      docref.update({
+        unread: firebase.firestore.FieldValue.arrayUnion({
+          created_at: new Date().getTime(),
+          text: text,
+          id: docId,
+        }),
+      });
+    } else {
+      docref.set({
+        read: [],
+        unread: [
+          {
+            text: text,
+            id: docId,
+            created_at: new Date().getTime(),
+          },
+        ],
+      });
+    }
+  });
+};
+
 export async function getAllEvents() {
   const allEv = [];
   try {

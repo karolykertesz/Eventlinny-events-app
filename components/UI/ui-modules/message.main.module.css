@@ -6,6 +6,23 @@
   display: block;
   margin: 150px auto;
 }
+.cover {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.arrow {
+  position: absolute;
+  right: 5%;
+  top: 10%;
+}
+.arrow p {
+  text-transform: capitalize;
+  color: burlywood;
+}
+.header img {
+  object-fit: cover;
+}
 .header {
   height: 50px;
   display: flex;
@@ -13,7 +30,7 @@
   justify-content: space-between;
   width: 100%;
   background-color: burlywood;
-  opacity: 0.2;
+  opacity: 0.6;
   overflow: hidden;
   border-radius: 15px 15px 0 0;
   -webkit-border-radius: 15px 15px 0 0;
@@ -27,7 +44,7 @@
   padding-right: 180px;
   font-weight: 600;
 
-  color: black;
+  color: #fff;
   letter-spacing: 1px;
   margin-top: 15px;
   font-family: Georgia, "Times New Roman", Times, serif;
@@ -63,7 +80,23 @@
 }
 .arrowIcon {
   height: 50px;
-  color: #fff;
+  color: burlywood;
   width: 50px;
   cursor: pointer;
+}
+.error {
+  text-align: center;
+  font-size: 20px;
+  letter-spacing: 1px;
+  color: burlywood;
+  text-transform: capitalize;
+}
+@media (max-width: 650px) {
+  .arrow {
+    top: -85%;
+    right: 0;
+  }
+  .top {
+    margin-top: 180px;
+  }
 }

@@ -5,7 +5,7 @@ import React, {
   useCallback,
   useRef,
 } from "react";
-import Loader from "../../components/UI/loader";
+import BigLoader from "../../components/UI/BigLoader";
 import EventList from "../../components/EventList";
 import {
   onlyCat,
@@ -67,7 +67,7 @@ const find = () => {
         }
       });
   }, [setuserSug]);
-  console.log(userSug);
+
   useEffect(() => {
     getSugestion();
     return () => {
@@ -125,7 +125,7 @@ const find = () => {
   if (loading) {
     return (
       <div>
-        <Loader />
+        <BigLoader />
       </div>
     );
   }

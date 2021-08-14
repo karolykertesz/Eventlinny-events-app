@@ -20,7 +20,6 @@ export const getLinkAndPass = async (room) => {
   let pass;
   const docref = firebase.firestore().collection("private_chat").doc(room);
   await docref.get().then(async (doc) => {
-    console.log(doc.data(), "ggggggg");
     if (doc.exists) {
       (link = await doc.data().linkVerif), (pass = await doc.data().password);
       console.log(doc.data());

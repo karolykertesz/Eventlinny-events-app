@@ -15,7 +15,6 @@ const Layout = (props) => {
   useEffect(() => {
     checkUser();
   }, [checkUser]);
-  console.log(isUser);
   return (
     <Fragment>
       <Head>

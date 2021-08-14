@@ -9,6 +9,9 @@ import { IconContext } from "react-icons";
 import { useRedirect } from "../../helpers/validatehelp";
 import { IoArrowUndoOutline } from "react-icons/io5";
 import { validate } from "validate.js";
+import { v4 as uuid_v4 } from "uuid";
+import { setNotifications, getuserimage } from "../../data";
+import Image from "next/image";
 
 const Message = () => {
   useRedirect();
@@ -22,7 +25,6 @@ const Message = () => {
   const [error, setError] = useState();
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
-
   const getUserDetails = useCallback(async () => {
     const docref = firebase.firestore().collection("user_aditional").doc(id);
     await docref.get().then(async (user) => {
@@ -31,6 +33,8 @@ const Message = () => {
         await setDetails({
           email: data.email,
           name: data.name,
+          id: data.id,
+          url: data.image_url ? data.image_url : "/images/noimage.svg",
         });
       }
     });
@@ -54,48 +58,99 @@ const Message = () => {
     });
     if (value) {
       setLoading(false);
-      console.log(value);
+      setError("Invalid characters");
+      return;
     }
+
+    // const userImage = useCallback(() => {
+    //   if(id){
+    //     return firebase.f
+    //   }
+    // }, []);
+
+    const currentRef = await firebase.firestore().collection("user_aditional");
+    const docId = uuid_v4();
+    const userArr = [uid, id];
+    const notificationText = `Hi ${
+      userDet && userDet.name
+    } you received a new message from ${currentUser.name}`;
+    const promises = userArr.map((item) =>
+      currentRef.doc(item).collection("conversations")
+    );
+    return Promise.all(promises)
+      .then((docs) => {
+        docs.forEach((dt) => {
+          dt.doc(docId).set({
+            added_by: uid,
+            recived: id,
+            created_at: new Date(),
+            text: message,
+          });
+        });
+      })
+      .then(() => setLoading(false))
+      .then(async () => {
+        const r = await setNotifications(id, docId, notificationText);
+      })
+      .then(() => setError("Your Message Sent"))
+      .then(() => setSent(true))
+      .catch((err) => {
+        setLoading(false);
+        console.log(err);
+      });
   };
   if (loading) {
     return <BigLoader />;
   }
+
   return (
-    <div className={classes.top}>
-      <div className={classes.header}>
-        {sent && (
-          <div>
-            <IconContext.Provider value={{ className: classes.arrowIcon }}>
-              <IoArrowUndoOutline />
-            </IconContext.Provider>
-          </div>
-        )}
-        {userDet ? (
-          <p>Your message to {userDet.name}</p>
-        ) : (
-          <p>Send Your message</p>
-        )}
-      </div>
-      <div className="input-group">
-        <input
-          type="text"
-          className={classes.input + " " + "form-control"}
-          placeholder="Your message....."
-          value={message || ""}
-          onChange={(e) => addMessage(e.target.value)}
-        />
-        <div className="input-group-append">
-          <span
-            className={classes.group + " " + "input-group-text"}
-            onClick={() => sendMessage()}
-          >
-            <IconContext.Provider value={{ className: classes.icon }}>
-              <BiPaperPlane />
-            </IconContext.Provider>
-          </span>
+    <div className={classes.cover}>
+      {sent && (
+        <div
+          className={classes.arrow}
+          onClick={() => router.push("/events/first")}
+        >
+          <p>Go back</p>
+          <IconContext.Provider value={{ className: classes.arrowIcon }}>
+            <IoArrowUndoOutline />
+          </IconContext.Provider>
         </div>
+      )}
+      <div className={classes.top}>
+        <div className={classes.header}>
+          <Image
+            src={userDet ? userDet.url : "/images/noimage.svg"}
+            width="50px"
+            height="50px"
+            quality={100}
+          />
+          {userDet ? (
+            <p>Your message to {userDet.name}</p>
+          ) : (
+            <p>Send Your message</p>
+          )}
+        </div>
+        <div className="input-group">
+          <input
+            type="text"
+            className={classes.input + " " + "form-control"}
+            placeholder="Your message....."
+            value={message || ""}
+            onChange={(e) => addMessage(e.target.value)}
+          />
+          <div className="input-group-append">
+            <span
+              className={classes.group + " " + "input-group-text"}
+              onClick={() => sendMessage()}
+            >
+              <IconContext.Provider value={{ className: classes.icon }}>
+                <BiPaperPlane />
+              </IconContext.Provider>
+            </span>
+          </div>
+        </div>
+        <div className={classes.error}>{error && error}</div>
       </div>
-      <div className={classes.error}>{error && error}</div>
     </div>
   );
 };
