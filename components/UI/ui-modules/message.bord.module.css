@@ -1,0 +1,55 @@
+.top {
+  margin-top: 150px;
+  width: 650px;
+  position: relative;
+  height: auto;
+  margin: 100px auto;
+}
+.holder {
+  display: flex;
+  justify-content: center;
+}
+.topDiv {
+  border-radius: 10px 0 0 0;
+  display: flex;
+  padding: 5px 0;
+  align-items: flex-end;
+  justify-content: space-evenly;
+  width: 30%;
+  border: 1px solid burlywood;
+  height: 60px;
+  -webkit-border-radius: 10px 0 0 0;
+  -moz-border-radius: 10px 0 0 0;
+  -ms-border-radius: 10px 0 0 0;
+  -o-border-radius: 10px 0 0 0;
+}
+.topDiv p {
+  text-align: center;
+  font-size: 15px;
+  color: burlywood;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  text-transform: capitalize;
+}
+.spanInput label {
+  cursor: pointer;
+  background-color: rgb(178, 178, 225);
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+.top .tog {
+  display: none;
+  position: absolute;
+  top: -11000px;
+}
+.c {
+  border: 1px solid rgb(178, 178, 225);
+}
+.topDiv .p {
+  color: rgb(178, 178, 225);
+}
+.topDiv > .tog:checked ~ .spanInput label {
+  background-color: burlywood;
+}

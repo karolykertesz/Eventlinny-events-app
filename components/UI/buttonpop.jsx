@@ -71,6 +71,9 @@ const ButtonPop = (props) => {
                 Get Notifications
               </Link>
             </div>
+            <div className={classes.link}>
+              <Link href={`/users/messages`}>Messages</Link>
+            </div>
             {note ? (
               <div className={classes.link}>
                 <Link
