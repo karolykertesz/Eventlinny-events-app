@@ -1,17 +1,19 @@
 .top {
-  width: 30%;
+  width: 200px;
   height: auto;
   overflow-y: auto;
-  border: 1px solid burlywood;
+  border-right: 1px solid burlywood;
   height: 100%;
+  background-color: burlywood;
 }
 .color {
   background-color: rgb(178, 178, 225);
   color: white;
-  border: 1px solid rgb(178, 178, 225);
+  border: 1px solid white;
 }
-.topDiv {
-  width: 100%;
+.topSide {
+  width: 200px;
   display: flex;
   flex-direction: column;
+  height: 700px;
 }

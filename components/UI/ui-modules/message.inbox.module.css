@@ -1,0 +1,35 @@
+.top {
+  width: 500px;
+  background-color: burlywood;
+  position: absolute;
+  left: 200px;
+  top: 0;
+}
+.header {
+  width: 100%;
+  height: 75px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.header p {
+  font-size: 20px;
+  padding: 5px 0 0 10px;
+  text-transform: uppercase;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: #fff;
+}
+.colorHeader {
+  background-color: rgb(178, 178, 225);
+}
+.header .bin {
+  cursor: pointer;
+  transition: all 0.4s ease;
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  -ms-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+}
+.header .bin:hover {
+  opacity: 0.3;
+}

@@ -5,17 +5,17 @@ import { useAuth } from "../../components/Layout/UserContext";
 import MessageBord from "../../components/UI/messagebord";
 
 const Messages = () => {
+  useRedirect();
   const user = useAuth().user;
   const uid = user && user.uid;
   const [messages, setMessages] = useState();
-  console.log(messages, "hhh");
   const getMessages = useCallback(async () => {
     const docref = await firebase
       .firestore()
       .collection("user_aditional")
       .doc(uid)
       .collection("conversations");
-    await docref.get().then((doc) => {
+    await docref.onSnapshot((doc) => {
       if (doc.size > 0) {
         const docArray = [];
         doc.forEach((d) => {
@@ -29,14 +29,13 @@ const Messages = () => {
       }
     });
   }, [setMessages]);
-  useRedirect();
   useEffect(() => {
     getMessages();
   }, [getMessages]);
 
   return (
     <div>
-      {messages && <MessageBord messages={messages} uid={uid && uid} />}
+      {messages && <MessageBord messages={messages} user={user && user} />}
     </div>
   );
 };

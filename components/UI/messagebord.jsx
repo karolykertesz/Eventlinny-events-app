@@ -4,14 +4,14 @@ import firebase from "firebase";
 import MessageSideBar from "./messagesidebar";
 import MessageInbox from "./messageinbox";
 const MessageBord = (props) => {
-  const { messages, uid } = props;
+  const { messages, user } = props;
   const [added, setAdded] = useState(false);
 
   return (
-    <div className={classes.top}>
+    <div className={added ? classes.top : classes.top + " " + classes.c}>
       <div className={classes.holder}>
-        <MessageSideBar added={added} setAdded={setAdded} />
-        <MessageInbox />
+        <MessageSideBar added={added} setAdded={setAdded} messages={messages} />
+        <MessageInbox added={added} user={user} messages={messages} />
       </div>
     </div>
   );
