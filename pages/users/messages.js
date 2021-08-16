@@ -25,7 +25,7 @@ const Messages = () => {
             ...d.data(),
           });
         });
-        setMessages(docArray);
+        return setMessages(docArray);
       }
     });
   }, [setMessages]);

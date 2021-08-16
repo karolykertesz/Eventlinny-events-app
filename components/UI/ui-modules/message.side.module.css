@@ -2,14 +2,12 @@
   width: 200px;
   height: auto;
   overflow-y: auto;
-  border-right: 1px solid burlywood;
   height: 100%;
   background-color: burlywood;
 }
 .color {
   background-color: rgb(178, 178, 225);
   color: white;
-  border: 1px solid white;
 }
 .topSide {
   width: 200px;

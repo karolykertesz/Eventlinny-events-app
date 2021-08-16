@@ -2,7 +2,11 @@ import classes from "../UI/ui-modules/message.bord.module.css";
 import Xcircle from "../UI/icons/x-circle";
 
 const MessageTop = (props) => {
-  const { added, setAdded } = props;
+  const { added, setAdded, setMessid } = props;
+  const setAddedAndNull = () => {
+    setMessid(null);
+    setAdded(!added);
+  };
   return (
     <div className={added ? classes.topDiv : classes.topDiv + " " + classes.c}>
       <span className={classes.divider}>
@@ -11,7 +15,7 @@ const MessageTop = (props) => {
             className={classes.tog}
             type="checkbox"
             id="toggle"
-            onChange={() => setAdded(!added)}
+            onChange={() => setAddedAndNull()}
           />
           <span className={classes.slider + " " + classes.round}></span>
         </label>

@@ -5,6 +5,10 @@
   left: 200px;
   top: 0;
 }
+.cover {
+  width: 500px;
+  height: auto;
+}
 .header {
   width: 100%;
   height: 75px;
@@ -19,9 +23,7 @@
   font-family: Georgia, "Times New Roman", Times, serif;
   color: #fff;
 }
-.colorHeader {
-  background-color: rgb(178, 178, 225);
-}
+
 .header .bin {
   cursor: pointer;
   transition: all 0.4s ease;
@@ -32,4 +34,39 @@
 }
 .header .bin:hover {
   opacity: 0.3;
+}
+
+.inputDiv {
+  position: absolute;
+  width: 100%;
+  height: 70px;
+  bottom: 0 !important;
+  background-color: burlywood;
+  display: flex;
+}
+.inputCover {
+  margin-top: 20px;
+  width: 400px !important;
+  margin-left: 200px;
+}
+.group {
+  height: 75%;
+  background-color: burlywood;
+  cursor: pointer;
+}
+.icon {
+  width: 25px;
+  height: 23px;
+  color: #fff;
+}
+.inner {
+  width: 500px;
+  height: auto;
+  position: absolute;
+  left: 200px;
+  top: 100px;
+  overflow-y: auto;
+}
+.colorHeader {
+  background-color: rgb(178, 178, 225);
 }

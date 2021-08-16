@@ -81,6 +81,7 @@ const Message = () => {
             recived: id,
             created_at: new Date(),
             text: message,
+            replies: [],
           });
         });
       })

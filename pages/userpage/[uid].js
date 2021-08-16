@@ -3,7 +3,7 @@ import { useAuth } from "../../components/Layout/UserContext";
 import { CoverDiv } from "../startup";
 import Userpage from "../../handlers/userpage";
 import { useRouter } from "next/router";
-import Loader from "../../components/UI/loader";
+import BigLoader from "../../components/UI/BigLoader";
 import { getuserimage } from "../../data";
 
 const UserProfile = ({ userLocation, userinfo, userAdditional, imgUrl }) => {
@@ -31,7 +31,7 @@ const UserProfile = ({ userLocation, userinfo, userAdditional, imgUrl }) => {
     return unsubscribe;
   }, [userContext]);
   if (!userLocation || !userinfo) {
-    return <Loader />;
+    return <BigLoader />;
   }
   return (
     <CoverDiv>

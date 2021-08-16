@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRedirect } from "../../helpers/validatehelp";
 import classes from "../../components/UI/ui-modules/main.chat.module.css";
 import firebase from "firebase";
-import Loader from "../../components/UI/loader";
+import BigLoader from "../../components/UI/BigLoader";
 import useBanned from "../../helpers/checkBanned";
 const Main = () => {
   useRedirect();
@@ -48,7 +48,7 @@ const Main = () => {
     }
   };
   if (!privCount || !pubCount) {
-    return <Loader />;
+    return <BigLoader />;
   }
   if (isBanned) {
     return (
