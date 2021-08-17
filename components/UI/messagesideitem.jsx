@@ -2,11 +2,11 @@ import react, { useState, useCallback, useEffect } from "react";
 import classes from "../UI/ui-modules/message.side.module.css";
 import firebase from "firebase";
 import Image from "next/image";
-import Sparkle from "../UI/icons/sparkle";
 
 const MessageSideItem = (props) => {
-  const { message, added } = props;
+  const { message, added, user } = props;
   const [url, setUrl] = useState();
+
   const getImage = useCallback(() => {
     const dataref = firebase
       .firestore()
@@ -26,22 +26,15 @@ const MessageSideItem = (props) => {
   }, [added, getImage]);
   return (
     <div>
-      {!added ? (
-        <div>
-          <Image
-            src={url ? url : "/images/noimage.svg"}
-            width="50px"
-            height="50px"
-            quality={100}
-          />
-          {message.text}
-        </div>
-      ) : (
-        <div>
-          <Sparkle width="35px" color="#fff" />
-          {message.text}
-        </div>
-      )}
+      <div>
+        <Image
+          src={url ? url : "/images/noimage.svg"}
+          width="50px"
+          height="50px"
+          quality={100}
+        />
+        {message.text}
+      </div>
     </div>
   );
 };

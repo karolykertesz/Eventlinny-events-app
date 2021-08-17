@@ -6,18 +6,15 @@ const MessageSidebar = (props) => {
   const user = useAuth().user;
   const uid = user && user.uid;
   const { added, setAdded, messages, setMessid } = props;
-  const filteredMessages = !added
-    ? messages.filter((m) => m.added_by !== uid)
-    : messages.filter((m) => m.added_by === uid);
   return (
     <div className={classes.topSide}>
       <MessageTop added={added} setAdded={setAdded} setMessid={setMessid} />
       <div className={added ? classes.top : classes.top + " " + classes.color}>
         <div classes={classes.list}>
           {messages &&
-            filteredMessages.map((message) => (
+            messages.map((message) => (
               <div key={message.id} onClick={() => setMessid(message.id)}>
-                <MessageSideItem message={message} added={added} />
+                <MessageSideItem message={message} added={added} user={user} />
               </div>
             ))}
         </div>

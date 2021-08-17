@@ -1,0 +1,25 @@
+.recived {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  float: left;
+}
+.recived img {
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+.added {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  float: right;
+  margin-right: 100px;
+  margin-top: 50px;
+  /* flex-direction: row-reverse; */
+}
+
+.added p {
+}

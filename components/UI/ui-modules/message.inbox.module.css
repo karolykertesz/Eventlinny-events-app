@@ -70,3 +70,8 @@
 .colorHeader {
   background-color: rgb(178, 178, 225);
 }
+.spinner {
+  position: absolute;
+  left: 330px;
+  bottom: 250px;
+}

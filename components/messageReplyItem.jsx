@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useCallback, Fragment } from "react";
+import classes from "../components/UI/ui-modules/message.reply.item.module.css";
 import Image from "next/image";
 import firebase from "firebase";
 const MessageReplyItem = (props) => {
-  const { item, user, messId } = props;
-  console.log(user.uid === item.added_by);
+  const { item, user, messId, added } = props;
   const [imageUrl, setUrl] = useState();
   const getImage = useCallback(() => {
     return firebase
       .firestore()
       .collection("user_aditional")
-      .doc(item && item.added_by)
+      .doc(item && item.recived)
       .get()
       .then((doc) => {
         const data = doc.data();
@@ -18,7 +18,7 @@ const MessageReplyItem = (props) => {
       });
   });
   useEffect(() => {
-    if (item.added_by && user.uid !== item.added_by) {
+    if (item.added_by) {
       getImage();
     }
   }, [getImage, messId]);
@@ -26,20 +26,18 @@ const MessageReplyItem = (props) => {
     <div>
       {item && (
         <Fragment>
-          {item.added_by !== user.uid ? (
-            <div>
-              <Image
-                src={imageUrl ? imageUrl : "/images/noimage.svg"}
-                width="50px"
-                height="50px"
-              />
-              <p>{item.input} ooooo</p>
-            </div>
-          ) : (
-            <div>
-              <p>{item.input}</p>
-            </div>
-          )}
+          <div
+            className={
+              item.added_by === user.uid ? classes.added : classes.recived
+            }
+          >
+            <Image
+              src={imageUrl ? imageUrl : "/images/noimage.svg"}
+              width="50px"
+              height="50px"
+            />
+            <p>{item.input}</p>
+          </div>
         </Fragment>
       )}
     </div>

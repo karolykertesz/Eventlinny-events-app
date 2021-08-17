@@ -29,6 +29,7 @@ const Messages = () => {
       }
     });
   }, [setMessages]);
+  console.log(messages, "gg");
   useEffect(() => {
     getMessages();
   }, [getMessages]);

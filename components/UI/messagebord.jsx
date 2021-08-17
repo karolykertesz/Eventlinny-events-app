@@ -15,6 +15,7 @@ const MessageBord = (props) => {
           setAdded={setAdded}
           messages={messages}
           setMessid={setMessid}
+          user={user}
         />
         <MessageInbox
           added={added}
