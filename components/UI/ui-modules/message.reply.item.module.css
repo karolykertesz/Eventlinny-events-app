@@ -1,25 +1,70 @@
 .recived {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
   float: left;
 }
-.recived img {
+.added {
+  float: right;
+}
+.recived .text {
+  background-color: #ffd699;
+  color: #fff;
+  border: 1px solid #ffd699;
+  border-radius: 12px 12px 0 12px;
+  -webkit-border-radius: 12px 12px 0 12px;
+  -moz-border-radius: 12px 12px 0 12px;
+  -ms-border-radius: 12px 12px 0 12px;
+  -o-border-radius: 12px 12px 0 12px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.added .text {
+  background-color: burlywood;
+  color: #eee;
+  border: 1px solid burlywood;
+  border-radius: 12px 12px 0 12px;
+  -webkit-border-radius: 12px 12px 0 12px;
+  -moz-border-radius: 12px 12px 0 12px;
+  -ms-border-radius: 12px 12px 0 12px;
+  -o-border-radius: 12px 12px 0 12px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.messageList {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+}
+.recived img,
+.added img {
   border-radius: 50%;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
+  object-fit: cover;
 }
-.added {
+.content {
+  grid-template-columns: auto 1fr;
+  gap: 75px;
+}
+.text {
+  padding: 9px 24px;
+  margin: 0 0 0 15px;
+  font-size: 16px;
+  margin-bottom: 2px;
+  overflow: hidden;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+.date {
+  font-size: 13px;
+  color: #777;
+}
+.messageContainer {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  float: right;
-  margin-right: 100px;
-  margin-top: 50px;
-  /* flex-direction: row-reverse; */
 }
-
-.added p {
+.messageRow {
+  margin-top: 10px;
+  /* margin-bottom: 10px; */
+  display: grid;
+  grid-template-columns: 100%;
 }

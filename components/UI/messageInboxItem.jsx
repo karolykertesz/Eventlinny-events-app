@@ -1,24 +1,16 @@
 import MessageReplyItem from "../messageReplyItem";
+import classes from "../UI/ui-modules/message.reply.item.module.css";
 const MessageInboxItem = (props) => {
   const { filtered, user, messId, added } = props;
   const ismapaple =
     filtered && filtered.replies && filtered.replies.length > 0 ? true : false;
   const allreplies = ismapaple && filtered.replies;
-  // const notAdder =
-  //   ismapaple && filtered.replies
-  //     ? allreplies.filter((item) => item.added_by !== user.uid)
-  //     : [];
-  // const adder =
-  //   ismapaple && filtered.replies
-  //     ? allreplies.filter((item) => item.added_by === user.uid)
-  //     : [];
 
   return (
-    <div>
-      <p style={{ textAlign: "center" }}>{filtered && filtered.text}</p>
+    <div className={classes.inboxHolder}>
       {ismapaple &&
         allreplies.map((item, indx) => (
-          <div key={indx}>
+          <div key={indx} className={classes.messageRow}>
             <MessageReplyItem
               item={item}
               user={user}

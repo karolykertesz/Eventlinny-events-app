@@ -6,7 +6,6 @@ import { IconContext } from "react-icons";
 import MessageInboxItem from "./messageInboxItem";
 import firebase from "firebase";
 import TinySpinner from "../UI/tinyspinner";
-import { isTSMethodSignature } from "@babel/types";
 
 const MessageInbox = (props) => {
   const { added, user, messId, messages } = props;
@@ -17,7 +16,23 @@ const MessageInbox = (props) => {
   const [loading, setloading] = useState(false);
   const [dis, setDis] = useState(false);
   const messi = messages && messages[0];
-  const deleteMassage = () => {};
+  const deleteMassage = async () => {
+    if (!messId) {
+      setError("Select a message to delete");
+      return;
+    }
+    const userInfo = await firebase
+      .firestore()
+      .collection("user_aditional")
+      .doc(user.uid);
+    await userInfo
+      .collection("conversations")
+      .doc(messId)
+      .delete()
+      .then(() => {
+        setError("Message Deleted!");
+      });
+  };
   const addMessage = () => {
     setError(null);
     if (!filteredMessage || !messageText) {
@@ -34,7 +49,13 @@ const MessageInbox = (props) => {
     );
     return Promise.all(promises)
       .then((items) => {
+        console.log(items.length);
         items.forEach((item) => {
+          if (!item.exists) {
+            setloading(false);
+            setError("Message has been deleted");
+            return;
+          }
           item.update({
             replies: firebase.firestore.FieldValue.arrayUnion({
               added_by: user && user.uid,
@@ -48,6 +69,7 @@ const MessageInbox = (props) => {
       .then(() => {
         setloading(false);
         setDis(false);
+        setMessage(null);
       })
       .catch((err) => {
         console.log(err);
@@ -67,10 +89,10 @@ const MessageInbox = (props) => {
                 : classes.header + " " + classes.colorHeader
             }
           >
-            <p> {user.name}</p>
+            <p> {user && user.name}</p>
             <p className={classes.error}>{error && error}</p>
 
-            <div className={classes.bin} onClick={() => {}}>
+            <div className={classes.bin} onClick={() => deleteMassage()}>
               <Bin color="white" width="40px" />
             </div>
           </div>
@@ -78,12 +100,14 @@ const MessageInbox = (props) => {
         {!loading ? (
           <div className={classes.inner}>
             {messages && (
-              <MessageInboxItem
-                filtered={!filteredMessage ? messi : filteredMessage[0]}
-                user={user}
-                messId={messId}
-                added={added}
-              />
+              <div className={classes.scroll}>
+                <MessageInboxItem
+                  filtered={!filteredMessage ? messi : filteredMessage[0]}
+                  user={user && user}
+                  messId={messId}
+                  added={added}
+                />
+              </div>
             )}
           </div>
         ) : (

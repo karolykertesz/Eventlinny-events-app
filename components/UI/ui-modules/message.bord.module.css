@@ -1,11 +1,12 @@
 .top {
-  margin-top: 150px;
   width: 700px;
   position: relative;
-  height: auto;
-  margin: 100px auto;
+  height: 800px;
+  margin: 100px auto 0 auto;
   border: 1px solid burlywood;
+  /* overflow: hidden; */
 }
+
 .holder {
   width: 100%;
   position: relative;
@@ -46,7 +47,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgb(178, 178, 225);
+  background-color: #ffd699;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -94,10 +95,11 @@ input:checked + .slider:before {
   top: -11000px;
 } */
 .c {
-  border: 1px solid rgb(178, 178, 225);
+  border: 1px solid #ffd699;
 }
 .topDiv .p {
-  color: rgb(178, 178, 225);
+  color: burlywood;
+  font-size: 15px;
 }
 /* .topDiv > .tog:checked ~ .spanInput label {
   background-color: burlywood;

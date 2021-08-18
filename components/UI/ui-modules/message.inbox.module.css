@@ -4,10 +4,10 @@
   position: absolute;
   left: 200px;
   top: 0;
+  z-index: 10;
 }
 .cover {
   width: 500px;
-  height: auto;
 }
 .header {
   width: 100%;
@@ -38,16 +38,29 @@
 
 .inputDiv {
   position: absolute;
-  width: 100%;
+  width: 700px;
   height: 70px;
   bottom: 0 !important;
   background-color: burlywood;
   display: flex;
 }
+
 .inputCover {
   margin-top: 20px;
   width: 400px !important;
   margin-left: 200px;
+}
+.inputCover .input {
+  outline: none !important;
+}
+.inputCover .input:focus {
+  outline: none !important;
+}
+.input::placeholder {
+  font-size: 17px;
+  color: rgb(194, 188, 188);
+  text-transform: capitalize;
+  font-weight: 500;
 }
 .group {
   height: 75%;
@@ -59,16 +72,28 @@
   height: 23px;
   color: #fff;
 }
+.scroll {
+  padding-top: 20px;
+  overflow-y: scroll;
+  position: relative;
+  top: 0;
+  height: 700px;
+}
+.scroll::-webkit-scrollbar {
+  display: none;
+}
 .inner {
   width: 500px;
-  height: auto;
   position: absolute;
   left: 200px;
-  top: 100px;
-  overflow-y: auto;
+  height: auto;
+  bottom: 35px;
 }
 .colorHeader {
-  background-color: rgb(178, 178, 225);
+  background-color: #ffd699;
+}
+.listTop {
+  height: 300px;
 }
 .spinner {
   position: absolute;

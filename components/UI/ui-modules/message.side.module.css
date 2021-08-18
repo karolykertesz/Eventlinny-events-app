@@ -1,17 +1,62 @@
 .top {
   width: 200px;
-  height: auto;
-  overflow-y: auto;
   height: 100%;
   background-color: burlywood;
 }
 .color {
-  background-color: rgb(178, 178, 225);
+  background-color: #ffd699;
   color: white;
 }
 .topSide {
   width: 200px;
   display: flex;
   flex-direction: column;
-  height: 700px;
+  height: 800px;
+}
+.list {
+  font-size: 1.1rem;
+  border-bottom: 1px solid #fff;
+  color: #fff;
+  padding: 5px 10px 0 7px;
+  transition: all 0.4s ease;
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  -ms-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+}
+
+.list:active,
+.list:hover {
+  background-color: rgba(240, 229, 218, 0.481);
+  cursor: pointer;
+}
+.listTop {
+  overflow-y: auto;
+}
+
+.listItem img {
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+}
+.title p {
+  font-weight: bold;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+.date p {
+  color: #fff;
+  font-size: 0.9rem;
+}
+.list::-webkit-scrollbar {
+  display: none;
+}
+.listItem::-webkit-scrollbar {
+  display: none;
 }

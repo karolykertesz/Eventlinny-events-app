@@ -29,7 +29,7 @@ const Messages = () => {
       }
     });
   }, [setMessages]);
-  console.log(messages, "gg");
+  console.log(messages);
   useEffect(() => {
     getMessages();
   }, [getMessages]);

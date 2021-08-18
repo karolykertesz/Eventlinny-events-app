@@ -5,6 +5,14 @@ import firebase from "firebase";
 const MessageReplyItem = (props) => {
   const { item, user, messId, added } = props;
   const [imageUrl, setUrl] = useState();
+  const humanDate = new Date(item.created_at.seconds * 1000).toLocaleString(
+    "HU-hu",
+    {
+      day: "numeric",
+      year: "numeric",
+      month: "numeric",
+    }
+  );
   const getImage = useCallback(() => {
     return firebase
       .firestore()
@@ -23,20 +31,23 @@ const MessageReplyItem = (props) => {
     }
   }, [getImage, messId]);
   return (
-    <div>
+    <div className={classes.messageList}>
       {item && (
         <Fragment>
-          <div
-            className={
-              item.added_by === user.uid ? classes.added : classes.recived
-            }
-          >
-            <Image
-              src={imageUrl ? imageUrl : "/images/noimage.svg"}
-              width="50px"
-              height="50px"
-            />
-            <p>{item.input}</p>
+          <div className={classes.content}>
+            <div
+              className={
+                item.added_by === user.uid ? classes.added : classes.recived
+              }
+            >
+              <Image
+                src={imageUrl ? imageUrl : "/images/noimage.svg"}
+                width="50px"
+                height="50px"
+              />
+              <p className={classes.text}>{item.input}</p>
+              <p className={classes.date}>{humanDate}</p>
+            </div>
           </div>
         </Fragment>
       )}
