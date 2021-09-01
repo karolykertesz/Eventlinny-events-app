@@ -16,10 +16,14 @@ export default async function sender(tok, uid) {
     const status = await mess.status;
     const mes = await mess.json();
     if (status !== 200) {
-      console.log(mes);
-      return mes;
+      return {
+        message: mes.message,
+        status,
+      };
     } else {
-      window.location.href = `${mes.message}`;
+      return {
+        status,
+      };
     }
     // }
   } catch (err) {

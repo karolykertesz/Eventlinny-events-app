@@ -13,7 +13,11 @@ const ValidPage = () => {
     };
     const sendEm = firebase.functions().httpsCallable("sendEmail");
     await sendEm(data).then(() => {
-      setReady(true);
+      setReady(true).then(() => {
+        setTimeout(() => {
+          router.push("/login");
+        }, 1000);
+      });
     });
   }, [email]);
   useEffect(() => {

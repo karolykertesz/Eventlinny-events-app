@@ -1,11 +1,10 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 const saltRounds = 10;
-import { db } from '../../../helpers/firebase';
-const { v4: uuidv4 } = require('uuid');
-import admin from 'firebase-admin';
+import { db } from "../../../helpers/firebase";
+const { v4: uuidv4 } = require("uuid");
 
-const validate = require('validate.js');
-import { constraints } from '../../../helpers/validators/signup';
+const validate = require("validate.js");
+import { constraints } from "../../../helpers/validators/signup";
 export default async function handler(req, res) {
   const { firstname, lastname, email, password } = req.body;
 
@@ -32,8 +31,8 @@ export default async function handler(req, res) {
   let emailExist = [];
   try {
     const dt = await db
-      .collection('users')
-      .where('email', '==', `${email}`)
+      .collection("users")
+      .where("email", "==", `${email}`)
       .get()
       .then((snapshot) => {
         snapshot.forEach((i) => {
@@ -41,15 +40,15 @@ export default async function handler(req, res) {
         });
       });
     if (emailExist.length > 0) {
-      return res.status(400).json({ message: 'error' });
+      return res.status(400).json({ message: "error" });
     }
   } catch (err) {
-    console.log('Error getting documents: ', err);
+    console.log("Error getting documents: ", err);
   }
 
   try {
     const dt = await db
-      .collection('users')
+      .collection("users")
       .add({
         firstname,
         lastname,

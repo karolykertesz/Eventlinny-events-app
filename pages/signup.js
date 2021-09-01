@@ -119,45 +119,6 @@ const Login = () => {
         <Error>{error && error}</Error>
       </div>
     </div>
-    // <Fragment>
-    //   <Layer>
-    //     <div className={classes.form}>
-    //       <form onSubmit={formSubmit}>
-    //         <div className={classes.control}>
-    //           <label htmlFor="firstname">First Name</label>
-    //           <input
-    //             type="text"
-    //             id="firstname"
-    //             name="firstname"
-    //             ref={firstNameRef}
-    //           />
-    //         </div>
-    //         <div className={classes.control}>
-    //           <label htmlFor="email">Email</label>
-    //           <input type="email" id="email" ref={emailRef} name="email" />
-    //         </div>
-    //         <div className={classes.control}>
-    //           <label htmlFor="password">Passsword</label>
-    //           <input
-    //             type="password"
-    //             id="password"
-    //             ref={passwordRef}
-    //             name="password"
-    //           />
-    //         </div>
-    //         <ForMButton>
-    //           <Pi>Sign Up</Pi>
-    //         </ForMButton>
-    //       </form>
-    //       <GoogleButton onClick={() => googleSign()}>
-    //         <IconContext.Provider value={{ color: "white", size: "1.6em" }}>
-    //           <ImGoogle3 />
-    //         </IconContext.Provider>
-    //       </GoogleButton>
-    //       <Error>{error && error}</Error>
-    //     </div>
-    //   </Layer>
-    // </Fragment>
   );
 };
 export default Login;
@@ -201,7 +162,9 @@ export const Error = styled.div`
   text-transform: uppercase;
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.2rem;
+  font-size: 0.8rem;
   font-weight: bold;
   margin-top: 10px;
+  position: absolute;
+  bottom: 10px;
 `;

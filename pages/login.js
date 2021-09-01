@@ -15,7 +15,9 @@ import Head from "next/head";
 import firebase from "firebase";
 import Mail from "../components/UI/icons/mail";
 import Lock from "../components/UI/icons/lock";
+import { useRouter } from "next/router";
 const Login = () => {
+  const router = useRouter();
   const [error, setError] = useState("");
   const [tok, setTok] = useState();
   const [useData, setUseDate] = useState(true);
@@ -64,11 +66,30 @@ const Login = () => {
           .auth()
           .signInWithEmailAndPassword(email, password)
           .then(async function (userCred) {
-            const uid = await userCred.user.uid;
-            await sender(tok, uid);
-          })
-          .then(() => {
+            const uid = userCred.user.uid;
+            const status = await sender(tok, uid);
+            if (status.status !== 200 || status.status !== 201) {
+              return setError(status.message);
+            }
             setTok("");
+            return uid;
+          })
+          .then((uid) => {
+            const dataRef = firebase
+              .firestore()
+              .collection("user_aditional")
+              .doc(uid);
+            return dataRef.get().then((doc) => {
+              if (doc.exists) {
+                if (doc.data().pref_events) {
+                  return (window.location.href = "/events/first");
+                } else {
+                  return (window.location.href = "/startup");
+                }
+              } else if (!doc.exists) {
+                return (window.location.href = "/startup");
+              }
+            });
           })
           .catch((err) => setError(err.message));
       }

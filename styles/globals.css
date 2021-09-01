@@ -9,7 +9,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: Georgia, "Times New Roman", Times, serif !important;
   color: #414141;
   background-color: papayawhip !important;
   box-sizing: border-box;
@@ -21,9 +21,11 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+p {
   /* font-family: Arial, Helvetica, sans-serif; */
   color: #2b2b2b;
+  font-family: inherit;
 }
 ul li a {
   list-style-type: none;
@@ -45,4 +47,13 @@ li {
 }
 a {
   text-decoration: none;
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background-color: #fff;
+}
+::-webkit-scrollbar-thumb {
+  background-color: papayawhip;
 }

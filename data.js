@@ -1,5 +1,6 @@
 // import firebase from "./helpers/firebase";
 import FirebaseClient from "./helpers/firebase";
+
 FirebaseClient();
 import firebase from "firebase";
 const db = firebase.firestore();

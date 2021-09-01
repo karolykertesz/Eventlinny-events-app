@@ -78,6 +78,7 @@ const MessageInbox = (props) => {
         setMessage("");
       });
   };
+
   return (
     <Fragment>
       <div className={classes.cover}>
