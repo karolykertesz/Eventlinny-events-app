@@ -5,7 +5,8 @@ const jwt = require("jsonwebtoken");
 FirebaseClient();
 
 const createPref = async (req, res) => {
-  const { location, userInt } = await req.body;
+  const { location } = await req.body;
+  console.log(location);
   const auth = req.cookies.auth;
   let uid;
   try {
@@ -22,11 +23,8 @@ const createPref = async (req, res) => {
     console.log(err);
     return;
   }
-
-  const locArray = location.split(",");
-  const intArray = userInt.split(",");
   const data = await fetch(
-    `https://api.opencagedata.com/geocode/v1/json?q=${locArray[0]}+${locArray[1]}&key=bb67b50c778f473485683ec677055afe`
+    `https://api.opencagedata.com/geocode/v1/json?q=${location[0]}+${location[1]}&key=bb67b50c778f473485683ec677055afe`
   );
   const message = await data.json();
   const locationString = await message.results[0].formatted;
@@ -39,17 +37,17 @@ const createPref = async (req, res) => {
         .then((docSnapshot) => {
           if (docSnapshot.exists) {
             res.status(200).json({ m: "Ok" });
-            console.log("run");
           } else {
             dockRef.set({
               location: locationString,
               country_code: countryCode,
-              pref_events: intArray,
             });
             res.status(200).json({ m: "Ok" });
           }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          res.status(400).json({ m: err });
+        });
     });
   };
   const pr = await newProm();

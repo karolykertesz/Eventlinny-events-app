@@ -14,8 +14,8 @@ const StartItem = ({ items, addUserInt }) => {
           onClick={() => setSelected(!selected)}
         >
           <Image
-            src={"/" + item.image}
-            alt={item.title}
+            src={item.src}
+            alt={item.name}
             width={350}
             height={250}
             quality={100}
@@ -23,8 +23,8 @@ const StartItem = ({ items, addUserInt }) => {
           {/* "/" */}
         </span>
         <span>
-          <Pi onClick={() => addUserInt(item.id)}>
-            <Paragraph>{items.description}</Paragraph>
+          <Pi onClick={() => addUserInt(item.name)}>
+            <Paragraph>{items.name}</Paragraph>
             <SVG onClick={() => setSelected(!selected)}>
               {!selected ? (
                 <span>
@@ -83,11 +83,14 @@ export const Pi = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  align-items: center;
+  align-items: flex-start;
 `;
 const Paragraph = styled.p`
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-family: Arial, Helvetica, sans-serif;
+  text-transform: capitalize;
+  color: burlywood;
+  font-font-weight: 500;
 `;
 export const SVG = styled.span`
   width: 30px;

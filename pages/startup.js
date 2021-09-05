@@ -4,40 +4,65 @@ import StartItem from "../components/startitem";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import classes from "../components/UI/button.module.css";
-import { getAllAStartUp } from "../data";
+import firebase from "firebase";
 import styled from "styled-components";
 import Head from "next/head";
 import { send } from "../helpers/helpers";
 import { useAuth } from "../components/Layout/UserContext";
-import firebase from "firebase";
-const StartUp = ({ allStart }) => {
+import { useLocation } from "../helpers/firebase-hooks/getLocation";
+import { useUserStart } from "../helpers/firebase-hooks/userStartUp";
+import { useRedirect } from "../helpers/validatehelp";
+import { categoryImages } from "../utils/image-utils";
+
+const StartUp = () => {
+  useRedirect();
   const user = useAuth().user;
-  useEffect(() => {
-    const getmedata = async () => {
-      const ad = await getLock().then(() => {
-        return new Promise(async (resolve, reject) => {
-          if (user) {
-            const docInfo = await firebase
-              .firestore()
-              .collection("user_aditional")
-              .doc(user && user.uid)
-              .set(
-                { email: user && user.email, name: user && user.name },
-                { merge: true }
-              )
-              .then(() => console.log("k"));
-          }
-        }).catch((err) => console.log(err));
-      });
-    };
-    return () => {
-      return getmedata();
-    };
-  }, []);
+  const { location } = useLocation();
+  const use = useUserStart(user && user, location);
   const [userInt, setUserInt] = useState([]);
   const router = useRouter();
-  const [location, setLocation] = useState([]);
+  const saveEvents = () => {
+    return firebase
+      .firestore()
+      .collection("user_aditional")
+      .doc(user && user.uid)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          doc.ref.update({
+            pref_events: userInt,
+          });
+        }
+      })
+      .then(() => {
+        router.push("/events/first");
+      });
+  };
+  // useEffect(() => {
+  //   const getmedata = async () => {
+  //     const ad = await getLock().then(() => {
+  //       return new Promise(async (resolve, reject) => {
+  //         if (user) {
+  //           const docInfo = await firebase
+  //             .firestore()
+  //             .collection("user_aditional")
+  //             .doc(user && user.uid)
+  //             .set(
+  //               { email: user && user.email, name: user && user.name },
+  //               { merge: true }
+  //             )
+  //             .then(() => console.log("k"));
+  //         }
+  //       }).catch((err) => console.log(err));
+  //     });
+  //   };
+  //   return () => {
+  //     return getmedata();
+  //   };
+  // }, []);
+
   const addUserInt = (id) => {
+    console.log(id);
     const item = userInt.find((i) => i === id);
     if (!item) {
       return setUserInt([...userInt, id]);
@@ -46,21 +71,22 @@ const StartUp = ({ allStart }) => {
     setUserInt(data);
   };
 
-  const getLock = async () => {
-    const getLocation = async (position) => {
-      const { latitude, longitude } = await position.coords;
-      const loca = [];
-      loca.push(latitude, longitude);
-      if (location.length === 0) {
-        await setLocation(loca);
-      }
-    };
-    if (location) {
-      await navigator.geolocation.getCurrentPosition(getLocation, console.log);
-    } else {
-      return;
-    }
-  };
+  // const getLock = () => {
+  //   const getLocation = async (position) => {
+  //     const { latitude, longitude } = await position.coords;
+  //     const loca = [];
+  //     loca.push(latitude, longitude);
+  //     if (location.length === 0) {
+  //       return setLocation(loca);
+  //     }
+  //   };
+  //   if (location) {
+  //     return navigator.geolocation.getCurrentPosition(getLocation, console.log);
+  //   } else {
+  //     return;
+  //   }
+  // };
+  console.log(userInt);
   return (
     <Fragment>
       <Head>
@@ -70,18 +96,15 @@ const StartUp = ({ allStart }) => {
       <CoverDiv>
         <PageTitle>Add Your favorite Cooking Events</PageTitle>
         <Uilayer>
-          {allStart.map((i) => (
-            <span key={i.id}>
+          {categoryImages.map((i) => (
+            <span key={i.name}>
               <StartItem items={i} addUserInt={addUserInt} />
             </span>
           ))}
         </Uilayer>
         {userInt.length > 0 && (
           <ButtonComp>
-            <button
-              className={classes.btn}
-              onClick={() => send(location, userInt.join(","))}
-            >
+            <button className={classes.btn} onClick={() => saveEvents()}>
               Save My Events
             </button>
           </ButtonComp>
@@ -92,16 +115,6 @@ const StartUp = ({ allStart }) => {
 };
 
 export default StartUp;
-
-export async function getStaticProps(context) {
-  const data = await getAllAStartUp();
-  return {
-    props: {
-      allStart: data,
-    },
-    revalidate: 1800,
-  };
-}
 
 const PageTitle = styled.span`
   display: flex;

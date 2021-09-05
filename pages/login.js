@@ -84,7 +84,7 @@ const Login = () => {
                 if (doc.data().pref_events) {
                   return (window.location.href = "/events/first");
                 } else {
-                  return (window.location.href = "/startup");
+                  // return (window.location.href = "/startup");
                 }
               } else if (!doc.exists) {
                 return (window.location.href = "/startup");
