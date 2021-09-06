@@ -3,7 +3,13 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-
+.block {
+  /* display: flex;
+  justify-content: space-around; */
+  width: 100%;
+  position: absolute;
+  left: 10%;
+}
 @media (max-width: 900px) {
   .list {
     grid-template-columns: 1fr 1fr;

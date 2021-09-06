@@ -9,3 +9,8 @@
   color: #c49e7d;
   font-size: 20px;
 }
+.coverDiv {
+  display: grid;
+  grid-template-columns: 45% 45%;
+  gap: 10%;
+}

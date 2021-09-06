@@ -356,7 +356,9 @@ export const getuserPrefWithWithCat = async (caRray) => {
     });
   };
   const dataBack = await getdataOnce();
-  return dataBack;
+  return {
+    dataBack,
+  };
 };
 export const getAttendiesInfo = async (attendies) => {
   const getdata = async () => {

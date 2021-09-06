@@ -16,6 +16,7 @@ import firebase from "firebase";
 import Mail from "../components/UI/icons/mail";
 import Lock from "../components/UI/icons/lock";
 import { useRouter } from "next/router";
+
 const Login = () => {
   const router = useRouter();
   const [error, setError] = useState("");
@@ -24,7 +25,8 @@ const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const tokenRef = useRef();
-
+  const [userId, setUid] = useState();
+  console.log(userId);
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (!user) {
@@ -62,36 +64,37 @@ const Login = () => {
       const password = passwordRef.current.value;
 
       if (tok !== undefined || tok !== null) {
-        return firebase
-          .auth()
-          .signInWithEmailAndPassword(email, password)
-          .then(async function (userCred) {
-            const uid = userCred.user.uid;
-            const status = await sender(tok, uid);
-            if (status.status !== 200 || status.status !== 201) {
-              return setError(status.message);
-            }
-            setTok("");
-            return uid;
-          })
-          .then((uid) => {
-            const dataRef = firebase
-              .firestore()
-              .collection("user_aditional")
-              .doc(uid);
-            return dataRef.get().then((doc) => {
-              if (doc.exists) {
-                if (doc.data().pref_events) {
-                  return (window.location.href = "/events/first");
-                } else {
-                  // return (window.location.href = "/startup");
-                }
-              } else if (!doc.exists) {
-                return (window.location.href = "/startup");
+        return new Promise(async (resolve, reject) => {
+          let userId;
+          await firebase
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .then(async function (userCred) {
+              const uid = userCred.user.uid;
+              const status = await sender(tok, uid);
+              if (status.status !== 200 || status.status !== 201) {
+                reject(setError(status.message));
               }
+              setTok("");
+              userId = uid;
+            })
+            .then(async () => {
+              const dataRef = firebase
+                .firestore()
+                .collection("user_aditional")
+                .doc(userId);
+              await dataRef.get().then((doc) => {
+                if (doc.exists) {
+                  if (doc.data().pref_events) {
+                    return (window.location.href = "/events/first");
+                  } else {
+                    return (window.location.href = "/startup");
+                  }
+                }
+                return (window.location.href = "/startup");
+              });
             });
-          })
-          .catch((err) => setError(err.message));
+        });
       }
     },
     [tok]
