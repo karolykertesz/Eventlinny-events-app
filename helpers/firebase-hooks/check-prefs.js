@@ -13,9 +13,9 @@ export const useCheckcatSet = (uid) => {
           router.push("/startup");
         }
         const data = snap.data();
-
-        if (!data.pref_events) {
-          router.push("/statup");
+        if (!uid) return;
+        if (!snap.data() || !snap.data().pref_events) {
+          router.push("/startup");
         }
       });
     return () => check();

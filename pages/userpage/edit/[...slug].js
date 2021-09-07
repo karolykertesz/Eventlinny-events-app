@@ -13,18 +13,29 @@ const Slug = () => {
   const router = useRouter();
   const query = router.query.slug;
   useEffect(() => {
-    let isTrue = true;
-    if (query && isTrue) {
-      return allUserPref(query[1])
-        .then(async (t) => {
-          const dtObj = await t;
-          return seTdata(dtObj);
-        })
-        .then(() => console.log("hh"))
-        .catch((err) => console.log(err));
-    }
-    return () => (isTrue = false);
+    // let isTrue = true;
+    // if (query && isTrue) {
+    //   return allUserPref(query[1])
+    //     .then(async (t) => {
+    //       const dtObj = await t;
+    //       return seTdata(dtObj);
+    //     })
+    //     .then(() => console.log("hh"))
+    //     .catch((err) => console.log(err));
+    // }
+    // return () => (isTrue = false);
+    const dataref = firebase
+      .firestore()
+      .collection("user_aditional")
+      .doc(query && query[1])
+      .onSnapshot((snap) => {
+        if (!snap.exists) return;
+        const prefs = snap.data().pref_events ? snap.data().pref_events : [];
+        seTdata(prefs);
+      });
+    // return dataref();
   }, []);
+  console.log(data, "ggg");
   const uid = query && query[1];
   const addUserInt = (id) => {
     if (uid) {

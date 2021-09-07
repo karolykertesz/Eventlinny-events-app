@@ -6,8 +6,7 @@ import { useRouter } from "next/router";
 import classes from "../../components/UI/ui-modules/publicchat.module.css";
 import Image from "next/image";
 import ChatItem from "../../components/UI/chatitem";
-import Loader from "../../components/UI/loader";
-import { singOut } from "../chat/chat-hooks";
+import BigLoader from "../../components/UI/BigLoader";
 import Shared from "./chatShared";
 
 const Public = () => {
@@ -72,7 +71,7 @@ const Public = () => {
     setUser();
   }, []);
   if (!data || !user) {
-    return <Loader />;
+    return <BigLoader />;
   }
   return (
     <div className={classes.top}>

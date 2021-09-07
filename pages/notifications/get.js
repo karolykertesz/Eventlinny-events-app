@@ -9,15 +9,14 @@ import classes from "../../components/UI/ui-modules/notification.get.module.css"
 import { useRouter } from "next/router";
 import { categories } from "../../data";
 import firebase from "firebase";
-import NotiItem from "../../components/UI/notificationItem";
-import Loader from "../../components/UI/loader";
+import BigLoader from "../../components/UI/BigLoader";
 import { addtocategories } from "../../helpers/notihelpers/addtocategories";
 import { useAuth } from "../../components/Layout/UserContext";
 import { useRedirect } from "../../helpers/validatehelp";
 
 const GetNote = () => {
   useRedirect();
-  const modeRef = useRef(true);
+
   const router = useRouter();
   const id = router.query.id;
   const filteredCat = categories.filter((i) => i !== "create");
@@ -60,14 +59,11 @@ const GetNote = () => {
   }, [id, setUpdated]);
   useEffect(() => {
     getNotiz();
-    return () => {
-      modeRef.current = false;
-    };
   }, [getNotiz]);
   const sendNoti = async () => {
     setLoading(true);
     try {
-      const dataref = await firebase
+      const dataref = firebase
         .firestore()
         .collection("user_aditional")
         .doc(id && id);
@@ -98,7 +94,7 @@ const GetNote = () => {
     }
   };
   if (loading) {
-    return <Loader />;
+    return <BigLoader />;
   }
   return (
     <div className={classes.coverDiv}>

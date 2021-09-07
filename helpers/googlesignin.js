@@ -13,18 +13,6 @@ const googleSign = (fn) => async () => {
     .catch((err) => console.log(err));
 };
 export default googleSign(async function (uid) {
-  const urlLink = await fetch("api/users/googleValid", {
-    method: "POST",
-    body: JSON.stringify({
-      uid: uid,
-    }),
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-  });
-  const url = await urlLink.json();
-
   try {
     const mess = await fetch("/api/users/googleSignIn", {
       method: "POST",
@@ -36,13 +24,21 @@ export default googleSign(async function (uid) {
         Accept: "application/json",
       },
     });
-    const status = await mess.status;
+    const status = mess.status;
     if (status !== 200) {
       return;
     }
   } catch (err) {
     console.log(err);
   }
-
-  window.location.href = `${url.url}`;
+  const dataRef = await firebase
+    .firestore()
+    .collection("user_aditional")
+    .doc(uid);
+  await dataRef.get().then((user) => {
+    if (!user.exists || !user.data().pref_events) {
+      return (window.location.href = "/startup");
+    }
+    return (window.location.href = "/events/first");
+  });
 });

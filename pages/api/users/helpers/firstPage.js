@@ -1,8 +1,6 @@
 import firebase from "firebase";
-import FirebaseClient from "../../../../helpers/firebase";
 const jwt = require("jsonwebtoken");
 const firstPage = (fn) => async (req, res) => {
-  FirebaseClient();
   const userSentId = req.body.uid ? req.body.uid : null;
   const auth = req.cookies.auth;
   let uidIn;
@@ -22,7 +20,10 @@ const firstPage = (fn) => async (req, res) => {
   }
   const value = userSentId !== null ? userSentId : uidIn;
 
-  const docRef = await firebase.firestore().collection("cookies").doc(value);
+  const docRef = await firebase
+    .firestore()
+    .collection("user_aditional")
+    .doc(value);
 
   let userPref;
   try {

@@ -17,70 +17,18 @@ const First = () => {
   useCheckcatSet(uid);
   const { pref } = useCategories(uid);
   const { prefItems } = useUserPrefCategories(pref);
-  // const [data, setData] = useState();
-  // const [user, setuser] = useState();
-  // const [userLocation, setuserlocation] = useState();
-  // const [userPrefs, setUserPrefs] = useState();
-  // const t = data;
-  // const call = useCallback(async () => {
-  //   const mess = await fetch("/api/users/helpers/firstPage");
-  //   const d = await mess.json();
-  //   setData(d);
-  // }, [setData]);
-  // const getStaticData = useCallback(async () => {
-  //   const uid = userInfo ? userInfo.uid : null;
-  //   if (uid !== null) {
-  //     try {
-  //       const categories = await getusercat(uid && uid);
-  //       return getuserPrefWithWithCat(categories)
-  //         .then((items) => {
-  //           const date = Date.now();
-  //           const itemsTosort = items.filter((i) => i.start > date);
-  //           return setUserPrefs(itemsTosort);
-  //         })
-  //         .then(() => console.log("jj"));
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   }
-  // }, [setUserPrefs]);
-
-  // useEffect(() => {
-  //   call();
-  //   return () => {
-  //     modeRef.current = false;
-  //   };
-  // }, [call]);
-  // useEffect(() => {
-  //   getStaticData();
-
-  //   return () => {
-  //     modeRef.current = false;
-  //   };
-  // }, [getStaticData]);
   return !user ? (
     <BigLoader />
   ) : (
-    <div style={{ position: "relative" }}>
+    <div style={{ position: "relative", marginTop: "100px" }}>
       {user && (
         <NameDiv>
           <Pi>
-            Dear {user && user.name} Your selection of cooking events below
+            Dear {user && user.name} Your selection of active cooking events
+            below
           </Pi>
         </NameDiv>
       )}
-      {/* <Layer>
-        {t.m &&
-          t.m.map((item, indx) => (
-            <span key={indx}>
-              <FirstPageItem
-                image={item.image}
-                cusineName={item.description}
-                location={userLocation}
-              />
-            </span>
-          ))}
-      </Layer> */}
 
       {prefItems && <EventList items={prefItems} />}
     </div>

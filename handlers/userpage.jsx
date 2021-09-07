@@ -19,14 +19,13 @@ const Userpage = ({ user, userInfo, location, userAdditional, imgUrl }) => {
   const router = useRouter();
   const [userPrefs, setUserPrefs] = useState();
   const filtereduser = user && user;
-  const userInfoNames = userInfo && userInfo.map((item) => item.name);
   const userLocation = location && location.location;
   const countryCode = location && location.countryCode.toUpperCase();
 
   const deleteElement = async (element) => {
     const docref = firebase
       .firestore()
-      .collection("cookies")
+      .collection("user_aditional")
       .doc(user && user.uid);
     await docref
       .update({
@@ -234,7 +233,7 @@ const Userpage = ({ user, userInfo, location, userAdditional, imgUrl }) => {
               {userInfo &&
                 userInfo.map((item) => (
                   <li key={item.id} className={classes.listitem}>
-                    {item.name}
+                    {item}
                     <IconContext.Provider value={{ className: classes.icon }}>
                       <div onClick={() => deleteElement(item.id)}>
                         <VscChromeClose />

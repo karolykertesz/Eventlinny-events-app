@@ -8,6 +8,7 @@ export const useCategories = (uid) => {
       .collection("user_aditional")
       .doc(uid)
       .onSnapshot((snap) => {
+        if (!uid) return;
         const data = snap.data();
         if (data.pref_events) {
           setPref(data.pref_events);
