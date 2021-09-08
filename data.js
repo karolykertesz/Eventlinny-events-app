@@ -524,6 +524,16 @@ export const categories = [
   "create",
 ];
 
+export const selectedCategories = [
+  "indian",
+  "french",
+  "german",
+  "american",
+  "italian",
+  "vegan",
+  "vegetarian",
+];
+
 const categoryimages = [
   {
     name: "indian",

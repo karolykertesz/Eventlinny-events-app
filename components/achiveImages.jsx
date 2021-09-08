@@ -11,7 +11,6 @@ const Archiveimages = (props) => {
   const ids = list && list.map((i) => i.id);
   const filteredArray =
     list && list.filter(({ id }, index) => !ids.includes(id, index + 1));
-  console.log(filteredArray);
   useEffect(async () => {
     const users = await getAttendiesInfo(userids);
     if (modeRef.current) {

@@ -9,12 +9,13 @@ const StartItem = ({ items, addUserInt }) => {
   return (
     <div style={{ width: "100%" }}>
       <Divlayer>
+        <p className={classes.title}>{item}</p>
         <span
           className={selected ? classes.divlayer : classes.divImage}
           onClick={() => setSelected(!selected)}
         >
           <Image
-            src={item.src}
+            src={`/images/${item}.jpg`}
             alt={item.name}
             width={350}
             height={250}
@@ -23,7 +24,7 @@ const StartItem = ({ items, addUserInt }) => {
           {/* "/" */}
         </span>
         <span>
-          <Pi onClick={() => addUserInt(item.name)}>
+          <Pi onClick={() => addUserInt(item)}>
             <Paragraph>{items.name}</Paragraph>
             <SVG onClick={() => setSelected(!selected)}>
               {!selected ? (

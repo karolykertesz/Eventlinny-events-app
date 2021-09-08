@@ -85,8 +85,9 @@ export const Error = styled.div`
 export const Grid = styled.div`
   display: grid;
   grid-gap: 20px;
-  margin-top: 100px;
+  margin-top: 70px;
   grid-template-columns: 1fr 1fr 1fr;
+  position: relative;
 
   @media (max-width: 650px) {
     /* display: flex; */

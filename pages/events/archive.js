@@ -5,6 +5,7 @@ import classes from "../../components/UI/ui-modules/archive.module.css";
 import { useRedirect } from "../../helpers/validatehelp";
 import ArcCont from "../../components/arcivecontainer";
 const MainArchive = ({ eventss }) => {
+  useRedirect();
   const [eventsBy, setEventsBy] = useState();
   const filterMe = useCallback(() => {
     return new Promise((resolve, reject) => {
@@ -32,7 +33,6 @@ const MainArchive = ({ eventss }) => {
       setEventsBy(arrSep);
     });
   }, [setEventsBy]);
-  useRedirect();
   useEffect(() => {
     filterMe();
   }, [filterMe]);

@@ -2,10 +2,10 @@ import { findById, getUserAddIds } from "../../data";
 import classes from "../../components/UI/ui-modules/carousel.archive.module.css";
 import ArchiveOneItem from "../../components/archiveOneItem";
 import { useRedirect } from "../../helpers/validatehelp";
-import Archiveimages from "../../components/achiveImages";
 import React, { Fragment, useState } from "react";
 
 const archiveItem = ({ items }) => {
+  useRedirect();
   const [URL, setUrl] = useState(null);
   const [imgDate, setImgdate] = useState();
   const firstindex = items.archive_photos
@@ -22,8 +22,7 @@ const archiveItem = ({ items }) => {
       setImgdate(smartDate);
     }
   };
-  useRedirect();
-  console.log(imgDate);
+
   return (
     <Fragment>
       <div className={classes.coverGrid}>

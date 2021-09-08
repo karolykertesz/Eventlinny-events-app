@@ -33,9 +33,10 @@
   height: auto;
 }
 .bg {
-  top: 20%;
-  left: 50%;
-  margin: 100px auto;
+  /* top: 20%; */
+  /* left: 50%; */
+  margin: 100px;
+  display: flex;
 }
 .bg p {
   text-align: center;
@@ -53,6 +54,7 @@
   font-size: 18px;
   font-weight: 500;
 }
+
 .search {
   /*display: flex;
   flex-direction: column;

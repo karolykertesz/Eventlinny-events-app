@@ -232,10 +232,10 @@ const Userpage = ({ user, userInfo, location, userAdditional, imgUrl }) => {
             <ul className={classes.list}>
               {userInfo &&
                 userInfo.map((item) => (
-                  <li key={item.id} className={classes.listitem}>
+                  <li key={item} className={classes.listitem}>
                     {item}
                     <IconContext.Provider value={{ className: classes.icon }}>
-                      <div onClick={() => deleteElement(item.id)}>
+                      <div onClick={() => deleteElement(item)}>
                         <VscChromeClose />
                       </div>
                     </IconContext.Provider>
