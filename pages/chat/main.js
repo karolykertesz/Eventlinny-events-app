@@ -29,7 +29,6 @@ const Main = () => {
       setPriv(total);
     });
   }, [pubCount, setPriv]);
-  console.log(privCount);
   useEffect(() => {
     setNumbers();
   }, [setNumbers]);

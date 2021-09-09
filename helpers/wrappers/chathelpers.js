@@ -22,14 +22,12 @@ export const getLinkAndPass = async (room) => {
   await docref.get().then(async (doc) => {
     if (doc.exists) {
       (link = await doc.data().linkVerif), (pass = await doc.data().password);
-      console.log(doc.data());
     } else {
       link = null;
       pass = null;
     }
   });
-  console.log(link);
-  console.log(pass);
+
   return {
     link,
     pass,

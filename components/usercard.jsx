@@ -6,9 +6,10 @@ import firebase from "firebase";
 import { useRouter } from "next/router";
 import { useAuth } from "./Layout/UserContext";
 const UserCard = (props) => {
+  const { user, events, id } = props;
   const currentUser = useAuth().user;
   const uid = currentUser && currentUser.uid;
-  const { user, events, id } = props;
+
   const router = useRouter();
   const [admin, setAdmin] = useState();
   const getUserdata = useCallback(async () => {
@@ -19,7 +20,7 @@ const UserCard = (props) => {
       });
     }
   }, [setAdmin]);
-
+  console.log(admin);
   const LastSigned = new Date(admin && admin.lastSignInTime).toLocaleDateString(
     "de-De",
     {

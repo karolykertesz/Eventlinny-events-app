@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback, Fragment } from "react";
 import { user_archive } from "../../data";
-import LogisticGrid from "../../components/event-detail/logistic-item-grid";
 import classes from "../../components/UI/ui-modules/archive.module.css";
 import { useRedirect } from "../../helpers/validatehelp";
 import ArcCont from "../../components/arcivecontainer";

@@ -25,10 +25,7 @@ export async function createRoom(room, email, password) {
   if (typeof value !== "undefined" || typeof passvalue !== "undefined") {
     return "Invalid characters or password to short";
   }
-  const docref = await firebase
-    .firestore()
-    .collection("private_chat")
-    .doc(room);
+  const docref = firebase.firestore().collection("private_chat").doc(room);
   await docref.get().then(async (doc) => {
     if (doc.exists) {
       message =
@@ -45,8 +42,8 @@ export async function createRoom(room, email, password) {
             merge: true,
           }
         )
-        .then(async () => {
-          message = await "Your chat room created password and info sent";
+        .then(() => {
+          message = "Your chat room created password and info sent";
         });
     }
   });

@@ -6,7 +6,6 @@ import EventMap from "../components/eventMap";
 import { categories, getComments } from "../data";
 import classes from "../components/UI/ui-modules/eventComp.module.css";
 import RecTCard from "../components/UI/reactbootstrap/card";
-import { getAttendiesInfo } from "../data";
 import ComentsCross from "../components/holders/commentscross.jsx";
 import Nomap from "../components/noMap";
 import Eventcard from "../components/UI/eventcard";
@@ -14,6 +13,7 @@ import { useRedirect } from "../helpers/validatehelp";
 
 import "firebase/functions";
 import { TopHolder } from "../components/holders/indexholders";
+import { useAttendiesInfo } from "../helpers/firebase-hooks/get-attendies-info";
 
 const EventComp = ({ single }) => {
   useRedirect();
@@ -27,17 +27,7 @@ const EventComp = ({ single }) => {
     month: "long",
     year: "numeric",
   });
-  useEffect(() => {
-    let mode = true;
-    getAttendiesInfo(attendies && attendies).then((items) => {
-      if (mode) {
-        setInfo(items);
-      }
-    });
-    return () => {
-      mode = false;
-    };
-  }, []);
+  const { info } = useAttendiesInfo(attendies);
   return (
     <Fragment>
       <EventSummary title={single.category} added_by={single.added_by} />
@@ -79,8 +69,8 @@ const EventComp = ({ single }) => {
         <div className={classes.cover}>
           <Grid>
             {
-              atttendiesInfo &&
-                atttendiesInfo.map((item) => (
+              info &&
+                info.map((item) => (
                   <RecTCard
                     key={item.id}
                     memberlink={`/users/${item.id}`}

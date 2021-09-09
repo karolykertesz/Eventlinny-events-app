@@ -1,76 +1,24 @@
-import React, { useEffect, useState, useCallback } from "react";
-import firebase from "firebase";
+import React from "react";
 import { useRedirect } from "../../helpers/validatehelp";
 import { useAuth } from "../../components/Layout/UserContext";
 import { useRouter } from "next/router";
 import classes from "../../components/UI/ui-modules/publicchat.module.css";
-import Image from "next/image";
-import ChatItem from "../../components/UI/chatitem";
 import BigLoader from "../../components/UI/BigLoader";
 import Shared from "./chatShared";
-
+import { useUserInfo } from "../../helpers/firebase-hooks/get-user-info";
+import { useChatMsessages } from "../../helpers/firebase-hooks/get-chat-messages";
 const Public = () => {
   useRedirect();
   const user = useAuth().user;
   const router = useRouter();
   const id = router.query.id;
-  const [data, setdata] = useState();
-  const [messages, Setmessages] = useState();
-  const [currImage, setUserImage] = useState();
-  const getdataOnce = useCallback(async () => {
-    const dataref = await firebase
-      .firestore()
-      .collection("public_chat")
-      .doc(id && id);
-    await dataref.get().then(async (doc) => {
-      setdata({
-        id: doc.id,
-        ...doc.data(),
-      });
-    });
-    await dataref
-      .collection("messages")
-      .orderBy("created_at")
-      .limit(30)
-      .onSnapshot(async (doc) => {
-        const arr = [];
-        const size = doc.size;
-        if (size > 0) {
-          doc.forEach((item) => {
-            arr.push({
-              id: item.id,
-              created_at: item.data().created_at,
-              text: item.data().text,
-              added_by: item.data().added_by,
-            });
-          });
-        }
-        await Setmessages(arr);
-      });
-  }, [setdata]);
 
-  const setUser = async () => {
-    const dataref = firebase
-      .firestore()
-      .collection("user_aditional")
-      .doc(user && user.uid);
-    await dataref.get().then(async (doc) => {
-      if (doc.exists) {
-        const data = await doc.data();
-        const imageUrl = data.image_url
-          ? data.image_url
-          : "/images/noimage.svg";
-        setUserImage(imageUrl);
-      }
-    });
-  };
-  useEffect(() => {
-    getdataOnce();
-  }, [getdataOnce]);
-  useEffect(() => {
-    setUser();
-  }, []);
-  if (!data || !user) {
+  const { userInfo } = useUserInfo(user && user.uid);
+  const currImage =
+    userInfo && userInfo.image_url ? userInfo.image_url : "/images/noimage.svg";
+  const { messages } = useChatMsessages(id, "public");
+
+  if (!user) {
     return <BigLoader />;
   }
   return (

@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import classes from "../../components/UI/ui-modules/publiclist.module.css";
 import firebase from "firebase";
-// import { getPublicChatsHelper } from "../../helpers/wrappers/chathelpers";
 import { useRedirect } from "../../helpers/validatehelp";
 import PublicItem from "../../components/publicitem";
 import Search from "../../components/UI/reactbootstrap/checksearch";
@@ -9,8 +8,6 @@ import useBanned from "../../helpers/checkBanned";
 const PubliList = () => {
   useRedirect();
   const isBanned = useBanned();
-  const modeRef = useRef(true);
-
   const [data, setData] = useState();
   const [checked, setChecked] = useState();
   const [searched, setSearched] = useState(null);

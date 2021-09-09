@@ -10,8 +10,16 @@
 }
 .eventGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  grid-template-columns: 1fr;
   width: 100%;
+  margin-top: 75px;
+
+  /* margin: 0 150px 0 0; */
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto; */
 }
 .ul {
   display: grid;

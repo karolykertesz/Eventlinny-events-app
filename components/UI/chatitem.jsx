@@ -1,23 +1,14 @@
 import React, { useState, useEffect, useCallback } from "react";
 import firebase from "firebase";
 import classes from "../UI/ui-modules/chatitem.module.css";
+import { useUserInfo } from "../../helpers/firebase-hooks/get-user-info";
 import Image from "next/image";
 const ChatItem = (props) => {
   const { item, uid } = props;
-  const [infoUrl, setInfo] = useState();
+  const { userInfo } = useUserInfo(uid);
+  const infoUrl =
+    userInfo && userInfo.image_url ? userInfo.image_url : "/images/noimage.svg";
   const [banned, setBanned] = useState([]);
-  const addData = useCallback(async () => {
-    const dataref = firebase
-      .firestore()
-      .collection("user_aditional")
-      .doc(item && item.added_by);
-    await dataref.get().then((doc) => {
-      const url = doc.data().image_url
-        ? doc.data().image_url
-        : "/images/noimage.svg";
-      setInfo(url);
-    });
-  }, [setInfo]);
   const getbanned = useCallback(() => {
     const users = [];
     return firebase
@@ -36,12 +27,8 @@ const ChatItem = (props) => {
       });
   }, [setBanned]);
   useEffect(() => {
-    addData();
-  }, [addData]);
-  useEffect(() => {
     getbanned();
   }, [getbanned]);
-  console.log(item.added_by);
   return (
     <div
       className={

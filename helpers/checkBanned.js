@@ -10,9 +10,9 @@ const useBanned = () => {
       .firestore()
       .collection("banned_users")
       .doc(user && user.uid);
-    await dataRef.onSnapshot(async (doc) => {
+    return dataRef.onSnapshot(async (doc) => {
       if (doc.exists) {
-        await setBanned(true);
+        setBanned(true);
       }
     });
   });

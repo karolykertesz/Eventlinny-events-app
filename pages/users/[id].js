@@ -12,7 +12,7 @@ const User = (props) => {
     const arr = [];
     const sorted = await userEvents.flatMap((e) => [e.category]);
     await sorted.map((i) => !arr.includes(i) && arr.push(i));
-    await setSort(arr);
+    return setSort(arr);
   }, [setSort]);
   useEffect(() => {
     sorting();
