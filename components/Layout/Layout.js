@@ -25,6 +25,7 @@ const Layout = (props) => {
       </Head>
 
       {isUser && <Header />}
+
       <main>{props.children}</main>
       {isUser && <Footer />}
     </Fragment>

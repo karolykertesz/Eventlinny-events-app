@@ -14,6 +14,8 @@
   },
   "dependencies": {
     "@glidejs/glide": "^3.4.1",
+    "@zoom/videosdk": "^1.1.4",
+    "@zoomus/websdk": "^1.9.8",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "child_process": "^1.0.2",
