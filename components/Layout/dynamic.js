@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 
-export const DynamicZoom = dynamic(() => import("./zoomContext"), {
+const DynamicZoom = dynamic(() => import("../meetings-main"), {
   ssr: false,
 });
+export default DynamicZoom;
