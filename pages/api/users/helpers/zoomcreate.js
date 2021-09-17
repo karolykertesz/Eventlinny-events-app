@@ -15,7 +15,7 @@ const handler = (fn) => async (req, res) => {
     secret
   );
   const userOptions = {
-    topic: "hhh",
+    topic: "Topic",
     type: 2,
     start_time: "2020-05-05 12:00:00",
     password: password.slice(0, 9).replace("-", ""),
