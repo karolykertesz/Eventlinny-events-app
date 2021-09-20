@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 import firebase from "firebase";
 import validate from "validate.js";
 import { constraints } from "../../helpers/validators/privatechat";
-import Loader from "../../components/UI/loader";
+import BigLoader from "../../components/UI/BigLoader";
 const Private = () => {
   useRedirect();
   const isBanned = useBanned();
@@ -100,7 +100,7 @@ const Private = () => {
     );
   }
   if (loading) {
-    return <Loader />;
+    return <BigLoader />;
   }
   return (
     <div className={classes.top}>

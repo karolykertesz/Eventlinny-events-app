@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Loader from "../../components/UI/loader";
+import BigLoader from "../../components/UI/BigLoader";
 import { useRouter } from "next/router";
 import firebase from "firebase";
 import EventComp from "../../components/eventComp";
@@ -7,7 +7,7 @@ import { getKeys, findById } from "../../data";
 
 const ViewEmailEvent = ({ single }) => {
   if (!single) {
-    return <Loader />;
+    return <BigLoader />;
   }
   return <EventComp single={single} />;
 };

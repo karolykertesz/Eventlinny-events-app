@@ -1,10 +1,9 @@
-import React, { useState, Fragment, useEffect } from "react";
-import firebase from "firebase";
+import React, { useState, Fragment } from "react";
+
 import classes from "./UI/ui-modules/createevent.module.css";
 import EventsTop from "./UI/eventstop";
 import { categories } from "../data";
 import Eventadder from "./UI/eventadder";
-import { Pi } from "../components/UI/styledComponents";
 
 const CreateEvent = ({ uid }) => {
   const [category, setCat] = useState();

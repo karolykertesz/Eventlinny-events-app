@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { useRedirect } from "../../helpers/validatehelp";
 import { useAuth } from "../../components/Layout/UserContext";
 import { useSingleEvent } from "../../helpers/firebase-hooks/get-single-event";
-import DynamicZoom from "../../components/Layout/dynamic";
 import BigTest from "../../components/UI/ggggggg";
 const Main = () => {
   useRedirect();

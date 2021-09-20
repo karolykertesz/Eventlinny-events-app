@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import Loader from "../../components/UI/loader";
+import BigLoader from "../../components/UI/BigLoader";
 import { useRouter } from "next/router";
 import firebase from "firebase";
 import {
@@ -71,7 +71,7 @@ const Verify = () => {
     };
   }, [getData]);
   if (loading) {
-    return <Loader />;
+    return <BigLoader />;
   }
   return (
     <div

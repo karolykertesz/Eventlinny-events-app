@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 
 const axios = require("axios");
 const handler = (fn) => async (req, res) => {
-  //   const { email, name, title, start, description } = req.body;
+  const { email, start, description, category } = req.body;
   const key = process.env.NEXT_PUBLIC_ZOOM_KEY;
   const secret = process.env.NEXT_PUBLIC_ZOOM_SECRET;
   const password = uuidv4();
@@ -15,20 +15,22 @@ const handler = (fn) => async (req, res) => {
     secret
   );
   const userOptions = {
-    topic: "Topic",
+    topic: `${category} EVENT`,
     type: 2,
-    start_time: "2020-05-05 12:00:00",
+    start_time: start,
     password: password.slice(0, 9).replace("-", ""),
     duration: 120,
-    agenda: "jjj",
+    agenda: description,
     timezone: "Europe/Berlin",
     settings: {
       host_video: false,
       participant_video: false,
-      join_before_host: false,
+      join_before_host: true,
       mute_upon_entry: true,
       use_pmi: false,
       approval_type: 0,
+      alternative_hosts: email,
+      close_registration: true,
     },
   };
   const userconfig = {

@@ -8,7 +8,6 @@ import { getcountries } from "../../helpers/axios/getlocaion";
 import LocationCity from "../locationCity";
 import EventDatePicker from "../eventDatepicker";
 import { useAuth } from "../../components/Layout/UserContext";
-import { sendEmailWithEvent } from "../../helpers/sendEmailWithEvent";
 import BigLoader from "../UI/BigLoader";
 import { TablePopOver } from "../UI/reactbootstrap/popover";
 
@@ -62,8 +61,6 @@ const Eventadder = ({
   const [complete, setComplete] = useState(false);
   const [loading, setLoading] = useState(false);
   const user = useAuth().user;
-  const email = user.email;
-  const startDate = startDay && startDay;
   const displayname = user.name;
   const initialState = {
     selectedcategory: category,
@@ -83,9 +80,22 @@ const Eventadder = ({
     description,
   } = state;
 
-  const startToSend = new Date(startDay).getTime();
+  const createDateObj = async () => {
+    if (!startDay) return;
+
+    const dataArray = await new Date(startDay)
+      .toLocaleDateString("HU-hu")
+      .split(". ")
+      .map((e) => e.replace(".", ""))
+      .join("-");
+    const frt = await new Date(startDay).toLocaleTimeString("Hu-hu");
+    return {
+      str: dataArray + " " + frt,
+    };
+  };
+
   const [allcountrie, setAllcounries] = useState();
-  const formSubmit = (e, value) => {
+  const formSubmit = async (e, value) => {
     e.preventDefault();
     if (value === false) {
       return new Promise((resolve, reject) => {
@@ -99,7 +109,19 @@ const Eventadder = ({
           setCat(null);
         });
     }
-
+    const { str } = await createDateObj();
+    const create = await fetch("/api/users/helpers/zoomcreate", {
+      method: "POST",
+      body: JSON.stringify({
+        email: user.email,
+        start: str,
+        description: description.toUpperCase(),
+        category: selectedcategory.toUpperCase(),
+      }),
+    });
+    const data = await create.json();
+    console.log(data);
+    return;
     if (
       state.eventLocation !== null &&
       state.startDay !== null &&
@@ -107,7 +129,8 @@ const Eventadder = ({
       state.description !== null
     ) {
       if (eventLocation === "online") {
-        setLoading(true);
+        // setLoading(true);
+
         return firebase
           .firestore()
           .collection("user_add_events")
@@ -181,7 +204,6 @@ const Eventadder = ({
   if (loading) {
     return <BigLoader />;
   }
-  console.log(selectedcategory.toLowerCase());
   return (
     <Layer>
       <div className={classes.form}>
