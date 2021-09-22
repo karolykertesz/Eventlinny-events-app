@@ -7,13 +7,18 @@
   -moz-border-radius: 7px;
   -ms-border-radius: 7px;
   -o-border-radius: 7px;
-  /* display: block; */
   margin: 100px auto;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 .unreadCont {
   width: 100%;
+  position: absolute;
+  padding: auto;
+  top: 200px;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .unreadUl {
   display: grid;
@@ -41,4 +46,16 @@
   font-size: 16px;
   font-weight: 600;
   font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+@media (max-width: 850px) {
+  .unreadCont {
+    margin: 0 40px;
+  }
+}
+
+@media (max-width: 650px) {
+  .unreadCont {
+    margin: 20px;
+  }
 }

@@ -69,3 +69,11 @@
     opacity: 0.5;
   }
 }
+
+@media (max-width: 650px) {
+  .cover,
+  .inactive {
+    width: 90px !important;
+    height: 90px;
+  }
+}

@@ -68,6 +68,7 @@
       279px; float: left; } .clear { display: block; clear: both; } /* */
     </style>
   </head>
+
   <body bgcolor="#deb887">
     <!-- {{start}} -->
     <div>
@@ -84,7 +85,6 @@
                     {{event}}
                     event
                   </th>
-
                 </tr>
               </table>
             </div>
@@ -99,7 +99,7 @@
         <td class="container innerDiv">
           <div class="content">
             <table>
-              <img src={{image}} />
+              <img src="{{image}}" />
             </table>
             <ul>
               <li>
@@ -112,7 +112,18 @@
                 <p class="lead">The Name Of your Event {{eventName}}</p>
               </li>
               <li>
-                <a href={{url}}>
+                <p class="lead">Your Zoom meeting id {{meeting_id}}</p>
+              </li>
+              <li>
+                <p class="lead">Your Eventlinny event starts
+                  {{meeeting_starts}}</p>
+              </li>
+              <li>
+                <p class="lead">Your Password and url will be avalible half and
+                  hour before the event starts</p>
+              </li>
+              <li>
+                <a href="{{url}}">
                   <p class="lead">wiew Your Event</p>
                 </a>
               </li>

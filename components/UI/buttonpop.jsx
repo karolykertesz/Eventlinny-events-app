@@ -74,6 +74,9 @@ const ButtonPop = (props) => {
             <div className={classes.link}>
               <Link href={`/users/messages`}>Messages</Link>
             </div>
+            <div className={classes.link}>
+              <Link href={`/meetings/main`}>Your Events</Link>
+            </div>
             {note ? (
               <div className={classes.link}>
                 <Link

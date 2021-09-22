@@ -17,13 +17,16 @@ export const sendCreate = functions.firestore
     const description = data.description;
     const displayname = data.created_by;
     const startToSend = moment(data.start).format("MMM Do YY");
+    const { id, meeeting_starts } = data.meeting;
 
     await createEvent(
       email,
       displayname,
       startToSend,
       selectedcategory,
-      description
+      description,
+      meeeting_starts,
+      id
     );
     const findItem = await categories.find(
       (item) => item === selectedcategory.toString()
@@ -44,10 +47,12 @@ export const sendCreate = functions.firestore
             const email = await docArray.toString();
             await sendNotificationEmail(
               email,
-              selectedcategory,
               displayname,
               startToSend,
-              description
+              selectedcategory,
+              description,
+              meeeting_starts,
+              id
             );
             try {
               const arrTosend = email.split(",");
@@ -59,14 +64,14 @@ export const sendCreate = functions.firestore
               return Promise.all(promises).then((docs) => {
                 docs.forEach((el) => {
                   el.forEach(async (i) => {
-                    const id = i.id;
+                    const usId = i.id;
                     await db
                       .collection("notifications")
-                      .doc(id)
+                      .doc(usId)
                       .get()
                       .then((doc) => {
                         if (doc.exists) {
-                          return db.doc(`notifications/${id}`).update({
+                          return db.doc(`notifications/${usId}`).update({
                             unread: admin.firestore.FieldValue.arrayUnion({
                               id: uuid_v4(),
                               created_at: Date.now(),
@@ -79,7 +84,7 @@ export const sendCreate = functions.firestore
                             }),
                           });
                         } else {
-                          return db.doc(`notifications/${id}`).set({
+                          return db.doc(`notifications/${usId}`).set({
                             unread: [
                               {
                                 id: uuid_v4(),

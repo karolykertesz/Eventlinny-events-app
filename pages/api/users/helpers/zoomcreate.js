@@ -3,7 +3,8 @@ const jwt = require("jsonwebtoken");
 
 const axios = require("axios");
 const handler = (fn) => async (req, res) => {
-  const { email, start, description, category } = req.body;
+  const { start, description, category } = req.body;
+
   const key = process.env.NEXT_PUBLIC_ZOOM_KEY;
   const secret = process.env.NEXT_PUBLIC_ZOOM_SECRET;
   const password = uuidv4();
@@ -29,8 +30,7 @@ const handler = (fn) => async (req, res) => {
       mute_upon_entry: true,
       use_pmi: false,
       approval_type: 0,
-      alternative_hosts: email,
-      close_registration: true,
+      close_registration: false,
     },
   };
   const userconfig = {

@@ -79,7 +79,6 @@ const Eventadder = ({
     startDay,
     description,
   } = state;
-
   const createDateObj = async () => {
     if (!startDay) return;
 
@@ -93,7 +92,6 @@ const Eventadder = ({
       str: dataArray + " " + frt,
     };
   };
-
   const [allcountrie, setAllcounries] = useState();
   const formSubmit = async (e, value) => {
     e.preventDefault();
@@ -109,77 +107,90 @@ const Eventadder = ({
           setCat(null);
         });
     }
+    if (
+      state.eventLocation == null ||
+      state.startDay == null ||
+      state.description == null
+    )
+      return;
+    setLoading(true);
     const { str } = await createDateObj();
     const create = await fetch("/api/users/helpers/zoomcreate", {
       method: "POST",
       body: JSON.stringify({
-        email: user.email,
-        start: str,
-        description: description.toUpperCase(),
-        category: selectedcategory.toUpperCase(),
+        start: new Date(startDay).toISOString(),
+        description: description,
+        category: selectedcategory,
       }),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
     });
-    const data = await create.json();
-    console.log(data);
-    return;
-    if (
-      state.eventLocation !== null &&
-      state.startDay !== null &&
-      state.endDay !== null &&
-      state.description !== null
-    ) {
-      if (eventLocation === "online") {
-        // setLoading(true);
+    const { password, id, join_url } = await create.json();
 
-        return firebase
-          .firestore()
-          .collection("user_add_events")
-          .doc(docId)
-          .set({
-            added_by: uid,
-            attendies: firebase.firestore.FieldValue.arrayUnion(uid),
-            category: selectedcategory.toLowerCase(),
-            location: "online",
-            starts: firebase.firestore.Timestamp.fromDate(new Date(startDay)),
-            premium: false,
-            description: description.toLowerCase(),
-            created_by: displayname,
-            user_email: user.email,
-          })
-          .then(() => {
-            setLoading(false);
-            //   });
-          })
-          .then(() => {
-            router.push("/events/first");
-          })
-          .catch((err) => console.log(err));
-      } else if (eventLocation !== "online") {
-        const loctString = selectedCity;
-        setLoading(true);
-        return firebase
-          .firestore()
-          .collection("user_add_events")
-          .doc(docId)
-          .set({
-            added_by: uid,
-            attendies: firebase.firestore.FieldValue.arrayUnion(uid),
-            category: selectedcategory.toLowerCase(),
-            location: loctString.toLowerCase(),
-            location_country: selectedCountry,
-            starts: new Date(startDay),
-            premium: false,
-            description: description.toLowerCase(),
-            created_by: displayname,
-            user_email: user.email,
-          })
+    if (eventLocation === "online") {
+      return firebase
+        .firestore()
+        .collection("user_add_events")
+        .doc(docId)
+        .set({
+          added_by: uid,
+          attendies: firebase.firestore.FieldValue.arrayUnion(uid),
+          category: selectedcategory.toLowerCase(),
+          location: "online",
+          starts: firebase.firestore.Timestamp.fromDate(new Date(startDay)),
+          premium: false,
+          description: description.toLowerCase(),
+          created_by: displayname,
+          user_email: user.email,
+          meeting: {
+            id,
+            password,
+            join_url,
+            start: firebase.firestore.Timestamp.fromDate(new Date(startDay)),
+            meeeting_starts: str,
+          },
+        })
+        .then(() => {
+          setLoading(false);
+        })
+        .then(() => {
+          router.push("/events/first");
+        })
+        .catch((err) => console.log(err));
+    } else if (eventLocation !== "online") {
+      const loctString = selectedCity;
+      setLoading(true);
+      return firebase
+        .firestore()
+        .collection("user_add_events")
+        .doc(docId)
+        .set({
+          added_by: uid,
+          attendies: firebase.firestore.FieldValue.arrayUnion(uid),
+          category: selectedcategory.toLowerCase(),
+          location: loctString.toLowerCase(),
+          location_country: selectedCountry,
+          starts: new Date(startDay),
+          premium: false,
+          description: description.toLowerCase(),
+          created_by: displayname,
+          user_email: user.email,
+          meeting: {
+            id,
+            password,
+            join_url,
+            meeeting_starts: str,
+            start: firebase.firestore.Timestamp.fromDate(new Date(startDay)),
+          },
+        })
 
-          .then(() => setLoading(false))
-          .then(() => {
-            router.push("/events");
-          })
-          .catch((err) => console.log(err));
-      }
+        .then(() => setLoading(false))
+        .then(() => {
+          router.push("/events");
+        })
+        .catch((err) => console.log(err));
     }
   };
 
@@ -204,6 +215,7 @@ const Eventadder = ({
   if (loading) {
     return <BigLoader />;
   }
+
   return (
     <Layer>
       <div className={classes.form}>
