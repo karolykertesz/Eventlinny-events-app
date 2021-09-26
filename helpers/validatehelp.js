@@ -16,7 +16,7 @@ export const useRedirect = () => {
   };
   useEffect(() => {
     if (trueRef.current) {
-      validate();
+      return validate();
     }
     return () => {
       trueRef.current = false;

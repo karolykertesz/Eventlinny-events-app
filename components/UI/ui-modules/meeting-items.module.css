@@ -1,0 +1,12 @@
+.main {
+  position: relative;
+  margin: 100px auto;
+  padding: auto;
+  max-width: 900px;
+  min-width: 350px;
+}
+.allGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
