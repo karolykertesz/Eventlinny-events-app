@@ -12,8 +12,6 @@ export const sendCreate = functions.firestore
   .onCreate(async (snap, context) => {
     const data = snap.data();
     const { docId } = context.params;
-    functions.logger.log(docId, "iiii");
-    functions.logger.log(context.params, "params");
 
     const email = data.user_email;
     const selectedcategory = data.category;
