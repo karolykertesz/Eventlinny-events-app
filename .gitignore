@@ -11,7 +11,6 @@
 # next.js
 /.next/
 /out/
-/public/images
 # production
 /build
 
@@ -30,6 +29,4 @@ yarn-error.log*
 # vercel
 *.logs
 .vercel
-/service
-service
-next-events-309cd-firebase-adminsdk-5vizw-f25b60cc6e.json
+
