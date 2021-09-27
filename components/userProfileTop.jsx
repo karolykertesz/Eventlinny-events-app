@@ -1,7 +1,5 @@
 import classes from "../components/UI/ui-modules/userprofile.module.css";
 import react, { Fragment, useEffect, useState } from "react";
-import styled from "styled-components";
-import { useRouter } from "next/router";
 import FirebaseClient from "../helpers/firebase";
 import firebase from "firebase";
 FirebaseClient();

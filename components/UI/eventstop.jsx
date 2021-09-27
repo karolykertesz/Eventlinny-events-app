@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import classes from "./ui-modules/createevent.module.css";
-import { SVG } from "../startitem";
-import { Pi } from "../UI/styledComponents";
 
 const EventsTop = ({ item, additem, clicked }) => {
   return (

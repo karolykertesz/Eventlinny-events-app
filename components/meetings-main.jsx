@@ -1,9 +1,4 @@
 import React, { useState } from "react";
-import Head from "next/head";
-// import { ZoomMtg } from "@zoomus/websdk";
-import classes from "./UI/ui-modules/main.chat.module.css";
-// ZoomMtg.preLoadWasm();
-// ZoomMtg.prepareJssdk();
 const MainMeetings = (props) => {
   const { id, event, setError, user } = props;
   const [meetingUrl, setmeetingUrl] = useState();

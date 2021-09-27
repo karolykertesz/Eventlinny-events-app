@@ -1,5 +1,4 @@
 import classes from "../UI/ui-modules/message.bord.module.css";
-import Xcircle from "../UI/icons/x-circle";
 
 const MessageTop = (props) => {
   const { added, setAdded, setMessid } = props;

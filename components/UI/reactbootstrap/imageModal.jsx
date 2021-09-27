@@ -1,8 +1,6 @@
 import { Modal } from "react-bootstrap";
 import classes from "../../UI/ui-modules/imagemodal.module.css";
 import Image from "next/image";
-import { VscChromeClose, VscDiffAdded } from "react-icons/vsc";
-import { IconContext } from "react-icons";
 
 const ImageModal = (props) => {
   return (

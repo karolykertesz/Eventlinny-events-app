@@ -1,7 +1,5 @@
 import classes from "../ui-modules/styled.module.css";
-import firebase from "firebase";
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 export const IconDock = (props) => {
   const { icon: Icon } = props;
   return (

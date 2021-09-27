@@ -11,15 +11,13 @@ export const sendCreate = functions.firestore
   .document("user_add_events/{docId}")
   .onCreate(async (snap, context) => {
     const data = snap.data();
-    const { docId } = context.params;
-
+    const t = snap.id;
     const email = data.user_email;
     const selectedcategory = data.category;
     const description = data.description;
     const displayname = data.created_by;
     const startToSend = moment(data.start).format("MMM Do YY");
     const { id, meeeting_starts } = data.meeting;
-
     await createEvent(
       email,
       displayname,
@@ -79,7 +77,7 @@ export const sendCreate = functions.firestore
                               text: [
                                 `New Eventlinny event has been added from the category : ${selectedcategory}`,
                                 `You can view the event here
-                              http://localhost:3000/events/${docId}
+                              http://localhost:3000/events/${t}
                               `,
                               ],
                             }),
@@ -93,7 +91,7 @@ export const sendCreate = functions.firestore
                                 text: [
                                   `New Eventlinny event has been added from the category : ${selectedcategory}`,
                                   `You can view the event here
-                                http://localhost:3000/events/${docId}
+                                http://localhost:3000/events/${t}
                                 `,
                                 ],
                               },

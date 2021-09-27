@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import PublicPop from "../components/UI/reactbootstrap/publicpop";
 import Image from "next/image";
 import classes from "../components/UI/ui-modules/publiclist.module.css";
