@@ -38,7 +38,7 @@ const UserNotes = () => {
   };
 
   return (
-    <div>
+    <div className={classes.mainTop}>
       <NotificationModal
         onHide={() => setShow(false)}
         cat={category}

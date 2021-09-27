@@ -42,7 +42,7 @@ const MessageSideItem = (props) => {
         />
         <div className={classes.inn}>
           <div className={classes.title}>
-            <p>{message.text}</p>
+            <p style={{ color: "#fff" }}>{message.text}</p>
           </div>
           <div className={classes.date}>
             <p>{humanDate}</p>
