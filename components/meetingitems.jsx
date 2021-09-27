@@ -1,28 +1,32 @@
 import classes from "./UI/ui-modules/meeting-items.module.css";
-import Image from "next/image";
-import Link from "next/link";
 import { selectedCategories } from "../data";
 const MeetingItems = ({ meeting }) => {
-  const currentDate = Date.now();
+  const currentDate = new Date();
   const { category, join_url, meet_starts, meeeting_starts, description } =
     meeting;
-  const meet_st = new Date(meet_starts.seconds * 1000).getTime();
+  const meet_st = new Date(meet_starts.seconds * 1000);
   const isMeetting =
-    meet_st - 1800 > currentDate
+    new Date(meet_st.setMinutes(meet_st.getMinutes() - 30)) > currentDate
       ? "Your Meeting didn't start ,yet"
-      : currentDate + 1800 > meet_st
+      : currentDate > new Date(meet_st.setMinutes(meet_st.getMinutes() + 30))
       ? "Sorry, Your meeting Already started"
       : "Go to meeting";
 
   const isValid =
-    meet_st - 1800 > currentDate || currentDate + 1800 > meet_st ? false : true;
+    new Date(meet_st.setMinutes(meet_st.getMinutes() + 30)) < currentDate ||
+    new Date(meet_st.setMinutes(meet_st.getMinutes() - 30)) > currentDate
+      ? false
+      : true;
   return (
-    <div className={classes.container}>
+    <div
+      className={
+        isValid
+          ? classes.container
+          : classes.container + " " + classes.contDisabled
+      }
+    >
       <div className={classes.imageHolder}>
-        <Image
-          width="100%"
-          height="100%"
-          quality={100}
+        <img
           src={
             selectedCategories.includes(category)
               ? `/images/sugimages/${category}.jpg`
@@ -30,15 +34,17 @@ const MeetingItems = ({ meeting }) => {
           }
         />
       </div>
-      <div className={classes.mettingDate}>
+      <div className={classes.meetingDate}>
         <p>{meeeting_starts}</p>
       </div>
       <div className={classes.description}>
         <p>{description}</p>
       </div>
       <div className={classes.buttonComp}>
-        <a href={join_url} target="_blank">
-          {isMeetting}
+        <a href={isValid ? join_url : "#"} target="_blank">
+          <button type="button" disabled={!isValid}>
+            {isMeetting}
+          </button>
         </a>
       </div>
     </div>

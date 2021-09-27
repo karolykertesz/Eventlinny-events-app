@@ -23,7 +23,9 @@ const Main = () => {
           ))}
         </div>
       ) : (
-        <div></div>
+        <div className={classes.noMeeting}>
+          <p>Sorry You don't have any meeting!</p>
+        </div>
       )}
     </main>
   );

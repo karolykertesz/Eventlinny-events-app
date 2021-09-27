@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import firebase from "firebase";
 export const useGetSignEvents = (id = "") => {
   const [signed, setSigned] = useState([]);
-  const currentDate = new Date();
+  const currentTime = new Date();
+  const converted = currentTime.setMinutes(currentTime.getMinutes() - 60);
+  const currentDate = new Date(converted);
   useEffect(() => {
     const allEvents = firebase
       .firestore()
