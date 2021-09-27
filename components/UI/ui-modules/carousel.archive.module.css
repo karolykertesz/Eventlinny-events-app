@@ -106,6 +106,10 @@
   -moz-transition: 0.6s;
   -ms-transition: 0.6s;
   -o-transition: 0.6s;
+  text-align: center;
+}
+.visHid {
+  visibility: hidden;
 }
 /* .slides .fir:checked ~ .mat img {
   margin-left: 0;

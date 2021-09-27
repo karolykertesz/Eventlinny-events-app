@@ -34,9 +34,14 @@ const UserEvents = ({ single }) => {
         <EventList items={single} />
       ) : (
         <Fragment>
-          <span onClick={() => setShowModal(true)}>
+          <span
+            onClick={() => setShowModal(true)}
+            style={{ margin: "200px auto", cursor: "pointer" }}
+          >
             <LogisticsItem icon={Plus}>
-              <p>You have No events ,Create one!</p>
+              <p style={{ color: "burlywood" }}>
+                You have No events ,Create one!
+              </p>
             </LogisticsItem>
           </span>
 

@@ -12,6 +12,9 @@
   flex-direction: column;
   position: relative;
 }
+.mainTop {
+  margin: 220px auto;
+}
 .unreadCont {
   width: 100%;
   position: absolute;

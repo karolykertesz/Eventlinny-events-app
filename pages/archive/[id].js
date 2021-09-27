@@ -11,6 +11,16 @@ const archiveItem = ({ items }) => {
   const firstindex = items.archive_photos
     ? items.archive_photos[0].url
     : "/images/salmon.jpg";
+  const startdate =
+    items.archive_photos.length === 1 &&
+    new Date(items.archive_photos[0].image_added_at).toLocaleDateString(
+      "en-GB",
+      {
+        day: "2-digit",
+        year: "numeric",
+        month: "long",
+      }
+    );
   const setImgUrl = (url, date) => {
     setUrl(url);
     if (date) {
@@ -19,10 +29,9 @@ const archiveItem = ({ items }) => {
         year: "numeric",
         month: "long",
       });
-      setImgdate(smartDate);
+      return setImgdate(smartDate);
     }
   };
-
   return (
     <Fragment>
       <div className={classes.coverGrid}>
@@ -68,7 +77,9 @@ const archiveItem = ({ items }) => {
 
                   {items.archive_photos && (
                     <div className={classes.slide}>
-                      <span className={classes.date}>{imgDate && imgDate}</span>
+                      <span className={classes.date}>
+                        {imgDate ? imgDate : startdate}
+                      </span>
                       <img src={URL !== null ? URL : firstindex} />
                     </div>
                   )}
@@ -77,7 +88,10 @@ const archiveItem = ({ items }) => {
                 <div className={classes.navigation}>
                   {items.archive_photos &&
                     items.archive_photos.map((leb) => (
-                      <span key={leb.url}>
+                      <span
+                        key={leb.url}
+                        className={startdate ? classes.visHid : ""}
+                      >
                         <label
                           htmlFor="r2"
                           className={classes.bar}

@@ -11,9 +11,9 @@ export const sendCreate = functions.firestore
   .document("user_add_events/{docId}")
   .onCreate(async (snap, context) => {
     const data = snap.data();
-    const docId = context.params.id;
-    functions.logger.log(docId);
-    functions.logger.log(context.params);
+    const { docId } = context.params;
+    functions.logger.log(docId, "iiii");
+    functions.logger.log(context.params, "params");
 
     const email = data.user_email;
     const selectedcategory = data.category;

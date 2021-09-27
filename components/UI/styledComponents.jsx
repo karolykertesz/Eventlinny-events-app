@@ -31,9 +31,9 @@ export const List = ({ children }) => {
 export const Cover = styled.div`
   display: flex;
   justify-content: center;
-  max-width: 700px;
+  max-width: 1000px;
   align-items: center !important;
-  margin: 10px auto;
+  margin: 100px auto;
   flex-direction: column;
 `;
 
