@@ -23,7 +23,7 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "firebase-admin": "^9.2.0",
-    "firebase-functions": "^3.14.1",
+    "firebase-functions": "^3.15.7",
     "moment": "^2.29.1",
     "nodemailer": "^6.6.1",
     "nodemailer-express-handlebars": "^4.0.0",

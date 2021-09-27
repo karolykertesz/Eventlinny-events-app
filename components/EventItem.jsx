@@ -13,7 +13,7 @@ import { categories } from "../data";
 import { useAuth } from "./Layout/UserContext";
 const EventItem = (props) => {
   const { start, category, location, id, attendies, added_by } = props;
-  const user = useAuth().user && useAuth().user;
+  const user = useAuth().user;
   const uid = user && user.uid;
   const isImageurl = categories.includes(category);
 
