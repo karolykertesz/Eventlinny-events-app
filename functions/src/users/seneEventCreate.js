@@ -7,8 +7,8 @@ const db = admin.firestore();
 import { v4 as uuid_v4 } from "uuid";
 import { sendNotificationEmail } from "./sendNotificationEmails";
 import { categories } from "./data";
-export const sendCreate = functions.database
-  .ref(`/user_add_events/{docId}`)
+export const sendCreate = functions.firestore
+  .document("user_add_events/{eventId}")
   .onCreate(async (snap, context) => {
     const data = snap.data();
     const t = snap.id;
