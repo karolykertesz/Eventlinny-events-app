@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react";
+import { Fragment } from "react";
 import Uilayer from "../components/UI/uiLayer ";
 import StartItem from "../components/startitem";
 import { useState } from "react";
@@ -7,18 +7,13 @@ import classes from "../components/UI/button.module.css";
 import firebase from "firebase";
 import styled from "styled-components";
 import Head from "next/head";
-import { send } from "../helpers/helpers";
 import { useAuth } from "../components/Layout/UserContext";
-import { useLocation } from "../helpers/firebase-hooks/getLocation";
-import { useUserStart } from "../helpers/firebase-hooks/userStartUp";
 import { useRedirect } from "../helpers/validatehelp";
 import { categoryImages } from "../utils/image-utils";
 
 const StartUp = () => {
   useRedirect();
   const user = useAuth().user;
-  const { location } = useLocation();
-  const use = useUserStart(user && user, location);
   const [userInt, setUserInt] = useState([]);
   const router = useRouter();
   const saveEvents = () => {
@@ -38,31 +33,8 @@ const StartUp = () => {
         router.push("/events/first");
       });
   };
-  // useEffect(() => {
-  //   const getmedata = async () => {
-  //     const ad = await getLock().then(() => {
-  //       return new Promise(async (resolve, reject) => {
-  //         if (user) {
-  //           const docInfo = await firebase
-  //             .firestore()
-  //             .collection("user_aditional")
-  //             .doc(user && user.uid)
-  //             .set(
-  //               { email: user && user.email, name: user && user.name },
-  //               { merge: true }
-  //             )
-  //             .then(() => console.log("k"));
-  //         }
-  //       }).catch((err) => console.log(err));
-  //     });
-  //   };
-  //   return () => {
-  //     return getmedata();
-  //   };
-  // }, []);
 
   const addUserInt = (id) => {
-    console.log(id);
     const item = userInt.find((i) => i === id);
     if (!item) {
       return setUserInt([...userInt, id]);
@@ -71,22 +43,6 @@ const StartUp = () => {
     setUserInt(data);
   };
 
-  // const getLock = () => {
-  //   const getLocation = async (position) => {
-  //     const { latitude, longitude } = await position.coords;
-  //     const loca = [];
-  //     loca.push(latitude, longitude);
-  //     if (location.length === 0) {
-  //       return setLocation(loca);
-  //     }
-  //   };
-  //   if (location) {
-  //     return navigator.geolocation.getCurrentPosition(getLocation, console.log);
-  //   } else {
-  //     return;
-  //   }
-  // };
-  console.log(userInt);
   return (
     <Fragment>
       <Head>
