@@ -21,7 +21,6 @@ const StartItem = ({ items, addUserInt }) => {
             height={250}
             quality={100}
           />
-          {/* "/" */}
         </span>
         <span>
           <Pi onClick={() => addUserInt(item)}>
@@ -91,7 +90,7 @@ const Paragraph = styled.p`
   font-family: Arial, Helvetica, sans-serif;
   text-transform: capitalize;
   color: burlywood;
-  font-font-weight: 500;
+  font-weight: 500;
 `;
 export const SVG = styled.span`
   width: 30px;

@@ -1,4 +1,4 @@
-const categoryImages = [
+export const categoryImages = [
   {
     name: "indian",
     src: "https://cdn.pixabay.com/photo/2017/09/09/12/09/india-2731812_960_720.jpg",
@@ -29,7 +29,7 @@ const categoryImages = [
   },
 ];
 
-const categories = [
+export const categories = [
   "indian",
   "french",
   "german",
@@ -38,8 +38,3 @@ const categories = [
   "vegan",
   "vegetarian",
 ];
-
-module.exports = {
-  categories,
-  categoryImages,
-};
