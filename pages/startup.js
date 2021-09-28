@@ -34,15 +34,15 @@ const StartUp = () => {
       });
   };
 
-  const addUserInt = (id) => {
-    const item = userInt.find((i) => i === id);
+  const addUserInt = (name) => {
+    const item = userInt.find((i) => i === name);
     if (!item) {
-      return setUserInt([...userInt, id]);
+      return setUserInt([...userInt, name]);
     }
-    const data = userInt.filter((i) => i !== id);
+    const data = userInt.filter((i) => i !== name);
     setUserInt(data);
   };
-
+  console.log(userInt);
   return (
     <Fragment>
       <Head>
@@ -50,21 +50,24 @@ const StartUp = () => {
         <meta name="description" content="all online cooking events" />
       </Head>
       <CoverDiv>
-        <PageTitle>Add Your favorite Cooking Events</PageTitle>
+        <CoverTop>
+          <PageTitle>Add Your favorite Cooking Events</PageTitle>
+          {userInt.length > 0 && (
+            <ButtonComp>
+              <button className={classes.btn} onClick={() => saveEvents()}>
+                Save My Events
+              </button>
+            </ButtonComp>
+          )}
+        </CoverTop>
+
         <Uilayer>
-          {categoryImages.map((i) => (
-            <span key={i.name}>
-              <StartItem items={i} addUserInt={addUserInt} />
+          {categoryImages.map((items) => (
+            <span key={items.name}>
+              <StartItem items={items} addUserInt={addUserInt} />
             </span>
           ))}
         </Uilayer>
-        {userInt.length > 0 && (
-          <ButtonComp>
-            <button className={classes.btn} onClick={() => saveEvents()}>
-              Save My Events
-            </button>
-          </ButtonComp>
-        )}
       </CoverDiv>
     </Fragment>
   );
@@ -85,17 +88,41 @@ const PageTitle = styled.span`
   text-transform: uppercase;
   font-size: 17px;
   margin-top: 100px;
+  margin-left: 80px;
+  @media (max-width: 650px) {
+    font-size: 14px;
+    margin-left: 0;
+  }
 `;
 export const CoverDiv = styled.div`
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
   @media (max-width: 600px) {
-    margin-top: 100px;
-    padding: 100px;
+    margin-top: 0;
+    padding: 0 100px;
+    margin-bottom: 60px;
   }
 `;
 export const ButtonComp = styled.div`
-  width: 100%;
+  width: auto;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  margin-top: 100px;
+  margin-right: 50px;
+  @media (max-width: 650px) {
+    margin-right: 0;
+    button {
+      width: 150px;
+      height: 50px;
+    }
+  }
+`;
+const CoverTop = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 `;

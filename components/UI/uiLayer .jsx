@@ -12,10 +12,16 @@ export const Layer = styled.div`
   display: grid;
   gap: 1rem;
   text-align: center;
-  @media screen and (min-width: 580px) {
-    grid-template-columns: 1fr 1fr;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  @media screen and (min-width: 680px) {
+    grid-template-columns: 1fr 1fr 1fr;
   }
   @media screen and (min-width: 780px) {
     grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  @media screen and (max-width: 680px) {
+    gap: 0;
   }
 `;

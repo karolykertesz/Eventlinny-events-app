@@ -5,25 +5,24 @@ import classes from "./UI/ui-modules/startitem.module.css";
 
 const StartItem = ({ items, addUserInt }) => {
   const [selected, setSelected] = useState(false);
-  const item = items && items;
   return (
     <div style={{ width: "100%" }}>
       <Divlayer>
-        <p className={classes.title}>{item}</p>
+        <p className={classes.title}>{items.name}</p>
         <span
           className={selected ? classes.divlayer : classes.divImage}
           onClick={() => setSelected(!selected)}
         >
           <Image
-            src={`/images/${item}.jpg`}
-            alt={item.name}
+            src={`/images/${items.name}.jpg`}
+            alt={items.name}
             width={350}
-            height={250}
+            height={230}
             quality={100}
           />
         </span>
         <span>
-          <Pi onClick={() => addUserInt(item)}>
+          <Pi onClick={() => addUserInt(items.name.toLowerCase())}>
             <Paragraph>{items.name}</Paragraph>
             <SVG onClick={() => setSelected(!selected)}>
               {!selected ? (
@@ -70,7 +69,7 @@ const StartItem = ({ items, addUserInt }) => {
 };
 
 const Divlayer = styled.div`
-  margin-top: 20px;
+  /* margin-top: 20px; */
   display: flex;
   justify-content: flex-start;
   flex-direction: column;

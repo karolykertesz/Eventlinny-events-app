@@ -13,7 +13,9 @@ const ValidPage = () => {
     };
     const sendEm = firebase.functions().httpsCallable("sendEmail");
     await sendEm(data).then(() => {
-      setReady(true).then(() => {
+      return new Promise((resolve, reject) => {
+        resolve(setReady(true));
+      }).then(() => {
         setTimeout(() => {
           router.push("/login");
         }, 1000);
