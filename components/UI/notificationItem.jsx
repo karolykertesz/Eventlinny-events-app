@@ -1,6 +1,6 @@
 import classes from "../UI/ui-modules/notification.item.module.css";
 import Eye from "../UI/icons/eye-icon";
-import EyeOff from "../Ui/icons/eye-off";
+import EyeOff from "./icons/eyeoff";
 import NotificationOvarlay from "../UI/reactbootstrap/notificationoverlay";
 const NotiItem = ({ item, cat }) => {
   return (
