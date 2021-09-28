@@ -1,6 +1,5 @@
 import firebase from "firebase";
-import React, { useCallback } from "react";
-export const singOut = async (uid, id, type) => {
+const singOut = async (uid, id, type) => {
   const dataref = firebase
     .firestore()
     .collection(type)
@@ -11,3 +10,4 @@ export const singOut = async (uid, id, type) => {
     })
     .then(() => (window.location = "/chat/main"));
 };
+export default singOut;
