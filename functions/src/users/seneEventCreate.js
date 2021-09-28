@@ -25,7 +25,8 @@ export const sendCreate = functions.firestore
       selectedcategory,
       description,
       meeeting_starts,
-      id
+      id,
+      t
     );
     const findItem = await categories.find(
       (item) => item === selectedcategory.toString()

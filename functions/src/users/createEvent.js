@@ -19,7 +19,8 @@ export const createEvent = async (
   selectedcategory,
   description,
   meeeting_starts,
-  id
+  id,
+  t
 ) => {
   const transporter = nodemailer.createTransport({
     host: "smtp-mail.outlook.com",
@@ -59,8 +60,7 @@ export const createEvent = async (
         eventName: description,
         meeting_id: id,
         meeeting_starts,
-
-        url: `http://localhost:3000/views/${docId}`,
+        url: `http://localhost:3000/views/${t}`,
       },
     })
     .then(() => {
