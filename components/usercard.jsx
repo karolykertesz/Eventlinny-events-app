@@ -49,13 +49,13 @@ const UserCard = (props) => {
             width="80px"
             height="80px"
             quality={100}
-            src={user.imgUrl}
+            src={user && user.imgUrl ? user.imgUrl : "/images/noimages.svg"}
             alt="user image"
           />
         </div>
       </div>
       <div className={classes.buttCont}>
-        <h4>{user.name}</h4>
+        <h4>{user && user.name}</h4>
         <p>Bio:{user.bio ? user.bio : "No Bio Shared"}</p>
         <p>Language: {user.language ? user.language : "No language shared"}</p>
         <p>Birthday: {user.birthday ? user.birthday : "No Birthday added"}</p>
@@ -67,7 +67,7 @@ const UserCard = (props) => {
             className={classes.mail}
             onClick={() => router.push(`/chat/message/?i=${id}`)}
           >
-            <p>contact {user.name}</p>
+            <p>contact {user && user.name}</p>
             <Mail width="25px" color="#fff" />
           </div>
         )}
