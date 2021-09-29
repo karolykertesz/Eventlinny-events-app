@@ -26,7 +26,7 @@ export const useChatMsessages = (id, type) => {
         return setMessages(snapArr);
       });
     return () => docref();
-  }, [id]);
+  }, [id, setMessages]);
   return {
     messages,
   };

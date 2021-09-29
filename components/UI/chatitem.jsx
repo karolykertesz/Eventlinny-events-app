@@ -5,7 +5,8 @@ import { useUserInfo } from "../../helpers/firebase-hooks/get-user-info";
 import Image from "next/image";
 const ChatItem = (props) => {
   const { item, uid } = props;
-  const { userInfo } = useUserInfo(uid);
+  const { userInfo } = useUserInfo(item.added_by);
+  console.log(userInfo);
   const infoUrl =
     userInfo && userInfo.image_url ? userInfo.image_url : "/images/noimage.svg";
   const [banned, setBanned] = useState([]);

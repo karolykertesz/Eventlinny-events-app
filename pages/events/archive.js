@@ -37,7 +37,7 @@ const MainArchive = ({ eventss }) => {
   }, [filterMe]);
 
   return (
-    <div>
+    <div className={classes.cover}>
       <p className={classes.pi}>2021</p>
       <div className={classes.StyledUl}>
         {eventsBy &&

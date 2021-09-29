@@ -42,11 +42,13 @@
     /*grid-template-columns: 1fr;
     margin: 10px 35px;
     */
+    overflow-x: hidden;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 35%;
-    left: 40%;
+    top: 50%;
+    left: 44%;
     transform: translate(-50%, -50%);
     -webkit-transform: translate(-50%, -50%);
     -moz-transform: translate(-50%, -50%);

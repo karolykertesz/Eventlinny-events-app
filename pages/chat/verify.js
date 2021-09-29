@@ -76,6 +76,7 @@ const Verify = () => {
   return (
     <div
       style={{
+        marginTop: "200px",
         textAlign: "center",
         fontFamily: "monospace",
         fontSize: "20px",

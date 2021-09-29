@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import {
   createPublic,
   createRoom,
@@ -91,7 +91,6 @@ const ChatModal = (props) => {
       setRoom("");
     }
   };
-  console.log(room, "jjj");
   return (
     <div className={classes.top}>
       <Modal

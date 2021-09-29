@@ -14,7 +14,7 @@ export const useUserInfo = (uid) => {
         }
       });
     return () => userRef();
-  }, [uid]);
+  }, [setUserInfo]);
   return {
     userInfo,
   };

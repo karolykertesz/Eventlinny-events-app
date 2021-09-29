@@ -16,6 +16,7 @@ import firebase from "firebase";
 import Mail from "../components/UI/icons/mail";
 import Lock from "../components/UI/icons/lock";
 import { useRouter } from "next/router";
+import { useIsUserIn } from "../helpers/firebase-hooks/get-is-user-in";
 
 const Login = () => {
   const router = useRouter();
@@ -43,7 +44,7 @@ const Login = () => {
 
     return getToken();
   }, []);
-
+  useIsUserIn();
   const formSubmit = useCallback(
     async (e) => {
       e.preventDefault();

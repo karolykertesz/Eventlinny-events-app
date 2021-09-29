@@ -60,11 +60,13 @@
 }
 .footer div {
   display: block;
-  height: 10px;
+  height: 30px;
+  text-align: center;
+  width: 100%;
+  margin: auto;
 }
 .footerDiv p {
   text-align: center !important;
-  margin-left: 50px !important;
 }
 .control {
   display: flex;

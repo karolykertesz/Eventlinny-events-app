@@ -13,6 +13,7 @@ import Mail from "../components/UI/icons/mail";
 import Lock from "../components/UI/icons/lock";
 import { Fbbutton } from "./login";
 import UserIcon from "../components/UI/icons/user-icon";
+import { useIsUserIn } from "../helpers/firebase-hooks/get-is-user-in";
 
 const Login = () => {
   const router = useRouter();
@@ -20,6 +21,8 @@ const Login = () => {
   const firstNameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
+
+  useIsUserIn();
 
   const formSubmit = async (e) => {
     setError(null);

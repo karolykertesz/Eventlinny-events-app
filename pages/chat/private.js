@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
-  useMemo,
-} from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useRedirect } from "../../helpers/validatehelp";
 import useBanned from "../../helpers/checkBanned";
 import classes from "../../components/UI/private.chat.login.module.css";
