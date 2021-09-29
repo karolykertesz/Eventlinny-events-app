@@ -20,7 +20,7 @@ const User = (props) => {
   return (
     <div className={classes.top}>
       <div className={classes.box}>
-        <UserCard user={user} events={userEvents} id={id} />
+        {user && <UserCard user={user} events={userEvents} id={id} />}
       </div>
       <div className={classes.events}>
         <p>{user && user.name} added categories</p>

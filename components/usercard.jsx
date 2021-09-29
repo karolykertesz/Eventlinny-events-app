@@ -56,9 +56,15 @@ const UserCard = (props) => {
       </div>
       <div className={classes.buttCont}>
         <h4>{user && user.name}</h4>
-        <p>Bio:{user.bio ? user.bio : "No Bio Shared"}</p>
-        <p>Language: {user.language ? user.language : "No language shared"}</p>
-        <p>Birthday: {user.birthday ? user.birthday : "No Birthday added"}</p>
+        <p>Bio:{user && user.bio ? user.bio : "No Bio Shared"}</p>
+        <p>
+          Language:{" "}
+          {user && user.language ? user.language : "No language shared"}
+        </p>
+        <p>
+          Birthday:{" "}
+          {user && user.birthday ? user.birthday : "No Birthday added"}
+        </p>
         <p>Events Added: {events ? events.length : "(0)"}</p>
         <p>Account Created: {admin && created}</p>
         <p>Last Visit: {admin && LastSigned}</p>
