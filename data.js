@@ -275,21 +275,20 @@ export const findById = async (id) => {
       .collection("user_add_events")
       .doc(id)
       .get()
-      .then((item) => {
+      .then(async (item) => {
         const data = item.data();
         ren = {
           id: item.id,
-          ...data,
-          // start: data.starts.toMillis(),
-          // category: data.category,
-          // added_by: data.added_by,
-          // location: data.location,
-          // attendies: data.attendies,
-          // premium: data.premium,
-          // description: data.description,
-          // created_by: data.created_by,
+          start: await data.starts.toMillis(),
+          category: data.category,
+          added_by: data.added_by,
+          location: data.location,
+          attendies: data.attendies,
+          premium: data.premium,
+          description: data.description,
+          created_by: data.created_by,
           archive_photos: data.archive_photos
-            ? data.archive_photos.map((it) => ({
+            ? await data.archive_photos.map((it) => ({
                 ...it,
                 image_added_at: new Date(it.image_added_at).getTime(),
               }))
@@ -299,6 +298,7 @@ export const findById = async (id) => {
   } catch (err) {
     console.log(err);
   }
+  console.log(ren);
   return ren;
 };
 
