@@ -279,14 +279,15 @@ export const findById = async (id) => {
         const data = item.data();
         ren = {
           id: item.id,
-          start: data.starts.toMillis(),
-          category: data.category,
-          added_by: data.added_by,
-          location: data.location,
-          attendies: data.attendies,
-          premium: data.premium,
-          description: data.description,
-          created_by: data.created_by,
+          ...data,
+          // start: data.starts.toMillis(),
+          // category: data.category,
+          // added_by: data.added_by,
+          // location: data.location,
+          // attendies: data.attendies,
+          // premium: data.premium,
+          // description: data.description,
+          // created_by: data.created_by,
           archive_photos: data.archive_photos
             ? data.archive_photos.map((it) => ({
                 ...it,
