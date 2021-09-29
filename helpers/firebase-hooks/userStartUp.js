@@ -1,25 +1,22 @@
 import React, { useEffect } from "react";
 import firebase from "firebase";
 
-export const useUserStart = (user, location) => {
-  const uid = user && user.uid;
-  const name = user && user.name;
-  const email = user && user.email;
+export const useUserStart = (user = "", location = []) => {
   useEffect(() => {
     const baseref = firebase.firestore().collection("user_aditional");
     const docref = firebase
       .firestore()
       .collection("user_aditional")
-      .doc(uid)
+      .doc(user && user.uid)
       .onSnapshot(async (snap) => {
-        if (!snap.exists && user) {
-          await baseref.doc(uid).set({
-            name: name,
-            email: email,
+        if (!snap.exists && user && location) {
+          await baseref.doc(user.uid).set({
+            name: user.name,
+            email: user.email,
           });
         }
 
-        if (location) {
+        if (location.length > 0) {
           const locationFetch = await fetch("/api/users/createPref", {
             method: "POST",
             body: JSON.stringify({

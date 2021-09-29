@@ -26,7 +26,6 @@ const Login = () => {
   const passwordRef = useRef();
   const tokenRef = useRef();
   const [userId, setUid] = useState();
-  console.log(userId);
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (!user) {

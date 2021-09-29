@@ -10,10 +10,14 @@ import Head from "next/head";
 import { useAuth } from "../components/Layout/UserContext";
 import { useRedirect } from "../helpers/validatehelp";
 import { categoryImages } from "../utils/image-utils";
+import { useLocation } from "../helpers/firebase-hooks/getLocation";
+import { useUserStart } from "../helpers/firebase-hooks/userStartUp";
 
 const StartUp = () => {
   useRedirect();
   const user = useAuth().user;
+  const { location } = useLocation();
+  useUserStart(user, location);
   const [userInt, setUserInt] = useState([]);
   const router = useRouter();
   const saveEvents = () => {
@@ -21,13 +25,8 @@ const StartUp = () => {
       .firestore()
       .collection("user_aditional")
       .doc(user && user.uid)
-      .get()
-      .then((doc) => {
-        if (doc.exists) {
-          doc.ref.update({
-            pref_events: userInt,
-          });
-        }
+      .set({
+        pref_events: userInt,
       })
       .then(() => {
         router.push("/events/first");
@@ -42,7 +41,21 @@ const StartUp = () => {
     const data = userInt.filter((i) => i !== name);
     setUserInt(data);
   };
-  console.log(userInt);
+  // const getLock = async () => {
+  //   const getLocation = async (position) => {
+  //     const { latitude, longitude } = await position.coords;
+  //     const loca = [];
+  //     loca.push(latitude, longitude);
+  //     if (location.length === 0) {
+  //       await setLocation(loca);
+  //     }
+  //   };
+  //   if (location) {
+  //     await navigator.geolocation.getCurrentPosition(getLocation, console.log);
+  //   } else {
+  //     return;
+  //   }
+  // };
   return (
     <Fragment>
       <Head>

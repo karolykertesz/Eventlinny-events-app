@@ -83,6 +83,9 @@
   -o-transition: all 0.4s ease;
   cursor: pointer;
 }
+.visHid {
+  visibility: hidden;
+}
 @media (max-width: 650px) {
   .links {
     position: fixed;

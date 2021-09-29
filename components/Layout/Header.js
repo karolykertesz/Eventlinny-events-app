@@ -8,6 +8,7 @@ import ButtonPop from "../UI/buttonpop";
 import { useAuth } from "../Layout/UserContext";
 import BigLoader from "../UI/BigLoader";
 import Image from "next/image";
+import { useIsCompleted } from "../../helpers/firebase-hooks/get-is-user-completed";
 
 const Header = () => {
   const user = useAuth().user;
@@ -48,6 +49,7 @@ const Header = () => {
       .then(() => (window.location.href = "/login"))
       .catch((err) => console.log(err));
   };
+  const { completed } = useIsCompleted(user && user.uid);
   if (loading) {
     return <BigLoader />;
   }
@@ -60,16 +62,23 @@ const Header = () => {
         </a>
       </div>
       <div className={classes.links}>
-        <Link href="/chat/main">Chats</Link>
-        <Link href="/events">All Events</Link>
-        <Link href="/events/find">Find an Event</Link>
-        <Link href="/events/archive">Archive</Link>
+        <span
+          style={{ display: "flex" }}
+          className={!completed ? classes.visHid : ""}
+        >
+          <Link href="/chat/main">Chats</Link>
+          <Link href="/events">All Events</Link>
+          <Link href="/events/find">Find an Event</Link>
+          <Link href="/events/archive">Archive</Link>
+        </span>
         <span onClick={() => sout()}>
           <Link href="#">Sign Out</Link>
         </span>
-        <Link href="/events/archive">
-          <ButtonPop>Your profile</ButtonPop>
-        </Link>
+        <span className={!completed ? classes.visHid : ""}>
+          <Link href="/events/archive">
+            <ButtonPop>Your profile</ButtonPop>
+          </Link>
+        </span>
       </div>
       <label htmlFor="nav-toggle" className={classes.iconToggle}>
         <div className={classes.line}></div>

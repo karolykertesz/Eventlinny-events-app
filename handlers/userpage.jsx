@@ -7,6 +7,7 @@ import { VscChromeClose, VscDiffAdded } from "react-icons/vsc";
 import { IconContext } from "react-icons";
 import Plus from "../components/UI/icons/plus";
 import { useRouter } from "next/router";
+import BigLoader from "../components/UI/BigLoader";
 import {
   Pi,
   IconCover,
@@ -20,8 +21,15 @@ const Userpage = ({ user, userInfo, location, userAdditional, imgUrl }) => {
   const [userPrefs, setUserPrefs] = useState();
   const filtereduser = user && user;
   const userLocation = location && location.location;
-  const countryCode = location && location.countryCode.toUpperCase();
 
+  const countryCode = location && location.countryCode.toUpperCase();
+  const createDisplaylocation = () => {
+    if (!userLocation) {
+      return "";
+    }
+    const splitLoc = userLocation.split(",");
+    return [splitLoc[0], splitLoc[splitLoc.length - 1]].join(",");
+  };
   const deleteElement = async (element) => {
     const docref = firebase
       .firestore()
@@ -58,7 +66,7 @@ const Userpage = ({ user, userInfo, location, userAdditional, imgUrl }) => {
   return (
     <Fragment>
       {!user || !location || !userInfo ? (
-        <div>Loadin ...</div>
+        <BigLoader />
       ) : (
         <div className={classes.top}>
           <div className={classes.inner}>
@@ -80,10 +88,7 @@ const Userpage = ({ user, userInfo, location, userAdditional, imgUrl }) => {
                     ) : (
                       <CoverRow>
                         <FileInput type="file" onChange={fileChange} />
-                        <Pi style={{ textTransform: "uppercase" }}>
-                          Add Image
-                        </Pi>
-                        <IconCover height="60px" width="50px">
+                        <IconCover height="50px" width="50px">
                           <UserIcon />
                         </IconCover>
                       </CoverRow>
@@ -122,7 +127,7 @@ const Userpage = ({ user, userInfo, location, userAdditional, imgUrl }) => {
                 </tr>
                 <tr>
                   <th>Location:</th>
-                  <td>{userLocation}</td>
+                  <td>{createDisplaylocation()}</td>
                   <td>
                     <span className={classes.desk}>
                       <Link

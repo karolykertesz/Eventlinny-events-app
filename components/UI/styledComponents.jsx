@@ -11,6 +11,9 @@ export const Pi = styled.p`
   margin-left: 2px;
   padding-left: 2px;
   text-transform: capitalize;
+  @media (max-width: 650px) {
+    font-size: 14px;
+  }
 `;
 
 export const PiBig = styled.p`
@@ -39,13 +42,19 @@ export const Cover = styled.div`
 
 export const CoverRow = styled.div`
   display: flex;
-
   justify-content: center;
   max-width: 600px;
   align-items: flex-start;
   margin: 5px auto;
   cursor: pointer;
   flex-direction: row;
+  margin: auto;
+  @media (max-width: 650px) {
+    position: absolute;
+    left: 40%;
+    width: 250px;
+    top: 5%;
+  }
 `;
 export const CatContainer = (props) => {
   return <CoverRow>{props.children}</CoverRow>;

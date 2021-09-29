@@ -8,9 +8,19 @@ export const IconCover = styled.div.attrs((props) => ({}))`
   height: ${(props) => props.height};
   width: ${(props) => props.width};
   color: burlywood;
-  margin-left: ${(props) => props.marginRight};
+
   &:active {
     color: ${(props) => props.color};
+  }
+  @media (min-width: 800px) {
+    height: 46px;
+    width: 46px;
+  }
+
+  @media (max-width: 650px) {
+    height: 70px;
+    width: 70px;
+    margin: 0 auto;
   }
 `;
 
@@ -47,7 +57,7 @@ const Button = styled.button`
   padding: 0.5rem 1.5rem;
   text-align: center;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
-  width: 300px;
+  width: 10px;
 `;
 
 export const SendButton = styled(Button)`
