@@ -275,14 +275,8 @@ export const findById = async (id) => {
       .collection("user_add_events")
       .doc(id)
       .get()
-      .then((item) => {
-        const image_archive = item.data().archive_photos
-          ? item.data().archive_photos.map((it) => ({
-              ...it,
-              image_added_at: new Date(it.image_added_at).getTime(),
-            }))
-          : null;
-        ren = {
+      .then(async (item) => {
+        ren = await {
           id: item.id,
           start: item.data().starts.toMillis(),
           category: item.data().category,
@@ -292,7 +286,12 @@ export const findById = async (id) => {
           premium: item.data().premium,
           description: item.data().description,
           created_by: item.data().created_by,
-          archive_photos: image_archive,
+          archive_photos: item.data().archive_photos
+            ? item.data().archive_photos.map((it) => ({
+                ...it,
+                image_added_at: new Date(it.image_added_at).getTime(),
+              }))
+            : null,
         };
       });
   } catch (err) {
