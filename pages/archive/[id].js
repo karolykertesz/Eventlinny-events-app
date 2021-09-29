@@ -5,6 +5,7 @@ import { useRedirect } from "../../helpers/validatehelp";
 import React, { Fragment, useState } from "react";
 
 const archiveItem = ({ items }) => {
+  console.log(items);
   useRedirect();
   const [URL, setUrl] = useState(null);
   const [imgDate, setImgdate] = useState();
@@ -126,7 +127,6 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const id = params.id;
-  let userArray;
   const allEv = await findById(id);
   if (!allEv) {
     return {

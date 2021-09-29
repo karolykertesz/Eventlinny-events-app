@@ -275,8 +275,8 @@ export const findById = async (id) => {
       .collection("user_add_events")
       .doc(id)
       .get()
-      .then(async (item) => {
-        ren = await {
+      .then((item) => {
+        ren = {
           id: item.id,
           start: item.data().starts.toMillis(),
           category: item.data().category,
