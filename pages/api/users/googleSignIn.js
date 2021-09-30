@@ -4,7 +4,6 @@ const cookie = require("cookie");
 export default async function handler(req, res) {
   const userId = req.body.uid;
   if (!userId) {
-    console.log("Error");
     res.status(400).json({ m: "no uid" });
     return;
   }

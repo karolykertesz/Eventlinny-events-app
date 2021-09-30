@@ -1,6 +1,7 @@
 import FirebaseClient from "../helpers/firebase";
 import firebase from "firebase/app";
 import "firebase/auth";
+import { fbsignin } from "./firebase-hooks/get-fb-signIn";
 
 const facebookSignIn = (fn) => async () => {
   FirebaseClient();
@@ -11,33 +12,41 @@ const facebookSignIn = (fn) => async () => {
     .signInWithPopup(provider)
     .then(function (result) {
       const id = result.credential.accessToken;
-      console.log(id);
-      return fn(id);
-    })
-    .then(() => {
-      window.location.href = "/startup";
+      const email = result.user.email;
+      return fn(email);
     })
     .catch((err) => {
-      console.log(err, "the error");
-      const message = err.message;
-      console.log(message);
-      return;
+      const code = err.code;
+      if (code == "auth/account-exists-with-different-credential") {
+        const pendingCred = err.credential;
+        const email = err.email;
+        firebase
+          .auth()
+          .fetchSignInMethodsForEmail(email)
+          .then((methods) => {
+            if (methods[0] === "password") {
+              const password = prompt(
+                `please enter your password used for ${email}`
+              );
+              firebase
+                .auth()
+                .signInWithEmailAndPassword(email, password)
+                .then((result) => {
+                  return result.user.linkWithCredential(pendingCred);
+                })
+                .then(async () => {
+                  // pendingCred.accessToken
+                  const t = await fbsignin(email);
+                })
+                .catch((err) => {
+                  throw new Error(err);
+                });
+            }
+          });
+      }
     });
 };
 
-export default facebookSignIn(async function (id) {
-  const mess = await fetch("/api/users/googleSignIn", {
-    method: "POST",
-    body: {
-      id: id,
-    },
-    headers: {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    },
-  });
-  const data = await mess.json();
-  console.log(data);
+export default facebookSignIn(async function (email) {
+  const t = await fbsignin(email);
 });

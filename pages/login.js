@@ -11,7 +11,6 @@ import { ImGoogle3, ImFacebook2 } from "react-icons/im";
 import { IconContext } from "react-icons";
 import googleSign from "../helpers/googlesignin";
 import facebookSignIn from "../helpers/fb";
-import Head from "next/head";
 import firebase from "firebase";
 import Mail from "../components/UI/icons/mail";
 import Lock from "../components/UI/icons/lock";
@@ -27,6 +26,10 @@ const Login = () => {
   const passwordRef = useRef();
   const tokenRef = useRef();
   const [userId, setUid] = useState();
+
+  const loginWithFace = async () => {
+    const sign = await facebookSignIn();
+  };
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (!user) {
@@ -144,7 +147,7 @@ const Login = () => {
             <ImGoogle3 />
           </IconContext.Provider>
         </GoogleButton>
-        <Fbbutton onClick={() => facebookSignIn()}>
+        <Fbbutton onClick={() => loginWithFace()}>
           <IconContext.Provider
             value={{
               size: 23,

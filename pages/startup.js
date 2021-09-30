@@ -16,6 +16,7 @@ import { useUserStart } from "../helpers/firebase-hooks/userStartUp";
 const StartUp = () => {
   useRedirect();
   const user = useAuth().user;
+  console.log(user);
   const { location } = useLocation();
   useUserStart(user, location);
   const [userInt, setUserInt] = useState([]);
