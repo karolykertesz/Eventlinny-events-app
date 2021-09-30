@@ -78,7 +78,7 @@ export const sendCreate = functions.firestore
                               text: [
                                 `New Eventlinny event has been added from the category : ${selectedcategory}`,
                                 `You can view the event here
-                              http://localhost:3000/events/${t}
+                                https://eventlinny.vercel.app/${t}
                               `,
                               ],
                             }),
@@ -92,7 +92,7 @@ export const sendCreate = functions.firestore
                                 text: [
                                   `New Eventlinny event has been added from the category : ${selectedcategory}`,
                                   `You can view the event here
-                                http://localhost:3000/events/${t}
+                                  https://eventlinny.vercel.app/events/${t}
                                 `,
                                 ],
                               },

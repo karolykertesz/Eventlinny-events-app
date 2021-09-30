@@ -13,7 +13,7 @@ export default async function handler(req, res) {
     return;
   }
   const actionCodeSettings = {
-    url: `http://localhost:3000/users/vid/?email=${email}`,
+    url: `https://eventlinny.vercel.app/users/vid/?email=${email}`,
   };
   try {
     await auth

@@ -60,9 +60,10 @@ export const createEvent = async (
         eventName: description,
         meeting_id: id,
         meeeting_starts,
-        url: `http://localhost:3000/views/${t}`,
+        url: `https://eventlinny.vercel.app/views/${t}`,
       },
     })
+
     .then(() => {
       console.log("sent");
     })
