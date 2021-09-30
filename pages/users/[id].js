@@ -4,9 +4,11 @@ import classes from "../../components/UI/ui-modules/user.module.css";
 import UserCard from "../../components/usercard";
 import { useRedirect } from "../../helpers/validatehelp";
 import UserEventcard from "../../components/UI/usereventcard";
+import { useUserEventInfo } from "../../helpers/firebase-hooks/get-user-event-info";
 const User = (props) => {
   useRedirect();
-  const { user, userEvents, id } = props;
+  const { userEvents, id } = props;
+  const { user } = useUserEventInfo(id);
   const [s, setSort] = useState();
   const sorting = useCallback(async () => {
     const arr = [];
@@ -41,12 +43,10 @@ export default User;
 
 export async function getStaticProps(context) {
   const id = await context.params.id;
-  const dd = await getUserInfo(id);
   const events = await getUserEvents(id);
 
   return {
     props: {
-      user: dd,
       id: context.params.id,
       userEvents: events,
     },

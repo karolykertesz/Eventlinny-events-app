@@ -10,7 +10,6 @@ const archiveItem = () => {
   const id = router.query.id;
   useRedirect();
   const { items } = useArchiveData(id);
-  console.log(items, "ttt");
   const [URL, setUrl] = useState(null);
   const [imgDate, setImgdate] = useState();
   const firstindex =
