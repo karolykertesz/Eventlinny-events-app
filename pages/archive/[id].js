@@ -1,17 +1,24 @@
-import { findById, getUserAddIds } from "../../data";
 import classes from "../../components/UI/ui-modules/carousel.archive.module.css";
 import ArchiveOneItem from "../../components/archiveOneItem";
 import { useRedirect } from "../../helpers/validatehelp";
+import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
+import { useArchiveData } from "../../helpers/firebase-hooks/get-arcive-data";
 
-const archiveItem = ({ items }) => {
+const archiveItem = () => {
+  const router = useRouter();
+  const id = router.query.id;
   useRedirect();
+  const { items } = useArchiveData(id);
+  console.log(items, "ttt");
   const [URL, setUrl] = useState(null);
   const [imgDate, setImgdate] = useState();
-  const firstindex = items.archive_photos
-    ? items.archive_photos[0].url
-    : "/images/salmon.jpg";
+  const firstindex =
+    items && items.archive_photos
+      ? items.archive_photos[0].url
+      : "/images/salmon.jpg";
   const startdate =
+    items &&
     items.archive_photos.length === 1 &&
     new Date(items.archive_photos[0].image_added_at).toLocaleDateString(
       "en-GB",
@@ -38,7 +45,10 @@ const archiveItem = ({ items }) => {
         {items && (
           <>
             <div className={classes.first}>
-              <ArchiveOneItem items={items} length={items && items.length} />
+              <ArchiveOneItem
+                items={items && items}
+                length={items && items.length}
+              />
             </div>
             <div className={classes.first}>
               <div className={classes.slidshow + " " + classes.middle}>
@@ -75,7 +85,7 @@ const archiveItem = ({ items }) => {
                     className={classes.first}
                   />
 
-                  {items.archive_photos && (
+                  {items && items.archive_photos && (
                     <div className={classes.slide}>
                       <span className={classes.date}>
                         {imgDate ? imgDate : startdate}
@@ -86,7 +96,8 @@ const archiveItem = ({ items }) => {
                 </div>
 
                 <div className={classes.navigation}>
-                  {items.archive_photos &&
+                  {items &&
+                    items.archive_photos &&
                     items.archive_photos.map((leb) => (
                       <span
                         key={leb.url}
@@ -110,34 +121,3 @@ const archiveItem = ({ items }) => {
 };
 
 export default archiveItem;
-
-export async function getStaticPaths() {
-  const userIds = await getUserAddIds();
-  const paths = userIds.map((item) => ({
-    params: {
-      id: item,
-    },
-  }));
-  return {
-    paths,
-    fallback: "blocking",
-  };
-}
-
-export async function getStaticProps({ params }) {
-  const id = await params.id;
-  const allEv = await findById(id);
-  if (!allEv) {
-    return {
-      notFound: true,
-      redirect: {
-        destination: "/events/first",
-      },
-    };
-  }
-  return {
-    props: {
-      items: allEv,
-    },
-  };
-}
