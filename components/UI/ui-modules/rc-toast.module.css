@@ -1,0 +1,32 @@
+.buttonComp {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.buttonComp button {
+  border-radius: 5px;
+  border: none;
+  height: 25px;
+  width: auto;
+}
+.rcFooter {
+  background-color: rgba(218, 177, 123, 0.742);
+}
+.buttonOk {
+  color: #ffff;
+  background-color: rgb(127, 255, 133);
+}
+.privacyBtn {
+  background-color: rgb(153, 153, 235);
+  color: #fff;
+}
+.rcHeader {
+  background-color: rgba(238, 230, 230, 0.533);
+  text-align: center;
+}
+.rcTostTop {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0.5px 0 0 0 rgba(17, 17, 17, 0.119);
+}

@@ -107,6 +107,12 @@
   -ms-transition: all 0.8s;
   transition: all 0.8s;
 }
+.toast {
+  position: fixed;
+  bottom: 10%;
+  right: 100px;
+  width: 290px;
+}
 .pad h4 {
   text-align: center;
 }
@@ -136,6 +142,9 @@
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
+}
+.visHid {
+  display: none;
 }
 @media (max-width: 650px) {
   .mainfooter {

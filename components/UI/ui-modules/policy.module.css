@@ -1,0 +1,32 @@
+.main {
+  position: relative;
+  margin: 0 auto;
+  max-width: 1200px;
+  overflow-x: hidden;
+  margin-top: 100px;
+}
+.cover {
+  margin: 0 auto;
+  padding: auto;
+  width: 100%;
+  margin-bottom: 100px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 1000;
+}
+.cover p strong {
+  color: burlywood;
+  font-size: 18px;
+}
+.cover a {
+  color: burlywood;
+  text-decoration: none;
+}
+.cover h1 {
+  font-size: 22px;
+  color: burlywood;
+}
+.cover h4 {
+  font-size: 17px;
+  color: burlywood;
+}

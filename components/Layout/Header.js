@@ -2,7 +2,6 @@ import Link from "next/link";
 import firebase from "firebase";
 import { useEffect, useState, Fragment, useCallback, useRef } from "react";
 import classes from "./main-nav.module.css";
-
 import { useRouter } from "next/router";
 import ButtonPop from "../UI/buttonpop";
 import { useAuth } from "../Layout/UserContext";

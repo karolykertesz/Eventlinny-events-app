@@ -14,6 +14,7 @@ export const useUserStart = (user = "k", location = []) => {
           await baseref.doc(user.uid).set({
             name: user.name,
             email: user.email,
+            policy: false,
           });
         }
 

@@ -23,7 +23,9 @@ const Login = () => {
   const passwordRef = useRef();
 
   useIsUserIn();
-
+  const loginWithFace = async () => {
+    const sign = await facebookSignIn();
+  };
   const formSubmit = async (e) => {
     setError(null);
     e.preventDefault();
@@ -107,7 +109,7 @@ const Login = () => {
                 <ImGoogle3 />
               </IconContext.Provider>
             </GoogleButton>
-            <Fbbutton onClick={() => facebookSignIn()}>
+            <Fbbutton onClick={() => loginWithFace()}>
               <IconContext.Provider
                 value={{ color: "white", className: classes.google }}
               >
