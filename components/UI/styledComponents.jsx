@@ -18,7 +18,7 @@ export const Pi = styled.p`
 
 export const PiBig = styled.p`
   text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Poetsen One;
   font-size: 24px;
   color: burlywood;
   font-weight: 500;

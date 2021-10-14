@@ -230,7 +230,7 @@ const Userpage = ({ user, userInfo, location, userAdditional, imgUrl }) => {
                   >
                     <VscDiffAdded />
                   </IconContext.Provider>
-                  <p>Add PREFERENCES</p>
+                  <p className={classes.secPi}>Add PREFERENCES</p>
                 </span>
               </Link>
             </div>

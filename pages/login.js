@@ -125,6 +125,7 @@ const Login = () => {
               quality={100}
             />
           </div>
+
           <div className={classes.title}>Eventlinny Login</div>
           <form onSubmit={formSubmit}>
             <div className={classes.fields}>
@@ -232,11 +233,12 @@ export const GoogleButton = styled.button`
 export const Fbbutton = styled.button`
   cursor: pointer;
   background-color: blue;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   border-radius: 30px;
   color: white;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
   width: 100%;
+  border: none;
   /* margin-top: 10px; */
 
   margin: 0.2rem auto;

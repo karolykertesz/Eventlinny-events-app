@@ -33,7 +33,7 @@ export const NameDiv = styled.div`
 export const Pi = styled.p`
   text-align: center;
   text-transform: uppercase;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Poetsen One, sans-serif;
   color: #c49e7d;
   font-size: 18px;
 `;

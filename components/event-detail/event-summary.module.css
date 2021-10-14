@@ -6,17 +6,15 @@
 .summary h3 {
   margin: 0;
   padding-top: 5rem;
-  font-size: 3rem;
+  font-size: 2.5rem;
   text-align: center;
-  text-shadow: 0 3px 3px rgba(226, 167, 39, 0.5);
+  text-shadow: 0 3px 3px rgba(226, 167, 39, 0.091);
   color: rgba(221, 142, 39, 0.673);
   animation-name: leftIn;
   animation-duration: 1.6s;
   animation-timing-function: ease-in;
-  /* backface-visibility: hidden; */
-  /*animation-delay: 1s;
-  */
-  text-transform: capitalize;
+  text-transform: uppercase;
+  font-family: "Poetsen small", sans-serif;
 }
 
 @media (max-width: 768px) {

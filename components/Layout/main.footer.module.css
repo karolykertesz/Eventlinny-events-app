@@ -127,7 +127,7 @@
 .pad ul li a {
   font-size: 16px;
   text-transform: capitalize;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Poetsen small", sans-serif;
 }
 .socialNetwork a {
   background-color: papayawhip;
@@ -137,6 +137,8 @@
   color: papayawhip;
   position: absolute;
   left: 50%;
+  font-size: 12px;
+  font-family: "Poetsen small", sans-serif;
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);

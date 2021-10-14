@@ -55,11 +55,12 @@
 .innerSec p {
   margin-top: 2px;
   line-height: 1.1rem;
-  font-size: 15px;
+  font-size: 12px;
   color: papayawhip;
   padding-left: 2px;
   text-transform: capitalize;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Poetsen One";
+  font-weight: 400;
 }
 .imgCon {
   position: relative;

@@ -1,5 +1,42 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;700&display=swap");
 
+/* @font-face {
+  font-family: "PoetsenOne";
+  src: url("/fonts/PoetseOne-Regular.ttf") format("truetype");
+  font-style: medium;
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "PoetsenOne";
+  src: url("/fonts/PoetseOne-large.ttf") format("truetype");
+  font-style: large;
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "PoetsenOne";
+  src: url("/fonts/PoetseOne-small.ttf") format("truetype");
+  font-style: small;
+  font-weight: 400;
+  font-display: swap;
+} */
+@font-face {
+  font-family: "Poetsen One";
+  src: url("/fonts/PoetsenOne-Regular.woff2") format("woff2"),
+    url("/fonts/PoetsenOne-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poetsen small";
+  src: url("/fonts/PoetsenOne-small.woff2") format("woff2"),
+    url("/fonts/PoetsenOne-small.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 *,
 *::after,
 *::before {

@@ -22,6 +22,31 @@ const Layout = (props) => {
         <title>Next events</title>
         <meta name="viewport" content="initial-scale=1.0 width=device-width" />
         <meta name="description" content="Next event App" />
+
+        <link
+          rel="preload"
+          href="/fonts/PoetsenOne-Regular.woff2"
+          as="font"
+          crossOrigin=""
+        />
+        <link
+          rel="preload"
+          href="/fonts/PoetsenOne-Regular.woff"
+          as="font"
+          crossOrigin=""
+        />
+        <link
+          rel="preload"
+          href="/fonts/PoetsenOne-small.woff2"
+          as="font"
+          crossOrigin=""
+        />
+        <link
+          rel="preload"
+          href="/fonts/PoetsenOne-small.woff"
+          as="font"
+          crossOrigin=""
+        />
       </Head>
 
       {isUser && <Header />}
