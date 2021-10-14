@@ -11,7 +11,7 @@ const First = ({ message }) => {
 export default First;
 First.getInitialProps = async (context) => {
   const cookie = context.req.headers.cookie;
-  const url = "http://localhost:3000/api/users/validate";
+  const url = "https://eventlinny.vercel.app/api/users/validate";
   const response = await fetch(url, {
     headers: {
       cookie: cookie,

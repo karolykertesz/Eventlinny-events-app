@@ -37,7 +37,7 @@ export async function getstaticPaths() {
 export async function getServerSideProps(context) {
   const uid = context.params.uid;
   const loc = await fetch(
-    "http://localhost:3000/api/users/helpers/userlocation",
+    "https://eventlinny.vercel.app/api/users/helpers/userlocation",
     {
       method: "POST",
       body: JSON.stringify({
@@ -50,7 +50,7 @@ export async function getServerSideProps(context) {
     }
   );
   const aditionals = await fetch(
-    "http://localhost:3000/api/users/helpers/getaditionals",
+    "https://eventlinny.vercel.app/api/users/helpers/getaditionals",
     {
       method: "POST",
       body: JSON.stringify({
@@ -67,7 +67,7 @@ export async function getServerSideProps(context) {
     return {
       notFound: true,
       redirect: {
-        destination: "http://localhost:3000/login",
+        destination: "/login",
         permanent: false,
       },
     };
