@@ -6,11 +6,10 @@ export const fbsignin = async (email) => {
     body: JSON.stringify({
       email: email,
     }),
+
     headers: {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
+      "Content-Type": "application/json",
+      Accept: "application/json",
     },
   });
   const status = await mess.status;

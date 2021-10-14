@@ -60,68 +60,95 @@ const Login = () => {
 
   return (
     <div className={classes.cover}>
-      <div className={classes.loginDiv}>
-        <div className={classes.logo}>
-          <Image src="/images/e.png" width="50px" height="50px" quality={100} />
-        </div>
-        <div className={classes.title}>Eventlinny Sign Up</div>
-        <form onSubmit={formSubmit}>
-          <div className={classes.fields}>
-            <div className={classes.email}>
-              <div className={classes.icon}>
-                <UserIcon />
-              </div>
-              <input
-                type="text"
-                placeholder="Your Name"
-                className={classes.inputEmail}
-                ref={firstNameRef}
-              />
-            </div>
-            <div className={classes.email}>
-              <div className={classes.icon}>
-                <Mail />
-              </div>
-              <input
-                type="email"
-                placeholder="Your Email"
-                className={classes.inputEmail}
-                ref={emailRef}
-              />
-            </div>
-            <div className={classes.pass}>
-              <div className={classes.icon}>
-                <Lock />
-              </div>
-              <input
-                type="password"
-                placeholder="Your Password"
-                className={classes.inputPassword}
-                ref={passwordRef}
-              />
-            </div>
-            <button className={classes.login}>Sign Up</button>
-
-            <GoogleButton onClick={() => googleSign()}>
-              <IconContext.Provider
-                value={{ color: "white", className: classes.google }}
-              >
-                <ImGoogle3 />
-              </IconContext.Provider>
-            </GoogleButton>
-            <Fbbutton onClick={() => loginWithFace()}>
-              <IconContext.Provider
-                value={{ color: "white", className: classes.google }}
-              >
-                <ImFacebook2 />
-              </IconContext.Provider>
-            </Fbbutton>
-            <div className={classes.link}>
-              <Link href="/login">Log In</Link>
-            </div>
+      <div className={classes.grid}>
+        <div className={classes.first}>
+          <div className={classes.imgDiv}>
+            <Image
+              src="/images/cook.png"
+              height="300px"
+              width="300px"
+              quality={100}
+            />
           </div>
-        </form>
-        <Error>{error && error}</Error>
+        </div>
+        <div className={classes.loginDiv}>
+          <div className={classes.logo}>
+            <Image
+              src="/images/e.png"
+              width="50px"
+              height="50px"
+              quality={100}
+            />
+          </div>
+          <div className={classes.title}>Eventlinny Sign Up</div>
+          <form onSubmit={formSubmit}>
+            <div className={classes.fields}>
+              <div className={classes.email}>
+                <div className={classes.icon}>
+                  <UserIcon />
+                </div>
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  className={classes.inputEmail}
+                  ref={firstNameRef}
+                />
+              </div>
+              <div className={classes.email}>
+                <div className={classes.icon}>
+                  <Mail />
+                </div>
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  className={classes.inputEmail}
+                  ref={emailRef}
+                />
+              </div>
+              <div className={classes.pass}>
+                <div className={classes.icon}>
+                  <Lock />
+                </div>
+                <input
+                  type="password"
+                  placeholder="Your Password"
+                  className={classes.inputPassword}
+                  ref={passwordRef}
+                />
+              </div>
+              <button className={classes.login}>Sign Up</button>
+
+              <GoogleButton onClick={() => googleSign()}>
+                <IconContext.Provider
+                  value={{ color: "white", className: classes.google }}
+                >
+                  <ImGoogle3 />
+                </IconContext.Provider>
+              </GoogleButton>
+              <Fbbutton onClick={() => loginWithFace()}>
+                <IconContext.Provider
+                  value={{ color: "white", className: classes.google }}
+                >
+                  <ImFacebook2 />
+                </IconContext.Provider>
+              </Fbbutton>
+              <div className={classes.link}>
+                <Link href="/login">Log In</Link>
+              </div>
+            </div>
+          </form>
+          <Error>{error && error}</Error>
+        </div>
+        <div className={classes.second}>
+          <div className={classes.secImgDiv}>
+            <Image
+              src="/images/ballons.png"
+              height="400px"
+              width="400px"
+              quality={100}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

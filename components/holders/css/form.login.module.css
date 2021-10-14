@@ -3,20 +3,68 @@
   justify-content: center;
   align-items: center;
   left: 50%;
+  width: 100%;
   position: absolute;
   transform: translate(-50%, 20%);
   -webkit-transform: translate(-50%, 20%);
   -moz-transform: translate(-50%, 20%);
   -ms-transform: translate(-50%, 20%);
   -o-transform: translate(-50%, 20%);
-  border-radius: 40px;
-  -webkit-border-radius: 40px;
-  -moz-border-radius: 40px;
-  -ms-border-radius: 40px;
-  -o-border-radius: 40px;
+}
+.grid {
+  display: flex;
+  width: 1500px;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+.first {
+  width: 500px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+}
+.second {
+  width: 500px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  background-color: papayawhip;
+}
+.secImgDiv {
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  width: 100%;
+  transform: translate(-50%, -45%);
+  background-color: papayawhip;
+}
+.secImgDiv img {
+  height: 400px !important;
+  object-fit: contain;
+  width: 100% !important;
+  transform: rotate(27deg);
+  /* z-index: -1; */
+}
+.imgDiv {
+  position: absolute;
+  top: 60%;
+  left: 10%;
+  width: 100%;
+  transform: translate(29%, -50%);
+}
+.imgDiv img {
+  height: 400px !important;
+  object-fit: contain;
+  width: 400px !important;
+  transform: rotate(-20deg);
 }
 .loginDiv {
-  width: 480px;
+  width: 500px;
   height: 600px;
   padding: 60px 35px 35px 35px;
   border-radius: 40px;
@@ -27,6 +75,7 @@
   background-color: papayawhip;
   box-shadow: 1px 2px 5px rgb(220, 187, 145), -2px -3px 5px rgb(225, 197, 159);
   position: relative;
+  z-index: 1;
 }
 .logo {
   position: absolute;
@@ -140,4 +189,47 @@
 .google {
   height: 20px;
   border-radius: 30px;
+}
+
+@media (max-width: 1000px) {
+  .grid {
+    width: 100vw;
+  }
+  .second {
+    width: calc(100vw - 70vw);
+  }
+
+  .loginDiv {
+    width: calc(100vw - 60vw);
+  }
+  .first {
+    width: calc(100vw - 70vw);
+  }
+  .secImgDiv {
+    left: 20%;
+  }
+  .secImgDiv img {
+    width: 300px !important;
+    height: 300px !important;
+    transform: rotate(25deg) !important;
+  }
+  .imgDiv {
+    left: -5%;
+  }
+  .imgDiv img {
+    width: 280px !important;
+    height: 280px !important;
+  }
+}
+
+@media (max-width: 750px) {
+  .first {
+    visibility: hidden;
+  }
+  .second {
+    visibility: hidden;
+  }
+  .loginDiv {
+    width: 70vw;
+  }
 }
