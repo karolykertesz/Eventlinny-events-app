@@ -11,7 +11,7 @@
   width: 200px;
   display: flex;
   flex-direction: column;
-  height: 800px;
+  height: 100%;
 }
 .list {
   font-size: 1.1rem;
