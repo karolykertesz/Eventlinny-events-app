@@ -24,7 +24,6 @@
   -ms-transition: all 0.4s ease;
   -o-transition: all 0.4s ease;
 }
-
 .list:active,
 .list:hover {
   background-color: rgba(240, 229, 218, 0.481);

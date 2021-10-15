@@ -1,7 +1,7 @@
 .top {
   width: 700px;
   position: relative;
-  height: 70vh;
+  height: 75vh;
   margin: 90px auto 0 auto;
   border: 1px solid burlywood;
   overflow: hidden;
@@ -15,14 +15,15 @@
 .topDiv {
   z-index: 5;
   display: flex;
-  padding: 5px 0;
+  padding: 0;
   align-items: flex-end;
   /* justify-content: space-evenly; */
   width: 200px;
   border-bottom: 1px solid burlywood;
-  height: 83px;
+  height: 50px;
 }
 .topDiv p {
+  margin-top: 20px;
   text-align: center;
   font-size: 15px;
   padding: 5px;
@@ -31,6 +32,7 @@
   text-transform: capitalize;
 }
 .switch {
+  margin-top: 20px;
   position: relative;
   display: inline-block;
   width: 65px;
@@ -55,6 +57,7 @@
 .divider {
   display: inline-flex;
   justify-content: space-between;
+  height: 60px;
 }
 .slider:before {
   position: absolute;
