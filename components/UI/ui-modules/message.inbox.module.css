@@ -77,7 +77,7 @@
   overflow-y: scroll;
   position: relative;
   top: 0;
-  height: 700px;
+  height: 600px;
 }
 .scroll::-webkit-scrollbar {
   display: none;
