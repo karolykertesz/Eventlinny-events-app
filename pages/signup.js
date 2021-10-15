@@ -1,4 +1,4 @@
-import { Fragment, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import styled from "styled-components";
 import classes from "../components/holders/css/form.login.module.css";
 import { useRouter } from "next/router";
@@ -14,6 +14,7 @@ import Lock from "../components/UI/icons/lock";
 import { Fbbutton } from "./login";
 import UserIcon from "../components/UI/icons/user-icon";
 import { useIsUserIn } from "../helpers/firebase-hooks/get-is-user-in";
+import facebookSignIn from "../helpers/fb";
 
 const Login = () => {
   const router = useRouter();
@@ -117,26 +118,25 @@ const Login = () => {
                 />
               </div>
               <button className={classes.login}>Sign Up</button>
-
-              <GoogleButton onClick={() => googleSign()}>
-                <IconContext.Provider
-                  value={{ color: "white", className: classes.google }}
-                >
-                  <ImGoogle3 />
-                </IconContext.Provider>
-              </GoogleButton>
-              <Fbbutton onClick={() => loginWithFace()}>
-                <IconContext.Provider
-                  value={{ color: "white", className: classes.google }}
-                >
-                  <ImFacebook2 />
-                </IconContext.Provider>
-              </Fbbutton>
-              <div className={classes.link}>
-                <Link href="/login">Log In</Link>
-              </div>
             </div>
           </form>
+          <GoogleButton onClick={() => googleSign()}>
+            <IconContext.Provider
+              value={{ color: "white", className: classes.google }}
+            >
+              <ImGoogle3 />
+            </IconContext.Provider>
+          </GoogleButton>
+          <Fbbutton onClick={() => loginWithFace()}>
+            <IconContext.Provider
+              value={{ color: "white", className: classes.google }}
+            >
+              <ImFacebook2 />
+            </IconContext.Provider>
+          </Fbbutton>
+          <div className={classes.link}>
+            <Link href="/login">Log In</Link>
+          </div>
           <Error>{error && error}</Error>
         </div>
         <div className={classes.second}>

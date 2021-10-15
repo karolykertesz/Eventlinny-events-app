@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import BigLoader from "../../components/UI/BigLoader";
 import {
   onlyCat,
@@ -8,7 +8,6 @@ import {
 
 import { PiBig, Error } from "../../components/UI/styledindex";
 import classes from "../../components/UI/ui-modules/find.module.css";
-import { useAuth } from "../../components/Layout/UserContext";
 import FindImage from "../../components/findImage";
 import { useRedirect } from "../../helpers/validatehelp";
 import Search from "../../components/UI/icons/search";

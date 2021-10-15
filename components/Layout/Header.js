@@ -34,7 +34,6 @@ const Header = () => {
   const sout = async () => {
     setLoading(true);
     const cancelChat = firebase.functions().httpsCallable("signCheckOut");
-    await cancelChat();
     return firebase
       .auth()
       .signOut()
@@ -46,6 +45,7 @@ const Header = () => {
       })
       .then(() => setLoading(false))
       .then(() => (window.location.href = "/login"))
+      .then(() => cancelChat())
       .catch((err) => console.log(err));
   };
   const { completed } = useIsCompleted(user && user.uid);

@@ -19,6 +19,9 @@
   -ms-border-radius: 2px;
   -o-border-radius: 2px;
 }
+.imgInner img {
+  object-fit: cover;
+}
 .bottom {
   display: flex;
   flex-direction: column;

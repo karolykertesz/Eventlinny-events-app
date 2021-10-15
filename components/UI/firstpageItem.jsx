@@ -27,7 +27,7 @@ export const NameDiv = styled.div`
   justify-content: center;
   align-items: center;
   padding: 2px;
-  margin: 10px;
+  margin: 100px 0;
 `;
 
 export const Pi = styled.p`
