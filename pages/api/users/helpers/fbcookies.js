@@ -3,9 +3,8 @@ const cookie = require("cookie");
 
 export default async function handler(req, res) {
   if (req.method == "POST") {
-    const body = JSON.parse(req.body);
     try {
-      const { email } = body;
+      const { email } = req.body;
       const secret = process.env.SECRET;
       const token = jwt.sign({ data: email }, secret, {
         expiresIn: "1h",

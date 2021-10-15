@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import EventList from "../../components/EventList";
-import EventSearch from "../../components/event-search.jsx";
 import { useRouter } from "next/router";
-import { getAllEvents, user_events_data } from "../../data";
+import { user_events_data } from "../../data";
 import styled from "styled-components";
 import firebase from "firebase";
 import Head from "next/head";
 import FirebaseClient from "../../helpers/firebase";
 import { useRedirect } from "../../helpers/validatehelp";
+import classes from "../../components/UI/ui-modules/first.page.module.css";
 FirebaseClient();
 const db = firebase.firestore();
 
@@ -30,14 +30,13 @@ const AllEvents = ({ eventss }) => {
           content="all next events including non featured events"
         />
       </Head>
-
-      {event && (
-        <Cover>
-          <EventList items={event} />
-          <div></div>
-          <div></div>
-        </Cover>
-      )}
+      <div className={classes.holder}>
+        {event && (
+          <div className={classes.center}>
+            <EventList items={event} />
+          </div>
+        )}
+      </div>
     </>
   );
 };
@@ -63,8 +62,28 @@ export async function getStaticProps() {
 }
 
 const Cover = styled.div`
-  margin: 100px;
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  top: 15%;
+  transform: translate(-50%, 0);
+  @media (max-width: 1000px) {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* align-items: center; */
+  /* justify-content: center; */
+  /* margin: 100px;
   @media (max-width: 650px) {
     margin: 100px 0 0 0;
-  }
+  } */
+`;
+
+const Top = styled.div`
+  width: 100%;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0 auto;
 `;

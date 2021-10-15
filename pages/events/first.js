@@ -7,6 +7,7 @@ import { useRedirect } from "../../helpers/validatehelp";
 import { useCheckcatSet } from "../../helpers/firebase-hooks/check-prefs";
 import { useCategories } from "../../helpers/firebase-hooks/pref-catecories";
 import { useUserPrefCategories } from "../../helpers/firebase-hooks/get-user-pref-cats";
+import classes from "../../components/UI/ui-modules/page-first.module.css";
 const First = () => {
   useRedirect();
   const user = useAuth().user;
@@ -17,7 +18,7 @@ const First = () => {
   return !user ? (
     <BigLoader />
   ) : (
-    <div style={{ position: "relative", marginTop: "100px" }}>
+    <div className={classes.holder}>
       {user && (
         <NameDiv>
           <Pi>
@@ -26,8 +27,9 @@ const First = () => {
           </Pi>
         </NameDiv>
       )}
-
-      {prefItems && <EventList items={prefItems} />}
+      <div className={classes.inner}>
+        {prefItems && <EventList items={prefItems} />}
+      </div>
     </div>
   );
 };
