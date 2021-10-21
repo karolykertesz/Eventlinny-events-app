@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import firebase from "firebase";
 import { useRouter } from "next/router";
-import axios from "axios";
 import LocationCity from "../../../components/locationCity";
 import LocationState from "../../../components/locationState";
 import classes from "../../../components/UI/ui-modules/location.module.css";
@@ -17,16 +16,18 @@ const LocationChange = () => {
   const [selectedCity, setSelectedCity] = useState();
   const [selectedState, setselectedstate] = useState();
   const [goback, setgoback] = useState(false);
-  const [error, seterror] = useState(null);
+  const [defCity, setdefCity] = useState();
 
   const router = useRouter();
   const query = router.query;
   const selectedCountry =
     country && country.filter((item) => item.iso2 === countrycode);
 
+  const cityToUpdate = selectedCity ? selectedCity : defCity;
+
   const updatedvalues =
     selectedState && selectedCity && selectedCountry
-      ? selectedCountry[0].name + " ," + selectedCity + " ," + selectedState
+      ? selectedCountry[0].name + " ," + cityToUpdate + " ," + selectedState
       : "";
 
   const cancelAll = () => {
@@ -34,19 +35,32 @@ const LocationChange = () => {
     setgoback(true);
   };
 
-  const updatelocation = () => {
-    if (
-      (selectedCountry && selectedCity && selectedState, query.uid, countrycode)
-    ) {
-      const docRef = firebase.firestore().collection("cookies").doc(query.uid);
-      return docRef
-        .update({
-          location: updatedvalues,
-          country_code: countrycode,
+  const updatelocation = async () => {
+    if (selectedCountry && selectedCity && selectedState) {
+      return firebase
+        .firestore()
+        .collection("cookies")
+        .doc(query.uid)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            doc.ref.update({
+              location: updatedvalues,
+              country_code: countrycode,
+            });
+          } else {
+            doc.ref.set(
+              {
+                location: updatedvalues,
+                country_code: countrycode,
+              },
+              {
+                merge: true,
+              }
+            );
+          }
         })
-        .then(() => {
-          router.push("/events/first");
-        })
+        .then(() => router.push("/events/first"))
         .catch((err) => console.log(err));
     }
   };
@@ -91,8 +105,9 @@ const LocationChange = () => {
       <LocationCity
         countrycode={countrycode}
         setSelectedCity={setSelectedCity}
+        setdefCity={setdefCity}
       />
-      {selectedCity && (
+      {(selectedCity || defCity) && (
         <LocationState
           countrycode={countrycode}
           setselectedstate={setselectedstate}
@@ -149,6 +164,7 @@ export const Pi = styled.p`
 
 export const Buttondiv = styled.div`
   display: flex;
+  margin-top: 50px;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;

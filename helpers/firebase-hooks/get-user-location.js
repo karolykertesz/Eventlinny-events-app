@@ -10,9 +10,21 @@ export const useUserCurrentLocation = (uid = "w") => {
       .doc(uid)
       .onSnapshot((snap) => {
         if (snap.exists) {
+          if (snap.data().location) {
+            setLocation({
+              location: snap.data().location,
+              countryCode: snap.data().country_code,
+            });
+          } else {
+            setLocation({
+              location: "loc",
+              countryCode: "HU",
+            });
+          }
+        } else {
           setLocation({
-            location: snap.data().location,
-            countryCode: snap.data().country_code,
+            location: "loc",
+            countryCode: "HU",
           });
         }
       });

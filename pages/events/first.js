@@ -15,6 +15,7 @@ const First = () => {
   useCheckcatSet(uid);
   const { pref } = useCategories(uid);
   const { prefItems } = useUserPrefCategories(pref);
+
   return !user ? (
     <BigLoader />
   ) : (
@@ -22,8 +23,17 @@ const First = () => {
       {user && (
         <NameDiv>
           <Pi>
-            Dear {user && user.name} Your selection of active cooking events
-            below
+            {prefItems && prefItems.length > 0 ? (
+              <>
+                Dear {user && user.name} Your selection of active cooking events
+                below
+              </>
+            ) : (
+              <>
+                Dear {user && user.name} currently no active events from your
+                selected categories
+              </>
+            )}
           </Pi>
         </NameDiv>
       )}

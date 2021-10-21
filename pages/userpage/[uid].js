@@ -9,7 +9,7 @@ import { useRedirect } from "../../helpers/validatehelp";
 import { useCategories } from "../../helpers/firebase-hooks/pref-catecories";
 import { useUserInfo } from "../../helpers/firebase-hooks/get-user-info";
 import { useUserCurrentLocation } from "../../helpers/firebase-hooks/get-user-location";
-const UserProfile = ({ userLocation, userAdditional, imgUrl }) => {
+const UserProfile = ({ imgUrl }) => {
   useRedirect();
   const router = useRouter();
   const user = useAuth().user;

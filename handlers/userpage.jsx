@@ -24,8 +24,8 @@ const Userpage = ({ user, userInfo, location, userAdditional, imgUrl }) => {
 
   const countryCode = location && location.countryCode.toUpperCase();
   const createDisplaylocation = () => {
-    if (!userLocation) {
-      return "";
+    if (!userLocation || location.location === "loc") {
+      return "No location set";
     }
     const splitLoc = userLocation.split(",");
     return [splitLoc[0], splitLoc[splitLoc.length - 1]].join(",");
@@ -153,7 +153,7 @@ const Userpage = ({ user, userInfo, location, userAdditional, imgUrl }) => {
                   <td>
                     {userAdditional.birthday
                       ? userAdditional.birthday
-                      : "Add your birthday.."}
+                      : "No birthday Added"}
                   </td>
                   <td>
                     <span className={classes.desk}>
@@ -175,7 +175,9 @@ const Userpage = ({ user, userInfo, location, userAdditional, imgUrl }) => {
                 </tr>
                 <tr>
                   <th>Bio:</th>
-                  <td>{userAdditional.bio ? userAdditional.bio : ""}</td>
+                  <td>
+                    {userAdditional.bio ? userAdditional.bio : "No Bio Added"}
+                  </td>
                   <td>
                     <span className={classes.desk}>
                       <Link href="/userpage/edit/bio">
@@ -195,7 +197,7 @@ const Userpage = ({ user, userInfo, location, userAdditional, imgUrl }) => {
                   <td>
                     {userAdditional.language
                       ? userAdditional.language
-                      : "Add Your Language"}
+                      : "No Prefered Language added"}
                   </td>
                   <td>
                     <span className={classes.desk}>

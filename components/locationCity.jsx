@@ -2,7 +2,7 @@ import react, { useEffect, useState } from "react";
 import axios from "axios";
 import { Pi } from "../pages/userpage/edit/location";
 import classes from "./UI/ui-modules/locationcity.module.css";
-const LocationCity = ({ countrycode, setSelectedCity }) => {
+const LocationCity = ({ countrycode, setSelectedCity, setdefCity }) => {
   const [city, setCity] = useState();
   useEffect(() => {
     return axios
@@ -17,6 +17,7 @@ const LocationCity = ({ countrycode, setSelectedCity }) => {
       )
       .then((response) => {
         setCity(response.data);
+        setdefCity(response.data[0]);
       })
       .then((re) => {
         console.log(re);

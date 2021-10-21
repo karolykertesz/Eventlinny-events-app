@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import firebase from "firebase";
 
 export const useUserStart = (user = "k", location = []) => {
-  console.log(user);
   useEffect(() => {
     const baseref = firebase.firestore().collection("user_aditional");
     const docref = firebase
@@ -10,8 +9,8 @@ export const useUserStart = (user = "k", location = []) => {
       .collection("user_aditional")
       .doc(user && user.uid)
       .onSnapshot(async (snap) => {
-        if (!snap.exists && user.uid && location) {
-          await baseref.doc(user.uid).set({
+        if (!snap.exists && user.uid && Array.isArray(location)) {
+          return baseref.doc(user.uid).set({
             name: user.name,
             email: user.email,
             policy: false,

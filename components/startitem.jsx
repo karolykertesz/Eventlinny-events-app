@@ -14,7 +14,7 @@ const StartItem = ({ items, addUserInt }) => {
           onClick={() => setSelected(!selected)}
         >
           <Image
-            src={`/images/${items}.jpg`}
+            src={`/images/${items.name}.jpg`}
             alt={items.name}
             width={350}
             height={230}
@@ -22,7 +22,7 @@ const StartItem = ({ items, addUserInt }) => {
           />
         </span>
         <span>
-          <Pi onClick={() => addUserInt(items.toLowerCase())}>
+          <Pi onClick={() => addUserInt(items.name.toLowerCase())}>
             <Paragraph>{items.name}</Paragraph>
             <SVG onClick={() => setSelected(!selected)}>
               {!selected ? (
