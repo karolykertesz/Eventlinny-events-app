@@ -201,7 +201,7 @@
   }
 
   .loginDiv {
-    width: calc(100vw - 60vw);
+    width: calc(100vw - 50vw);
   }
   .first {
     width: calc(100vw - 70vw);
@@ -224,6 +224,10 @@
 }
 
 @media (max-width: 750px) {
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
   .first {
     visibility: hidden;
   }
@@ -231,6 +235,12 @@
     visibility: hidden;
   }
   .loginDiv {
-    width: 70vw;
+    width: 75%;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 500px) {
+  .loginDiv {
+    width: 95%;
   }
 }
