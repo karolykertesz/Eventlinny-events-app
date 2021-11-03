@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import styled from "styled-components";
 import classes from "../components/holders/css/form.login.module.css";
-import { useRouter } from "next/router";
 import React from "react";
 import { GoogleButton } from "./login";
 import { IconContext } from "react-icons";
@@ -17,7 +16,6 @@ import { useIsUserIn } from "../helpers/firebase-hooks/get-is-user-in";
 import facebookSignIn from "../helpers/fb";
 
 const Login = () => {
-  const router = useRouter();
   const [error, setError] = useState("");
   const firstNameRef = useRef();
   const emailRef = useRef();
@@ -53,6 +51,7 @@ const Login = () => {
         },
       });
       const data = await mess.json();
+      console.log(data);
       setError(data.message);
     } catch (err) {
       console.log(err, "the error");
