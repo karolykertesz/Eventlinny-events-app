@@ -14,6 +14,9 @@ import { Fbbutton } from "./login";
 import UserIcon from "../components/UI/icons/user-icon";
 import { useIsUserIn } from "../helpers/firebase-hooks/get-is-user-in";
 import facebookSignIn from "../helpers/fb";
+import firebase from "firebase";
+import validate from "validate.js";
+import { constraints } from "../helpers/validators/signup";
 
 const Login = () => {
   const [error, setError] = useState("");
@@ -28,6 +31,7 @@ const Login = () => {
   const formSubmit = async (e) => {
     setError(null);
     e.preventDefault();
+    console.log(emailRef.current.password);
     if (
       !firstNameRef.current.value ||
       !emailRef.current.value ||
@@ -36,25 +40,40 @@ const Login = () => {
       setError("Missing Input values!!");
       return;
     }
+    const value = await validate(
+      {
+        firstname: firstNameRef.current.value,
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+      },
+      constraints
+    );
+    if (value) {
+      return setError("Sorry, invalid Characters");
+    }
     try {
-      const mess = await fetch("/api/users/signer", {
-        method: "POST",
-        body: JSON.stringify({
-          firstname: firstNameRef.current.value,
-          email: emailRef.current.value,
-          password: passwordRef.current.value,
-        }),
-
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
+      const actionCodeSettings = {
+        url: `https://eventlinny.vercel.app/users/vid/?email=${emailRef.current.value}`,
+      };
+      const recipient = await firebase
+        .auth()
+        .createUserWithEmailAndPassword(
+          emailRef.current.value,
+          passwordRef.current.value
+        );
+      await recipient.user.sendEmailVerification(actionCodeSettings);
+      await recipient.user.updateProfile({
+        displayName: firstNameRef.current.value,
       });
-      const data = await mess.json();
-      console.log(data);
-      setError(data.message);
+      setError(
+        "Email Verification has been sent,plese check your spam folder,too!"
+      );
     } catch (err) {
-      console.log(err, "the error");
+      const message =
+        err.code === "auth/email-already-in-use"
+          ? "This email already has been assign to an Eventlinny user"
+          : "Sorry ,Wrong sign up credentials!";
+      return setError(message);
     }
   };
 

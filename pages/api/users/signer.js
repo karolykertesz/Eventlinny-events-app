@@ -3,12 +3,9 @@ const validate = require("validate.js");
 const auth = firebase.auth();
 import { constraints } from "../../../helpers/validators/signup";
 export default async function handler(req, res) {
-  const { firstname, lastname, email, password } = req.body;
-  const value = await validate(
-    { firstname, lastname, email, password },
-    constraints
-  );
-  if (value !== undefined) {
+  const { firstname, email, password } = req.body;
+  const value = await validate({ firstname, email, password }, constraints);
+  if (value !== undefined || value !== null) {
     res.status(403).json({ message: value });
     return;
   }

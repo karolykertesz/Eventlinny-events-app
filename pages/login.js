@@ -67,37 +67,38 @@ const Login = () => {
       const password = passwordRef.current.value;
 
       if (tok !== undefined || tok !== null) {
-        return new Promise(async (resolve, reject) => {
-          let userId;
-          await firebase
+        try {
+          const recipient = await firebase
             .auth()
-            .signInWithEmailAndPassword(email, password)
-            .then(async function (userCred) {
-              const uid = userCred.user.uid;
-              const status = await sender(tok, uid);
-              if (status.status !== 200 || status.status !== 201) {
-                reject(setError(status.message));
-              }
-              setTok("");
-              userId = uid;
-            })
-            .then(async () => {
-              const dataRef = firebase
-                .firestore()
-                .collection("user_aditional")
-                .doc(userId);
-              await dataRef.get().then((doc) => {
-                if (doc.exists) {
-                  if (doc.data().pref_events) {
+            .signInWithEmailAndPassword(email, password);
+          const uid = recipient.user.uid;
+          router.push("/events/first");
+          const status = await sender(tok, uid);
+          if (status.status === 200) {
+            return firebase
+              .firestore()
+              .collection("user_aditional")
+              .doc(uid)
+              .get()
+              .then((snap) => {
+                if (snap.exists) {
+                  if (snap.data().pref_events) {
                     return (window.location.href = "/events/first");
                   } else {
                     return (window.location.href = "/startup");
                   }
+                } else {
+                  return (window.location.href = "/startup");
                 }
-                return (window.location.href = "/startup");
               });
-            });
-        });
+          } else {
+            setError("Please Refresh the page");
+          }
+        } catch (err) {
+          if (err.code) {
+            return setError("Sorry No user with this Email or Password");
+          }
+        }
       }
     },
     [tok]

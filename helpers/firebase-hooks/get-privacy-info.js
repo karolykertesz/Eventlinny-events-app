@@ -1,7 +1,7 @@
 import firebase from "firebase";
 import React, { useState, useEffect } from "react";
 export const usePrivacy = (id = "u") => {
-  const [privacy, setPrivacy] = useState(true);
+  const [privacy, setPrivacy] = useState(false);
 
   useEffect(() => {
     const pr = firebase
@@ -12,12 +12,10 @@ export const usePrivacy = (id = "u") => {
         if (snap.exists) {
           const dt = snap.data();
           if (dt.policy === true) {
-            return;
+            return setPrivacy(true);
           } else {
             setPrivacy(false);
           }
-        } else {
-          setPrivacy(false);
         }
       });
     return () => pr();
