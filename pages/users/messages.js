@@ -8,7 +8,6 @@ const Messages = () => {
   const user = useAuth().user;
   const uid = user && user.uid;
   const { messages } = useMessages(uid);
-
   return (
     <div>
       {messages ? (

@@ -2,10 +2,11 @@ import MessageReplyItem from "../messageReplyItem";
 import classes from "../UI/ui-modules/message.reply.item.module.css";
 const MessageInboxItem = (props) => {
   const { filtered, user, messId, added } = props;
+
   const ismapaple =
     filtered && filtered.replies && filtered.replies.length > 0 ? true : false;
   const allreplies = ismapaple && filtered.replies;
-
+  console.log(filtered);
   return (
     <div className={classes.inboxHolder}>
       {ismapaple &&

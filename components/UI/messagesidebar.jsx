@@ -10,6 +10,8 @@ const MessageSidebar = (props) => {
     messages && messages.filter((item) => item.added_by === uid);
   const recivedMessages =
     messages && messages.filter((item) => item.added_by !== uid);
+  console.log(recivedMessages);
+  console.log(added);
   return (
     <div className={classes.topSide}>
       <MessageTop added={added} setAdded={setAdded} setMessid={setMessid} />

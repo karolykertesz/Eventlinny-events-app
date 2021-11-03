@@ -43,7 +43,7 @@
 }
 .content {
   grid-template-columns: auto 1fr;
-  gap: 75px;
+  gap: 0;
 }
 .text {
   padding: 9px 24px;

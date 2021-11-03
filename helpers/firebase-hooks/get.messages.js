@@ -22,7 +22,7 @@ const useMessages = (uid) => {
         }
       });
     return () => docref();
-  }, []);
+  }, [uid]);
   return {
     messages,
   };

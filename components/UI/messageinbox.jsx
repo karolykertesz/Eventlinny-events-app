@@ -21,7 +21,7 @@ const MessageInbox = (props) => {
       setError("Select a message to delete");
       return;
     }
-    const userInfo = await firebase
+    const userInfo = firebase
       .firestore()
       .collection("user_aditional")
       .doc(user.uid);
@@ -49,9 +49,8 @@ const MessageInbox = (props) => {
     );
     return Promise.all(promises)
       .then((items) => {
-        console.log(items.length);
         items.forEach((item) => {
-          if (!item.exists) {
+          if (!item) {
             setloading(false);
             setError("Message has been deleted");
             return;
