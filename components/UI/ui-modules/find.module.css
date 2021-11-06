@@ -147,27 +147,84 @@
   -ms-transform: translateY(10px) rotate(225deg);
   -o-transform: translateY(10px) rotate(225deg);
 } */
-@media (min-width: 800px) {
-  .bg {
-    display: flex;
-    justify-content: flex-start;
-  }
-  .top {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-}
-@media (min-width: 1000px) {
+
+/* @media (min-width: 1000px) {
   .top {
     grid-template-columns: 1fr 1fr 30%;
   }
-}
+} */
+/* @media (max-width: 800px) {
+  .top {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+} */
 
+@media (min-width: 600px) {
+  .top {
+    grid-template-columns: 1fr;
+  }
+  .eventGrid {
+    margin: auto 50px;
+  }
+  .secTop {
+    /* grid-column-start: 2;
+    grid-column-end: 4; */
+    /* position: absolute;
+    top: 100%; */
+    display: none;
+  }
+  .bg {
+    /* grid-column-start: 0;
+    grid-column-end: 2; */
+    display: flex;
+    justify-content: flex-start;
+    margin: 100px auto;
+  }
+  .bg p {
+    position: absolute;
+    left: 20%;
+  }
+}
+@media (min-width: 800px) {
+  .secTop {
+    display: inline-block;
+  }
+  .ul {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 0;
+  }
+  .bg p {
+    position: absolute;
+    left: 10%;
+  }
+  .top {
+    grid-template-columns: 1fr 1fr;
+  }
+  .eventGrid {
+    margin: auto;
+  }
+}
 @media (max-width: 600px) {
+  .eventGrid {
+    margin: auto;
+  }
   .bg {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 100px auto;
+  }
+  .display {
+    position: absolute;
+    left: 55% !important;
+    top: 0 !important;
+    transform: translate(-50%, 0) !important;
+    -webkit-transform: translate(-50%, 0) !important;
+    -moz-transform: translate(-50%, 0) !important;
+    -ms-transform: translate(-50%, 0) !important;
+    -o-transform: translate(-50%, 0) !important;
   }
   .eventGrid {
     grid-template-columns: 1fr;
@@ -185,11 +242,8 @@
   }
   .ul {
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin: -40px 0 0 80px;
-  }
-  .ul {
-    width: 180px !important;
+    gap: 15px;
+    /* margin: -40px 0 0 80px; */
   }
 }
 

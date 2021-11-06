@@ -241,6 +241,6 @@
 }
 @media (max-width: 500px) {
   .loginDiv {
-    width: 95%;
+    width: 100vw;
   }
 }

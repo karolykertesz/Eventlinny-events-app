@@ -6,6 +6,8 @@
   width: 100%;
   height: 75px;
   background-color: #c49e7d;
+  overflow: hidden;
+  z-index: 2;
 }
 
 .row {

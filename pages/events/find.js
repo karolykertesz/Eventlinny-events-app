@@ -86,7 +86,7 @@ const find = () => {
   return (
     <div className={classes.top}>
       <div className={classes.bg}>
-        <p>Search Event By category or Location</p>
+        <p className={classes.display}>Search Event By category or Location</p>
         <div className={classes.box}>
           <div className={classes.search}>
             <div className={classes.input}>

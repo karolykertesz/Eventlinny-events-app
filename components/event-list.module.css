@@ -23,7 +23,9 @@
 @media (max-width: 600px) {
   .list {
     grid-template-columns: 1fr;
-    margin: 0 5px 0 15px;
+    /* margin: 0; */
+    width: 100vw;
+
     /* display: grid;
   
     grid-template-columns: 1fr;

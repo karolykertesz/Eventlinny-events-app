@@ -27,7 +27,18 @@ export const NameDiv = styled.div`
   justify-content: center;
   align-items: center;
   padding: 2px;
-  margin: 100px 0;
+  z-index: -1;
+  /* margin: 50px 0; */
+  top: 150px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  @media (max-width: 550px) {
+    visibility: hidden;
+  }
 `;
 
 export const Pi = styled.p`

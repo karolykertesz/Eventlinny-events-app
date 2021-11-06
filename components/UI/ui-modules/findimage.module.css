@@ -1,6 +1,7 @@
 .top {
-  max-width: 250px;
-  min-width: 200px;
+  /* max-width: 250px;
+  min-width: 100px; */
+  width: 75%;
   max-height: 200px;
   background-color: burlywood;
   cursor: pointer;
@@ -76,3 +77,20 @@
   right: 20px;
   top: 10px;
 } */
+/* @media (max-width: 1000px) {
+  .top {
+    width: 250%;
+  }
+} */
+
+@media (min-width: 600px) {
+  .top {
+    width: 170px;
+  }
+}
+
+@media (max-width: 600px) {
+  .top {
+    width: 100%;
+  }
+}

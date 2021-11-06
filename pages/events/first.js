@@ -37,8 +37,10 @@ const First = () => {
           </Pi>
         </NameDiv>
       )}
-      <div className={classes.inner}>
-        {prefItems && <EventList items={prefItems} />}
+      <div className={classes.rowOne}>
+        <div className={classes.inner}>
+          {prefItems && <EventList items={prefItems} />}
+        </div>
       </div>
     </div>
   );
