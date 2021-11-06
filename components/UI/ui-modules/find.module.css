@@ -174,8 +174,6 @@
     display: none;
   }
   .bg {
-    /* grid-column-start: 0;
-    grid-column-end: 2; */
     display: flex;
     justify-content: flex-start;
     margin: 100px auto;
